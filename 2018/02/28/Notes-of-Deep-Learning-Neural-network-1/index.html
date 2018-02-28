@@ -6,14 +6,26 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Blog of Saul</title>
+  <title>Notes of Deep Learning:神经网络(1) | Blog of Saul</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Blog of Saul">
-<meta property="og:url" content="http://yoursite.com/page/7/index.html">
+  <meta name="description" content="人工神经元  其实神经元这个翻译有点唬人，有些学者也不喜欢借用某些生物词语来蹭热度，他们直接就把所谓的人工神经元称之为单元（unit），结合人工神经网络来看的话，你可以很容易的推测出，它是由这个所谓的人工神经元组成的。在一个人工神经网络中，神经元间会有一种单向的影响，因为人工神经网络可以看做是一张有向无环图。下图是一个常见的粗糙模型：   从这张图中你可以看到，一个人工神经元有几个主要的部分，如果">
+<meta name="keywords" content="学习笔记,深度学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Notes of Deep Learning:神经网络(1)">
+<meta property="og:url" content="http://yoursite.com/2018/02/28/Notes-of-Deep-Learning-Neural-network-1/index.html">
 <meta property="og:site_name" content="Blog of Saul">
+<meta property="og:description" content="人工神经元  其实神经元这个翻译有点唬人，有些学者也不喜欢借用某些生物词语来蹭热度，他们直接就把所谓的人工神经元称之为单元（unit），结合人工神经网络来看的话，你可以很容易的推测出，它是由这个所谓的人工神经元组成的。在一个人工神经网络中，神经元间会有一种单向的影响，因为人工神经网络可以看做是一张有向无环图。下图是一个常见的粗糙模型：   从这张图中你可以看到，一个人工神经元有几个主要的部分，如果">
+<meta property="og:image" content="http://yoursite.com/img/QQ图片20180214181505.png">
+<meta property="og:image" content="http://yoursite.com/img/QQ图片20180214180333.png">
+<meta property="og:image" content="http://yoursite.com/img/QQ图片20180214194819.png">
+<meta property="og:image" content="http://yoursite.com/img/QQ图片20180214195043.png">
+<meta property="og:image" content="http://yoursite.com/img/QQ图片20180214200631.png">
+<meta property="og:image" content="http://yoursite.com/img/NN.jpg">
+<meta property="og:updated_time" content="2018-02-28T08:02:28.755Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Blog of Saul">
+<meta name="twitter:title" content="Notes of Deep Learning:神经网络(1)">
+<meta name="twitter:description" content="人工神经元  其实神经元这个翻译有点唬人，有些学者也不喜欢借用某些生物词语来蹭热度，他们直接就把所谓的人工神经元称之为单元（unit），结合人工神经网络来看的话，你可以很容易的推测出，它是由这个所谓的人工神经元组成的。在一个人工神经网络中，神经元间会有一种单向的影响，因为人工神经网络可以看做是一张有向无环图。下图是一个常见的粗糙模型：   从这张图中你可以看到，一个人工神经元有几个主要的部分，如果">
+<meta name="twitter:image" content="http://yoursite.com/img/QQ图片20180214181505.png">
   
   
     <link rel="icon" href="/favicon.png">
@@ -130,36 +142,79 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-Functional-Programming-3-Pure-Functional-Status" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-Notes-of-Deep-Learning-Neural-network-1" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/29/Functional-Programming-3-Pure-Functional-Status/">Functional Programming (3):纯函数式状态</a>
+    <h1 class="article-title" itemprop="name">
+      Notes of Deep Learning:神经网络(1)
     </h1>
   
 
         
-        <a href="/2017/07/29/Functional-Programming-3-Pure-Functional-Status/" class="archive-article-date">
-  	<time datetime="2017-07-29T07:32:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-29</time>
+        <a href="/2018/02/28/Notes-of-Deep-Learning-Neural-network-1/" class="archive-article-date">
+  	<time datetime="2018-02-28T07:17:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-28</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>  如何以纯函数来实现有状态的API？你曾经写程序的时候可能会发现，函数的输出并不一定和输入有关，有可能和一个状态值有关，比如某平台在工作日的8:00-20:00才允许登入，你可能会写一个if判断来判断当前时间是不是属于允许登录时段来作为登录方法，但是现在情况有所不同，让我们再次来看函数式代码的定义：                                           </p>
-<p>​     <strong>在函数式代码中，函数的输出仅依赖于传入的参数，同样的输入意味着同样的输出，和局部或全局状态无关 </strong></p>
-<p>  既然我们不能允许一个全局状态量来决定我们的输出，肯定不意味着我们没办法写这样的程序，只不过现在我们要抛弃传统的命令式编程，转换到函数式上来。</p>
-        
-          <a class="article-more-a" href="/2017/07/29/Functional-Programming-3-Pure-Functional-Status/#more">more >></a>
-        
+        <h2 id="人工神经元"><a href="#人工神经元" class="headerlink" title="人工神经元"></a>人工神经元</h2><p>  其实神经元这个翻译有点唬人，有些学者也不喜欢借用某些生物词语来蹭热度，他们直接就把所谓的人工神经元称之为单元（unit），结合人工神经网络来看的话，你可以很容易的推测出，它是由这个所谓的人工神经元组成的。在一个人工神经网络中，神经元间会有一种单向的影响，因为人工神经网络可以看做是一张有向无环图。下图是一个常见的粗糙模型：</p>
+<div align="center"><br><br><img src="\img\QQ图片20180214181505.png"><br><br><img src="\img\QQ图片20180214180333.png"><br><br></div>
+
+<p>从这张图中你可以看到，一个人工神经元有几个主要的部分，如果你把它看做是有向无环图里的一个节点，那么你可以观察到它的每一个入度，分别对应一个不同的输入和一个自身权重的乘积（w和x都是向量或者矩阵，这里准确来说应该是<strong>点积</strong>），所有入度的点积的累加加上节点对应的偏差值（偏置）(Σwixi+b）代入所入节点的激活函数，图中就是f，对应为f(Σwixi+b),然后这个输出结果（<strong>激活率</strong>）顺着节点的出度流入下一层网络中的神经元。</p>
+<p>  现在你大概知道什么是所谓的人工神经元，如果硬要跟生物神经元扯上一毛钱关系的话，你学过高中生物，大概会知道突触，树突，突触小泡之类的，你也许能把这个和两个神经细胞里通过突触来传递兴奋的机制联系起来…然后对别人吹嘘一波，但是我是做不到的，可能是我不怎么了解生物吧。 </p>
+<a id="more"></a>
+<h2 id="激活函数"><a href="#激活函数" class="headerlink" title="激活函数"></a>激活函数</h2><p>  认识了人工神经元之后，我们就知道了这里面有一个叫做<strong>激活函数（activation function）</strong>的重要概念，激活函数的选择对最终训练出来的模型影响是很大的，如果你以前看过一些公众号中推送的文章，可能会经常看到Sigmoid和Tanh这样的字眼，这是都是激活函数的名称，但是你不要看着这些名字这么奇怪就觉得这个函数会不会很复杂啊，其实稍微用点脑子思考一下就知道激活函数不能是多么复杂的函数，因为我们最后需要通过反向传播这样的算法去计算梯度，从而进行参数调优，如果这个激活函数是非常复杂的，这个梯度就不太好算了，激活函数通常都是非线性函数，目的是为了模型有更强的表达能力，详情可以<a href="https://www.zhihu.com/question/22334626" target="_blank" rel="external">参考这里</a>，排名前几的答案基本上把这个问题讲清楚了。这里我记录3个激活函数：</p>
+<h3 id="S型函数"><a href="#S型函数" class="headerlink" title="S型函数"></a>S型函数</h3><p>  S型函数就是Sigmoid，如果在你学高等数学或者微积分的时候，肯定是接触过这个函数的，这个函数由于它在平面直角坐标系上的曲线而得名。即：</p>
+<blockquote>
+<p>σ（x）=1/(1+e^(-x))</p>
+</blockquote>
+<p><img src="\img\QQ图片20180214194819.png" alt="QQ图片20180214194819"></p>
+<h3 id="Tanh函数"><a href="#Tanh函数" class="headerlink" title="Tanh函数"></a>Tanh函数</h3><p>  Tanh函数是有S型函数转化过来的零中心函数，Tanh比S型函数更受欢迎，但是他们存在着饱和问题，即在接近极值的区间，梯度几乎为0，训练模型的时候使用反向传播算法，一个接近0的梯度反向传播下去，小数相乘会以指数形式收缩到0。</p>
+<blockquote>
+<p>tanh=2σ(2x)-1=2/(1+e^(-2x))-1</p>
+</blockquote>
+<p><img src="\img\QQ图片20180214195043.png" alt="QQ图片20180214195043"></p>
+<h3 id="ReLU函数"><a href="#ReLU函数" class="headerlink" title="ReLU函数"></a>ReLU函数</h3><p>目前最流行的激活函数,非常简单粗暴有效,名字的由来是Rectified Linear Unit-&gt;ReLU</p>
+<blockquote>
+<p>ReLu(x)=max(0,x)</p>
+</blockquote>
+<p><img src="\img\QQ图片20180214200631.png" alt="QQ图片20180214200631"></p>
+<h2 id="神经网络结构"><a href="#神经网络结构" class="headerlink" title="神经网络结构"></a>神经网络结构</h2><p>我们通过一个普通的神经网络来展开对它的层结构认知，比如下面这个两层的网络：</p>
+<p><img src="\img\NN.jpg" alt="NN"></p>
+<p>  一般来说输入层是不算做层数的，所以说这个网络是2层，即一个隐层和输出层，当然有些网络有很多隐层，我们在这个图片上看到的是一个有向无环图，但是经过前面的理解，你知道实际上它是一个做矩阵点积的数学函数。</p>
+<p>  在这个普通的网络中，它的层都是<strong>全连接层</strong>，全连接层中的神经元与其前后两层的神经元是完全成对连接的，但是在同一个全连接层内的神经元之间没有连接。</p>
+<p>  在神经网络中，输出层是没有激活函数的，因为它用来完成分类的打分。有时候我们要表示一个神经网络的尺寸，比如上面那个神经网络是怎么样的尺寸呢，它有着4（隐层）+2（输出层）=6个神经元，因为是全连接的，它有着3*4+4*2=20个权重，以及4+2=6个偏置，权重和偏置都是可学习的，那么我们训练这个神经网络的时候需要学习这个26个参数，以最优化算法求得他们的最优值。这样看起来似乎比较清晰了，但是一般的卷积神经网络有着10-20层，1亿个可学习参数，要求这个1一个参数的最优值可不是一个简单的工程，这也是为什么大部分做深度学习的同学都处在调参的路上的原因了。</p>
+<p>  是不是层数越多的神经网络越好呢?视情况而定，一般的神经网络就是3层网络，再增加层数很难增强它的表达力度，而卷积神经网络则不同，因为要提取层次化特征，所以深度就是一个很重要的问题，一般都是数十层之多，谈到这个问题，我们又有新的问题，如何设置神经网络的层数和尺寸。我们知道神经网络其实是一个函数，如果在有着相同激活函数的情况下，整个函数更为复杂，则函数的表达能力就能更强，但是也会引起<strong>过拟合</strong>等问题，<strong>过拟合</strong>是指网络对数据中的噪点拟合过甚，导致整个模型的泛化能力不强。</p>
+<p>  即便大的网络会有过拟合问题，我们还是会使用更大一点的网络作为模型，因为防止过拟合还有其他的方法，比如<strong>L2正则化或者dropout</strong>，特别是正则化。因此我们没有必要去牺牲整个网络模型的表达能力去换去泛化能力。另外小网络的极小值很容易收敛到，但是这些极值的损失值一般都很高，不利于我们构建一个优秀的模型，而大的网络极小值更多，虽然更不容易收敛，但是我们可以有更多的选择，从而得到一个更好的模型。</p>
+
       
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>嘀，学生卡<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -170,11 +225,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">FP</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习笔记</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">scala</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">深度学习</a>
         		</li>
       		
 		</ul>
@@ -183,325 +238,114 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/07/29/Functional-Programming-3-Pure-Functional-Status/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2018/02/28/Notes-of-Deep-Learning-Neural-network-1/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
 
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2018/02/01/Junit-4-Mock/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Junit(4):Mock</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
 
 
+
+
+
+  
+  
+  
+
+  
+
+  
 
         <!-- 目录内容 -->
+        
+            <p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
+            <span class="btn-bg"></span>
+            <span class="btn-text">文章导航</span>
+            </p>
+            <div id="toc-article" class="toc-article">
+                <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
+                <strong class="toc-title">文章目录</strong>
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#人工神经元"><span class="toc-number">1.</span> <span class="toc-text">人工神经元</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#激活函数"><span class="toc-number">2.</span> <span class="toc-text">激活函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#S型函数"><span class="toc-number">2.1.</span> <span class="toc-text">S型函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Tanh函数"><span class="toc-number">2.2.</span> <span class="toc-text">Tanh函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ReLU函数"><span class="toc-number">2.3.</span> <span class="toc-text">ReLU函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#神经网络结构"><span class="toc-number">3.</span> <span class="toc-text">神经网络结构</span></a></li></ol>
+           </div>
+           <script type="text/javascript">
+            function showToc(){
+                var toc_article = document.getElementById("toc-article");
+                var show_toc_btn = document.getElementById("show-toc-btn");
+                toc_article.setAttribute("style","display:block");
+                show_toc_btn.setAttribute("style","display:none");
+                };
+            function showBtn(){
+                var toc_article = document.getElementById("toc-article");
+                var show_toc_btn = document.getElementById("show-toc-btn");
+                toc_article.setAttribute("style","display:none");
+                show_toc_btn.setAttribute("style","display:block");
+                };
+           </script>
              
         <!-- 目录内容结束 -->
-  
-    <article id="post-Functional-Programming-2-Exception-handing" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/28/Functional-Programming-2-Exception-handing/">Functional Programming (2):函数式错误处理</a>
-    </h1>
-  
-
-        
-        <a href="/2017/07/28/Functional-Programming-2-Exception-handing/" class="archive-article-date">
-  	<time datetime="2017-07-28T08:09:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-28</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>  抛出异常是有副作用的，事实上我们可以用普通的值来表现成功和异常，以这种方式返回错误，符合引用透明的特点。</p>
-<p>  我之前写了一篇博文介绍Scala中的<a href="/2017/07/15/Learning-Scala-6-Monadic/">一元集合</a>，我在其中有介绍过Option，Try，两种一元集合，它们都是sealed类，且都有两个已经实现子类，来分别代表结果的两种对立情况。并且我也介绍了如何用Try来进行错误的处理。在这篇文章，我将介绍函数式编程为什么要这样做，同时更详细的说明如何这样做。</p>
-        
-          <a class="article-more-a" href="/2017/07/28/Functional-Programming-2-Exception-handing/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">FP</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">scala</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/07/28/Functional-Programming-2-Exception-handing/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-        <!-- 目录内容 -->
-             
-        <!-- 目录内容结束 -->
-  
-    <article id="post-Functional-Programming-1-what-is-FP？" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/27/Functional-Programming-1-what-is-FP？/">Functional Programming (1):函数式编程概念</a>
-    </h1>
-  
-
-        
-        <a href="/2017/07/27/Functional-Programming-1-what-is-FP？/" class="archive-article-date">
-  	<time datetime="2017-07-27T05:59:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="函数式编程崛起"><a href="#函数式编程崛起" class="headerlink" title="函数式编程崛起"></a>函数式编程崛起</h2><h3 id="Why"><a href="#Why" class="headerlink" title="Why?"></a>Why?</h3><p>  在大学低年级的时候，我们可能听的最多的就是面向过程编程以及面向对象编程，并且这两种编程模型我们会在学习中不断的使用，近年来，我们可以看到计算机的核心数不断的增加，随着并发的概念越来越深入软件系统，数据处理的规模越来越大，在你学操作系统的时候，你接触到的信号量，死锁检测等等手段在实际应用中可能对很多程序员是一个挑战，于是函数式编程又一次出现在了工程界，14年迟迟发布的java 8中，Java引入了lambda表达式，似乎标志工程界命令式编程（imperative programming）和声明式编程（Declarative programming ）互相交织的时代已经全面正式的拉开大幕。</p>
-<h3 id="函数式编程概念"><a href="#函数式编程概念" class="headerlink" title="函数式编程概念"></a>函数式编程概念</h3><p>  <strong>那么什么是函数式编程（Functional Programming）？</strong></p>
-<p>  <strong>函数式编程是一种编程范式，它是声明式编程（用表达式或声明来代替语句块）的一种，它倾向于计算像求解数学函数一样，避免改变状态和使用可变量，在函数式代码中，函数的输出仅依赖于传入的参数，同样的输入意味着同样的输出，和局部或全局状态无关 。</strong></p>
-<p>  函数式编程的输入和传参的依赖特性使得，使得函数更加容易理解和可预测，因为你不需要再去思考有函数输入参数之外的其他的状态，影响函数的输出。比如调用函数时你不需要考虑是不是会出现线程同步问题（这样说威力够大？）。</p>
-        
-          <a class="article-more-a" href="/2017/07/27/Functional-Programming-1-what-is-FP？/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">FP</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">scala</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/07/27/Functional-Programming-1-what-is-FP？/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-        <!-- 目录内容 -->
-             
-        <!-- 目录内容结束 -->
-  
-    <article id="post-Practice-of-Basic-Java-Skills-NIO-5-Selector" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/24/Practice-of-Basic-Java-Skills-NIO-5-Selector/">Practice of Basic Java Skills:非阻塞I/O (5):选择器</a>
-    </h1>
-  
-
-        
-        <a href="/2017/07/24/Practice-of-Basic-Java-Skills-NIO-5-Selector/" class="archive-article-date">
-  	<time datetime="2017-07-24T00:53:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>  循环的查询一个服务器socket通道是否接受到一个请求或者一个Socket通道是否能读写数据，是没有任何意义的，类似于我们不想要程序查询方式，所以有了中断一样，为了不让非阻塞I/O的理想背道而驰，我们引入了选择器（Selecor），让我们能够不让线程做一些毫无意义的查询。</p>
-<p>  在前面的服务器和客户端例子中，我们接触了选择器，你可以发现目前为止NIO包中多数实例都是通过工厂方法构建的，Selector也不例外，我们用了Selector类的静态工厂open方法来构造一个实例，然后调用通道的register方法将通道注册进该选择器。</p>
-<h2 id="选择器"><a href="#选择器" class="headerlink" title="选择器"></a>选择器</h2><h3 id="选择器的注册"><a href="#选择器的注册" class="headerlink" title="选择器的注册"></a>选择器的注册</h3><table>
-<thead>
-<tr>
-<th>方法</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>SelectionKey register(Selector sel, int ops)</td>
-</tr>
-<tr>
-<td>SelectionKey register(Selector sel, int ops, Object att)</td>
-</tr>
-</tbody>
-</table>
-<p>  通道的register方法中，第一个参数是接受一个选择器实例，第二个参数是操作数，用于标志要选择的通道类型</p>
-<p><strong>SelectionKey.OP_ACCEPT= 1 &lt;&lt; 4=16</strong></p>
-<p><strong>SelectionKey .OP_CONNECT= 1 &lt;&lt; 3=8</strong></p>
-<p><strong>SelectionKey .OP_WRITE=1 &lt;&lt; 2=4</strong></p>
-<p><strong>SelectionKey .OP_READ= 1 &lt;&lt; 0=1</strong></p>
-        
-          <a class="article-more-a" href="/2017/07/24/Practice-of-Basic-Java-Skills-NIO-5-Selector/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">非阻塞I/O(NIO)</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/07/24/Practice-of-Basic-Java-Skills-NIO-5-Selector/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-        <!-- 目录内容 -->
-             
-        <!-- 目录内容结束 -->
-  
-    <article id="post-Practice-of-Basic-Java-Skills-NIO-4-Channel" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/23/Practice-of-Basic-Java-Skills-NIO-4-Channel/">Practice of Basic Java Skills:非阻塞I/O (4):通道</a>
-    </h1>
-  
-
-        
-        <a href="/2017/07/23/Practice-of-Basic-Java-Skills-NIO-4-Channel/" class="archive-article-date">
-  	<time datetime="2017-07-23T00:39:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>  上次我们了解了非阻塞I/O中用于数据读写的缓冲区对象，现在我们来看看通道，通道有很多类，层次结构复杂，幸好网络编程中我们不会使用那么多类，和缓冲区一样有一些类是我们经常使用的，它们分别是SoketChannel、ServerSocketChannel以及DatagramChannel,从名字你就可知道最后一个属于UDP协议。通道将缓冲区的数据块移入或移出到各种各样的I/O源。</p>
-<h2 id="SoketChannel"><a href="#SoketChannel" class="headerlink" title="SoketChannel"></a>SoketChannel</h2><h3 id="建立链接"><a href="#建立链接" class="headerlink" title="建立链接"></a>建立链接</h3><p>  我们在前面的客户端和服务器例子中好像不止一次的使用到了这个类，你知道我们可以用它来实现对TCP Socet的读写，使用方法跟一般的Sokect很类似，但是SoketChannel是一个抽象类，你不能直接new一个对象，我们需要调用它的静态工厂方法open来创建一个SoketChannel对象。</p>
-        
-          <a class="article-more-a" href="/2017/07/23/Practice-of-Basic-Java-Skills-NIO-4-Channel/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">非阻塞I/O(NIO)</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/07/23/Practice-of-Basic-Java-Skills-NIO-4-Channel/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-        <!-- 目录内容 -->
-             
-        <!-- 目录内容结束 -->
-  
-  
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/6/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/8/">Next &raquo;</a>
-    </nav>
-  
-
-
           </div>
         </div>
       </div>
@@ -521,8 +365,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
