@@ -132,6 +132,75 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Learning-Scala-9-More-Characters" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/18/Learning-Scala-9-More-Characters/">Learning Scala (9):更多Scala特性</a>
+    </h1>
+  
+
+        
+        <a href="/2017/07/18/Learning-Scala-9-More-Characters/" class="archive-article-date">
+  	<time datetime="2017-07-18T00:06:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>  Scala利用常规类构建高层元组和函数字面量，这一篇文章主要是简单的介绍一下以常规类作为基础的元组和函数。</p>
+<h2 id="TupleX和FunctionX"><a href="#TupleX和FunctionX" class="headerlink" title="TupleX和FunctionX"></a>TupleX和FunctionX</h2><p>  创建一个元组和函数字面量的语法非常快捷，而且直观，它不需要new关键字，好像就是与生俱来的语法优势一样，实际上元组和函数字面量的具体实现只是普通的类。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line">Scala的语法简洁而直观</div><div class="line">*/</div><div class="line"></div><div class="line">scala&gt; <span class="keyword">val</span> abc=(<span class="string">"a"</span>,<span class="string">"b"</span>,<span class="string">"c"</span>)</div><div class="line">abc: (<span class="type">String</span>, <span class="type">String</span>, <span class="type">String</span>) = (a,b,c)</div><div class="line"></div><div class="line">scala&gt; <span class="keyword">val</span> f=(x:<span class="type">Int</span>)=&gt;x*<span class="number">2</span></div><div class="line">f: <span class="type">Int</span> =&gt; <span class="type">Int</span> = $$<span class="type">Lambda</span>$<span class="number">1022</span>/<span class="number">627707285</span>@<span class="number">2</span>f3928ac</div></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2017/07/18/Learning-Scala-9-More-Characters/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习笔记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">scala</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/07/18/Learning-Scala-9-More-Characters/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+        <!-- 目录内容 -->
+             
+        <!-- 目录内容结束 -->
+  
     <article id="post-Learning-Scala-8-Advanced-Object-Oriented-Scala" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -431,77 +500,9 @@
              
         <!-- 目录内容结束 -->
   
-    <article id="post-Learning-Scala-4-immutable-collections" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/14/Learning-Scala-4-immutable-collections/">Learning Scala(4):不可变集合</a>
-    </h1>
-  
-
-        
-        <a href="/2017/07/14/Learning-Scala-4-immutable-collections/" class="archive-article-date">
-  	<time datetime="2017-07-14T04:31:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-14</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="不可变集合"><a href="#不可变集合" class="headerlink" title="不可变集合"></a>不可变集合</h2><p>  因为是JVM语言，Scala代码可以访问和使用整个JAVA集合库,但是如果你想体会到Scala中高阶函数带来的种种好处，你应该选择Scala本身提供的集合。</p>
-<p>  Scala集合提供了大量的高阶操作，如map,reduce,filter等等，如果你经常使用jquery中的包装集的各种操作，你就会立刻联想到这些高阶操作带来的好处。Scala的集合又分为可变和不可变集合两类，利用不可变性可以保证程序更加稳定，当然在必要时也可以转化为可变类型。在这里，我们首先来看三种不可变集合，它们分别是List,Set,Map。</p>
-        
-          <a class="article-more-a" href="/2017/07/14/Learning-Scala-4-immutable-collections/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">scala</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/07/14/Learning-Scala-4-immutable-collections/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-        <!-- 目录内容 -->
-             
-        <!-- 目录内容结束 -->
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/8/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/10/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/8/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/10/">Next &raquo;</a>
     </nav>
   
 
@@ -591,10 +592,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">-闲谈</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">闲谈</a>
               </li>
              
@@ -615,11 +612,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">FP</a>
+                <a href="javascript:void(0)" class="js-tag color1">scala</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">scala</a>
+                <a href="javascript:void(0)" class="js-tag color3">FP</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -636,6 +633,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Junit</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">-闲谈</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -667,11 +668,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">温故</a>
+                <a href="javascript:void(0)" class="js-tag color3">译文</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">译文</a>
+                <a href="javascript:void(0)" class="js-tag color3">温故</a>
               </li>
             
             <div class="clearfix"></div>

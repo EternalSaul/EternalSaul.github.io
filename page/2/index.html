@@ -132,6 +132,70 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Von-Neumann-The-Mathematician-part-2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/20/Von-Neumann-The-Mathematician-part-2/">冯诺依曼：《数学家》（下）</a>
+    </h1>
+  
+
+        
+        <a href="/2017/12/20/Von-Neumann-The-Mathematician-part-2/" class="archive-article-date">
+  	<time datetime="2017-12-20T08:09:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><em>本文作者是冯诺依曼，英文名为《The Mathematician》，该文章在1947年发表在《Works of the Mind》上，后来也记录在《von Neumann’s Collected Works》中，这篇文章是我听讲座时偶然得知的，于是看了一下后翻译了出来，才疏学浅，只源于爱好，如有不对多多包涵——2017.12.20</em>  </p>
+<p>本文接<a href="http://saul.xin/2017/12/13/Von-Neumann-The-Mathematician-part-1/#more" target="_blank" rel="external">上一部分</a></p>
+        
+          <a class="article-more-a" href="/2017/12/20/Von-Neumann-The-Mathematician-part-2/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">译文</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/12/20/Von-Neumann-The-Mathematician-part-2/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+        <!-- 目录内容 -->
+             
+        <!-- 目录内容结束 -->
+  
     <article id="post-JVM-5-Execution-engine-of-bytecode" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -410,79 +474,9 @@
              
         <!-- 目录内容结束 -->
   
-    <article id="post-JVM-4-Class-Loader" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/05/JVM-4-Class-Loader/">JVM(4):类加载器机制</a>
-    </h1>
-  
-
-        
-        <a href="/2017/12/05/JVM-4-Class-Loader/" class="archive-article-date">
-  	<time datetime="2017-12-05T03:45:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>  类加载执行的前提是我们能以一个类的全限定名来获取字节流，至于字节流在哪里生成，我们从哪里获取这并不是虚拟机所关心的，作为一个出色的设计团队，Java的设计者最初为了满足Java Applet，设计了大名鼎鼎的类加载器机制，<strong>即让通过全限定名获取字节流的这个动作，放到JVM的外部，用户可以选择自行实现一些特殊的加载方案</strong>，现在你知道的随着flash的流行，Java Applet这种技术已经淘汰了，现在随着html5的新起，flash也基本上接近夕阳了，可见技术的变化是普遍而剧烈的。虽然Applet死了很多年，但是类加载器却被作为一种精髓留在了java体系中，原因是它在OSGi,代码加密，热部署等等应用中有了新生的土壤。</p>
-<p>  类加载器还有一个作用就是和类的标识一起来确定这个类的唯一性，若N1是类C的全限定名称标识，而L1是加载类C类加载器，那么如果存在一个类D的全限定名称为N2,而L2是类D的加载器，那么：</p>
-<p> 当且仅当，N1=N2且L1=L2时C和D才被认为是同一个类，即C&lt;N1,L1&gt;=D&lt;N2,L2&gt;</p>
-<p> 这种相等，关系到类的Class对象的equals方法，isAssignableFrom()方法以及isInstance()方法和instanceof关键字的判断结果。</p>
-        
-          <a class="article-more-a" href="/2017/12/05/JVM-4-Class-Loader/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">JVM</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/12/05/JVM-4-Class-Loader/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-        <!-- 目录内容 -->
-             
-        <!-- 目录内容结束 -->
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
     </nav>
   
 
@@ -572,10 +566,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">-闲谈</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">闲谈</a>
               </li>
              
@@ -596,11 +586,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">FP</a>
+                <a href="javascript:void(0)" class="js-tag color1">scala</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">scala</a>
+                <a href="javascript:void(0)" class="js-tag color3">FP</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -617,6 +607,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Junit</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">-闲谈</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -648,11 +642,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">温故</a>
+                <a href="javascript:void(0)" class="js-tag color3">译文</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">译文</a>
+                <a href="javascript:void(0)" class="js-tag color3">温故</a>
               </li>
             
             <div class="clearfix"></div>
