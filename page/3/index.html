@@ -132,6 +132,81 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Learning-ES6-1-Block-scope" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/06/Learning-ES6-1-Block-scope/">Learning ES6(1):块作用域</a>
+    </h1>
+  
+
+        
+        <a href="/2017/12/06/Learning-ES6-1-Block-scope/" class="archive-article-date">
+  	<time datetime="2017-12-06T06:46:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>  最近主要是在学习3个东西，一个就是单元测试，第二个就是jvm，还有一个就是es6了，目前的话jvm已经学完了，就差把笔记搬运从笔记本上到博客上，单元测试和es6的话都是正在进行，es6的是阮一峰的<a href="https://github.com/ruanyf/es6tutorial" target="_blank" rel="external">ECMAScript 6 入门</a>，大神已经把书开源道github上了，推荐大家去看那本书，博客这里主要用于我个人用于以后回忆某些知识用的。</p>
+<p>  至于es6是什么可以自行使用搜索引擎，或看上面那本书的第1章，这里我就不介绍了。</p>
+<hr>
+<p>  在ES6之前，js中是没有<strong>块级作用域</strong>这个东西的，只有<strong>函数</strong>和<strong>全局</strong>作用域<br>  ES6中的第一个特性，即以let来声明一个变量，这个变量只在当前代码块中有效，比如对于如下代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">!<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">let</span> k = <span class="number">3</span>;<span class="comment">//k作用域只在当前代码块中</span></div><div class="line">    &#125;</div><div class="line">    alert(k); <span class="comment">//报错，外层代码不能去引用内层代码块中的k，如果上面是var则输出3</span></div><div class="line">&#125;();</div><div class="line"></div><div class="line">!<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">let</span> k = <span class="number">3</span>;</div><div class="line">    &#123;</div><div class="line">        alert(k);<span class="comment">//正常输出3</span></div><div class="line">    &#125;</div><div class="line">&#125;();</div><div class="line"></div><div class="line">!<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">let</span> k = <span class="number">4</span>;</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">let</span> k = <span class="number">5</span>;</div><div class="line">        alert(k);<span class="comment">//输出k=5</span></div><div class="line">    &#125;</div><div class="line">    alert(k);<span class="comment">//输出k=4</span></div><div class="line">&#125;();</div></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2017/12/06/Learning-ES6-1-Block-scope/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习笔记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ES6</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/12/06/Learning-ES6-1-Block-scope/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+        <!-- 目录内容 -->
+             
+        <!-- 目录内容结束 -->
+  
     <article id="post-JVM-4-Class-Loader" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -411,83 +486,6 @@
              
         <!-- 目录内容结束 -->
   
-    <article id="post-Junit-2-Assert-by-Hamcrest" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/29/Junit-2-Assert-by-Hamcrest/">Junit(2):使用Hamcrest断言</a>
-    </h1>
-  
-
-        
-        <a href="/2017/10/29/Junit-2-Assert-by-Hamcrest/" class="archive-article-date">
-  	<time datetime="2017-10-29T07:32:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>  上一篇文章中，我们以几个简单的用例测试来开篇，以assertTure,assertEquals这样的简单形式来作断言，这些方法都是org.junit.Assert来提供，如果你用的是maven或者其他的项目构建工具来引入junit包，我们会发现，它居然依赖于一个org.hamcrest的项目包，实际上，如果涉及到比较复杂的断言，我们以junit需要写一大串代码，这让我们的测试代码非常不美观，这个叫做hamcrest提供了一套断言工具，而且该项目还有ruby等等语言的版本，他们返回一个org.hamcrest.Matcher的子类，另外在org.hamcrest.MatcherAssert中提供了一套assertThat方法，它接受一个org.hamcrest.Matcher和一个计算值，从而做出该值是否符合该Matcher的判断。</p>
-<p>  在org.junit.Assert类中也有assertThat方法，不过它其实就是包装了一下MatcherAssert中的assertThat。如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function"><span class="keyword">void</span> <span class="title">assertThat</span><span class="params">(String reason, T actual,</span></span></div><div class="line">        Matcher&lt;? <span class="keyword">super</span> T&gt; matcher) &#123;</div><div class="line">    MatcherAssert.assertThat(reason, actual, matcher);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2017/10/29/Junit-2-Assert-by-Hamcrest/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">软件测试</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">TDD</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Junit</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/10/29/Junit-2-Assert-by-Hamcrest/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-        <!-- 目录内容 -->
-             
-        <!-- 目录内容结束 -->
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
@@ -592,11 +590,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ES6</a>
+                <a href="javascript:void(0)" class="js-tag color3">FP</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -604,7 +598,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">FP</a>
+                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">ES6</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -656,11 +654,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">译文</a>
+                <a href="javascript:void(0)" class="js-tag color3">温故</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">温故</a>
+                <a href="javascript:void(0)" class="js-tag color3">译文</a>
               </li>
             
             <div class="clearfix"></div>

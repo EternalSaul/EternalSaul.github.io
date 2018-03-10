@@ -17,8 +17,8 @@
 <meta property="og:description" content="从上一篇博文，我们知道，神经网络其实就是一个一系列线性映射和非线性激活函数交织起来的评分函数，我们在输入层输入我们的数据，经过隐层的一系列点积和激活函数计算在输出层得到一个类型评分，然而要比较好地训练一个神经网络，我们需要更多的考虑，比如数据预处理，我们还需要考虑权重的初始值以及如何选择激活函数。 数据预处理  我们通常会对训练集数据进行预处理，当然这可能有很多种形式，比如我们如果要去除一些噪">
 <meta property="og:image" content="http://yoursite.com/img/dropout.jpg">
 <meta property="og:image" content="http://yoursite.com/img/loss.jpg">
-<meta property="og:image" content="d:/Saulxin/source/img/loss2.png">
-<meta property="og:updated_time" content="2018-03-10T04:40:52.460Z">
+<meta property="og:image" content="http://yoursite.com/img/loss2.png">
+<meta property="og:updated_time" content="2018-03-10T08:23:41.941Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Notes of Deep Learning:Neural network 2">
 <meta name="twitter:description" content="从上一篇博文，我们知道，神经网络其实就是一个一系列线性映射和非线性激活函数交织起来的评分函数，我们在输入层输入我们的数据，经过隐层的一系列点积和激活函数计算在输出层得到一个类型评分，然而要比较好地训练一个神经网络，我们需要更多的考虑，比如数据预处理，我们还需要考虑权重的初始值以及如何选择激活函数。 数据预处理  我们通常会对训练集数据进行预处理，当然这可能有很多种形式，比如我们如果要去除一些噪">
@@ -194,7 +194,7 @@
 <p>  Softmax-&gt;交叉熵损失</p>
 <p><img src="\img\loss.jpg" alt="loss"></p>
 <p>  如果我们面对的不是一个一般的分类问题，怎么办呢？上面的几种损失公式都只正确作用在每个样本只有一个正确的标签yi的假设成立的情况之下。但是你可以看到，在hexo博客中的一篇文章是可以打几个标签的，亦或者是新浪微博上的一张图片，比如你的女神正在日本旅游，发了一张在清水寺前不知道谁给它拍了一张照，可以打上美女，日本旅游，快乐等等几个标签。我们可以采取下面的一种损失评分策略：</p>
-<p><img src="D:\Saulxin\source\img\loss2.png" alt="loss2"></p>
+<p><img src="\img\loss2.png" alt="loss2"></p>
 <p>其中yij的值为1或者-1，它表示第i个样本是否被贴上第j个标签，如果是就是1，如果不是就是-1，这样的话，可以发现，当一个正样本的得分小于+1，或者一个负样本得分大于-1的时候，算法就会累计损失值。</p>
 <p>  再比如回归问题，比如你要预测北京的空气质量pm2.5的值，一般我们考虑计算预测值和真实值之间的损失，再用L2或者L1范式度量差异。</p>
 
@@ -304,6 +304,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2018/03/10/Notes-of-Deep-Learning-Neural-network-3/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Notes of Deep Learning:Neural network 3
+        
+      </div>
+    </a>
   
   
     <a href="/2018/02/28/Notes-of-Deep-Learning-Neural-network-1/" id="article-nav-older" class="article-nav-link-wrap">
@@ -449,11 +458,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ES6</a>
+                <a href="javascript:void(0)" class="js-tag color3">FP</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -461,7 +466,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">FP</a>
+                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">ES6</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -513,11 +522,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">译文</a>
+                <a href="javascript:void(0)" class="js-tag color3">温故</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">温故</a>
+                <a href="javascript:void(0)" class="js-tag color3">译文</a>
               </li>
             
             <div class="clearfix"></div>
