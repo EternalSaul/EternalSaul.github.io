@@ -8,18 +8,20 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>Notes of Deep Learning:Neural network 2 | Blog of Saul</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="从上一篇博文，我们知道，神经网络其实就是一个一系列线性映射和非线性激活函数交织起来的评分函数，我们在输入层输入我们的数据，经过隐层的一系列点积和激活函数计算在输出层得到一个类型评分，然而要比较好地训练一个神经网络，我们需要更多的考虑，比如数据预处理，我们还需要考虑权重的初始值以及如何选择激活函数。‘ 数据预处理  我们通常会对训练集数据进行预处理，当然这可能有很多种形式，比如我们如果要去除一些">
+  <meta name="description" content="从上一篇博文，我们知道，神经网络其实就是一个一系列线性映射和非线性激活函数交织起来的评分函数，我们在输入层输入我们的数据，经过隐层的一系列点积和激活函数计算在输出层得到一个类型评分，然而要比较好地训练一个神经网络，我们需要更多的考虑，比如数据预处理，我们还需要考虑权重的初始值以及如何选择激活函数。 数据预处理  我们通常会对训练集数据进行预处理，当然这可能有很多种形式，比如我们如果要去除一些噪">
 <meta name="keywords" content="学习笔记,深度学习">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Notes of Deep Learning:Neural network 2">
 <meta property="og:url" content="http://yoursite.com/2018/03/01/Notes-of-Deep-Learning-Neural-network-2/index.html">
 <meta property="og:site_name" content="Blog of Saul">
-<meta property="og:description" content="从上一篇博文，我们知道，神经网络其实就是一个一系列线性映射和非线性激活函数交织起来的评分函数，我们在输入层输入我们的数据，经过隐层的一系列点积和激活函数计算在输出层得到一个类型评分，然而要比较好地训练一个神经网络，我们需要更多的考虑，比如数据预处理，我们还需要考虑权重的初始值以及如何选择激活函数。‘ 数据预处理  我们通常会对训练集数据进行预处理，当然这可能有很多种形式，比如我们如果要去除一些">
+<meta property="og:description" content="从上一篇博文，我们知道，神经网络其实就是一个一系列线性映射和非线性激活函数交织起来的评分函数，我们在输入层输入我们的数据，经过隐层的一系列点积和激活函数计算在输出层得到一个类型评分，然而要比较好地训练一个神经网络，我们需要更多的考虑，比如数据预处理，我们还需要考虑权重的初始值以及如何选择激活函数。 数据预处理  我们通常会对训练集数据进行预处理，当然这可能有很多种形式，比如我们如果要去除一些噪">
 <meta property="og:image" content="http://yoursite.com/img/dropout.jpg">
-<meta property="og:updated_time" content="2018-03-03T08:53:17.384Z">
+<meta property="og:image" content="http://yoursite.com/img/loss.jpg">
+<meta property="og:image" content="d:/Saulxin/source/img/loss2.png">
+<meta property="og:updated_time" content="2018-03-10T04:40:52.460Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Notes of Deep Learning:Neural network 2">
-<meta name="twitter:description" content="从上一篇博文，我们知道，神经网络其实就是一个一系列线性映射和非线性激活函数交织起来的评分函数，我们在输入层输入我们的数据，经过隐层的一系列点积和激活函数计算在输出层得到一个类型评分，然而要比较好地训练一个神经网络，我们需要更多的考虑，比如数据预处理，我们还需要考虑权重的初始值以及如何选择激活函数。‘ 数据预处理  我们通常会对训练集数据进行预处理，当然这可能有很多种形式，比如我们如果要去除一些">
+<meta name="twitter:description" content="从上一篇博文，我们知道，神经网络其实就是一个一系列线性映射和非线性激活函数交织起来的评分函数，我们在输入层输入我们的数据，经过隐层的一系列点积和激活函数计算在输出层得到一个类型评分，然而要比较好地训练一个神经网络，我们需要更多的考虑，比如数据预处理，我们还需要考虑权重的初始值以及如何选择激活函数。 数据预处理  我们通常会对训练集数据进行预处理，当然这可能有很多种形式，比如我们如果要去除一些噪">
 <meta name="twitter:image" content="http://yoursite.com/img/dropout.jpg">
   
   
@@ -157,12 +159,13 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>  从上一篇博文，我们知道，神经网络其实就是一个一系列线性映射和非线性激活函数交织起来的评分函数，我们在输入层输入我们的数据，经过隐层的一系列点积和激活函数计算在输出层得到一个类型评分，然而要比较好地训练一个神经网络，我们需要更多的考虑，比如数据预处理，我们还需要考虑权重的初始值以及如何选择激活函数。‘</p>
+        <p>  从上一篇博文，我们知道，神经网络其实就是一个一系列线性映射和非线性激活函数交织起来的评分函数，我们在输入层输入我们的数据，经过隐层的一系列点积和激活函数计算在输出层得到一个类型评分，然而要比较好地训练一个神经网络，我们需要更多的考虑，比如数据预处理，我们还需要考虑权重的初始值以及如何选择激活函数。</p>
 <h2 id="数据预处理"><a href="#数据预处理" class="headerlink" title="数据预处理"></a>数据预处理</h2><p>  我们通常会对<strong>训练集</strong>数据进行预处理，当然这可能有很多种形式，比如我们如果要去除一些噪声可能要进行数据清洗，这一部分这里先不介绍了，我们这里主要介绍归一化，归一化可以有利于避免模型训练时出现数值问题，还有利于网络快速收敛，更具体的优点你可以查看<a href="http://nnetinfo.com/nninfo/showText.jsp?id=37" target="_blank" rel="external">这里</a>。</p>
 <p>  归一化（Normalization）即把数据的所有维度都归一化，使其数值范围都近似相等，这个种预处理操作只在确信不同输入特征有不同的输入范围时才有意义，对于图像处理中，像素的范围都是0-255，所以这样做对于图片数据意义不大，但是数据如果是表示一个人，（体重（kg），身高（m），年龄）,这样的数据显然60Kg的体重和1.7m的身高不太对等，这会产生一些数值问题，我们有必要进行归一化。这里有两种方式进行<strong>归一化</strong>：</p>
 <p>先假设数据矩阵M，尺寸是N*D,N为样本数目，D是数据维度</p>
 <p>第一种：对数据先做零中心化(zero-centered)，如果用numpy表示：M-=np.mean(X,axis=0)，然后我们对每个维度都除以它的标准差就可以了，M/=np.std(X,axis=0)。</p>
 <p>第二种：对每个维度归一化使得每个维度的最大和最小值是1和-1。</p>
+<a id="more"></a>
 <p>  实际上零中心化单独也可以看成是一种预处理操作，被称作是<strong>均值减法</strong>在实际中用的也比较多，另外由于近来BN层的引入，归一化在有BN层的情况下也就没有必要了，因为每次卷积后BN层会把数据拉到0均值1方差的分布（标准高斯分布）上，并且这个均值和方差还是更加精确的动态统计出来的，而非原始输入上统计，因此在BN引入后归一化没什么必要。</p>
 <p>  我在前面就说过，数据预处理，归一化只是一种情况，还可能进行数据清洗，数据增强，白化和PCA等等操作，图片处理中有时候我们还会转换图片的格式，这也是一种预处理。预处理在模型训练中非常重要，有时候甚至决定着学习算法本身的好坏。</p>
 <h2 id="权重初始化"><a href="#权重初始化" class="headerlink" title="权重初始化"></a>权重初始化</h2><p>  要训练我们的网络，我们确定好我们需要一个怎么样的模型，然后构建一个最开始的网络，这样的话，网络中各种参数的初始值就显得非常重要，权重就是其中之一。</p>
@@ -186,6 +189,14 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">predict</span><span class="params">(X)</span>:</span></div><div class="line">  <span class="comment"># 前向传播时模型集成</span></div><div class="line">  H1 = np.maximum(<span class="number">0</span>, np.dot(W1, X) + b1) * p <span class="comment"># 注意：激活数据要乘以p</span></div><div class="line">  H2 = np.maximum(<span class="number">0</span>, np.dot(W2, H1) + b2) * p <span class="comment"># 注意：激活数据要乘以p</span></div><div class="line">  out = np.dot(W3, H2) + b3</div></pre></td></tr></table></figure>
 <p>  这样的话测试时要多乘一次p显得非常麻烦，为了让我们的测试效率更高，各种深度学习框架中实践的其实是inverted dropout,有翻译为<strong>反向随机失活</strong>，个人觉得这个翻译不太好，<strong>其实它就是在训练阶段对激活函数输出值进行放大，即是放大1/p倍，而测试阶段则保持不变。</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">train_step</span><span class="params">(X)</span>:</span></div><div class="line">  <span class="comment"># 3层neural network的前向传播</span></div><div class="line">  H1 = np.maximum(<span class="number">0</span>, np.dot(W1, X) + b1)</div><div class="line">  U1 = (np.random.rand(*H1.shape) &lt; p) / p <span class="comment"># 第一个随机失活遮罩. 注意/p!</span></div><div class="line">  H1 *= U1 <span class="comment"># drop!</span></div><div class="line">  H2 = np.maximum(<span class="number">0</span>, np.dot(W2, H1) + b2)</div><div class="line">  U2 = (np.random.rand(*H2.shape) &lt; p) / p <span class="comment"># 第二个随机失活遮罩. 注意/p!</span></div><div class="line">  H2 *= U2 <span class="comment"># drop!</span></div><div class="line">  out = np.dot(W3, H2) + b3</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">predict</span><span class="params">(X)</span>:</span></div><div class="line">  <span class="comment"># 前向传播时模型集成</span></div><div class="line">  H1 = np.maximum(<span class="number">0</span>, np.dot(W1, X) + b1) <span class="comment"># 不用数值范围调整了</span></div><div class="line">  H2 = np.maximum(<span class="number">0</span>, np.dot(W2, H1) + b2)</div><div class="line">  out = np.dot(W3, H2) + b3</div></pre></td></tr></table></figure>
+<h2 id="损失函数的选择"><a href="#损失函数的选择" class="headerlink" title="损失函数的选择"></a>损失函数的选择</h2><p>  我们知道在<strong>分类问题中</strong>两个最常见的分类器对应的损失计算：</p>
+<p>  SVM-&gt;折页损失/平方折页损失（下图没列出）</p>
+<p>  Softmax-&gt;交叉熵损失</p>
+<p><img src="\img\loss.jpg" alt="loss"></p>
+<p>  如果我们面对的不是一个一般的分类问题，怎么办呢？上面的几种损失公式都只正确作用在每个样本只有一个正确的标签yi的假设成立的情况之下。但是你可以看到，在hexo博客中的一篇文章是可以打几个标签的，亦或者是新浪微博上的一张图片，比如你的女神正在日本旅游，发了一张在清水寺前不知道谁给它拍了一张照，可以打上美女，日本旅游，快乐等等几个标签。我们可以采取下面的一种损失评分策略：</p>
+<p><img src="D:\Saulxin\source\img\loss2.png" alt="loss2"></p>
+<p>其中yij的值为1或者-1，它表示第i个样本是否被贴上第j个标签，如果是就是1，如果不是就是-1，这样的话，可以发现，当一个正样本的得分小于+1，或者一个负样本得分大于-1的时候，算法就会累计损失值。</p>
+<p>  再比如回归问题，比如你要预测北京的空气质量pm2.5的值，一般我们考虑计算预测值和真实值之间的损失，再用L2或者L1范式度量差异。</p>
 
       
 
@@ -323,7 +334,7 @@
             <div id="toc-article" class="toc-article">
                 <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
                 <strong class="toc-title">文章目录</strong>
-                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#数据预处理"><span class="toc-number">1.</span> <span class="toc-text">数据预处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#权重初始化"><span class="toc-number">2.</span> <span class="toc-text">权重初始化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#正则化"><span class="toc-number">3.</span> <span class="toc-text">正则化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#L1，L2正则化"><span class="toc-number">3.1.</span> <span class="toc-text">L1，L2正则化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#随机失活"><span class="toc-number">3.2.</span> <span class="toc-text">随机失活</span></a></li></ol></li></ol>
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#数据预处理"><span class="toc-number">1.</span> <span class="toc-text">数据预处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#权重初始化"><span class="toc-number">2.</span> <span class="toc-text">权重初始化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#正则化"><span class="toc-number">3.</span> <span class="toc-text">正则化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#L1，L2正则化"><span class="toc-number">3.1.</span> <span class="toc-text">L1，L2正则化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#随机失活"><span class="toc-number">3.2.</span> <span class="toc-text">随机失活</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#损失函数的选择"><span class="toc-number">4.</span> <span class="toc-text">损失函数的选择</span></a></li></ol>
            </div>
            <script type="text/javascript">
             function showToc(){
