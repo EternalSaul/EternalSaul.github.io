@@ -132,6 +132,75 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Practice-of-Basic-Java-Skills-NIO-1-NIO-In-Client" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/20/Practice-of-Basic-Java-Skills-NIO-1-NIO-In-Client/">Practice of Basic Java Skills:非阻塞I/O (1)——客户端非阻塞I/O</a>
+    </h1>
+  
+
+        
+        <a href="/2017/07/20/Practice-of-Basic-Java-Skills-NIO-1-NIO-In-Client/" class="archive-article-date">
+  	<time datetime="2017-07-20T07:54:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>  在机器中每一级总线的速度差异是巨大的，cpu肯定不愿意等磁盘，对于比磁盘还要慢的网络它就更不愿意了，如果你用过某些速度很慢的VPS的话，你可以观察到每次敲一个键然后等2-3秒出来的情况。</p>
+<p>  对于这种网络比CPU慢几个数量级的情况，传统的解决手法是用缓存和多线程，多线程处理不同的数据连接，然后把处理的数据放到缓存区中，一旦网络可以发送数据了就发送它。在你学习如何用ServerSocket等等去搭建一个应用层服务器的时候，你可能会以一个请求一个线程的方式，我有理由相信你肯定是这么干的。实际上以现在的硬件水平，这并不是多大的事情，但是如果你想开发一个应用而你又没有什么钱，只能用用5刀/月的廉价VPS的话，这可能会是一个问题。</p>
+<p>  实际上非阻塞I/O在硬件允许的一般情况下都不会比多线程阻塞I/O快，非阻塞I/O的优势基于阻塞I/O的方式，即CPU不会浪费时间去等待一个I/O完成。</p>
+        
+          <a class="article-more-a" href="/2017/07/20/Practice-of-Basic-Java-Skills-NIO-1-NIO-In-Client/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">非阻塞I/O(NIO)</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/07/20/Practice-of-Basic-Java-Skills-NIO-1-NIO-In-Client/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+        <!-- 目录内容 -->
+             
+        <!-- 目录内容结束 -->
+  
     <article id="post-Learning-Scala-10-Some-About-Type" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -394,76 +463,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2017/07/16/Learning-Scala-7-Object-Oriented-Scala/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-        <!-- 目录内容 -->
-             
-        <!-- 目录内容结束 -->
-  
-    <article id="post-Learning-Scala-6-Monadic" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/15/Learning-Scala-6-Monadic/">Learning Scala(6):一元集合</a>
-    </h1>
-  
-
-        
-        <a href="/2017/07/15/Learning-Scala-6-Monadic/" class="archive-article-date">
-  	<time datetime="2017-07-15T03:06:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p> <strong>一元(Monadic)集合支持Iterable中的变换操作，但是包含的元素不能多于1个。</strong></p>
-<h2 id="Option"><a href="#Option" class="headerlink" title="Option"></a>Option</h2><h3 id="Some和None"><a href="#Some和None" class="headerlink" title="Some和None"></a>Some和None</h3><p>  Option是一个一元集合类型，标识一个值的存在或者不存在。你可以看到很多编程语言近年来都增加了类似于Option的这样的一种特性，比如Java 8中的Optional和Swift中的Option,因为很多开发人员认为Option可以安全的代替null值，减少空指针异常发生的可能性，还有一些开发人员把它看作是构建操作链的安全方法，确保链中只含有有效的值。</p>
-<p>  Option类型本身没有实现，它依赖于两个子类型提供具体的实现：Some和None，其中Some是一个类型参数化的单元素集合，而None是一个空集合。</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//创建一个值为kkk的字符串</span></div><div class="line">scala&gt; <span class="keyword">val</span> s=<span class="string">"kkk"</span></div><div class="line">s: <span class="type">String</span> = kkk</div><div class="line"></div><div class="line"><span class="comment">//调用Option，构造出Some类型</span></div><div class="line">scala&gt; <span class="keyword">val</span> a=<span class="type">Option</span>(s)</div><div class="line">a: <span class="type">Option</span>[<span class="type">String</span>] = <span class="type">Some</span>(kkk)</div><div class="line"></div><div class="line"><span class="comment">//创建一个空字符串</span></div><div class="line">scala&gt; <span class="keyword">val</span> n:<span class="type">String</span>=<span class="literal">null</span></div><div class="line">n: <span class="type">String</span> = <span class="literal">null</span></div><div class="line"></div><div class="line"><span class="comment">/*</span></div><div class="line">调用Option，构造出None类型</div><div class="line">以此你可以通过这样的新方式来判断一个值或者变量是不是null</div><div class="line">*/</div><div class="line">scala&gt; <span class="keyword">val</span> b=<span class="type">Option</span>(n)</div><div class="line">b: <span class="type">Option</span>[<span class="type">String</span>] = <span class="type">None</span></div><div class="line"></div><div class="line"><span class="comment">/*</span></div><div class="line">当然如果不是在REPL下而是在IDE下编写Scala程序，你并不会直接看到toString的输出，你也就无法判定具体的类型到底是None还是Some，这样的话我们需要借助两个操作来判断：isDefined和isEmpty</div><div class="line">*/</div><div class="line">scala&gt; a.isDefined</div><div class="line">res40: <span class="type">Boolean</span> = <span class="literal">true</span></div><div class="line"></div><div class="line">scala&gt; a.isEmpty</div><div class="line">res41: <span class="type">Boolean</span> = <span class="literal">false</span></div><div class="line"></div><div class="line">scala&gt; b.isEmpty</div><div class="line">res42: <span class="type">Boolean</span> = <span class="literal">true</span></div><div class="line"></div><div class="line">scala&gt; b.isDefined</div><div class="line">res43: <span class="type">Boolean</span> = <span class="literal">false</span></div></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2017/07/15/Learning-Scala-6-Monadic/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">scala</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/07/15/Learning-Scala-6-Monadic/">展开全文 >></a>
         </p>
       
 
