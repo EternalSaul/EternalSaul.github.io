@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-03-11T12:57:14.909Z</updated>
+  <updated>2018-03-11T13:45:44.223Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,12 +17,12 @@
   
   <entry>
     <title>Notes of Deep Learning:Neural network 4</title>
-    <link href="http://yoursite.com/2018/03/10/Notes-of-Deep-Learning-Neural-network-4/"/>
-    <id>http://yoursite.com/2018/03/10/Notes-of-Deep-Learning-Neural-network-4/</id>
-    <published>2018-03-10T05:41:24.000Z</published>
-    <updated>2018-03-11T12:57:14.909Z</updated>
+    <link href="http://yoursite.com/2018/03/11/Notes-of-Deep-Learning-Neural-network-4/"/>
+    <id>http://yoursite.com/2018/03/11/Notes-of-Deep-Learning-Neural-network-4/</id>
+    <published>2018-03-11T13:30:24.000Z</published>
+    <updated>2018-03-11T13:45:44.223Z</updated>
     
-    <content type="html"><![CDATA[<p>  我们利用反向传播计算出解析梯度，然后利用计算出的解析梯度来进行参数更新，这里记录一些有些的最优化技巧，但不进行细节更新。</p>
+    <content type="html"><![CDATA[<p>  我们利用反向传播计算出解析梯度，然后利用计算出的解析梯度来进行参数更新，这里记录一些有些的最优化技巧，但不进行细节分析。</p>
 <a id="more"></a>
 <h2 id="参数更新方法"><a href="#参数更新方法" class="headerlink" title="参数更新方法"></a>参数更新方法</h2><h3 id="普通更新"><a href="#普通更新" class="headerlink" title="普通更新"></a>普通更新</h3><p>  沿着负梯度方向改变参数是一个简单有效的方法，比如一个参数向量x，它的梯度为dx，那么这个简单的方法可以表示为：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">x+=learning_rate*dx</div></pre></td></tr></table></figure>
@@ -63,7 +63,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;  我们利用反向传播计算出解析梯度，然后利用计算出的解析梯度来进行参数更新，这里记录一些有些的最优化技巧，但不进行细节更新。&lt;/p&gt;
+      &lt;p&gt;  我们利用反向传播计算出解析梯度，然后利用计算出的解析梯度来进行参数更新，这里记录一些有些的最优化技巧，但不进行细节分析。&lt;/p&gt;
     
     </summary>
     
