@@ -132,6 +132,86 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Junit-4-Mock" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/02/01/Junit-4-Mock/">Junit(4):Mock</a>
+    </h1>
+  
+
+        
+        <a href="/2018/02/01/Junit-4-Mock/" class="archive-article-date">
+  	<time datetime="2018-02-01T08:29:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>  就像上篇文章所说，我们还可以用mock方式模拟一个没有完成的模块，从而完成测试，事实上如果测试的业务比较繁琐，比如涉及到输入啥的，我们也可以mock一个假的输入对象，mock object是在极限编程里提出的，而今天它已经广泛用于软件测试领域。</p>
+<p>  就如mock这个单词的词义一样，mock object即是一个模制的对象，但这个对象的行为是人为故意给定的，不包含实际的业务。这样说可能非常抽象，如果让我们考虑用<strong>Scala</strong>写一个在商店里用pos机刷卡的例子,比如我们刷卡并且输入密码后会构造出这样的一个CreditCard对象：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">case</span> <span class="class"><span class="keyword">class</span> <span class="title">CreditCard</span>(<span class="params">val cardId:<span class="type">String</span>,val password:<span class="type">String</span></span>)</span></div></pre></td></tr></table></figure>
+<p> 而我们的Pos机要负责转账处理：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Pos</span> </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">transfer</span></span>(amount:<span class="type">Double</span>,creditCard: <span class="type">CreditCard</span>, creditCard2: <span class="type">CreditCard</span>, accountManager: <span class="type">AccountManager</span>): <span class="type">Unit</span> = &#123;</div><div class="line">    <span class="keyword">val</span> account1: <span class="type">Account</span> = accountManager.findAccount(creditCard.cardId, creditCard.password);</div><div class="line">    <span class="keyword">val</span> account2: <span class="type">Account</span> = accountManager.findAccount(creditCard2.cardId, creditCard2.password);</div><div class="line">    accountManager.saveAccount(account1.copy(account1.balance - amount,account1.creditCard))</div><div class="line">    accountManager.saveAccount(account2 copy(account2.balance + amount, account2.creditCard))</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>，但是问题是此时我们根本没有构造号银行卡账户数据库，甚至我们连dao对象都只是一个接口，那么为了测试Pos代码逻辑能不能正确执行我们该怎么办呢？</p>
+        
+          <a class="article-more-a" href="/2018/02/01/Junit-4-Mock/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习笔记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">软件测试</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">TDD</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Junit</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/02/01/Junit-4-Mock/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+        <!-- 目录内容 -->
+             
+        <!-- 目录内容结束 -->
+  
     <article id="post-Junit-3-Build-a-stub" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -403,69 +483,6 @@
              
         <!-- 目录内容结束 -->
   
-    <article id="post-Von-Neumann-The-Mathematician-part-1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/13/Von-Neumann-The-Mathematician-part-1/">冯诺依曼：《数学家》（上）</a>
-    </h1>
-  
-
-        
-        <a href="/2017/12/13/Von-Neumann-The-Mathematician-part-1/" class="archive-article-date">
-  	<time datetime="2017-12-13T10:56:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><em>本文作者是冯诺依曼，英文名为《The Mathematician》，该文章在1947年发表在《Works of the Mind》上，后来也记录在《von Neumann’s Collected Works》中，这篇文章是我听讲座时偶然得知的，于是看了一下后翻译了出来，才疏学浅，只源于爱好，如有不对多多包涵——2017.12.13</em>  </p>
-        
-          <a class="article-more-a" href="/2017/12/13/Von-Neumann-The-Mathematician-part-1/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">译文</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/12/13/Von-Neumann-The-Mathematician-part-1/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-        <!-- 目录内容 -->
-             
-        <!-- 目录内容结束 -->
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
@@ -570,19 +587,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">FP</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">scala</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">javascript</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">ES6</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">FP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">scala</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -634,11 +651,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">温故</a>
+                <a href="javascript:void(0)" class="js-tag color3">译文</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">译文</a>
+                <a href="javascript:void(0)" class="js-tag color3">温故</a>
               </li>
             
             <div class="clearfix"></div>
