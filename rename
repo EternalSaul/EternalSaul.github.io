@@ -1,5 +1,5 @@
 #!/bin/bash
 for file in `ls ./img/*.png | grep QQ`
 do
- cp $file ./img/QQ${file:10}
+ mv $file ./img/QQ图片20${file:10}
 done
