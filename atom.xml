@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-03-12T08:39:07.501Z</updated>
+  <updated>2018-10-09T02:59:27.610Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -16,11 +16,87 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>react(1):meet react</title>
+    <link href="http://yoursite.com/2018/10/09/react-1-meet-react/"/>
+    <id>http://yoursite.com/2018/10/09/react-1-meet-react/</id>
+    <published>2018-10-09T01:44:08.000Z</published>
+    <updated>2018-10-09T02:59:27.610Z</updated>
+    
+    <content type="html"><![CDATA[<p>  几乎所有的软件问题都可以添加一层抽象来解决，react通过添加虚拟DOM这层抽象，=，解决了处理DOM的效率问题，<strong>虚拟DOM即用来描述真实DOM的JS对象</strong>，我们知道处理结构化的js对象，要比处理一大段文本快得多。</p>
+<p>  特点：</p>
+<p>  <strong>声明式的视图层</strong>：以JSX语法声明视图层，因此可以随意使用状态数据</p>
+<p>  <strong>从状态到UI的单向数据流</strong>：定义UI的状态，让React来把它渲染为最终的UI，React根据最新状态来渲染最新UI。</p>
+<p>  <strong>灵活渲染</strong>：React并不直接把视图渲染成最终的界面，而是把它们渲染为了中间的抽象，即虚拟DOM，结合其他库，可以把虚拟DOM渲染成不同的最终界面，在浏览器上是react-dom,在移动端上则可以配合Native来使用，在服务端则可以配合Node进行渲染。</p>
+<p>  <strong>高效DOM操作</strong>：本身对js对象的操作就远快于对真实DOM操作，配合一些诸如Diff之类的差异算法，更是可以减少渲染速度，让界面性能增加。</p>
+<h2 id="JSX"><a href="#JSX" class="headerlink" title="JSX"></a>JSX</h2><p>  JSX是一种用于描述UI的JS扩展语法，React用其来描述组件的UI。发明这种语法与React本身的理念有关，与传统很多模板思想把数据和UI拆分有所不同，其理念把<strong>组件</strong>当做是界面的可复用模块，<strong>且认为组件应该是具备UI描述和UI数据的完整体</strong>，不应该把它们分开来处理。</p>
+<p>  实际上JSX仅仅是React提供的语法糖，它对应的方法是</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">React.createElement(component,props, ...chi)</div></pre></td></tr></table></figure>
+<p>  所有的JSX最终都会转变为对上面这个方法的调用，但是为了对被声明的视图一目了然，首选使用JSX，就像java8中一般不会使用匿名类来代替lambda语法一样。</p>
+<h3 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h3><p>  JSX只有两种标签，React通过首字母是否大写来区分这两类标签，而且它们可以互相嵌套使用：</p>
+<p>  其一就是DOM类型的标签，也就是html的基础标签诸如div,span,p等等，首字母必须小写。</p>
+<p>  然后则是React组件标签，首字母必须大写。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//dom标签</span></div><div class="line"><span class="keyword">const</span> divElement = <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span> hello saul <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>;</div><div class="line"></div><div class="line"><span class="comment">//组件标签</span></div><div class="line"><span class="keyword">const</span> element = <span class="xml"><span class="tag">&lt;<span class="name">SaulBlog</span> /&gt;</span>;</span></div><div class="line">     </div><div class="line">//嵌套使用</div><div class="line">const hello = (<span class="tag">&lt;<span class="name">div</span>&gt;</span> <span class="tag">&lt;<span class="name">SaulBlog</span> /&gt;</span> <span class="tag">&lt;/<span class="name">div</span>&gt;</span>;</div></pre></td></tr></table></figure>
+<h3 id="js表达式"><a href="#js表达式" class="headerlink" title="js表达式"></a>js表达式</h3><p>JSX本质上依然是Js，我们可以用{}讲表达式括起来的方式来使用表达式，一般有两种情况我们要用这种语法：</p>
+<p>  <strong>通过表达式给标签属性赋值</strong></p>
+<p>  <strong>通过表达式定义子组件</strong></p>
+<p>需要注意的是和scala之类的语言不同，js表达式并不支持多行js语句，用;隔开两条语句是会报错的。</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//Error!</span></div><div class="line"><span class="keyword">const</span> element = <span class="xml"><span class="tag">&lt;<span class="name">Saul</span> <span class="attr">value</span> = <span class="string">&#123;const</span> <span class="attr">val</span> = <span class="string">1+1;return</span> <span class="attr">val</span>; &#125; /&gt;</span></span></div></pre></td></tr></table></figure>
+<p>所以你用不了if-eles语句，但是可以用三目运算符?和&amp;&amp;代替if的作用。</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> boolean = <span class="literal">false</span>;</div><div class="line"></div><div class="line"><span class="keyword">const</span> element = <span class="xml"><span class="tag">&lt;<span class="name">Saul</span> <span class="attr">value</span> = <span class="string">&#123;boolean</span> &amp;&amp; <span class="attr">1</span>&#125; /&gt;</span></span></div></pre></td></tr></table></figure>
+<h3 id="标签属性和注释"><a href="#标签属性和注释" class="headerlink" title="标签属性和注释"></a>标签属性和注释</h3><h4 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h4><p>除了部分属性外，DOM标签支持的属性JSX同样支持，只不过有些地方有点变化，比如es6占用的class关键字，现在需要在标签属性中用className代替</p>
+<p>另外React对标签支持的事件进行了重新分封装，封装时采用的是驼峰命名法，如onclick要写成onClick。</p>
+<h4 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h4><p>注释方面需要用{}把/**/括起来</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123;<span class="comment">/* 我是注释 */</span>&#125;</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;  几乎所有的软件问题都可以添加一层抽象来解决，react通过添加虚拟DOM这层抽象，=，解决了处理DOM的效率问题，&lt;strong&gt;虚拟DOM即用来描述真实DOM的JS对象&lt;/strong&gt;，我们知道处理结构化的js对象，要比处理一大段文本快得多。&lt;/p&gt;
+&lt;p&gt;  特点
+    
+    </summary>
+    
+    
+      <category term="前端" scheme="http://yoursite.com/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+      <category term="react" scheme="http://yoursite.com/tags/react/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Notes of Deep Learning:what is YOLO</title>
+    <link href="http://yoursite.com/2018/03/13/Notes-of-Deep-Learning-what-is-YOLO/"/>
+    <id>http://yoursite.com/2018/03/13/Notes-of-Deep-Learning-what-is-YOLO/</id>
+    <published>2018-03-13T07:17:13.000Z</published>
+    <updated>2018-03-14T10:14:12.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>  YOLO是现在性能比较好的一个基于卷积神经网络的目标检测算法，当然它有2个版本，这里说的是第一个版本，YOLO的第一个版本有一些局限性，比如对小的目标检测效果不是很好，但是它的检测速度对比于RCNN系列算法(Fast,Faster)是一个很大的优势，在论文中作者说在TITAN X显卡上跑YOLO模型，检测速度可以达到每秒45帧，另外有一个牺牲了一些准确度的简化版模型（Fast YOLO）则达到了每秒155帧，要知道RCNN最快的版本也就是10多帧的样子。下图是YOLO论文中给出的一张对比表：</p>
+<div><br><br><img src="\img\QQ图片20180314145429.png" align="center"><br><br></div>
+
+<p>  对YOLO算法在速度上的突破起决定性作用的应该是把目标检测作为单个回归问题，而不是分类问题，RCNN系列算法，一般都有两个重要的模块，一个用于找出候选区域，一个用于将候选区域里的图像用于分类。YOLO则直接是一个端到端的系统，从图像像素到边界框坐标和类概率一气呵成。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;  YOLO是现在性能比较好的一个基于卷积神经网络的目标检测算法，当然它有2个版本，这里说的是第一个版本，YOLO的第一个版本有一些局限性，比如对小的目标检测效果不是很好，但是它的检测速度对比于RCNN系列算法(Fast,Faster)是一个很大的优势，在论文中作者说在TI
+    
+    </summary>
+    
+    
+      <category term="学习笔记" scheme="http://yoursite.com/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="深度学习" scheme="http://yoursite.com/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="目标检测" scheme="http://yoursite.com/tags/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Notes of CS231n:Structure of CNN</title>
     <link href="http://yoursite.com/2018/03/12/Notes-of-Deep-Learning-Structure-of-CNN/"/>
     <id>http://yoursite.com/2018/03/12/Notes-of-Deep-Learning-Structure-of-CNN/</id>
     <published>2018-03-12T03:04:18.000Z</published>
-    <updated>2018-03-12T08:39:07.501Z</updated>
+    <updated>2018-03-12T08:39:06.000Z</updated>
     
     <content type="html"><![CDATA[<p>  卷积神经网络也由有学习能力的神经元组成，这些神经元中也有权重和偏差。整个卷积神经网络实为是一个可导的评分函数，在神经网络中我们实现的各种技巧和要点依旧适用于卷积神经网络。但是<strong>卷积神经网络与一般神经网络不同的是，它基于一个假设，即输入的数据是图像</strong>。基于这个假设，我们添加了一些特有的特性，从而让我们的前向传播更为高效，<strong>同时也大大降低了网络中的参数数量</strong>。降低参数数量是一个很好的特性，因为在一般的神经网络中，因为是全连接的，如果要处理一个大点的图像，比如一个200*200*3的图像，一个神经元就有12万个权重，显然这是不可接受的。</p>
 <a id="more"></a>
@@ -108,7 +184,7 @@
     <link href="http://yoursite.com/2018/03/11/Notes-of-Deep-Learning-Neural-network-4/"/>
     <id>http://yoursite.com/2018/03/11/Notes-of-Deep-Learning-Neural-network-4/</id>
     <published>2018-03-11T13:30:24.000Z</published>
-    <updated>2018-03-13T03:56:10.087Z</updated>
+    <updated>2018-03-13T03:56:10.000Z</updated>
     
     <content type="html"><![CDATA[<p>  我们利用反向传播计算出解析梯度，然后利用计算出的解析梯度来进行参数更新，这里记录一些有些的最优化技巧，但不进行细节分析。</p>
 <a id="more"></a>
@@ -167,7 +243,7 @@
     <link href="http://yoursite.com/2018/03/10/Notes-of-Deep-Learning-Neural-network-3/"/>
     <id>http://yoursite.com/2018/03/10/Notes-of-Deep-Learning-Neural-network-3/</id>
     <published>2018-03-10T05:41:24.000Z</published>
-    <updated>2018-03-12T08:37:47.679Z</updated>
+    <updated>2018-03-12T08:37:46.000Z</updated>
     
     <content type="html"><![CDATA[<p>  在上一篇文章中，记录了如何构造一个神经网络，比如如何初始化参数，如何选择激活函数和损失函数，应该用哪种方法来防止过拟合等等，在这篇记录中，记录的是如何训练一个神经网络，包括如何学习参数以及如何将超参数最优化。</p>
 <a id="more"></a>
@@ -226,7 +302,7 @@
     <link href="http://yoursite.com/2018/03/01/Notes-of-Deep-Learning-Neural-network-2/"/>
     <id>http://yoursite.com/2018/03/01/Notes-of-Deep-Learning-Neural-network-2/</id>
     <published>2018-03-01T02:26:43.000Z</published>
-    <updated>2018-03-12T08:36:58.431Z</updated>
+    <updated>2018-03-12T08:36:58.000Z</updated>
     
     <content type="html"><![CDATA[<p>  从上一篇博文，我们知道，神经网络其实就是一个一系列线性映射和非线性激活函数交织起来的评分函数，我们在输入层输入我们的数据，经过隐层的一系列点积和激活函数计算在输出层得到一个类型评分，然而要比较好地训练一个神经网络，我们需要更多的考虑，比如数据预处理，我们还需要考虑权重的初始值以及如何选择激活函数。</p>
 <h2 id="数据预处理"><a href="#数据预处理" class="headerlink" title="数据预处理"></a>数据预处理</h2><p>  我们通常会对<strong>训练集</strong>数据进行预处理，当然这可能有很多种形式，比如我们如果要去除一些噪声可能要进行数据清洗，这一部分这里先不介绍了，我们这里主要介绍归一化，归一化可以有利于避免模型训练时出现数值问题，还有利于网络快速收敛，更具体的优点你可以查看<a href="http://nnetinfo.com/nninfo/showText.jsp?id=37" target="_blank" rel="external">这里</a>。</p>
@@ -291,7 +367,7 @@
     <link href="http://yoursite.com/2018/02/28/Notes-of-Deep-Learning-Neural-network-1/"/>
     <id>http://yoursite.com/2018/02/28/Notes-of-Deep-Learning-Neural-network-1/</id>
     <published>2018-02-28T07:17:09.000Z</published>
-    <updated>2018-03-12T08:37:59.679Z</updated>
+    <updated>2018-03-12T08:37:58.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="人工神经元"><a href="#人工神经元" class="headerlink" title="人工神经元"></a>人工神经元</h2><p>  其实神经元这个翻译有点唬人，有些学者也不喜欢借用某些生物词语来蹭热度，他们直接就把所谓的人工神经元称之为单元（unit），结合人工神经网络来看的话，你可以很容易的推测出，它是由这个所谓的人工神经元组成的。在一个人工神经网络中，神经元间会有一种单向的影响，因为人工神经网络可以看做是一张有向无环图。下图是一个常见的粗糙模型：</p>
 <div align="center"><br><br><img width="600px" src="\img\QQ图片20180214181505.png"><br><br><img src="\img\QQ图片20180214180333.jpg"><br><br></div>
@@ -346,7 +422,7 @@
     <link href="http://yoursite.com/2018/02/01/Junit-4-Mock/"/>
     <id>http://yoursite.com/2018/02/01/Junit-4-Mock/</id>
     <published>2018-02-01T08:29:46.000Z</published>
-    <updated>2018-02-01T15:39:50.653Z</updated>
+    <updated>2018-02-01T15:39:50.000Z</updated>
     
     <content type="html"><![CDATA[<p>  就像上篇文章所说，我们还可以用mock方式模拟一个没有完成的模块，从而完成测试，事实上如果测试的业务比较繁琐，比如涉及到输入啥的，我们也可以mock一个假的输入对象，mock object是在极限编程里提出的，而今天它已经广泛用于软件测试领域。</p>
 <p>  就如mock这个单词的词义一样，mock object即是一个模制的对象，但这个对象的行为是人为故意给定的，不包含实际的业务。这样说可能非常抽象，如果让我们考虑用<strong>Scala</strong>写一个在商店里用pos机刷卡的例子,比如我们刷卡并且输入密码后会构造出这样的一个CreditCard对象：</p>
@@ -413,7 +489,7 @@
     <link href="http://yoursite.com/2018/01/29/Junit-3-Build-a-stub/"/>
     <id>http://yoursite.com/2018/01/29/Junit-3-Build-a-stub/</id>
     <published>2018-01-29T14:45:51.000Z</published>
-    <updated>2018-01-30T15:40:10.139Z</updated>
+    <updated>2018-01-30T15:40:10.000Z</updated>
     
     <content type="html"><![CDATA[<p>  如果我们只是单纯测试一个类里的公共方法，那么使用简单的断言，就能满足我们的需求，可是我们的<strong>测试很多时候要依赖其他的类，或者说环境</strong>，比如你测试的方法可能要访问一些服务器获取资源，或者访问数据库获取数据，此时我们必须需要一个真实的环境么？实际上很多情况下，你根本拿不到真实的环境，比如你测试的是一个还没有完成的服务模块。既然有这种需求，我们就得想办法在开发环境中模拟一个模块来测试，这有两种策略，一种就是stub，还一种就是mock，<strong>这两种方法都是为了代替依赖部分，不同的是mock是构建一个假的对象，而stub是真实地简单实现一个对象</strong>，这一节我先讲这个stub，我们将以stub的方式，模拟一个对一个服务器发送http请求测试。</p>
 <a id="more"></a>
@@ -448,7 +524,7 @@
     <link href="http://yoursite.com/2018/01/22/Touch-ThoughtWorks-Be-a-ThoughtWorker/"/>
     <id>http://yoursite.com/2018/01/22/Touch-ThoughtWorks-Be-a-ThoughtWorker/</id>
     <published>2018-01-22T09:25:36.000Z</published>
-    <updated>2018-01-24T14:55:45.724Z</updated>
+    <updated>2018-01-24T14:55:44.000Z</updated>
     
     <content type="html"><![CDATA[<p>  写下第一句话的时候，发现这好像是2018年第一篇博文，正好此文献给我的公司和即将共事的同事。</p>
 <a id="more"></a>
@@ -476,7 +552,7 @@
     <link href="http://yoursite.com/2017/12/20/Von-Neumann-The-Mathematician-part-2/"/>
     <id>http://yoursite.com/2017/12/20/Von-Neumann-The-Mathematician-part-2/</id>
     <published>2017-12-20T08:09:29.000Z</published>
-    <updated>2017-12-20T13:20:26.855Z</updated>
+    <updated>2017-12-20T13:20:26.000Z</updated>
     
     <content type="html"><![CDATA[<p><em>本文作者是冯诺依曼，英文名为《The Mathematician》，该文章在1947年发表在《Works of the Mind》上，后来也记录在《von Neumann’s Collected Works》中，这篇文章是我听讲座时偶然得知的，于是看了一下后翻译了出来，才疏学浅，只源于爱好，如有不对多多包涵——2017.12.20</em>  </p>
 <p>本文接<a href="http://saul.xin/2017/12/13/Von-Neumann-The-Mathematician-part-1/#more" target="_blank" rel="external">上一部分</a></p>
@@ -516,7 +592,7 @@
     <link href="http://yoursite.com/2017/12/14/JVM-5-Execution-engine-of-bytecode/"/>
     <id>http://yoursite.com/2017/12/14/JVM-5-Execution-engine-of-bytecode/</id>
     <published>2017-12-14T05:41:54.000Z</published>
-    <updated>2017-12-15T16:12:00.831Z</updated>
+    <updated>2017-12-15T16:12:00.000Z</updated>
     
     <content type="html"><![CDATA[<p>  经历过类加载以后，类文件结构就以JVM定义的形式存储在JVM的方法区中。但是程序如何执行的描述存储在我们前面介绍的方法表的Code属性中的字节码指令，字节码执行引擎，即是执行那些直接码指令，以至于让程序“跑”起来。字节码执行引擎相当于JVM的“处理器”。</p>
 <p>  实际上JVM规范只定义了字节码执行引擎的概念模型，具体的实现可能是解释执行也可能是编译执行，或者混合起来。但是从外面看，所有的字节码执行引擎输入都是字节码文件，处理后输出的都是执行结果。</p>
@@ -600,7 +676,7 @@
     <link href="http://yoursite.com/2017/12/13/Von-Neumann-The-Mathematician-part-1/"/>
     <id>http://yoursite.com/2017/12/13/Von-Neumann-The-Mathematician-part-1/</id>
     <published>2017-12-13T10:56:43.000Z</published>
-    <updated>2017-12-13T15:11:17.132Z</updated>
+    <updated>2017-12-13T15:11:16.000Z</updated>
     
     <content type="html"><![CDATA[<p><em>本文作者是冯诺依曼，英文名为《The Mathematician》，该文章在1947年发表在《Works of the Mind》上，后来也记录在《von Neumann’s Collected Works》中，这篇文章是我听讲座时偶然得知的，于是看了一下后翻译了出来，才疏学浅，只源于爱好，如有不对多多包涵——2017.12.13</em>  </p>
 <a id="more"></a>
@@ -637,7 +713,7 @@
     <link href="http://yoursite.com/2017/12/08/ES6-2-Destructuring-assignment/"/>
     <id>http://yoursite.com/2017/12/08/ES6-2-Destructuring-assignment/</id>
     <published>2017-12-08T15:57:12.000Z</published>
-    <updated>2017-12-09T07:13:28.857Z</updated>
+    <updated>2017-12-09T07:13:28.000Z</updated>
     
     <content type="html"><![CDATA[<p>  本世纪以来的很多新语言都提供了各种赋值或者模式匹配判断的语法糖，es6也提供了对解构赋值的一系列支持使得我们可以在很多情况下节省很多行代码。但是对一个复杂模式的解构赋值很可能让维护代码的人员感到很疑惑，所以这里记录的解构赋值没有那么多奇技淫巧。</p>
 <a id="more"></a>
@@ -667,11 +743,11 @@
     </summary>
     
     
-      <category term="学习笔记" scheme="http://yoursite.com/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
       <category term="javascript" scheme="http://yoursite.com/tags/javascript/"/>
     
       <category term="ES6" scheme="http://yoursite.com/tags/ES6/"/>
+    
+      <category term="学习笔记" scheme="http://yoursite.com/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
@@ -680,7 +756,7 @@
     <link href="http://yoursite.com/2017/12/06/Learning-ES6-1-Block-scope/"/>
     <id>http://yoursite.com/2017/12/06/Learning-ES6-1-Block-scope/</id>
     <published>2017-12-06T06:46:19.000Z</published>
-    <updated>2017-12-06T08:42:35.280Z</updated>
+    <updated>2017-12-06T08:42:34.000Z</updated>
     
     <content type="html"><![CDATA[<p>  最近主要是在学习3个东西，一个就是单元测试，第二个就是jvm，还有一个就是es6了，目前的话jvm已经学完了，就差把笔记搬运从笔记本上到博客上，单元测试和es6的话都是正在进行，es6的是阮一峰的<a href="https://github.com/ruanyf/es6tutorial" target="_blank" rel="external">ECMAScript 6 入门</a>，大神已经把书开源道github上了，推荐大家去看那本书，博客这里主要用于我个人用于以后回忆某些知识用的。</p>
 <p>  至于es6是什么可以自行使用搜索引擎，或看上面那本书的第1章，这里我就不介绍了。</p>
@@ -734,11 +810,11 @@
     </summary>
     
     
-      <category term="学习笔记" scheme="http://yoursite.com/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
       <category term="javascript" scheme="http://yoursite.com/tags/javascript/"/>
     
       <category term="ES6" scheme="http://yoursite.com/tags/ES6/"/>
+    
+      <category term="学习笔记" scheme="http://yoursite.com/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
@@ -747,7 +823,7 @@
     <link href="http://yoursite.com/2017/12/05/JVM-4-Class-Loader/"/>
     <id>http://yoursite.com/2017/12/05/JVM-4-Class-Loader/</id>
     <published>2017-12-05T03:45:40.000Z</published>
-    <updated>2017-12-05T10:23:38.194Z</updated>
+    <updated>2017-12-05T10:23:38.000Z</updated>
     
     <content type="html"><![CDATA[<p>  类加载执行的前提是我们能以一个类的全限定名来获取字节流，至于字节流在哪里生成，我们从哪里获取这并不是虚拟机所关心的，作为一个出色的设计团队，Java的设计者最初为了满足Java Applet，设计了大名鼎鼎的类加载器机制，<strong>即让通过全限定名获取字节流的这个动作，放到JVM的外部，用户可以选择自行实现一些特殊的加载方案</strong>，现在你知道的随着flash的流行，Java Applet这种技术已经淘汰了，现在随着html5的新起，flash也基本上接近夕阳了，可见技术的变化是普遍而剧烈的。虽然Applet死了很多年，但是类加载器却被作为一种精髓留在了java体系中，原因是它在OSGi,代码加密，热部署等等应用中有了新生的土壤。</p>
 <p>  类加载器还有一个作用就是和类的标识一起来确定这个类的唯一性，若N1是类C的全限定名称标识，而L1是加载类C类加载器，那么如果存在一个类D的全限定名称为N2,而L2是类D的加载器，那么：</p>
@@ -795,7 +871,7 @@
     <link href="http://yoursite.com/2017/12/04/JVM-3-Class-Loading/"/>
     <id>http://yoursite.com/2017/12/04/JVM-3-Class-Loading/</id>
     <published>2017-12-04T04:41:21.000Z</published>
-    <updated>2017-12-09T07:17:44.128Z</updated>
+    <updated>2017-12-09T07:17:44.000Z</updated>
     
     <content type="html"><![CDATA[<p>  一般来说，我们以.class文件的形式将类保存到磁盘上，在介绍类结构的时候我已经说了，jvm并不关系你的类从哪儿来，只要它符合jvm类结构的规范就好了，无论是以传统方式从磁盘上加载.class文件，还是从网络来获取一段流，亦或者以Proxy动态生成一个类，都没有问题，它们最终会被自己所属的<strong>类加载器</strong>加载到虚拟机的方法区中，成为jvm可以直接使用的java类型。</p>
 <p>  类的生命周期有7个阶段，它们分别是：</p>
@@ -912,7 +988,7 @@
     <link href="http://yoursite.com/2017/11/29/JVM-2-Structure-of-class-file-II/"/>
     <id>http://yoursite.com/2017/11/29/JVM-2-Structure-of-class-file-II/</id>
     <published>2017-11-29T03:55:41.000Z</published>
-    <updated>2017-12-03T13:47:56.162Z</updated>
+    <updated>2017-12-03T13:47:56.000Z</updated>
     
     <content type="html"><![CDATA[<p>  如上篇文章所说，这篇文章我介绍一下类文件结构里比较复杂的<strong>属性表</strong>，属性列表这项数据可能存在于字段表，方法表，和类文件本身结构以及Code属性表中，我们可以 参照面的类C结构，来确认这一点。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">/*</div><div class="line">类文件结构</div><div class="line">*/</div><div class="line">ClassFile &#123;</div><div class="line">    u4             magic;</div><div class="line">    u2             minor_version;</div><div class="line">    u2             major_version;</div><div class="line">    u2             constant_pool_count;</div><div class="line">    cp_info        constant_pool[constant_pool_count-1];</div><div class="line">    u2             access_flags;</div><div class="line">    u2             this_class;</div><div class="line">    u2             super_class;</div><div class="line">    u2             interfaces_count;</div><div class="line">    u2             interfaces[interfaces_count];</div><div class="line">    u2             fields_count;</div><div class="line">    field_info     fields[fields_count];</div><div class="line">    u2             methods_count;</div><div class="line">    method_info    methods[methods_count];</div><div class="line">    /*属性表*/</div><div class="line">    u2             attributes_count;</div><div class="line">    attribute_info attributes[attributes_count];</div><div class="line">&#125;</div><div class="line"></div><div class="line">/*方法表（和字段表结构相同）*/</div><div class="line">field_info &#123;</div><div class="line">    u2             access_flags;</div><div class="line">    u2             name_index;</div><div class="line">    u2             descriptor_index;</div><div class="line">    /*属性表*/</div><div class="line">    u2             attributes_count;</div><div class="line">    attribute_info attributes[attributes_count];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -1016,7 +1092,7 @@
     <link href="http://yoursite.com/2017/11/25/JVM-1-Structure-of-class-file/"/>
     <id>http://yoursite.com/2017/11/25/JVM-1-Structure-of-class-file/</id>
     <published>2017-11-25T06:02:15.000Z</published>
-    <updated>2017-11-28T07:26:55.867Z</updated>
+    <updated>2017-11-28T07:26:54.000Z</updated>
     
     <content type="html"><![CDATA[<p>  <strong>平台无关性</strong>是Java语言最重要的特性之一，这个特性由<strong>字节码</strong>这种中间码作为虚拟机执行的文件载体被大家所认识，<strong>一次编译到处运行</strong>的这种<strong>平台无关性</strong>在一个学习者在刚刚学习编程而且选择的是Java语言时就会了解，但是随着学习者技术视野不断扩张，就会意识到jvm不是提供了java运行的平台，而是提供了字节码运行的平台，像Scala，Groovy，Ruby，Python等等语言通过他们自己的编译器，也可以编译成字节码从而在jvm平台上运行，即<strong>语言无关性</strong>。</p>
 <p>  一个非凡的公司去设计一款非凡的程序平台，Java在诞生之初，JVM和Java语言的规范就是分开来的，JVM只关心Class文件里的字节码，并不关心它是怎么来的，你甚至可以用16进制编辑器自己写一份字节码，前提你对它的结构非常的清楚，你也可自己设计一门语言，然后让这门语言编译成字节码，运行在jvm平台上，以作为你的毕业设计或者开源项目。</p>
@@ -1296,7 +1372,7 @@
     <link href="http://yoursite.com/2017/10/29/Junit-2-Assert-by-Hamcrest/"/>
     <id>http://yoursite.com/2017/10/29/Junit-2-Assert-by-Hamcrest/</id>
     <published>2017-10-29T07:32:43.000Z</published>
-    <updated>2017-10-31T08:51:02.767Z</updated>
+    <updated>2017-10-31T08:51:02.000Z</updated>
     
     <content type="html"><![CDATA[<p>  上一篇文章中，我们以几个简单的用例测试来开篇，以assertTure,assertEquals这样的简单形式来作断言，这些方法都是org.junit.Assert来提供，如果你用的是maven或者其他的项目构建工具来引入junit包，我们会发现，它居然依赖于一个org.hamcrest的项目包，实际上，如果涉及到比较复杂的断言，我们以junit需要写一大串代码，这让我们的测试代码非常不美观，这个叫做hamcrest提供了一套断言工具，而且该项目还有ruby等等语言的版本，他们返回一个org.hamcrest.Matcher的子类，另外在org.hamcrest.MatcherAssert中提供了一套assertThat方法，它接受一个org.hamcrest.Matcher和一个计算值，从而做出该值是否符合该Matcher的判断。</p>
 <p>  在org.junit.Assert类中也有assertThat方法，不过它其实就是包装了一下MatcherAssert中的assertThat。如下：</p>
@@ -1368,101 +1444,6 @@
       <category term="TDD" scheme="http://yoursite.com/tags/TDD/"/>
     
       <category term="Junit" scheme="http://yoursite.com/tags/Junit/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Junit(1):开始我们的单元测试之旅!</title>
-    <link href="http://yoursite.com/2017/10/27/Junit-1-Start-our-testing-travel/"/>
-    <id>http://yoursite.com/2017/10/27/Junit-1-Start-our-testing-travel/</id>
-    <published>2017-10-27T09:52:55.000Z</published>
-    <updated>2017-10-28T07:15:16.104Z</updated>
-    
-    <content type="html"><![CDATA[<p>  作为一名程序员，虽然你可能不是测试岗，但是懂得测试是必须的，这一个系列的文章用来记录一些Junit的测试方法，首先从实现自动化测试开始，然后衍生到stub和mock测试，再来进行我们的web应用的测试和数据库的测试。当然测试并不只包含这些内容，这里只是其中的一小块，有兴趣的同学可以继续开展。</p>
-<p>  写这个系列的文章的目的在于，由于我未来工作的公司，是结对编程，有时候我需要去在伙伴写业务代码的时候写测试代码，不过我认为，既然软件测试在软件工程课程中是基础课，那么每一个程序员都应该懂得一定的测试手段，再者写下这套文章，有利于我从新复习java的单元测试手段，当然这些手段在未来，即使是换一种语言，也会是通用的知识。这篇文章中所用的junit版本都是junit4,用注解来标识一些测试声明，而且测试类不再需要继承TestCase,也不需要遵循它的测试方法命名规则，我们可以把测试方法命名的的更加直观。</p>
-<a id="more"></a>
-<h2 id="断言"><a href="#断言" class="headerlink" title="断言"></a>断言</h2><p>  可能很多情况下，我们会把@Test标识的方法作为一个主方法来使用，如果在没有专门测试的项目中，你可能会使用sysout插桩，然后用一个个去查看输入输出是不是和你内心预期的相同来检验我们的代码是不是存在某些问题。</p>
-<p>  如果有成百上千个方法需要测试，而每一个方法都需要覆盖到它所有的分支，我们就不能再用上面提到过的原始方式来对测试用例的结果进行判断了。在以@Test标识的测试用例，我们引入断言的方式来对我们的预期结果和实际结果的匹配进行判断，如果断言验证预期和实际不同则该用例执行时就会标红，这样其实我们的测试代码就和实际的业务代码分离了。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> services;</div><div class="line"></div><div class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.junit.Assert.*;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.junit.Before;</div><div class="line"><span class="keyword">import</span> org.junit.Test;</div><div class="line"><span class="keyword">import</span> xin.saul.app.services.Calculate;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CalculateTest</span> </span>&#123;</div><div class="line">    Calculate calculate;</div><div class="line"></div><div class="line">    <span class="meta">@Before</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</div><div class="line">        calculate = <span class="keyword">new</span> Calculate();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Test</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addTest</span><span class="params">()</span> </span>&#123;</div><div class="line">        assertEquals(<span class="number">3</span>, calculate.add(<span class="number">1</span>, <span class="number">2</span>));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Test</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">minusTest</span><span class="params">()</span> </span>&#123;</div><div class="line">        assertEquals(-<span class="number">1</span>, calculate.minus(<span class="number">1</span>, <span class="number">2</span>));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Test</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">multiplyTest</span><span class="params">()</span> </span>&#123;</div><div class="line">        assertEquals(<span class="number">2</span>, calculate.multiply(<span class="number">1</span>, <span class="number">2</span>));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Test</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">divideTest</span><span class="params">()</span> </span>&#123;</div><div class="line">        assertEquals(<span class="number">2</span>, calculate.divide(<span class="number">4</span>, <span class="number">2</span>));</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><img src="\img\QQ图片20171028140338.png" alt="QQ图片20171028140338"></p>
-<p>  从上面可以看到，我的测试用例都通过了断言，当然些测试用例是不完备的，它没有覆盖到我们有可能输入的所有情况，或者我给定的输入没有覆盖到被测试方法的所有分支。</p>
-<p>  当然如果我们的项目是一个maven项目我们可以用mvn test来进行测试。比如对于该项目mvn test输出如下报告，当然如果你对maven熟悉你可以去详细看其生成的测试报告，它在<strong>target-&gt;surefire-reports</strong>文件夹。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">-------------------------------------------------------</div><div class="line"> T E S T S</div><div class="line">-------------------------------------------------------</div><div class="line">Running services.CalculateTest</div><div class="line">Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.042 sec</div><div class="line"></div><div class="line">Results :</div><div class="line"></div><div class="line">Tests run: 4, Failures: 0, Errors: 0, Skipped: 0</div></pre></td></tr></table></figure>
-<h2 id="异常测试"><a href="#异常测试" class="headerlink" title="异常测试"></a>异常测试</h2><p>  现在我们对这个项目做一些小小的改变，我们加一个用例来测试:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">arithmeticExceptionTest</span><span class="params">()</span> </span>&#123;</div><div class="line">	calculate.divide(<span class="number">4</span>, <span class="number">0</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>  你可以知道这个方法用例明显是会抛出一个ArithmeticException的</p>
-<p><img src="\img\QQ图片20171028141519.png" alt="QQ图片20171028141519"></p>
-<p>  我们可以看到，正如我们所料，新加的测试用例直接抛出了异常，直觉告诉我们这肯定是不符合标准的，测试是要有预期的，对异常的预期也是一种预期，实际上我们可以测试在某种情况下会抛出某种异常。<strong>这需要我们添加@Test注解的一个属性–expected,它接受一个Throwable的子类型来作为预期的异常，默认值是一个定义在Test中的静态类型None，标识预期不抛出任何异常。</strong>如果你定义的一个预期的异常，但是实际运行过程中并没有抛出该异常，不会标红，但是会标黄，并提示没有抛出该异常，实际上这样测试用例依然是没有通过测试，会抛出一个<strong>java.lang.AssertionError</strong>，比如如下代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 异常测试</div><div class="line"> */</div><div class="line">@Test(expected = ArithmeticException.class)</div><div class="line">public void arithmeticExceptionTest() &#123;</div><div class="line">    calculate.divide(4, 1);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><img src="\img\QQ图片20171028142613.png" alt="QQ图片20171028142613"></p>
-<p>Maven中你会得到如下的报告：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">-------------------------------------------------------</div><div class="line"> T E S T S</div><div class="line">-------------------------------------------------------</div><div class="line">Running services.CalculateTest</div><div class="line">Tests run: 6, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 1.047 sec &lt;&lt;&lt; FAILURE!</div><div class="line">arithmeticExceptionTest(services.CalculateTest)  Time elapsed: 0.004 sec  &lt;&lt;&lt; FAILURE!</div><div class="line">java.lang.AssertionError: Expected exception: java.lang.ArithmeticException</div><div class="line">...(省略异常栈内容)</div><div class="line">Results :</div><div class="line"></div><div class="line">Failed tests:   arithmeticExceptionTest(services.CalculateTest): Expected exception: java.lang.ArithmeticException</div><div class="line"></div><div class="line">Tests run: 6, Failures: 1, Errors: 0, Skipped: 0</div></pre></td></tr></table></figure>
-<h2 id="时间预期测试"><a href="#时间预期测试" class="headerlink" title="时间预期测试"></a>时间预期测试</h2><p>  业务量大了以后，或者涉及到复杂的算法或线程，我们需要在给定的时间之类测试我们的业务是否能完成，比如我们需要每次正常查询数据库的时间都在10毫秒之内，当然由于服务器资源是有限的，我们的测试并不完备，我们做时间的单元测试并没有考虑到可能会有服务器过载的情况导致运行时间的拉长，但是我们可以考虑一个比较合理的时间（更短），来中和掉这些误差，比如一个业务在70ms正常内完成是被允许的，但是在服务器过载的情况下需要100ms，我们可以将测试的时间预期压缩到30毫秒，以要求开放人员设计出的算法能够达到这个水平，以至于即使在服务器过载情况下，我们也能在时间允许的范围内完成大多数业务请求。</p>
-<p>  引入时间测试的另一个理由是，<strong>junit并非是多线程去运行每一个测试用例的，而是按顺序往下执行</strong>，所以我们如果某个业务很耗时（比如一个或多个网络请求），或者直接就阻塞了，严重影响我们的自动化测试过程，所以如果超时我们就直接报错，把这部分代码的问题提交给开发人员去处理。</p>
-<p>  我们需要引入@Test注解的另一个属性timeout,它接受一个long类型，默认值是0L，表示不考虑最大等待时间。</p>
-<p>  我们在我们的单元测试类中引入一个新方法：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 时间测试</div><div class="line"> */</div><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">timeoutTest</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        Thread.sleep(<span class="number">100000</span>);</div><div class="line">    &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">        e.printStackTrace();</div><div class="line">    &#125;</div><div class="line">    calculate.divide(<span class="number">4</span>, <span class="number">1</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>你可以预料到这个方法要注释100秒之久，在这个过程中，还没执行的测试用例都得不到测试。</p>
-<p><img src="\img\QQ图片20171028145933.png" alt="QQ图片20171028145933"></p>
-<p>现在我们加入timeout属性</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 时间测试</div><div class="line"> */</div><div class="line"><span class="meta">@Test</span>(timeout = <span class="number">1000</span>)</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">timeoutTest</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        Thread.sleep(<span class="number">100000</span>);</div><div class="line">    &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">        e.printStackTrace();</div><div class="line">    &#125;</div><div class="line">    calculate.divide(<span class="number">4</span>, <span class="number">1</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>现在可以看到，阻塞一秒之后并没有等到任务完成，我们的代码直接报错了，用例没有在预期时间类完成，这该线程会被interrupted，你可以知道线程会抛出一个异常打断sleep，从而让测试继续往下执行。<br><img src="\img\QQ图片20171028150227.png" alt="QQ图片20171028150227"></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;  作为一名程序员，虽然你可能不是测试岗，但是懂得测试是必须的，这一个系列的文章用来记录一些Junit的测试方法，首先从实现自动化测试开始，然后衍生到stub和mock测试，再来进行我们的web应用的测试和数据库的测试。当然测试并不只包含这些内容，这里只是其中的一小块，有兴趣的同学可以继续开展。&lt;/p&gt;
-&lt;p&gt;  写这个系列的文章的目的在于，由于我未来工作的公司，是结对编程，有时候我需要去在伙伴写业务代码的时候写测试代码，不过我认为，既然软件测试在软件工程课程中是基础课，那么每一个程序员都应该懂得一定的测试手段，再者写下这套文章，有利于我从新复习java的单元测试手段，当然这些手段在未来，即使是换一种语言，也会是通用的知识。这篇文章中所用的junit版本都是junit4,用注解来标识一些测试声明，而且测试类不再需要继承TestCase,也不需要遵循它的测试方法命名规则，我们可以把测试方法命名的的更加直观。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="软件测试" scheme="http://yoursite.com/tags/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95/"/>
-    
-      <category term="TDD" scheme="http://yoursite.com/tags/TDD/"/>
-    
-      <category term="Junit" scheme="http://yoursite.com/tags/Junit/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>温故:快排和归并</title>
-    <link href="http://yoursite.com/2017/09/14/Recall-Quick-Sort-and-Merging-Sort/"/>
-    <id>http://yoursite.com/2017/09/14/Recall-Quick-Sort-and-Merging-Sort/</id>
-    <published>2017-09-14T13:37:04.000Z</published>
-    <updated>2017-09-14T16:31:09.565Z</updated>
-    
-    <content type="html"><![CDATA[<p>可能要去实习了，笔试的常考的算法要看一下，今天无聊的时候随便写了几个。</p>
-<h1 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h1><p>  这个应该是一个要背出来的的算法了随便用scala实现了一下，快排的话是英国人霍尔在26岁的时候偶然发现的，当时他为了解决词典排序问题，想到了冒泡排序这种比较普遍的方法，然后就发现了霍尔划分法，20年之后就得了图灵奖，真是我辈楷模，所以快排又被看作是特殊的冒泡，也就是这个道理了。</p>
-<p>  我们上面提到的并不是霍尔发现了快排，而是霍尔发现了霍尔划分法，实际上快排最主要的部分是划分，而不是排序或者合并，有两种划分方法，分别是Lomuto划分，Hoare划分，其中前者常常被用来实现基于减治的快速查找算法。但两者都可以实现快排。</p>
-<h2 id="Lomuto划分"><a href="#Lomuto划分" class="headerlink" title="Lomuto划分"></a>Lomuto划分</h2><p>  先用1行代码写一个交换函数，然后，额….这里我犯了小错误，因为我当时考虑用基类实现数字划分的时候的时候发现这AnyVal这个东西没有比较函数，所以我为了偷懒就用了一下Int直接写了，实际只花费了5行代码。</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//读取一个Array和要交换的两个元素的位置</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">swap</span></span>[<span class="type">T</span>](l:<span class="type">Array</span>[<span class="type">T</span>],a:<span class="type">Int</span>,b:<span class="type">Int</span>):<span class="type">Unit</span>=&#123;<span class="keyword">val</span> temp=l(a);l(a)=l(b);l(b)=temp&#125;</div><div class="line"></div><div class="line"><span class="comment">//实现Lomuto划分</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">lomutoPartion</span></span>(buf:<span class="type">Array</span>[<span class="type">Int</span>],start:<span class="type">Int</span>,end:<span class="type">Int</span>)=&#123;</div><div class="line">  <span class="keyword">var</span> (p,s)=(buf(start),start);</div><div class="line">  <span class="comment">//s指向大于p的第一个数的前一个数，一旦发现小于p的数就与s指向的位置交换，当然还有一种情况是不存在大于p的数，最后p被换到最后</span></div><div class="line">  <span class="keyword">for</span>(i&lt;-s+<span class="number">1</span> to end) <span class="keyword">if</span>(buf(i)&lt;p)&#123;s+=<span class="number">1</span>;swap(buf,s,i)&#125;</div><div class="line">  <span class="comment">//返回中轴s的位置</span></div><div class="line">  swap(buf,start,s);s</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<a id="more"></a>
-<h3 id="快速查找"><a href="#快速查找" class="headerlink" title="快速查找"></a>快速查找</h3><p>Lomuto划分算法常常用来做减值法的快速查找,这种查找法和在一个已经排序的数组里二分找某个元素的位置不同，这个查找是从一个无序数组里找到第n大或者第n小的元素。</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//找第n大的元素</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">quickSelect</span></span>(l:<span class="type">Array</span>[<span class="type">Int</span>],start:<span class="type">Int</span>,end:<span class="type">Int</span>,i:<span class="type">Int</span>):<span class="type">Int</span>=&#123;</div><div class="line">    <span class="keyword">val</span> s=lomutoPartion(l,start,end);</div><div class="line">   <span class="comment">//如果第k大的元素在前半部分，那么后半部分和中轴被丢弃的元素是end+1-s个，所以前半部分应该找第i-(end+1-s)大的元素</span></div><div class="line">    s+i<span class="number">-1</span>-end <span class="keyword">match</span>&#123;</div><div class="line">    <span class="comment">//如果正好是中轴直接返回</span></div><div class="line">    <span class="keyword">case</span> <span class="number">0</span>=&gt;l(s)</div><div class="line">    <span class="comment">//x&gt;0时，表示元素在前半部分</span></div><div class="line">    <span class="keyword">case</span> x=&gt;x&gt;<span class="number">0</span> <span class="keyword">match</span>&#123;</div><div class="line">      <span class="keyword">case</span> <span class="literal">true</span> =&gt;&#123;quickSelect(l,start,s<span class="number">-1</span>, x)&#125;</div><div class="line">      <span class="keyword">case</span> <span class="literal">false</span> =&gt; &#123;quickSelect(l,s+<span class="number">1</span>,end,i)&#125;</div><div class="line">    &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">//找第n小的元素</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">quickSelectLittle</span></span>(l:<span class="type">Array</span>[<span class="type">Int</span>],start:<span class="type">Int</span>,end:<span class="type">Int</span>,i:<span class="type">Int</span>):<span class="type">Int</span>=&#123;</div><div class="line">    <span class="keyword">val</span> s=lomutoPartion(l,start,end);</div><div class="line">   <span class="comment">//如果第k大的元素在后半部分，那么后前部分和中轴被丢弃的元素是s+1-start个，所以前后部分应该找第start+i-s+1小的元素</span></div><div class="line">    start+i<span class="number">-1</span>-s <span class="keyword">match</span>&#123;</div><div class="line">      <span class="comment">//如果正好是中轴直接返回</span></div><div class="line">      <span class="keyword">case</span> <span class="number">0</span>=&gt;l(s)</div><div class="line">      <span class="comment">//x&gt;0时，表示元素在后半部分</span></div><div class="line">      <span class="keyword">case</span> x=&gt;x&lt;<span class="number">0</span> <span class="keyword">match</span>&#123;</div><div class="line">        <span class="keyword">case</span> <span class="literal">true</span> =&gt;quickSelectLittle(l,start,s<span class="number">-1</span>, i)</div><div class="line">        <span class="keyword">case</span> <span class="literal">false</span> =&gt;quickSelectLittle(l,s+<span class="number">1</span>,end,x)</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="Hoare划分"><a href="#Hoare划分" class="headerlink" title="Hoare划分"></a>Hoare划分</h2><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//这个霍尔划分法没有做其他的增强效率的操作，比如用特殊的方法，取一个更好的p为中轴</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">HoarePartion</span></span>(l:<span class="type">Array</span>[<span class="type">Int</span>],start:<span class="type">Int</span>,end:<span class="type">Int</span>)=&#123;</div><div class="line">  <span class="keyword">var</span> (p,i,j)=(l(start),start,end+<span class="number">1</span>);</div><div class="line">  do&#123;</div><div class="line">    <span class="comment">//i指从左到右扫描到第一个大于等于p的数为止</span></div><div class="line">    do i+=<span class="number">1</span> <span class="keyword">while</span>(i&lt;end&amp;&amp;l(i)&lt;p)</div><div class="line">    <span class="comment">//j从右向左扫描到小于p的第一个数为止</span></div><div class="line">    do j-=<span class="number">1</span> <span class="keyword">while</span>(j&gt;start&amp;&amp;l(j)&gt;p)</div><div class="line">    <span class="comment">//交换i,j</span></div><div class="line">    swap(l, i, j)</div><div class="line">  &#125;<span class="keyword">while</span>(i&lt;j)<span class="comment">//知道i和j交叉，即当i&gt;=j的时候结束循环</span></div><div class="line">  <span class="comment">//复原上次交换，因为i&gt;=j这次交换是无效的</span></div><div class="line">  swap(l, i, j)</div><div class="line">  <span class="comment">//把起始的l的第一个元素交换到j位置上，完成划分，返回j的位置，即中轴</span></div><div class="line">  swap(l, start, j);j</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>测试：</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span></span>(args: <span class="type">Array</span>[<span class="type">String</span>]): <span class="type">Unit</span> = &#123;</div><div class="line">  <span class="keyword">val</span> s=<span class="type">Array</span>(<span class="number">9</span>,<span class="number">12</span>,<span class="number">42</span>,<span class="number">41</span>,<span class="number">2</span>,<span class="number">5</span>,<span class="number">0</span>,<span class="number">41</span>,<span class="number">2</span>,<span class="number">5</span>,<span class="number">9</span>,<span class="number">3</span>,<span class="number">13</span>,<span class="number">4</span>,<span class="number">5</span>)</div><div class="line">  quickSort(s, <span class="number">0</span>, s.length<span class="number">-1</span>);</div><div class="line">  println(s.toList)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/*</span></div><div class="line">output:</div><div class="line">List(0, 2, 2, 3, 4, 5, 5, 5, 9, 9, 12, 13, 41, 41, 42)</div><div class="line">*/</div></pre></td></tr></table></figure>
-<h3 id="实现快排"><a href="#实现快排" class="headerlink" title="实现快排"></a>实现快排</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">quickSort</span></span>(l:<span class="type">Array</span>[<span class="type">Int</span>],start:<span class="type">Int</span>,end:<span class="type">Int</span>)&#123;</div><div class="line">  <span class="keyword">if</span>(start&lt;end)&#123;</div><div class="line">    <span class="keyword">val</span> s=<span class="type">HoarePartion</span>(l, start, end);</div><div class="line">    </div><div class="line">    <span class="comment">//val s=LomutoPartion(l, start, end);   你也可以用Lomuto划分，或者你自己的划分算法</span></div><div class="line">    </div><div class="line">    <span class="comment">//分治策略，更好的方法时在l.lengtg&lt;10的时候用选择排序，其实改进后可以成为尾递归，这里没做</span></div><div class="line">    quickSort(l, start, s<span class="number">-1</span>);</div><div class="line">    quickSort(l, s+<span class="number">1</span>, end);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h1 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h1><p>  基于分治策略的归并排序，如果需要的话空间复杂度可以到O(1),即在位排序，只用一个空间来做交换，但是这样对算法时间效率就毫无提升了，失去意义。</p>
-<p>  要发挥最差nlog(n)的时间效率（由主定理得出）就需要有O(n)空间牺牲。但是应该记住归并排序的最大优势是<strong>稳定性</strong>！如果你需要在某些单片机上在位排序，又想获得最差nlong(n)可以用<strong>堆排序</strong></p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//归并排序    </span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">mergeSort</span></span>(ls:<span class="type">Array</span>[<span class="type">Int</span>]):<span class="type">Array</span>[<span class="type">Int</span>]=&#123;</div><div class="line">      <span class="comment">//这里要注意的是如果ls的length是1那么l是空，而r长度是1</span></div><div class="line">      <span class="keyword">val</span> (l,r)=(ls.take(ls.length/<span class="number">2</span>),ls.drop(ls.length/<span class="number">2</span>))</div><div class="line">    </div><div class="line">  	  <span class="comment">//如果l，r的长度大于1的话就做递归</span></div><div class="line">      <span class="keyword">if</span>(l.length&gt;<span class="number">1</span>) mergeSort(l);</div><div class="line">      <span class="keyword">if</span>(r.length&gt;<span class="number">1</span>) mergeSort(r);</div><div class="line">      </div><div class="line">      merge(l, r, ls);</div><div class="line">&#125;</div><div class="line">    </div><div class="line"><span class="comment">//合并两个数组</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">merge</span></span>(l:<span class="type">Array</span>[<span class="type">Int</span>],r:<span class="type">Array</span>[<span class="type">Int</span>],ls:<span class="type">Array</span>[<span class="type">Int</span>]):<span class="type">Array</span>[<span class="type">Int</span>]=&#123;</div><div class="line">  <span class="keyword">var</span> i,j=<span class="number">0</span>;</div><div class="line">  <span class="keyword">for</span>(k &lt;- <span class="number">0</span> to ls.length<span class="number">-1</span>)&#123;</div><div class="line">    <span class="comment">//用模式配置来匹配各种情形</span></div><div class="line">    (i&lt;l.length,j&lt;r.length) <span class="keyword">match</span>&#123;</div><div class="line">      <span class="keyword">case</span> (<span class="literal">true</span>,<span class="literal">true</span>) =&gt; <span class="keyword">if</span>(l(i)&lt;=r(j))&#123;ls(k)=l(i);i+=<span class="number">1</span>&#125;<span class="keyword">else</span>&#123;ls(k)=r(j);j+=<span class="number">1</span>&#125;</div><div class="line">      <span class="keyword">case</span> (<span class="literal">true</span>,<span class="literal">false</span>) =&gt; &#123;ls(k)=l(i);i+=<span class="number">1</span>&#125;</div><div class="line">      <span class="keyword">case</span> (<span class="literal">false</span>,<span class="literal">true</span>) =&gt; &#123;ls(k)=r(j);j+=<span class="number">1</span>&#125;</div><div class="line">      <span class="keyword">case</span> _=&gt;</div><div class="line">    &#125;</div><div class="line">   &#125;</div><div class="line">  ls</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>测试：</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span></span>(args: <span class="type">Array</span>[<span class="type">String</span>]): <span class="type">Unit</span> = &#123;</div><div class="line">  <span class="keyword">val</span> s=<span class="type">Array</span>(<span class="number">9</span>,<span class="number">12</span>,<span class="number">42</span>,<span class="number">41</span>,<span class="number">2</span>,<span class="number">5</span>,<span class="number">0</span>,<span class="number">41</span>,<span class="number">2</span>,<span class="number">5</span>,<span class="number">9</span>,<span class="number">3</span>,<span class="number">13</span>,<span class="number">4</span>,<span class="number">5</span>)</div><div class="line">  mergeSort(s)</div><div class="line">  println(s.toList)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/*</span></div><div class="line">output:</div><div class="line">List(0, 2, 2, 3, 4, 5, 5, 5, 9, 9, 12, 13, 41, 41, 42)</div><div class="line">*/</div></pre></td></tr></table></figure>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;可能要去实习了，笔试的常考的算法要看一下，今天无聊的时候随便写了几个。&lt;/p&gt;
-&lt;h1 id=&quot;快速排序&quot;&gt;&lt;a href=&quot;#快速排序&quot; class=&quot;headerlink&quot; title=&quot;快速排序&quot;&gt;&lt;/a&gt;快速排序&lt;/h1&gt;&lt;p&gt;  这个应该是一个要背出来的的算法了随便用scala实现了一下，快排的话是英国人霍尔在26岁的时候偶然发现的，当时他为了解决词典排序问题，想到了冒泡排序这种比较普遍的方法，然后就发现了霍尔划分法，20年之后就得了图灵奖，真是我辈楷模，所以快排又被看作是特殊的冒泡，也就是这个道理了。&lt;/p&gt;
-&lt;p&gt;  我们上面提到的并不是霍尔发现了快排，而是霍尔发现了霍尔划分法，实际上快排最主要的部分是划分，而不是排序或者合并，有两种划分方法，分别是Lomuto划分，Hoare划分，其中前者常常被用来实现基于减治的快速查找算法。但两者都可以实现快排。&lt;/p&gt;
-&lt;h2 id=&quot;Lomuto划分&quot;&gt;&lt;a href=&quot;#Lomuto划分&quot; class=&quot;headerlink&quot; title=&quot;Lomuto划分&quot;&gt;&lt;/a&gt;Lomuto划分&lt;/h2&gt;&lt;p&gt;  先用1行代码写一个交换函数，然后，额….这里我犯了小错误，因为我当时考虑用基类实现数字划分的时候的时候发现这AnyVal这个东西没有比较函数，所以我为了偷懒就用了一下Int直接写了，实际只花费了5行代码。&lt;/p&gt;
-&lt;figure class=&quot;highlight scala&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//读取一个Array和要交换的两个元素的位置&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;swap&lt;/span&gt;&lt;/span&gt;[&lt;span class=&quot;type&quot;&gt;T&lt;/span&gt;](l:&lt;span class=&quot;type&quot;&gt;Array&lt;/span&gt;[&lt;span class=&quot;type&quot;&gt;T&lt;/span&gt;],a:&lt;span class=&quot;type&quot;&gt;Int&lt;/span&gt;,b:&lt;span class=&quot;type&quot;&gt;Int&lt;/span&gt;):&lt;span class=&quot;type&quot;&gt;Unit&lt;/span&gt;=&amp;#123;&lt;span class=&quot;keyword&quot;&gt;val&lt;/span&gt; temp=l(a);l(a)=l(b);l(b)=temp&amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//实现Lomuto划分&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;lomutoPartion&lt;/span&gt;&lt;/span&gt;(buf:&lt;span class=&quot;type&quot;&gt;Array&lt;/span&gt;[&lt;span class=&quot;type&quot;&gt;Int&lt;/span&gt;],start:&lt;span class=&quot;type&quot;&gt;Int&lt;/span&gt;,end:&lt;span class=&quot;type&quot;&gt;Int&lt;/span&gt;)=&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; (p,s)=(buf(start),start);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;comment&quot;&gt;//s指向大于p的第一个数的前一个数，一旦发现小于p的数就与s指向的位置交换，当然还有一种情况是不存在大于p的数，最后p被换到最后&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt;(i&amp;lt;-s+&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt; to end) &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt;(buf(i)&amp;lt;p)&amp;#123;s+=&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;;swap(buf,s,i)&amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;comment&quot;&gt;//返回中轴s的位置&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  swap(buf,start,s);s&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-    
-    </summary>
-    
-    
-      <category term="温故" scheme="http://yoursite.com/tags/%E6%B8%A9%E6%95%85/"/>
     
   </entry>
   

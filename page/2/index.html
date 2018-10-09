@@ -132,6 +132,149 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Notes-of-Deep-Learning-Neural-network-2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/01/Notes-of-Deep-Learning-Neural-network-2/">Notes of CS231n:Neural network 2</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/01/Notes-of-Deep-Learning-Neural-network-2/" class="archive-article-date">
+  	<time datetime="2018-03-01T02:26:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>  从上一篇博文，我们知道，神经网络其实就是一个一系列线性映射和非线性激活函数交织起来的评分函数，我们在输入层输入我们的数据，经过隐层的一系列点积和激活函数计算在输出层得到一个类型评分，然而要比较好地训练一个神经网络，我们需要更多的考虑，比如数据预处理，我们还需要考虑权重的初始值以及如何选择激活函数。</p>
+<h2 id="数据预处理"><a href="#数据预处理" class="headerlink" title="数据预处理"></a>数据预处理</h2><p>  我们通常会对<strong>训练集</strong>数据进行预处理，当然这可能有很多种形式，比如我们如果要去除一些噪声可能要进行数据清洗，这一部分这里先不介绍了，我们这里主要介绍归一化，归一化可以有利于避免模型训练时出现数值问题，还有利于网络快速收敛，更具体的优点你可以查看<a href="http://nnetinfo.com/nninfo/showText.jsp?id=37" target="_blank" rel="external">这里</a>。</p>
+<p>  归一化（Normalization）即把数据的所有维度都归一化，使其数值范围都近似相等，这个种预处理操作只在确信不同输入特征有不同的输入范围时才有意义，对于图像处理中，像素的范围都是0-255，所以这样做对于图片数据意义不大，但是数据如果是表示一个人，（体重（kg），身高（m），年龄）,这样的数据显然60Kg的体重和1.7m的身高不太对等，这会产生一些数值问题，我们有必要进行归一化。这里有两种方式进行<strong>归一化</strong>：</p>
+<p>先假设数据矩阵M，尺寸是N*D,N为样本数目，D是数据维度</p>
+<p>第一种：对数据先做零中心化(zero-centered)，如果用numpy表示：M-=np.mean(X,axis=0)，然后我们对每个维度都除以它的标准差就可以了，M/=np.std(X,axis=0)。</p>
+<p>第二种：对每个维度归一化使得每个维度的最大和最小值是1和-1。</p>
+        
+          <a class="article-more-a" href="/2018/03/01/Notes-of-Deep-Learning-Neural-network-2/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习笔记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">深度学习</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/01/Notes-of-Deep-Learning-Neural-network-2/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+        <!-- 目录内容 -->
+             
+        <!-- 目录内容结束 -->
+  
+    <article id="post-Notes-of-Deep-Learning-Neural-network-1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/02/28/Notes-of-Deep-Learning-Neural-network-1/">Notes of CS231n:Neural network 1</a>
+    </h1>
+  
+
+        
+        <a href="/2018/02/28/Notes-of-Deep-Learning-Neural-network-1/" class="archive-article-date">
+  	<time datetime="2018-02-28T07:17:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="人工神经元"><a href="#人工神经元" class="headerlink" title="人工神经元"></a>人工神经元</h2><p>  其实神经元这个翻译有点唬人，有些学者也不喜欢借用某些生物词语来蹭热度，他们直接就把所谓的人工神经元称之为单元（unit），结合人工神经网络来看的话，你可以很容易的推测出，它是由这个所谓的人工神经元组成的。在一个人工神经网络中，神经元间会有一种单向的影响，因为人工神经网络可以看做是一张有向无环图。下图是一个常见的粗糙模型：</p>
+<div align="center"><br><br><img width="600px" src="\img\QQ图片20180214181505.png"><br><br><img src="\img\QQ图片20180214180333.jpg"><br><br></div>
+
+<p>从这张图中你可以看到，一个人工神经元有几个主要的部分，如果你把它看做是有向无环图里的一个节点，那么你可以观察到它的每一个入度，分别对应一个不同的输入和一个自身权重的乘积（w和x都是向量或者矩阵，这里准确来说应该是<strong>点积</strong>），所有入度的点积的累加加上节点对应的偏差值（偏置）(Σwixi+b）代入所入节点的激活函数，图中就是f，对应为f(Σwixi+b),然后这个输出结果（<strong>激活率</strong>）顺着节点的出度流入下一层网络中的神经元。</p>
+<p>  现在你大概知道什么是所谓的人工神经元，如果硬要跟生物神经元扯上一毛钱关系的话，你学过高中生物，大概会知道突触，树突，突触小泡之类的，你也许能把这个和两个神经细胞里通过突触来传递兴奋的机制联系起来…然后对别人吹嘘一波，但是我是做不到的，可能是我不怎么了解生物吧。 </p>
+        
+          <a class="article-more-a" href="/2018/02/28/Notes-of-Deep-Learning-Neural-network-1/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习笔记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">深度学习</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/02/28/Notes-of-Deep-Learning-Neural-network-1/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+        <!-- 目录内容 -->
+             
+        <!-- 目录内容结束 -->
+  
     <article id="post-Junit-4-Mock" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -350,142 +493,9 @@
              
         <!-- 目录内容结束 -->
   
-    <article id="post-Von-Neumann-The-Mathematician-part-2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/20/Von-Neumann-The-Mathematician-part-2/">冯诺依曼：《数学家》（下）</a>
-    </h1>
-  
-
-        
-        <a href="/2017/12/20/Von-Neumann-The-Mathematician-part-2/" class="archive-article-date">
-  	<time datetime="2017-12-20T08:09:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><em>本文作者是冯诺依曼，英文名为《The Mathematician》，该文章在1947年发表在《Works of the Mind》上，后来也记录在《von Neumann’s Collected Works》中，这篇文章是我听讲座时偶然得知的，于是看了一下后翻译了出来，才疏学浅，只源于爱好，如有不对多多包涵——2017.12.20</em>  </p>
-<p>本文接<a href="http://saul.xin/2017/12/13/Von-Neumann-The-Mathematician-part-1/#more" target="_blank" rel="external">上一部分</a></p>
-        
-          <a class="article-more-a" href="/2017/12/20/Von-Neumann-The-Mathematician-part-2/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">译文</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/12/20/Von-Neumann-The-Mathematician-part-2/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-        <!-- 目录内容 -->
-             
-        <!-- 目录内容结束 -->
-  
-    <article id="post-JVM-5-Execution-engine-of-bytecode" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/14/JVM-5-Execution-engine-of-bytecode/">JVM(5):字节码执行引擎</a>
-    </h1>
-  
-
-        
-        <a href="/2017/12/14/JVM-5-Execution-engine-of-bytecode/" class="archive-article-date">
-  	<time datetime="2017-12-14T05:41:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-14</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>  经历过类加载以后，类文件结构就以JVM定义的形式存储在JVM的方法区中。但是程序如何执行的描述存储在我们前面介绍的方法表的Code属性中的字节码指令，字节码执行引擎，即是执行那些直接码指令，以至于让程序“跑”起来。字节码执行引擎相当于JVM的“处理器”。</p>
-<p>  实际上JVM规范只定义了字节码执行引擎的概念模型，具体的实现可能是解释执行也可能是编译执行，或者混合起来。但是从外面看，所有的字节码执行引擎输入都是字节码文件，处理后输出的都是执行结果。</p>
-<h2 id="运行时栈帧结构"><a href="#运行时栈帧结构" class="headerlink" title="运行时栈帧结构"></a>运行时栈帧结构</h2><p>  JVM的直接码指令是基于栈操作的，我们也知道在JVM的内存结构里，线程私有的3种内存，即虚拟机栈，本地方法栈，和程序计数器。Hotspot中没有本地方法栈和虚拟机栈的区别，在JVM里，这两种栈中的元素都被称之为<strong>栈帧</strong>。栈帧是VM进行方法调用和方法执行的数据结构，它存储了方法的<strong>局部变量表，操作数栈，动态链接和方法返回地址和一些附加信息</strong>。</p>
-        
-          <a class="article-more-a" href="/2017/12/14/JVM-5-Execution-engine-of-bytecode/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">JVM</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/12/14/JVM-5-Execution-engine-of-bytecode/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-        <!-- 目录内容 -->
-             
-        <!-- 目录内容结束 -->
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
     </nav>
   
 
@@ -579,11 +589,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Docker</a>
+                <a href="javascript:void(0)" class="js-tag color4">-闲谈</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">学习笔记</a>
+                <a href="javascript:void(0)" class="js-tag color1">scala</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">FP</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -595,11 +609,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">FP</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">scala</a>
+                <a href="javascript:void(0)" class="js-tag color5">学习笔记</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -619,10 +629,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">-闲谈</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Maven</a>
               </li>
              
@@ -635,11 +641,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Nexus</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Nexus</a>
+                <a href="javascript:void(0)" class="js-tag color5">目标检测</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -651,11 +661,23 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">译文</a>
+                <a href="javascript:void(0)" class="js-tag color3">温故</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">温故</a>
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">react</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Docker</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">译文</a>
               </li>
             
             <div class="clearfix"></div>

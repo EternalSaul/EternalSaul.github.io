@@ -132,6 +132,167 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-react-1-meet-react" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/10/09/react-1-meet-react/">react(1):meet react</a>
+    </h1>
+  
+
+        
+        <a href="/2018/10/09/react-1-meet-react/" class="archive-article-date">
+  	<time datetime="2018-10-09T01:44:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>  几乎所有的软件问题都可以添加一层抽象来解决，react通过添加虚拟DOM这层抽象，=，解决了处理DOM的效率问题，<strong>虚拟DOM即用来描述真实DOM的JS对象</strong>，我们知道处理结构化的js对象，要比处理一大段文本快得多。</p>
+<p>  特点：</p>
+<p>  <strong>声明式的视图层</strong>：以JSX语法声明视图层，因此可以随意使用状态数据</p>
+<p>  <strong>从状态到UI的单向数据流</strong>：定义UI的状态，让React来把它渲染为最终的UI，React根据最新状态来渲染最新UI。</p>
+<p>  <strong>灵活渲染</strong>：React并不直接把视图渲染成最终的界面，而是把它们渲染为了中间的抽象，即虚拟DOM，结合其他库，可以把虚拟DOM渲染成不同的最终界面，在浏览器上是react-dom,在移动端上则可以配合Native来使用，在服务端则可以配合Node进行渲染。</p>
+<p>  <strong>高效DOM操作</strong>：本身对js对象的操作就远快于对真实DOM操作，配合一些诸如Diff之类的差异算法，更是可以减少渲染速度，让界面性能增加。</p>
+<h2 id="JSX"><a href="#JSX" class="headerlink" title="JSX"></a>JSX</h2><p>  JSX是一种用于描述UI的JS扩展语法，React用其来描述组件的UI。发明这种语法与React本身的理念有关，与传统很多模板思想把数据和UI拆分有所不同，其理念把<strong>组件</strong>当做是界面的可复用模块，<strong>且认为组件应该是具备UI描述和UI数据的完整体</strong>，不应该把它们分开来处理。</p>
+<p>  实际上JSX仅仅是React提供的语法糖，它对应的方法是</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">React.createElement(component,props, ...chi)</div></pre></td></tr></table></figure>
+<p>  所有的JSX最终都会转变为对上面这个方法的调用，但是为了对被声明的视图一目了然，首选使用JSX，就像java8中一般不会使用匿名类来代替lambda语法一样。</p>
+<h3 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h3><p>  JSX只有两种标签，React通过首字母是否大写来区分这两类标签，而且它们可以互相嵌套使用：</p>
+<p>  其一就是DOM类型的标签，也就是html的基础标签诸如div,span,p等等，首字母必须小写。</p>
+<p>  然后则是React组件标签，首字母必须大写。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//dom标签</span></div><div class="line"><span class="keyword">const</span> divElement = <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span> hello saul <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>;</div><div class="line"></div><div class="line"><span class="comment">//组件标签</span></div><div class="line"><span class="keyword">const</span> element = <span class="xml"><span class="tag">&lt;<span class="name">SaulBlog</span> /&gt;</span>;</span></div><div class="line">     </div><div class="line">//嵌套使用</div><div class="line">const hello = (<span class="tag">&lt;<span class="name">div</span>&gt;</span> <span class="tag">&lt;<span class="name">SaulBlog</span> /&gt;</span> <span class="tag">&lt;/<span class="name">div</span>&gt;</span>;</div></pre></td></tr></table></figure>
+<h3 id="js表达式"><a href="#js表达式" class="headerlink" title="js表达式"></a>js表达式</h3><p>JSX本质上依然是Js，我们可以用{}讲表达式括起来的方式来使用表达式，一般有两种情况我们要用这种语法：</p>
+<p>  <strong>通过表达式给标签属性赋值</strong></p>
+<p>  <strong>通过表达式定义子组件</strong></p>
+<p>需要注意的是和scala之类的语言不同，js表达式并不支持多行js语句，用;隔开两条语句是会报错的。</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//Error!</span></div><div class="line"><span class="keyword">const</span> element = <span class="xml"><span class="tag">&lt;<span class="name">Saul</span> <span class="attr">value</span> = <span class="string">&#123;const</span> <span class="attr">val</span> = <span class="string">1+1;return</span> <span class="attr">val</span>; &#125; /&gt;</span></span></div></pre></td></tr></table></figure>
+<p>所以你用不了if-eles语句，但是可以用三目运算符?和&amp;&amp;代替if的作用。</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> boolean = <span class="literal">false</span>;</div><div class="line"></div><div class="line"><span class="keyword">const</span> element = <span class="xml"><span class="tag">&lt;<span class="name">Saul</span> <span class="attr">value</span> = <span class="string">&#123;boolean</span> &amp;&amp; <span class="attr">1</span>&#125; /&gt;</span></span></div></pre></td></tr></table></figure>
+<h3 id="标签属性和注释"><a href="#标签属性和注释" class="headerlink" title="标签属性和注释"></a>标签属性和注释</h3><h4 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h4><p>除了部分属性外，DOM标签支持的属性JSX同样支持，只不过有些地方有点变化，比如es6占用的class关键字，现在需要在标签属性中用className代替</p>
+<p>另外React对标签支持的事件进行了重新分封装，封装时采用的是驼峰命名法，如onclick要写成onClick。</p>
+<h4 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h4><p>注释方面需要用{}把/**/括起来</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123;<span class="comment">/* 我是注释 */</span>&#125;</div></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">前端</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">react</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/10/09/react-1-meet-react/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+        <!-- 目录内容 -->
+             
+        <!-- 目录内容结束 -->
+  
+    <article id="post-Notes-of-Deep-Learning-what-is-YOLO" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/13/Notes-of-Deep-Learning-what-is-YOLO/">Notes of Deep Learning:what is YOLO</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/13/Notes-of-Deep-Learning-what-is-YOLO/" class="archive-article-date">
+  	<time datetime="2018-03-13T07:17:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-13</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>  YOLO是现在性能比较好的一个基于卷积神经网络的目标检测算法，当然它有2个版本，这里说的是第一个版本，YOLO的第一个版本有一些局限性，比如对小的目标检测效果不是很好，但是它的检测速度对比于RCNN系列算法(Fast,Faster)是一个很大的优势，在论文中作者说在TITAN X显卡上跑YOLO模型，检测速度可以达到每秒45帧，另外有一个牺牲了一些准确度的简化版模型（Fast YOLO）则达到了每秒155帧，要知道RCNN最快的版本也就是10多帧的样子。下图是YOLO论文中给出的一张对比表：</p>
+<div><br><br><img src="\img\QQ图片20180314145429.png" align="center"><br><br></div>
+
+<p>  对YOLO算法在速度上的突破起决定性作用的应该是把目标检测作为单个回归问题，而不是分类问题，RCNN系列算法，一般都有两个重要的模块，一个用于找出候选区域，一个用于将候选区域里的图像用于分类。YOLO则直接是一个端到端的系统，从图像像素到边界框坐标和类概率一气呵成。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习笔记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">深度学习</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">目标检测</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/13/Notes-of-Deep-Learning-what-is-YOLO/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+        <!-- 目录内容 -->
+             
+        <!-- 目录内容结束 -->
+  
     <article id="post-Notes-of-Deep-Learning-Structure-of-CNN" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -333,152 +494,9 @@
              
         <!-- 目录内容结束 -->
   
-    <article id="post-Notes-of-Deep-Learning-Neural-network-2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/01/Notes-of-Deep-Learning-Neural-network-2/">Notes of CS231n:Neural network 2</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/01/Notes-of-Deep-Learning-Neural-network-2/" class="archive-article-date">
-  	<time datetime="2018-03-01T02:26:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>  从上一篇博文，我们知道，神经网络其实就是一个一系列线性映射和非线性激活函数交织起来的评分函数，我们在输入层输入我们的数据，经过隐层的一系列点积和激活函数计算在输出层得到一个类型评分，然而要比较好地训练一个神经网络，我们需要更多的考虑，比如数据预处理，我们还需要考虑权重的初始值以及如何选择激活函数。</p>
-<h2 id="数据预处理"><a href="#数据预处理" class="headerlink" title="数据预处理"></a>数据预处理</h2><p>  我们通常会对<strong>训练集</strong>数据进行预处理，当然这可能有很多种形式，比如我们如果要去除一些噪声可能要进行数据清洗，这一部分这里先不介绍了，我们这里主要介绍归一化，归一化可以有利于避免模型训练时出现数值问题，还有利于网络快速收敛，更具体的优点你可以查看<a href="http://nnetinfo.com/nninfo/showText.jsp?id=37" target="_blank" rel="external">这里</a>。</p>
-<p>  归一化（Normalization）即把数据的所有维度都归一化，使其数值范围都近似相等，这个种预处理操作只在确信不同输入特征有不同的输入范围时才有意义，对于图像处理中，像素的范围都是0-255，所以这样做对于图片数据意义不大，但是数据如果是表示一个人，（体重（kg），身高（m），年龄）,这样的数据显然60Kg的体重和1.7m的身高不太对等，这会产生一些数值问题，我们有必要进行归一化。这里有两种方式进行<strong>归一化</strong>：</p>
-<p>先假设数据矩阵M，尺寸是N*D,N为样本数目，D是数据维度</p>
-<p>第一种：对数据先做零中心化(zero-centered)，如果用numpy表示：M-=np.mean(X,axis=0)，然后我们对每个维度都除以它的标准差就可以了，M/=np.std(X,axis=0)。</p>
-<p>第二种：对每个维度归一化使得每个维度的最大和最小值是1和-1。</p>
-        
-          <a class="article-more-a" href="/2018/03/01/Notes-of-Deep-Learning-Neural-network-2/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">深度学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/01/Notes-of-Deep-Learning-Neural-network-2/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-        <!-- 目录内容 -->
-             
-        <!-- 目录内容结束 -->
-  
-    <article id="post-Notes-of-Deep-Learning-Neural-network-1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/02/28/Notes-of-Deep-Learning-Neural-network-1/">Notes of CS231n:Neural network 1</a>
-    </h1>
-  
-
-        
-        <a href="/2018/02/28/Notes-of-Deep-Learning-Neural-network-1/" class="archive-article-date">
-  	<time datetime="2018-02-28T07:17:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-28</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="人工神经元"><a href="#人工神经元" class="headerlink" title="人工神经元"></a>人工神经元</h2><p>  其实神经元这个翻译有点唬人，有些学者也不喜欢借用某些生物词语来蹭热度，他们直接就把所谓的人工神经元称之为单元（unit），结合人工神经网络来看的话，你可以很容易的推测出，它是由这个所谓的人工神经元组成的。在一个人工神经网络中，神经元间会有一种单向的影响，因为人工神经网络可以看做是一张有向无环图。下图是一个常见的粗糙模型：</p>
-<div align="center"><br><br><img width="600px" src="\img\QQ图片20180214181505.png"><br><br><img src="\img\QQ图片20180214180333.jpg"><br><br></div>
-
-<p>从这张图中你可以看到，一个人工神经元有几个主要的部分，如果你把它看做是有向无环图里的一个节点，那么你可以观察到它的每一个入度，分别对应一个不同的输入和一个自身权重的乘积（w和x都是向量或者矩阵，这里准确来说应该是<strong>点积</strong>），所有入度的点积的累加加上节点对应的偏差值（偏置）(Σwixi+b）代入所入节点的激活函数，图中就是f，对应为f(Σwixi+b),然后这个输出结果（<strong>激活率</strong>）顺着节点的出度流入下一层网络中的神经元。</p>
-<p>  现在你大概知道什么是所谓的人工神经元，如果硬要跟生物神经元扯上一毛钱关系的话，你学过高中生物，大概会知道突触，树突，突触小泡之类的，你也许能把这个和两个神经细胞里通过突触来传递兴奋的机制联系起来…然后对别人吹嘘一波，但是我是做不到的，可能是我不怎么了解生物吧。 </p>
-        
-          <a class="article-more-a" href="/2018/02/28/Notes-of-Deep-Learning-Neural-network-1/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">深度学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/02/28/Notes-of-Deep-Learning-Neural-network-1/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-        <!-- 目录内容 -->
-             
-        <!-- 目录内容结束 -->
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 
@@ -572,11 +590,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Docker</a>
+                <a href="javascript:void(0)" class="js-tag color4">-闲谈</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">学习笔记</a>
+                <a href="javascript:void(0)" class="js-tag color1">scala</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">FP</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -588,11 +610,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">FP</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">scala</a>
+                <a href="javascript:void(0)" class="js-tag color5">学习笔记</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -612,10 +630,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">-闲谈</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Maven</a>
               </li>
              
@@ -628,11 +642,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Nexus</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Nexus</a>
+                <a href="javascript:void(0)" class="js-tag color5">目标检测</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -644,11 +662,23 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">译文</a>
+                <a href="javascript:void(0)" class="js-tag color3">温故</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">温故</a>
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">react</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Docker</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">译文</a>
               </li>
             
             <div class="clearfix"></div>

@@ -132,6 +132,149 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-JVM-4-Class-Loader" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/05/JVM-4-Class-Loader/">JVM(4):类加载器机制</a>
+    </h1>
+  
+
+        
+        <a href="/2017/12/05/JVM-4-Class-Loader/" class="archive-article-date">
+  	<time datetime="2017-12-05T03:45:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>  类加载执行的前提是我们能以一个类的全限定名来获取字节流，至于字节流在哪里生成，我们从哪里获取这并不是虚拟机所关心的，作为一个出色的设计团队，Java的设计者最初为了满足Java Applet，设计了大名鼎鼎的类加载器机制，<strong>即让通过全限定名获取字节流的这个动作，放到JVM的外部，用户可以选择自行实现一些特殊的加载方案</strong>，现在你知道的随着flash的流行，Java Applet这种技术已经淘汰了，现在随着html5的新起，flash也基本上接近夕阳了，可见技术的变化是普遍而剧烈的。虽然Applet死了很多年，但是类加载器却被作为一种精髓留在了java体系中，原因是它在OSGi,代码加密，热部署等等应用中有了新生的土壤。</p>
+<p>  类加载器还有一个作用就是和类的标识一起来确定这个类的唯一性，若N1是类C的全限定名称标识，而L1是加载类C类加载器，那么如果存在一个类D的全限定名称为N2,而L2是类D的加载器，那么：</p>
+<p> 当且仅当，N1=N2且L1=L2时C和D才被认为是同一个类，即C&lt;N1,L1&gt;=D&lt;N2,L2&gt;</p>
+<p> 这种相等，关系到类的Class对象的equals方法，isAssignableFrom()方法以及isInstance()方法和instanceof关键字的判断结果。</p>
+        
+          <a class="article-more-a" href="/2017/12/05/JVM-4-Class-Loader/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习笔记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">JVM</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/12/05/JVM-4-Class-Loader/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+        <!-- 目录内容 -->
+             
+        <!-- 目录内容结束 -->
+  
+    <article id="post-JVM-3-Class-Loading" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/04/JVM-3-Class-Loading/">JVM(3):类加载过程</a>
+    </h1>
+  
+
+        
+        <a href="/2017/12/04/JVM-3-Class-Loading/" class="archive-article-date">
+  	<time datetime="2017-12-04T04:41:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-04</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>  一般来说，我们以.class文件的形式将类保存到磁盘上，在介绍类结构的时候我已经说了，jvm并不关系你的类从哪儿来，只要它符合jvm类结构的规范就好了，无论是以传统方式从磁盘上加载.class文件，还是从网络来获取一段流，亦或者以Proxy动态生成一个类，都没有问题，它们最终会被自己所属的<strong>类加载器</strong>加载到虚拟机的方法区中，成为jvm可以直接使用的java类型。</p>
+<p>  类的生命周期有7个阶段，它们分别是：</p>
+<p><code>加载-&gt;验证-&gt;准备-&gt;解析-&gt;初始化-&gt;使用-&gt;卸载</code></p>
+<p>其中<code>验证-&gt;准备-&gt;解析</code>这三个阶段被称为链接（Linking）阶段</p>
+<p><code>加载-&gt;验证-&gt;准备-&gt;解析-&gt;初始化</code>这5个阶段称为<strong>类加载阶段</strong></p>
+<p>  在上面的声明周期七个阶段中，<strong>加载，验证，准备，初始化，卸载</strong>这5个阶段是<strong>按顺序开始</strong>的，注意这里是只是说开始，实际上它们的执行过程是<strong>交叉进行</strong>，相当于你按顺序执行了一个线程，线程里又执行了一个新的线程，如此往复的执行了5个，实际上它们是交叉执行的。</p>
+<p>  上面的<strong>箭头部分有误导倾向</strong>，因为<strong>解析</strong>这个过程，为了支持Java的运行时绑定机制，<strong>有些时候在初始化过程之后开始</strong>。</p>
+        
+          <a class="article-more-a" href="/2017/12/04/JVM-3-Class-Loading/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习笔记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">JVM</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/12/04/JVM-3-Class-Loading/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+        <!-- 目录内容 -->
+             
+        <!-- 目录内容结束 -->
+  
     <article id="post-JVM-2-Structure-of-class-file-II" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -345,148 +488,9 @@
              
         <!-- 目录内容结束 -->
   
-    <article id="post-Junit-1-Start-our-testing-travel" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/27/Junit-1-Start-our-testing-travel/">Junit(1):开始我们的单元测试之旅!</a>
-    </h1>
-  
-
-        
-        <a href="/2017/10/27/Junit-1-Start-our-testing-travel/" class="archive-article-date">
-  	<time datetime="2017-10-27T09:52:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>  作为一名程序员，虽然你可能不是测试岗，但是懂得测试是必须的，这一个系列的文章用来记录一些Junit的测试方法，首先从实现自动化测试开始，然后衍生到stub和mock测试，再来进行我们的web应用的测试和数据库的测试。当然测试并不只包含这些内容，这里只是其中的一小块，有兴趣的同学可以继续开展。</p>
-<p>  写这个系列的文章的目的在于，由于我未来工作的公司，是结对编程，有时候我需要去在伙伴写业务代码的时候写测试代码，不过我认为，既然软件测试在软件工程课程中是基础课，那么每一个程序员都应该懂得一定的测试手段，再者写下这套文章，有利于我从新复习java的单元测试手段，当然这些手段在未来，即使是换一种语言，也会是通用的知识。这篇文章中所用的junit版本都是junit4,用注解来标识一些测试声明，而且测试类不再需要继承TestCase,也不需要遵循它的测试方法命名规则，我们可以把测试方法命名的的更加直观。</p>
-        
-          <a class="article-more-a" href="/2017/10/27/Junit-1-Start-our-testing-travel/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">软件测试</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">TDD</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Junit</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/10/27/Junit-1-Start-our-testing-travel/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-        <!-- 目录内容 -->
-             
-        <!-- 目录内容结束 -->
-  
-    <article id="post-Recall-Quick-Sort-and-Merging-Sort" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/14/Recall-Quick-Sort-and-Merging-Sort/">温故:快排和归并</a>
-    </h1>
-  
-
-        
-        <a href="/2017/09/14/Recall-Quick-Sort-and-Merging-Sort/" class="archive-article-date">
-  	<time datetime="2017-09-14T13:37:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-14</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>可能要去实习了，笔试的常考的算法要看一下，今天无聊的时候随便写了几个。</p>
-<h1 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h1><p>  这个应该是一个要背出来的的算法了随便用scala实现了一下，快排的话是英国人霍尔在26岁的时候偶然发现的，当时他为了解决词典排序问题，想到了冒泡排序这种比较普遍的方法，然后就发现了霍尔划分法，20年之后就得了图灵奖，真是我辈楷模，所以快排又被看作是特殊的冒泡，也就是这个道理了。</p>
-<p>  我们上面提到的并不是霍尔发现了快排，而是霍尔发现了霍尔划分法，实际上快排最主要的部分是划分，而不是排序或者合并，有两种划分方法，分别是Lomuto划分，Hoare划分，其中前者常常被用来实现基于减治的快速查找算法。但两者都可以实现快排。</p>
-<h2 id="Lomuto划分"><a href="#Lomuto划分" class="headerlink" title="Lomuto划分"></a>Lomuto划分</h2><p>  先用1行代码写一个交换函数，然后，额….这里我犯了小错误，因为我当时考虑用基类实现数字划分的时候的时候发现这AnyVal这个东西没有比较函数，所以我为了偷懒就用了一下Int直接写了，实际只花费了5行代码。</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//读取一个Array和要交换的两个元素的位置</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">swap</span></span>[<span class="type">T</span>](l:<span class="type">Array</span>[<span class="type">T</span>],a:<span class="type">Int</span>,b:<span class="type">Int</span>):<span class="type">Unit</span>=&#123;<span class="keyword">val</span> temp=l(a);l(a)=l(b);l(b)=temp&#125;</div><div class="line"></div><div class="line"><span class="comment">//实现Lomuto划分</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">lomutoPartion</span></span>(buf:<span class="type">Array</span>[<span class="type">Int</span>],start:<span class="type">Int</span>,end:<span class="type">Int</span>)=&#123;</div><div class="line">  <span class="keyword">var</span> (p,s)=(buf(start),start);</div><div class="line">  <span class="comment">//s指向大于p的第一个数的前一个数，一旦发现小于p的数就与s指向的位置交换，当然还有一种情况是不存在大于p的数，最后p被换到最后</span></div><div class="line">  <span class="keyword">for</span>(i&lt;-s+<span class="number">1</span> to end) <span class="keyword">if</span>(buf(i)&lt;p)&#123;s+=<span class="number">1</span>;swap(buf,s,i)&#125;</div><div class="line">  <span class="comment">//返回中轴s的位置</span></div><div class="line">  swap(buf,start,s);s</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2017/09/14/Recall-Quick-Sort-and-Merging-Sort/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">温故</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/09/14/Recall-Quick-Sort-and-Merging-Sort/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-        <!-- 目录内容 -->
-             
-        <!-- 目录内容结束 -->
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
     </nav>
   
 
@@ -580,11 +584,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Docker</a>
+                <a href="javascript:void(0)" class="js-tag color4">-闲谈</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">学习笔记</a>
+                <a href="javascript:void(0)" class="js-tag color1">scala</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">FP</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -596,11 +604,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">FP</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">scala</a>
+                <a href="javascript:void(0)" class="js-tag color5">学习笔记</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -620,10 +624,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">-闲谈</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Maven</a>
               </li>
              
@@ -636,11 +636,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Nexus</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Nexus</a>
+                <a href="javascript:void(0)" class="js-tag color5">目标检测</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -652,11 +656,23 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">译文</a>
+                <a href="javascript:void(0)" class="js-tag color3">温故</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">温故</a>
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">react</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Docker</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">译文</a>
               </li>
             
             <div class="clearfix"></div>
