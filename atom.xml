@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-10-09T02:59:27.610Z</updated>
+  <updated>2018-10-09T03:03:39.871Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,9 +20,10 @@
     <link href="http://yoursite.com/2018/10/09/react-1-meet-react/"/>
     <id>http://yoursite.com/2018/10/09/react-1-meet-react/</id>
     <published>2018-10-09T01:44:08.000Z</published>
-    <updated>2018-10-09T02:59:27.610Z</updated>
+    <updated>2018-10-09T03:03:39.871Z</updated>
     
     <content type="html"><![CDATA[<p>  几乎所有的软件问题都可以添加一层抽象来解决，react通过添加虚拟DOM这层抽象，=，解决了处理DOM的效率问题，<strong>虚拟DOM即用来描述真实DOM的JS对象</strong>，我们知道处理结构化的js对象，要比处理一大段文本快得多。</p>
+<a id="more"></a>
 <p>  特点：</p>
 <p>  <strong>声明式的视图层</strong>：以JSX语法声明视图层，因此可以随意使用状态数据</p>
 <p>  <strong>从状态到UI的单向数据流</strong>：定义UI的状态，让React来把它渲染为最终的UI，React根据最新状态来渲染最新UI。</p>
@@ -35,14 +36,14 @@
 <h3 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h3><p>  JSX只有两种标签，React通过首字母是否大写来区分这两类标签，而且它们可以互相嵌套使用：</p>
 <p>  其一就是DOM类型的标签，也就是html的基础标签诸如div,span,p等等，首字母必须小写。</p>
 <p>  然后则是React组件标签，首字母必须大写。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//dom标签</span></div><div class="line"><span class="keyword">const</span> divElement = <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span> hello saul <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>;</div><div class="line"></div><div class="line"><span class="comment">//组件标签</span></div><div class="line"><span class="keyword">const</span> element = <span class="xml"><span class="tag">&lt;<span class="name">SaulBlog</span> /&gt;</span>;</span></div><div class="line">     </div><div class="line">//嵌套使用</div><div class="line">const hello = (<span class="tag">&lt;<span class="name">div</span>&gt;</span> <span class="tag">&lt;<span class="name">SaulBlog</span> /&gt;</span> <span class="tag">&lt;/<span class="name">div</span>&gt;</span>;</div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//dom标签</span></div><div class="line"><span class="keyword">const</span> divElement = &lt;div&gt; hello saul &lt;/div&gt;;</div><div class="line"></div><div class="line"><span class="comment">//组件标签</span></div><div class="line"><span class="keyword">const</span> element = &lt;SaulBlog /&gt;;</div><div class="line">     </div><div class="line">//嵌套使用</div><div class="line">const hello = (&lt;div&gt; &lt;SaulBlog /&gt; &lt;/div&gt;;</div></pre></td></tr></table></figure>
 <h3 id="js表达式"><a href="#js表达式" class="headerlink" title="js表达式"></a>js表达式</h3><p>JSX本质上依然是Js，我们可以用{}讲表达式括起来的方式来使用表达式，一般有两种情况我们要用这种语法：</p>
 <p>  <strong>通过表达式给标签属性赋值</strong></p>
 <p>  <strong>通过表达式定义子组件</strong></p>
 <p>需要注意的是和scala之类的语言不同，js表达式并不支持多行js语句，用;隔开两条语句是会报错的。</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//Error!</span></div><div class="line"><span class="keyword">const</span> element = <span class="xml"><span class="tag">&lt;<span class="name">Saul</span> <span class="attr">value</span> = <span class="string">&#123;const</span> <span class="attr">val</span> = <span class="string">1+1;return</span> <span class="attr">val</span>; &#125; /&gt;</span></span></div></pre></td></tr></table></figure>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//Error!</span></div><div class="line"><span class="keyword">const</span> element = &lt;Saul value = &#123;const val = 1+1;return val; &#125; /&gt;</div></pre></td></tr></table></figure>
 <p>所以你用不了if-eles语句，但是可以用三目运算符?和&amp;&amp;代替if的作用。</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> boolean = <span class="literal">false</span>;</div><div class="line"></div><div class="line"><span class="keyword">const</span> element = <span class="xml"><span class="tag">&lt;<span class="name">Saul</span> <span class="attr">value</span> = <span class="string">&#123;boolean</span> &amp;&amp; <span class="attr">1</span>&#125; /&gt;</span></span></div></pre></td></tr></table></figure>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> boolean = <span class="literal">false</span>;</div><div class="line"></div><div class="line"><span class="keyword">const</span> element = &lt;Saul value = &#123;boolean &amp;&amp; 1&#125; /&gt;</div></pre></td></tr></table></figure>
 <h3 id="标签属性和注释"><a href="#标签属性和注释" class="headerlink" title="标签属性和注释"></a>标签属性和注释</h3><h4 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h4><p>除了部分属性外，DOM标签支持的属性JSX同样支持，只不过有些地方有点变化，比如es6占用的class关键字，现在需要在标签属性中用className代替</p>
 <p>另外React对标签支持的事件进行了重新分封装，封装时采用的是驼峰命名法，如onclick要写成onClick。</p>
 <h4 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h4><p>注释方面需要用{}把/**/括起来</p>
@@ -52,7 +53,6 @@
     <summary type="html">
     
       &lt;p&gt;  几乎所有的软件问题都可以添加一层抽象来解决，react通过添加虚拟DOM这层抽象，=，解决了处理DOM的效率问题，&lt;strong&gt;虚拟DOM即用来描述真实DOM的JS对象&lt;/strong&gt;，我们知道处理结构化的js对象，要比处理一大段文本快得多。&lt;/p&gt;
-&lt;p&gt;  特点
     
     </summary>
     
