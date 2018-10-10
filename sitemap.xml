@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2018/10/10/React-3-More-details-of-component/</loc>
+    
+    <lastmod>2018-10-10T09:53:14.543Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2018/10/09/react-1-meet-react/</loc>
     
     <lastmod>2018-10-10T06:29:56.678Z</lastmod>
@@ -12,13 +19,6 @@
     <loc>http://yoursite.com/2018/10/09/react-2-Component/</loc>
     
     <lastmod>2018-10-10T06:29:48.773Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2018/10/10/React-3-More-details-of-component/</loc>
-    
-    <lastmod>2018-10-10T06:26:20.542Z</lastmod>
     
   </url>
   
