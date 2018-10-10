@@ -209,7 +209,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/09/react-2-Component/">react(2):Component </a>
+      <a class="article-title" href="/2018/10/09/react-2-Component/">React(2):Component </a>
     </h1>
   
 
@@ -225,7 +225,7 @@
         <p>  React的核心概念就是组件，组件是整个React应用的基石，组件是UI中被拆分成的独立，可复用的模块。</p>
 <h2 id="定义组件"><a href="#定义组件" class="headerlink" title="定义组件"></a>定义组件</h2><h3 id="类组件"><a href="#类组件" class="headerlink" title="类组件"></a>类组件</h3><p>  组件的声明方式有两种，使用ES 6 class声明的<strong>类组件</strong>和使用函数的声明<strong>函数组件</strong>，然而class语法只是es6的一个语法糖，不过在这里沟通过继承React已定义好的组件类能够简化开发。</p>
 <p>一个class组件如下：</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//Board.js</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Board</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</div><div class="line"></div><div class="line">    render() &#123;</div><div class="line">        <span class="keyword">return</span> (</div><div class="line">            <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></div><div class="line">                Board</div><div class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">        );</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">//这句话将Board作为默认模块导出，从而可以在其他JS文件中导入使用</span></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> Board;</div></pre></td></tr></table></figure>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//Board.js</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Board</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</div><div class="line"></div><div class="line">    render() &#123;</div><div class="line">        <span class="keyword">return</span> (</div><div class="line">            &lt;div&gt;</div><div class="line">                Board</div><div class="line">            &lt;/div&gt;</div><div class="line">        );</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">//这句话将Board作为默认模块导出，从而可以在其他JS文件中导入使用</span></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> Board;</div></pre></td></tr></table></figure>
 <p>以下两点需要注意：</p>
 <p><strong>class组件必须继承自React.Component</strong></p>
 <p><strong>class内部必须定义render方法，该方法返回代表该组件UI的react元素</strong></p>
@@ -282,7 +282,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/09/react-1-meet-react/">react(1):meet react</a>
+      <a class="article-title" href="/2018/10/09/react-1-meet-react/">React(1):meet react</a>
     </h1>
   
 
