@@ -74,7 +74,7 @@
     <link href="http://yoursite.com/2018/10/09/react-2-Component/"/>
     <id>http://yoursite.com/2018/10/09/react-2-Component/</id>
     <published>2018-10-09T03:13:52.000Z</published>
-    <updated>2018-10-10T06:28:34.548Z</updated>
+    <updated>2018-10-10T06:29:48.773Z</updated>
     
     <content type="html"><![CDATA[<p>  React的核心概念就是组件，组件是整个React应用的基石，组件是UI中被拆分成的独立，可复用的模块。</p>
 <h2 id="定义组件"><a href="#定义组件" class="headerlink" title="定义组件"></a>定义组件</h2><h3 id="类组件"><a href="#类组件" class="headerlink" title="类组件"></a>类组件</h3><p>  组件的声明方式有两种，使用ES 6 class声明的<strong>类组件</strong>和使用函数的声明<strong>函数组件</strong>，然而class语法只是es6的一个语法糖，不过在这里沟通过继承React已定义好的组件类能够简化开发。</p>
@@ -140,7 +140,7 @@
     
       <category term="前端" scheme="http://yoursite.com/tags/%E5%89%8D%E7%AB%AF/"/>
     
-      <category term="react" scheme="http://yoursite.com/tags/react/"/>
+      <category term="React" scheme="http://yoursite.com/tags/React/"/>
     
   </entry>
   
@@ -149,7 +149,7 @@
     <link href="http://yoursite.com/2018/10/09/react-1-meet-react/"/>
     <id>http://yoursite.com/2018/10/09/react-1-meet-react/</id>
     <published>2018-10-09T01:44:08.000Z</published>
-    <updated>2018-10-10T06:28:20.915Z</updated>
+    <updated>2018-10-10T06:29:56.678Z</updated>
     
     <content type="html"><![CDATA[<p>  几乎所有的软件问题都可以添加一层抽象来解决，react通过添加虚拟DOM这层抽象，=，解决了处理DOM的效率问题，<strong>虚拟DOM即用来描述真实DOM的JS对象</strong>，我们知道处理结构化的js对象，要比处理一大段文本快得多。</p>
 <a id="more"></a>
@@ -188,7 +188,7 @@
     
       <category term="前端" scheme="http://yoursite.com/tags/%E5%89%8D%E7%AB%AF/"/>
     
-      <category term="react" scheme="http://yoursite.com/tags/react/"/>
+      <category term="React" scheme="http://yoursite.com/tags/React/"/>
     
   </entry>
   
