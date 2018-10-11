@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2018/10/11/React-5-HOC/</loc>
+    
+    <lastmod>2018-10-11T07:25:16.219Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2018/10/10/React-3-More-details-of-component/</loc>
     
     <lastmod>2018-10-11T06:34:05.669Z</lastmod>

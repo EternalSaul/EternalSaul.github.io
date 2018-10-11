@@ -132,6 +132,74 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Functional-Programming-2-Exception-handing" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/28/Functional-Programming-2-Exception-handing/">Functional Programming (2):函数式错误处理</a>
+    </h1>
+  
+
+        
+        <a href="/2017/07/28/Functional-Programming-2-Exception-handing/" class="archive-article-date">
+  	<time datetime="2017-07-28T08:09:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>  抛出异常是有副作用的，事实上我们可以用普通的值来表现成功和异常，以这种方式返回错误，符合引用透明的特点。</p>
+<p>  我之前写了一篇博文介绍Scala中的<a href="/2017/07/15/Learning-Scala-6-Monadic/">一元集合</a>，我在其中有介绍过Option，Try，两种一元集合，它们都是sealed类，且都有两个已经实现子类，来分别代表结果的两种对立情况。并且我也介绍了如何用Try来进行错误的处理。在这篇文章，我将介绍函数式编程为什么要这样做，同时更详细的说明如何这样做。</p>
+        
+          <a class="article-more-a" href="/2017/07/28/Functional-Programming-2-Exception-handing/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">scala</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">FP</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/07/28/Functional-Programming-2-Exception-handing/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+        <!-- 目录内容 -->
+             
+        <!-- 目录内容结束 -->
+  
     <article id="post-Functional-Programming-1-what-is-FP£ø" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -171,11 +239,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">FP</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">scala</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">scala</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">FP</a>
         		</li>
       		
 		</ul>
@@ -429,74 +497,6 @@
              
         <!-- 目录内容结束 -->
   
-    <article id="post-Practice-of-Basic-Java-Skills-NIO-2-NIO-In-Server" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/21/Practice-of-Basic-Java-Skills-NIO-2-NIO-In-Server/">Practice of Basic Java Skills:非阻塞I/O (2)——服务器非阻塞I/O</a>
-    </h1>
-  
-
-        
-        <a href="/2017/07/21/Practice-of-Basic-Java-Skills-NIO-2-NIO-In-Server/" class="archive-article-date">
-  	<time datetime="2017-07-21T02:44:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>  服务器中可能更需要非阻塞I/O，特别是在你不需要维持那么多线程或者机器维持不了那么多线程的时候，上一篇文章我们看到了通道和缓冲区，它们是用来实现非阻塞I/O的重要手段，现在在服务器中我们可能还需要选择器（Selector）,选择器用来让服务器判断哪些链接是已经准备好手法数据的，在一般的多线程I/O中，你并不需要做这一点，因为它们总是阻塞自己的线程，直到数据开始传递。</p>
-<p>   现在用以下代码构造一个极其简单的非阻塞I/O服务器,服务器和上个服务器实现的是一样的功能，只是这里我们不再让服务器线程阻塞一毫秒，一旦发现有客户机入站，就建立连接并不断的输出hello。</p>
-        
-          <a class="article-more-a" href="/2017/07/21/Practice-of-Basic-Java-Skills-NIO-2-NIO-In-Server/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">非阻塞I/O(NIO)</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/07/21/Practice-of-Basic-Java-Skills-NIO-2-NIO-In-Server/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-        <!-- 目录内容 -->
-             
-        <!-- 目录内容结束 -->
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/8/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/10/">Next &raquo;</a>
@@ -617,11 +617,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">scala</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">FP</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">scala</a>
+                <a href="javascript:void(0)" class="js-tag color4">JVM</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -634,10 +638,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Junit</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">JVM</a>
               </li>
              
               <li class="article-tag-list-item">
