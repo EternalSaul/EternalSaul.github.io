@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-10-11T04:44:42.419Z</updated>
+  <updated>2018-10-11T04:45:28.499Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,9 +20,10 @@
     <link href="http://yoursite.com/2018/10/10/Communication-way-of-Component/"/>
     <id>http://yoursite.com/2018/10/10/Communication-way-of-Component/</id>
     <published>2018-10-10T09:59:51.000Z</published>
-    <updated>2018-10-11T04:44:42.419Z</updated>
+    <updated>2018-10-11T04:45:28.499Z</updated>
     
     <content type="html"><![CDATA[<p>  单独的组件几乎没什么意义，一个真实的UI界面是由多个组件打起来的，而这些组件部分又与服务器通信得到数据，更改自身的state进行渲染，组件之间也有通信方式，比如父组件就通过props把数据传给子组件进行渲染，以至于整个界面“活”了起来。</p>
+<a id="more"></a>
 <h2 id="组件与服务器通信"><a href="#组件与服务器通信" class="headerlink" title="组件与服务器通信"></a>组件与服务器通信</h2><p>考虑通信问题，在明确怎么通信和在哪通信两个点，我们在<a href="http://saul.xin/2018/10/09/react-2-Component/" target="_blank" rel="external">前一篇文章</a>中介绍了组件的生命周期方法，组件的生命周期方法覆盖了整个组件的生命周期，在哪通信实际上就是选择合适的生命周期方法来通信。</p>
 <p>首先是<strong>挂载阶段</strong>的通信：</p>
 <p>挂载阶段有下面的方法：</p>
@@ -45,7 +46,6 @@
     <summary type="html">
     
       &lt;p&gt;  单独的组件几乎没什么意义，一个真实的UI界面是由多个组件打起来的，而这些组件部分又与服务器通信得到数据，更改自身的state进行渲染，组件之间也有通信方式，比如父组件就通过props把数据传给子组件进行渲染，以至于整个界面“活”了起来。&lt;/p&gt;
-&lt;h2 id=&quot;组件与服
     
     </summary>
     
