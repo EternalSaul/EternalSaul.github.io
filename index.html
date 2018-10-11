@@ -132,6 +132,88 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Communication-way-of-Component" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/10/10/Communication-way-of-Component/">React(4):Communication way of Component</a>
+    </h1>
+  
+
+        
+        <a href="/2018/10/10/Communication-way-of-Component/" class="archive-article-date">
+  	<time datetime="2018-10-10T09:59:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>  单独的组件几乎没什么意义，一个真实的UI界面是由多个组件打起来的，而这些组件部分又与服务器通信得到数据，更改自身的state进行渲染，组件之间也有通信方式，比如父组件就通过props把数据传给子组件进行渲染，以至于整个界面“活”了起来。</p>
+<h2 id="组件与服务器通信"><a href="#组件与服务器通信" class="headerlink" title="组件与服务器通信"></a>组件与服务器通信</h2><p>考虑通信问题，在明确怎么通信和在哪通信两个点，我们在<a href="http://saul.xin/2018/10/09/react-2-Component/" target="_blank" rel="external">前一篇文章</a>中介绍了组件的生命周期方法，组件的生命周期方法覆盖了整个组件的生命周期，在哪通信实际上就是选择合适的生命周期方法来通信。</p>
+<p>首先是<strong>挂载阶段</strong>的通信：</p>
+<p>挂载阶段有下面的方法：</p>
+<p><code>constructor -&gt; componentWillMount -&gt; render -&gt; componentDidMount</code></p>
+<p>首先我们排除两个特定的方法，构造器和render，虽然你可以在里面写通信代码但是这样做显然有背与该方法的自身定义的作用，并且你在render里写的话严重影响程序效率，因为这个方法很多时候都会被调用。</p>
+<p>余下的方法里，一般我们选择componentDidMount，此时组件已经挂载，它能保证DOM操作是安全的。且如果组件在服务器端渲染，componentWillMount会被调用两次（服务器端一次，浏览器端一次）。</p>
+<p><strong>更新阶段的通信</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">componentWillReceiveProps -&gt; shouldComponentUpdate -&gt; componentWillUpdate -&gt; render -&gt; componentDidUpdate</div></pre></td></tr></table></figure>
+<p>组件更新阶段常常需要从服务器获取最新数据，这很容易理解，比如组件向服务器发送请求有一个参数来自于props的一个属性,那么props的这个属性发生改变时，理应从新请求服务器数据。</p>
+<p>这样结果就很清楚了，<code>componentWillReceiveProps(nextProps)</code>用来做更新时的服务器通信再好不过,并且在实际请求前可以先对比nextProps和当前的props，确定请求依赖的属性有变化，再发送请求。</p>
+<h3 id="组件间通信"><a href="#组件间通信" class="headerlink" title="组件间通信"></a>组件间通信</h3><h3 id="父子通信"><a href="#父子通信" class="headerlink" title="父子通信"></a>父子通信</h3><p>父子组件通信在React应用中是常有的情况，父子组件通信主要依赖于props，父组件向子组件传递props比较简单，子组件向父组件通信时，需要依赖于父组件传入的回调函数。</p>
+<h3 id="兄弟通信"><a href="#兄弟通信" class="headerlink" title="兄弟通信"></a>兄弟通信</h3><p>另外兄弟组件之间也是可以通信的，这里的兄弟和树形兄弟不同，你可以认为如果他们有同一个祖先，那么他们就是兄弟组件，并不一定是处于相同的层级。</p>
+<p>兄弟组件间不能够直接通信，一般来说要把这些组件需要共享的状态放到离他们最近的祖先中，然后通过父组件传递来的回调函数去改变这些共享状态。</p>
+<h3 id="使用上下文-不推荐使用"><a href="#使用上下文-不推荐使用" class="headerlink" title="使用上下文(不推荐使用)"></a>使用上下文(不推荐使用)</h3><p>祖先往子孙传递上下文需要经过多个层级操作，这样会很麻烦，React提供了一个<strong>试用性的功能</strong>，即提供了一个context，不过要用这个功能必须在提供context的组件内新增一个getChildContext方法，并且还要在组件的childContextTypes属性上定义context对象的属性的类型信息。</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Container</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span></span>&#123;</div><div class="line">	<span class="comment">//...</span></div><div class="line">	getChildContext()&#123;</div><div class="line">        <span class="keyword">return</span> &#123;</div><div class="line">            <span class="attr">onAction</span>: <span class="keyword">this</span>.handleMethod</div><div class="line">        &#125;;</div><div class="line">	&#125;</div><div class="line">	<span class="comment">//...</span></div><div class="line">&#125;</div><div class="line"></div><div class="line">Container.childContextTypes = &#123;</div><div class="line">    <span class="attr">onAction</span>: PropTypes.func</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>在子组件中可以通过[this.context.属性名]来获取到提供context组件中所传入的对象。子组件也需要声明context的属性类型：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">SubElement.contextTypes = &#123;</div><div class="line">    <span class="attr">onAddUser</span>: propTypes.func</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">前端</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">React</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/10/10/Communication-way-of-Component/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+        <!-- 目录内容 -->
+             
+        <!-- 目录内容结束 -->
+  
     <article id="post-React-3-More-details-of-component" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -225,7 +307,7 @@
         <p>  React的核心概念就是组件，组件是整个React应用的基石，组件是UI中被拆分成的独立，可复用的模块。</p>
 <h2 id="定义组件"><a href="#定义组件" class="headerlink" title="定义组件"></a>定义组件</h2><h3 id="类组件"><a href="#类组件" class="headerlink" title="类组件"></a>类组件</h3><p>  组件的声明方式有两种，使用ES 6 class声明的<strong>类组件</strong>和使用函数的声明<strong>函数组件</strong>，然而class语法只是es6的一个语法糖，不过在这里沟通过继承React已定义好的组件类能够简化开发。</p>
 <p>一个class组件如下：</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//Board.js</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Board</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</div><div class="line"></div><div class="line">    render() &#123;</div><div class="line">        <span class="keyword">return</span> (</div><div class="line">            &lt;div&gt;</div><div class="line">                Board</div><div class="line">            &lt;/div&gt;</div><div class="line">        );</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">//这句话将Board作为默认模块导出，从而可以在其他JS文件中导入使用</span></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> Board;</div></pre></td></tr></table></figure>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//Board.js</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Board</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</div><div class="line"></div><div class="line">    render() &#123;</div><div class="line">        <span class="keyword">return</span> (</div><div class="line">            <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></div><div class="line">                Board</div><div class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">        );</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">//这句话将Board作为默认模块导出，从而可以在其他JS文件中导入使用</span></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> Board;</div></pre></td></tr></table></figure>
 <p>以下两点需要注意：</p>
 <p><strong>class组件必须继承自React.Component</strong></p>
 <p><strong>class内部必须定义render方法，该方法返回代表该组件UI的react元素</strong></p>
@@ -409,73 +491,6 @@
              
         <!-- 目录内容结束 -->
   
-    <article id="post-Notes-of-Deep-Learning-Neural-network-4" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/11/Notes-of-Deep-Learning-Neural-network-4/">Notes of CS231n:Neural network 4</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/11/Notes-of-Deep-Learning-Neural-network-4/" class="archive-article-date">
-  	<time datetime="2018-03-11T13:30:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>  我们利用反向传播计算出解析梯度，然后利用计算出的解析梯度来进行参数更新，这里记录一些有些的最优化技巧，但不进行细节分析。</p>
-        
-          <a class="article-more-a" href="/2018/03/11/Notes-of-Deep-Learning-Neural-network-4/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">深度学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/11/Notes-of-Deep-Learning-Neural-network-4/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-        <!-- 目录内容 -->
-             
-        <!-- 目录内容结束 -->
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -576,6 +591,14 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">React</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">javascript</a>
               </li>
              
@@ -588,19 +611,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">scala</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">FP</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">JVM</a>
+                <a href="javascript:void(0)" class="js-tag color1">scala</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Junit</a>
+                <a href="javascript:void(0)" class="js-tag color5">软件测试</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -608,7 +627,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">软件测试</a>
+                <a href="javascript:void(0)" class="js-tag color1">Junit</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">JVM</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -624,11 +647,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Nexus</a>
+                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
+                <a href="javascript:void(0)" class="js-tag color1">Nexus</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -640,19 +663,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">React</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">温故</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">react</a>
               </li>
              
               <li class="article-tag-list-item">

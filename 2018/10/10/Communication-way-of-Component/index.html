@@ -6,14 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives | Blog of Saul</title>
+  <title>React(4):Communication way of Component | Blog of Saul</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Blog of Saul">
-<meta property="og:url" content="http://yoursite.com/archives/page/7/index.html">
+  <meta name="description" content="单独的组件几乎没什么意义，一个真实的UI界面是由多个组件打起来的，而这些组件部分又与服务器通信得到数据，更改自身的state进行渲染，组件之间也有通信方式，比如父组件就通过props把数据传给子组件进行渲染，以至于整个界面“活”了起来。 组件与服务器通信考虑通信问题，在明确怎么通信和在哪通信两个点，我们在前一篇文章中介绍了组件的生命周期方法，组件的生命周期方法覆盖了整个组件的生命周期，在哪通信">
+<meta name="keywords" content="前端,React">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React(4):Communication way of Component">
+<meta property="og:url" content="http://yoursite.com/2018/10/10/Communication-way-of-Component/index.html">
 <meta property="og:site_name" content="Blog of Saul">
+<meta property="og:description" content="单独的组件几乎没什么意义，一个真实的UI界面是由多个组件打起来的，而这些组件部分又与服务器通信得到数据，更改自身的state进行渲染，组件之间也有通信方式，比如父组件就通过props把数据传给子组件进行渲染，以至于整个界面“活”了起来。 组件与服务器通信考虑通信问题，在明确怎么通信和在哪通信两个点，我们在前一篇文章中介绍了组件的生命周期方法，组件的生命周期方法覆盖了整个组件的生命周期，在哪通信">
+<meta property="og:updated_time" content="2018-10-11T04:44:42.419Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Blog of Saul">
+<meta name="twitter:title" content="React(4):Communication way of Component">
+<meta name="twitter:description" content="单独的组件几乎没什么意义，一个真实的UI界面是由多个组件打起来的，而这些组件部分又与服务器通信得到数据，更改自身的state进行渲染，组件之间也有通信方式，比如父组件就通过props把数据传给子组件进行渲染，以至于整个界面“活”了起来。 组件与服务器通信考虑通信问题，在明确怎么通信和在哪通信两个点，我们在前一篇文章中介绍了组件的生命周期方法，组件的生命周期方法覆盖了整个组件的生命周期，在哪通信">
   
   
     <link rel="icon" href="/favicon.png">
@@ -130,246 +135,199 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Communication-way-of-Component" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      React(4):Communication way of Component
+    </h1>
+  
+
+        
+        <a href="/2018/10/10/Communication-way-of-Component/" class="archive-article-date">
+  	<time datetime="2018-10-10T09:59:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-10</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>  单独的组件几乎没什么意义，一个真实的UI界面是由多个组件打起来的，而这些组件部分又与服务器通信得到数据，更改自身的state进行渲染，组件之间也有通信方式，比如父组件就通过props把数据传给子组件进行渲染，以至于整个界面“活”了起来。</p>
+<h2 id="组件与服务器通信"><a href="#组件与服务器通信" class="headerlink" title="组件与服务器通信"></a>组件与服务器通信</h2><p>考虑通信问题，在明确怎么通信和在哪通信两个点，我们在<a href="http://saul.xin/2018/10/09/react-2-Component/" target="_blank" rel="external">前一篇文章</a>中介绍了组件的生命周期方法，组件的生命周期方法覆盖了整个组件的生命周期，在哪通信实际上就是选择合适的生命周期方法来通信。</p>
+<p>首先是<strong>挂载阶段</strong>的通信：</p>
+<p>挂载阶段有下面的方法：</p>
+<p><code>constructor -&gt; componentWillMount -&gt; render -&gt; componentDidMount</code></p>
+<p>首先我们排除两个特定的方法，构造器和render，虽然你可以在里面写通信代码但是这样做显然有背与该方法的自身定义的作用，并且你在render里写的话严重影响程序效率，因为这个方法很多时候都会被调用。</p>
+<p>余下的方法里，一般我们选择componentDidMount，此时组件已经挂载，它能保证DOM操作是安全的。且如果组件在服务器端渲染，componentWillMount会被调用两次（服务器端一次，浏览器端一次）。</p>
+<p><strong>更新阶段的通信</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">componentWillReceiveProps -&gt; shouldComponentUpdate -&gt; componentWillUpdate -&gt; render -&gt; componentDidUpdate</div></pre></td></tr></table></figure>
+<p>组件更新阶段常常需要从服务器获取最新数据，这很容易理解，比如组件向服务器发送请求有一个参数来自于props的一个属性,那么props的这个属性发生改变时，理应从新请求服务器数据。</p>
+<p>这样结果就很清楚了，<code>componentWillReceiveProps(nextProps)</code>用来做更新时的服务器通信再好不过,并且在实际请求前可以先对比nextProps和当前的props，确定请求依赖的属性有变化，再发送请求。</p>
+<h3 id="组件间通信"><a href="#组件间通信" class="headerlink" title="组件间通信"></a>组件间通信</h3><h3 id="父子通信"><a href="#父子通信" class="headerlink" title="父子通信"></a>父子通信</h3><p>父子组件通信在React应用中是常有的情况，父子组件通信主要依赖于props，父组件向子组件传递props比较简单，子组件向父组件通信时，需要依赖于父组件传入的回调函数。</p>
+<h3 id="兄弟通信"><a href="#兄弟通信" class="headerlink" title="兄弟通信"></a>兄弟通信</h3><p>另外兄弟组件之间也是可以通信的，这里的兄弟和树形兄弟不同，你可以认为如果他们有同一个祖先，那么他们就是兄弟组件，并不一定是处于相同的层级。</p>
+<p>兄弟组件间不能够直接通信，一般来说要把这些组件需要共享的状态放到离他们最近的祖先中，然后通过父组件传递来的回调函数去改变这些共享状态。</p>
+<h3 id="使用上下文-不推荐使用"><a href="#使用上下文-不推荐使用" class="headerlink" title="使用上下文(不推荐使用)"></a>使用上下文(不推荐使用)</h3><p>祖先往子孙传递上下文需要经过多个层级操作，这样会很麻烦，React提供了一个<strong>试用性的功能</strong>，即提供了一个context，不过要用这个功能必须在提供context的组件内新增一个getChildContext方法，并且还要在组件的childContextTypes属性上定义context对象的属性的类型信息。</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Container</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span></span>&#123;</div><div class="line">	<span class="comment">//...</span></div><div class="line">	getChildContext()&#123;</div><div class="line">        <span class="keyword">return</span> &#123;</div><div class="line">            <span class="attr">onAction</span>: <span class="keyword">this</span>.handleMethod</div><div class="line">        &#125;;</div><div class="line">	&#125;</div><div class="line">	<span class="comment">//...</span></div><div class="line">&#125;</div><div class="line"></div><div class="line">Container.childContextTypes = &#123;</div><div class="line">    <span class="attr">onAction</span>: PropTypes.func</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>在子组件中可以通过[this.context.属性名]来获取到提供context组件中所传入的对象。子组件也需要声明context的属性类型：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">SubElement.contextTypes = &#123;</div><div class="line">    <span class="attr">onAddUser</span>: propTypes.func</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>嘀，学生卡<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/08/18/MongoDB-1-Brief-Introduce-of-MongoDB/" class="archive-article-date">
-  	<time datetime="2017-08-18T07:02:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-18</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/18/MongoDB-1-Brief-Introduce-of-MongoDB/">MongoDB (1):Brief Introduce of MongoDB</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">MongoDB</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">前端</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">NoSQL</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">React</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2018/10/10/Communication-way-of-Component/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/08/12/Nexus-2-Deploy-project-into-Nexus/" class="archive-article-date">
-  	<time datetime="2017-08-12T01:34:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/12/Nexus-2-Deploy-project-into-Nexus/">Nexus (2):将项目部署到Nexus</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Maven</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Nexus</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/08/11/Nexus-1-construct-a-private-server-of-Maven/" class="archive-article-date">
-  	<time datetime="2017-08-11T02:09:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-11</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/11/Nexus-1-construct-a-private-server-of-Maven/">Nexus (1):用Nexus构建Maven私服</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Maven</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Nexus</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/08/08/Maven-4-Aggregation-Inheritance/" class="archive-article-date">
-  	<time datetime="2017-08-08T05:52:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-08</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/08/Maven-4-Aggregation-Inheritance/">Maven (4):聚合与继承</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Maven</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/08/07/Maven-3-More-details-of-Maven/" class="archive-article-date">
-  	<time datetime="2017-08-07T03:33:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/07/Maven-3-More-details-of-Maven/">Maven (3):依赖包的传递</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Maven</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2018/10/10/React-3-More-details-of-component/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">React(3):More details of component</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
-
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/page/6/">&laquo; Prev</a><a class="page-number" href="/archives/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/5/">5</a><a class="page-number" href="/archives/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/archives/page/8/">8</a><a class="page-number" href="/archives/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/12/">12</a><a class="extend next" rel="next" href="/archives/page/8/">Next &raquo;</a>
-    </nav>
-  
+</nav>
 
 
+
+
+
+  
+  
+  
+
+  
+
+  
+
+        <!-- 目录内容 -->
+        
+            <p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
+            <span class="btn-bg"></span>
+            <span class="btn-text">文章导航</span>
+            </p>
+            <div id="toc-article" class="toc-article">
+                <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
+                <strong class="toc-title">文章目录</strong>
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#组件与服务器通信"><span class="toc-number">1.</span> <span class="toc-text">组件与服务器通信</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#组件间通信"><span class="toc-number">1.1.</span> <span class="toc-text">组件间通信</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#父子通信"><span class="toc-number">1.2.</span> <span class="toc-text">父子通信</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#兄弟通信"><span class="toc-number">1.3.</span> <span class="toc-text">兄弟通信</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用上下文-不推荐使用"><span class="toc-number">1.4.</span> <span class="toc-text">使用上下文(不推荐使用)</span></a></li></ol></li></ol>
+           </div>
+           <script type="text/javascript">
+            function showToc(){
+                var toc_article = document.getElementById("toc-article");
+                var show_toc_btn = document.getElementById("show-toc-btn");
+                toc_article.setAttribute("style","display:block");
+                show_toc_btn.setAttribute("style","display:none");
+                };
+            function showBtn(){
+                var toc_article = document.getElementById("toc-article");
+                var show_toc_btn = document.getElementById("show-toc-btn");
+                toc_article.setAttribute("style","display:none");
+                show_toc_btn.setAttribute("style","display:block");
+                };
+           </script>
+             
+        <!-- 目录内容结束 -->
           </div>
         </div>
       </div>
@@ -390,8 +348,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

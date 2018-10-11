@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-10-10T09:53:14.543Z</updated>
+  <updated>2018-10-11T04:44:42.419Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,47 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>React(4):Communication way of Component</title>
+    <link href="http://yoursite.com/2018/10/10/Communication-way-of-Component/"/>
+    <id>http://yoursite.com/2018/10/10/Communication-way-of-Component/</id>
+    <published>2018-10-10T09:59:51.000Z</published>
+    <updated>2018-10-11T04:44:42.419Z</updated>
+    
+    <content type="html"><![CDATA[<p>  单独的组件几乎没什么意义，一个真实的UI界面是由多个组件打起来的，而这些组件部分又与服务器通信得到数据，更改自身的state进行渲染，组件之间也有通信方式，比如父组件就通过props把数据传给子组件进行渲染，以至于整个界面“活”了起来。</p>
+<h2 id="组件与服务器通信"><a href="#组件与服务器通信" class="headerlink" title="组件与服务器通信"></a>组件与服务器通信</h2><p>考虑通信问题，在明确怎么通信和在哪通信两个点，我们在<a href="http://saul.xin/2018/10/09/react-2-Component/" target="_blank" rel="external">前一篇文章</a>中介绍了组件的生命周期方法，组件的生命周期方法覆盖了整个组件的生命周期，在哪通信实际上就是选择合适的生命周期方法来通信。</p>
+<p>首先是<strong>挂载阶段</strong>的通信：</p>
+<p>挂载阶段有下面的方法：</p>
+<p><code>constructor -&gt; componentWillMount -&gt; render -&gt; componentDidMount</code></p>
+<p>首先我们排除两个特定的方法，构造器和render，虽然你可以在里面写通信代码但是这样做显然有背与该方法的自身定义的作用，并且你在render里写的话严重影响程序效率，因为这个方法很多时候都会被调用。</p>
+<p>余下的方法里，一般我们选择componentDidMount，此时组件已经挂载，它能保证DOM操作是安全的。且如果组件在服务器端渲染，componentWillMount会被调用两次（服务器端一次，浏览器端一次）。</p>
+<p><strong>更新阶段的通信</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">componentWillReceiveProps -&gt; shouldComponentUpdate -&gt; componentWillUpdate -&gt; render -&gt; componentDidUpdate</div></pre></td></tr></table></figure>
+<p>组件更新阶段常常需要从服务器获取最新数据，这很容易理解，比如组件向服务器发送请求有一个参数来自于props的一个属性,那么props的这个属性发生改变时，理应从新请求服务器数据。</p>
+<p>这样结果就很清楚了，<code>componentWillReceiveProps(nextProps)</code>用来做更新时的服务器通信再好不过,并且在实际请求前可以先对比nextProps和当前的props，确定请求依赖的属性有变化，再发送请求。</p>
+<h3 id="组件间通信"><a href="#组件间通信" class="headerlink" title="组件间通信"></a>组件间通信</h3><h3 id="父子通信"><a href="#父子通信" class="headerlink" title="父子通信"></a>父子通信</h3><p>父子组件通信在React应用中是常有的情况，父子组件通信主要依赖于props，父组件向子组件传递props比较简单，子组件向父组件通信时，需要依赖于父组件传入的回调函数。</p>
+<h3 id="兄弟通信"><a href="#兄弟通信" class="headerlink" title="兄弟通信"></a>兄弟通信</h3><p>另外兄弟组件之间也是可以通信的，这里的兄弟和树形兄弟不同，你可以认为如果他们有同一个祖先，那么他们就是兄弟组件，并不一定是处于相同的层级。</p>
+<p>兄弟组件间不能够直接通信，一般来说要把这些组件需要共享的状态放到离他们最近的祖先中，然后通过父组件传递来的回调函数去改变这些共享状态。</p>
+<h3 id="使用上下文-不推荐使用"><a href="#使用上下文-不推荐使用" class="headerlink" title="使用上下文(不推荐使用)"></a>使用上下文(不推荐使用)</h3><p>祖先往子孙传递上下文需要经过多个层级操作，这样会很麻烦，React提供了一个<strong>试用性的功能</strong>，即提供了一个context，不过要用这个功能必须在提供context的组件内新增一个getChildContext方法，并且还要在组件的childContextTypes属性上定义context对象的属性的类型信息。</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Container</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span></span>&#123;</div><div class="line">	<span class="comment">//...</span></div><div class="line">	getChildContext()&#123;</div><div class="line">        <span class="keyword">return</span> &#123;</div><div class="line">            <span class="attr">onAction</span>: <span class="keyword">this</span>.handleMethod</div><div class="line">        &#125;;</div><div class="line">	&#125;</div><div class="line">	<span class="comment">//...</span></div><div class="line">&#125;</div><div class="line"></div><div class="line">Container.childContextTypes = &#123;</div><div class="line">    <span class="attr">onAction</span>: PropTypes.func</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>在子组件中可以通过[this.context.属性名]来获取到提供context组件中所传入的对象。子组件也需要声明context的属性类型：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">SubElement.contextTypes = &#123;</div><div class="line">    <span class="attr">onAddUser</span>: propTypes.func</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;  单独的组件几乎没什么意义，一个真实的UI界面是由多个组件打起来的，而这些组件部分又与服务器通信得到数据，更改自身的state进行渲染，组件之间也有通信方式，比如父组件就通过props把数据传给子组件进行渲染，以至于整个界面“活”了起来。&lt;/p&gt;
+&lt;h2 id=&quot;组件与服
+    
+    </summary>
+    
+    
+      <category term="前端" scheme="http://yoursite.com/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+      <category term="React" scheme="http://yoursite.com/tags/React/"/>
+    
+  </entry>
   
   <entry>
     <title>React(3):More details of component</title>
@@ -31,12 +72,12 @@
 <p><strong>es6 class并不会自动绑定this到当前对象，所以开发者在某些形式下需要手动绑定。</strong></p>
 <h3 id="箭头函数来定义事件"><a href="#箭头函数来定义事件" class="headerlink" title="箭头函数来定义事件"></a>箭头函数来定义事件</h3><p>如果用<code>{(index) =&gt; alert(index + &quot;:&quot; + this.props.name)}</code>这样的lambda形式来定义事件,因为箭头函数的this总是指向函数定义的对象，所以这里的对象就是当前组件的实例。</p>
 <p>但是这样有一个缺点，就是如果箭头函数在render中定义，那么每次render时都会创建一个新的处理函数对象，虽然一般情况下这点消耗是可以忽略的，如果组件层级比较低，那么这样的消耗就比较大了。</p>
-<h3 id="直接绑定组件方法"><a href="#直接绑定组件方法" class="headerlink" title="直接绑定组件方法"></a>直接绑定组件方法</h3><figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyButton</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</div><div class="line">    <span class="keyword">constructor</span>(props)&#123;</div><div class="line">        <span class="keyword">super</span>(props);</div><div class="line">        <span class="comment">//绑定指向</span></div><div class="line">        <span class="keyword">this</span>.handleClick = <span class="keyword">this</span>.handleClick.bind(<span class="keyword">this</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    handleClick(event)&#123;</div><div class="line">        alert(<span class="string">"hello"</span>+<span class="keyword">this</span>.props.whose)</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    render() &#123;</div><div class="line">        <span class="keyword">return</span> (</div><div class="line">            &lt;button onClick=&#123;this.handleClick&#125;&gt;</div><div class="line">                &#123;this.props.whose&#125; Button</div><div class="line">            &lt;/button&gt;</div><div class="line">        );</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="直接绑定组件方法"><a href="#直接绑定组件方法" class="headerlink" title="直接绑定组件方法"></a>直接绑定组件方法</h3><figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyButton</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</div><div class="line">    <span class="keyword">constructor</span>(props)&#123;</div><div class="line">        <span class="keyword">super</span>(props);</div><div class="line">        <span class="comment">//绑定指向</span></div><div class="line">        <span class="keyword">this</span>.handleClick = <span class="keyword">this</span>.handleClick.bind(<span class="keyword">this</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    handleClick(event)&#123;</div><div class="line">        alert(<span class="string">"hello"</span>+<span class="keyword">this</span>.props.whose)</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    render() &#123;</div><div class="line">        <span class="keyword">return</span> (</div><div class="line">            <span class="xml"><span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;this.handleClick&#125;</span>&gt;</span></span></div><div class="line">                &#123;this.props.whose&#125; Button</div><div class="line">            <span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line">        );</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>上面这种方式在构造函数中为后面用到的事件处理函数绑定了this的指向。如果你的事件处理函数里根本没有用到this，那不绑定也可以，但是一般不会出现这种没用到this的事件处理函数。</p>
 <p>有些人觉得构造函数中用的那种绑定模板代码比较繁琐，会用下面的方式直接在事件声明时绑定this指针的指向。不过bind会返回一个新的对象，这样的话相当于每次render调用时还是创建了一个新的对象。</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">render() &#123;</div><div class="line">    <span class="keyword">return</span> (</div><div class="line">        &lt;button onClick=&#123;this.handleClick.bind(this)&#125;&gt;</div><div class="line">            &#123;this.props.whose&#125; Button</div><div class="line">        &lt;/button&gt;</div><div class="line">    );</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">render() &#123;</div><div class="line">    <span class="keyword">return</span> (</div><div class="line">        <span class="xml"><span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;this.handleClick.bind(this)&#125;</span>&gt;</span></span></div><div class="line">            &#123;this.props.whose&#125; Button</div><div class="line">        <span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line">    );</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h3 id="属性初始化语法"><a href="#属性初始化语法" class="headerlink" title="属性初始化语法"></a>属性初始化语法</h3><p>这是一个试验阶段的特性，默认不支持，不过create-react-app手脚架默认是支持的，在其他项目中可能需要引入transform-class-properties插件获取这个特性支持。</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyButton</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</div><div class="line">    <span class="keyword">constructor</span>(props)&#123;</div><div class="line">        <span class="keyword">super</span>(props);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    handleClick = <span class="function">(<span class="params">event</span>) =&gt;</span>&#123;</div><div class="line">        alert(<span class="string">"hello"</span>+<span class="keyword">this</span>.props.whose)</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    render() &#123;</div><div class="line">        <span class="keyword">return</span> (</div><div class="line">            &lt;button onClick=&#123;this.handleClick&#125;&gt;</div><div class="line">                &#123;this.props.whose&#125; Button</div><div class="line">            &lt;/button&gt;</div><div class="line">        );</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyButton</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</div><div class="line">    <span class="keyword">constructor</span>(props)&#123;</div><div class="line">        <span class="keyword">super</span>(props);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    handleClick = <span class="function">(<span class="params">event</span>) =&gt;</span>&#123;</div><div class="line">        alert(<span class="string">"hello"</span>+<span class="keyword">this</span>.props.whose)</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    render() &#123;</div><div class="line">        <span class="keyword">return</span> (</div><div class="line">            <span class="xml"><span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;this.handleClick&#125;</span>&gt;</span></span></div><div class="line">                &#123;this.props.whose&#125; Button</div><div class="line">            <span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line">        );</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h2 id="受控和非受控组件"><a href="#受控和非受控组件" class="headerlink" title="受控和非受控组件"></a>受控和非受控组件</h2><p>某些元素自身维护了一些状态，比如很多表单元素维护着自身的输入和显示内容，React组件的状态只能通state来管理，这些状态不被React来控制的元素，即是非受控元素。</p>
 <h3 id="受控组件"><a href="#受控组件" class="headerlink" title="受控组件"></a>受控组件</h3><p>那么为了达成这种控制，React引入了受控组件概念，如果一个表单元素的值是由React来管理的那么它就是一个受控组件，这样做的目的是为了保证state是界面上所有元素状态的唯一来源。</p>
 <p><strong>text/password/textarea:</strong></p>
@@ -106,13 +147,13 @@
     <content type="html"><![CDATA[<p>  React的核心概念就是组件，组件是整个React应用的基石，组件是UI中被拆分成的独立，可复用的模块。</p>
 <h2 id="定义组件"><a href="#定义组件" class="headerlink" title="定义组件"></a>定义组件</h2><h3 id="类组件"><a href="#类组件" class="headerlink" title="类组件"></a>类组件</h3><p>  组件的声明方式有两种，使用ES 6 class声明的<strong>类组件</strong>和使用函数的声明<strong>函数组件</strong>，然而class语法只是es6的一个语法糖，不过在这里沟通过继承React已定义好的组件类能够简化开发。</p>
 <p>一个class组件如下：</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//Board.js</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Board</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</div><div class="line"></div><div class="line">    render() &#123;</div><div class="line">        <span class="keyword">return</span> (</div><div class="line">            &lt;div&gt;</div><div class="line">                Board</div><div class="line">            &lt;/div&gt;</div><div class="line">        );</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">//这句话将Board作为默认模块导出，从而可以在其他JS文件中导入使用</span></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> Board;</div></pre></td></tr></table></figure>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//Board.js</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Board</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</div><div class="line"></div><div class="line">    render() &#123;</div><div class="line">        <span class="keyword">return</span> (</div><div class="line">            <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></div><div class="line">                Board</div><div class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">        );</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">//这句话将Board作为默认模块导出，从而可以在其他JS文件中导入使用</span></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> Board;</div></pre></td></tr></table></figure>
 <p>以下两点需要注意：</p>
 <p><strong>class组件必须继承自React.Component</strong></p>
 <p><strong>class内部必须定义render方法，该方法返回代表该组件UI的react元素</strong></p>
 <a id="more"></a>
 <p>此时的Board还没有挂载，所以并未正确显示，我们需要把它挂载到界面的root节点上:</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//index.js</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</div><div class="line"><span class="keyword">import</span> ReactDOM <span class="keyword">from</span> <span class="string">'react-dom'</span>;</div><div class="line"></div><div class="line"><span class="comment">//导入Board组件模块</span></div><div class="line"><span class="keyword">import</span> Board <span class="keyword">from</span> <span class="string">'./Board'</span></div><div class="line"></div><div class="line"><span class="comment">//mount!</span></div><div class="line">ReactDOM.render(</div><div class="line">    &lt;Board /&gt;,</div><div class="line">    document.getElementById('root')</div><div class="line">);</div></pre></td></tr></table></figure>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//index.js</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</div><div class="line"><span class="keyword">import</span> ReactDOM <span class="keyword">from</span> <span class="string">'react-dom'</span>;</div><div class="line"></div><div class="line"><span class="comment">//导入Board组件模块</span></div><div class="line"><span class="keyword">import</span> Board <span class="keyword">from</span> <span class="string">'./Board'</span></div><div class="line"></div><div class="line"><span class="comment">//mount!</span></div><div class="line">ReactDOM.render(</div><div class="line">    <span class="xml"><span class="tag">&lt;<span class="name">Board</span> /&gt;</span>,</span></div><div class="line">    document.getElementById('root')</div><div class="line">);</div></pre></td></tr></table></figure>
 <p>上面的<code>import ReactDOM from &#39;react-dom&#39;;</code>用于导入react-dom库，这个库用于虚拟DOM节点到浏览器DOM节点间的转换。</p>
 <h4 id="props和state"><a href="#props和state" class="headerlink" title="props和state"></a>props和state</h4><p>props和state是组件的两个重要属性，它们都会反映到最终UI上，但它们有所不同。</p>
 <p>你可以把React组件看作是一个函数,输入是props和state输出是UI,你可以认为相同组件最终表现出的UI就是由传入的两个参数来决定的</p>
@@ -123,17 +164,17 @@
 <p>props是一个对外的接口，组件通过props接收外部的数据（有时也是方法，当然方法也是一种数据），内部不要去改变props，所以一般来说这个属性是只读的，只在组件创建的那一刻决定了。</p>
 <p>states则是一个对内接口，组件的内不要变化通过state来反映出来，这个数据是可变的，我们通过setState方法来修改。</p>
 <h3 id="函数组件"><a href="#函数组件" class="headerlink" title="函数组件"></a>函数组件</h3><p>  props和state都可以影响组件UI，那么组件必须要同时它们两者么？我们知道props一般作为只读的属性，一般来说你只能在创建组件时就把它的值给决定了，而state则不然，这样的话我们知道对于那些不可变的<strong>无状态组件</strong>，我们根本不需要state，我们一般用一个函数来定义无状态组件，因为更加简单明了，当然你也可以用比较长的类定义来定义组件，比如：</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Board</span>(<span class="params">props</span>)</span>&#123;</div><div class="line">        <span class="keyword">return</span> &lt;div&gt;&#123;props.whose&#125; Board&lt;/div&gt;;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> Board;</div></pre></td></tr></table></figure>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</div><div class="line"><span class="keyword">import</span> ReactDOM <span class="keyword">from</span> <span class="string">'react-dom'</span>;</div><div class="line"><span class="keyword">import</span> Board <span class="keyword">from</span> <span class="string">'./Board'</span></div><div class="line"></div><div class="line"><span class="comment">//mount!</span></div><div class="line">ReactDOM.render(</div><div class="line">    &lt;Board whose = "Saul's" /&gt;,</div><div class="line">    document.getElementById('root')</div><div class="line">);</div></pre></td></tr></table></figure>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Board</span>(<span class="params">props</span>)</span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>&#123;props.whose&#125; Board<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> Board;</div></pre></td></tr></table></figure>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</div><div class="line"><span class="keyword">import</span> ReactDOM <span class="keyword">from</span> <span class="string">'react-dom'</span>;</div><div class="line"><span class="keyword">import</span> Board <span class="keyword">from</span> <span class="string">'./Board'</span></div><div class="line"></div><div class="line"><span class="comment">//mount!</span></div><div class="line">ReactDOM.render(</div><div class="line">    <span class="xml"><span class="tag">&lt;<span class="name">Board</span> <span class="attr">whose</span> = <span class="string">"Saul's"</span> /&gt;</span>,</span></div><div class="line">    document.getElementById('root')</div><div class="line">);</div></pre></td></tr></table></figure>
 <p>Board是一个无状态的函数式组件，我们在挂载它的时候为它传入了<code>props.whose</code>,组件渲染出来将会是<code>Saul&#39;s Board</code>这句话。</p>
 <p>现实中大多数组件是一次性渲染的无状态组件，最佳实践中我们定义少量的有状态组件来管理整个应用的状态变化拥有处理状态变化的逻辑，而无状态组件关注绝大部分UI的渲染工作。</p>
 <h2 id="组件和元素"><a href="#组件和元素" class="headerlink" title="组件和元素"></a>组件和元素</h2><p>React的组件和元素并不是同一个东西，JSX是createElement的语法糖，所以JSX其实就是用来创建元素的，而组件的声明方式在上面提到了，显然它们并不是一种东西。</p>
 <p>React元素实际上是一个JS对象，它的结构的例子如下：</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    type : 'div',</div><div class="line">    props : &#123;</div><div class="line">        className : 'students',</div><div class="line">        student : &#123;</div><div class="line">            type : 'Student',</div><div class="line">            props : &#123;</div><div class="line">                name : 'Liu',</div><div class="line">                age : 20</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>以JSX创建上面这个元素是：</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;div className = <span class="string">'students'</span>&gt;</div><div class="line">	&lt;Student name = 'Liu' age = 20 /&gt; </div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;div className = <span class="string">'students'</span>&gt;</div><div class="line">	<span class="xml"><span class="tag">&lt;<span class="name">Student</span> <span class="attr">name</span> = <span class="string">'Liu'</span> <span class="attr">age</span> = <span class="string">20</span> /&gt;</span> </span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
 <p>因为JSX创建的就是一个普通的js对象，你可以用JSX语法创建一个元素对象赋值给一个变量</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> student = &lt;Student name = 'Liu' age = 20 /&gt;;</div><div class="line"></div><div class="line">&lt;div className = 'students'&gt;</div><div class="line">	&#123;student&#125;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> student = <span class="xml"><span class="tag">&lt;<span class="name">Student</span> <span class="attr">name</span> = <span class="string">'Liu'</span> <span class="attr">age</span> = <span class="string">20</span> /&gt;</span>;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span> = <span class="string">'students'</span>&gt;</span></div><div class="line">	&#123;student&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
 <h3 id="组件的生命周期"><a href="#组件的生命周期" class="headerlink" title="组件的生命周期"></a>组件的生命周期</h3><p>React组件从创建到销毁之间会经历多个生命周期方法，目的是为了让开发者更好的控制组件行为而准备。<strong>函数组件没有生命周期方法（很简单它只是一个普通的函数，不可能无中生有出几个方法）。</strong></p>
 <h4 id="挂载阶段"><a href="#挂载阶段" class="headerlink" title="挂载阶段"></a>挂载阶段</h4><p>该阶段组件被创建和初始化，然后被挂载到DOM里，完成组件的第一次渲染。</p>
 <p><code>constructor -&gt; componentWillMount -&gt; render -&gt; componentDidMount</code></p>
@@ -157,7 +198,7 @@
       &lt;p&gt;  React的核心概念就是组件，组件是整个React应用的基石，组件是UI中被拆分成的独立，可复用的模块。&lt;/p&gt;
 &lt;h2 id=&quot;定义组件&quot;&gt;&lt;a href=&quot;#定义组件&quot; class=&quot;headerlink&quot; title=&quot;定义组件&quot;&gt;&lt;/a&gt;定义组件&lt;/h2&gt;&lt;h3 id=&quot;类组件&quot;&gt;&lt;a href=&quot;#类组件&quot; class=&quot;headerlink&quot; title=&quot;类组件&quot;&gt;&lt;/a&gt;类组件&lt;/h3&gt;&lt;p&gt;  组件的声明方式有两种，使用ES 6 class声明的&lt;strong&gt;类组件&lt;/strong&gt;和使用函数的声明&lt;strong&gt;函数组件&lt;/strong&gt;，然而class语法只是es6的一个语法糖，不过在这里沟通过继承React已定义好的组件类能够简化开发。&lt;/p&gt;
 &lt;p&gt;一个class组件如下：&lt;/p&gt;
-&lt;figure class=&quot;highlight jsx&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;15&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;16&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;17&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;18&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//Board.js&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; React &lt;span class=&quot;keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&#39;react&#39;&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;Board&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;React&lt;/span&gt;.&lt;span class=&quot;title&quot;&gt;Component&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    render() &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; (&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &amp;lt;div&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                Board&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &amp;lt;/div&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        );&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//这句话将Board作为默认模块导出，从而可以在其他JS文件中导入使用&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;default&lt;/span&gt; Board;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight jsx&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;15&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;16&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;17&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;18&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//Board.js&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; React &lt;span class=&quot;keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&#39;react&#39;&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;Board&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;React&lt;/span&gt;.&lt;span class=&quot;title&quot;&gt;Component&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    render() &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; (&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;span class=&quot;xml&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;div&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                Board&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            &lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;div&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        );&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//这句话将Board作为默认模块导出，从而可以在其他JS文件中导入使用&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;default&lt;/span&gt; Board;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;以下两点需要注意：&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;class组件必须继承自React.Component&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;class内部必须定义render方法，该方法返回代表该组件UI的react元素&lt;/strong&gt;&lt;/p&gt;
@@ -192,14 +233,14 @@
 <h3 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h3><p>  JSX只有两种标签，React通过首字母是否大写来区分这两类标签，而且它们可以互相嵌套使用：</p>
 <p>  其一就是DOM类型的标签，也就是html的基础标签诸如div,span,p等等，首字母必须小写。</p>
 <p>  然后则是React组件标签，首字母必须大写。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//dom标签</span></div><div class="line"><span class="keyword">const</span> divElement = &lt;div&gt; hello saul &lt;/div&gt;;</div><div class="line"></div><div class="line"><span class="comment">//组件标签</span></div><div class="line"><span class="keyword">const</span> element = &lt;SaulBlog /&gt;;</div><div class="line">     </div><div class="line">//嵌套使用</div><div class="line">const hello = (&lt;div&gt; &lt;SaulBlog /&gt; &lt;/div&gt;;</div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//dom标签</span></div><div class="line"><span class="keyword">const</span> divElement = <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span> hello saul <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>;</div><div class="line"></div><div class="line"><span class="comment">//组件标签</span></div><div class="line"><span class="keyword">const</span> element = <span class="xml"><span class="tag">&lt;<span class="name">SaulBlog</span> /&gt;</span>;</span></div><div class="line">     </div><div class="line">//嵌套使用</div><div class="line">const hello = (<span class="tag">&lt;<span class="name">div</span>&gt;</span> <span class="tag">&lt;<span class="name">SaulBlog</span> /&gt;</span> <span class="tag">&lt;/<span class="name">div</span>&gt;</span>;</div></pre></td></tr></table></figure>
 <h3 id="js表达式"><a href="#js表达式" class="headerlink" title="js表达式"></a>js表达式</h3><p>JSX本质上依然是Js，我们可以用{}讲表达式括起来的方式来使用表达式，一般有两种情况我们要用这种语法：</p>
 <p>  <strong>通过表达式给标签属性赋值</strong></p>
 <p>  <strong>通过表达式定义子组件</strong></p>
 <p>需要注意的是和scala之类的语言不同，js表达式并不支持多行js语句，用;隔开两条语句是会报错的。</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//Error!</span></div><div class="line"><span class="keyword">const</span> element = &lt;Saul value = &#123;const val = 1+1;return val; &#125; /&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//Error!</span></div><div class="line"><span class="keyword">const</span> element = <span class="xml"><span class="tag">&lt;<span class="name">Saul</span> <span class="attr">value</span> = <span class="string">&#123;const</span> <span class="attr">val</span> = <span class="string">1+1;return</span> <span class="attr">val</span>; &#125; /&gt;</span></span></div></pre></td></tr></table></figure>
 <p>所以你用不了if-eles语句，但是可以用三目运算符?和&amp;&amp;代替if的作用。</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> boolean = <span class="literal">false</span>;</div><div class="line"></div><div class="line"><span class="keyword">const</span> element = &lt;Saul value = &#123;boolean &amp;&amp; 1&#125; /&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> boolean = <span class="literal">false</span>;</div><div class="line"></div><div class="line"><span class="keyword">const</span> element = <span class="xml"><span class="tag">&lt;<span class="name">Saul</span> <span class="attr">value</span> = <span class="string">&#123;boolean</span> &amp;&amp; <span class="attr">1</span>&#125; /&gt;</span></span></div></pre></td></tr></table></figure>
 <h3 id="标签属性和注释"><a href="#标签属性和注释" class="headerlink" title="标签属性和注释"></a>标签属性和注释</h3><h4 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h4><p>除了部分属性外，DOM标签支持的属性JSX同样支持，只不过有些地方有点变化，比如es6占用的class关键字，现在需要在标签属性中用className代替</p>
 <p>另外React对标签支持的事件进行了重新分封装，封装时采用的是驼峰命名法，如onclick要写成onClick。</p>
 <h4 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h4><p>注释方面需要用{}把/**/括起来</p>
@@ -604,11 +645,11 @@
     
       <category term="学习笔记" scheme="http://yoursite.com/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
-      <category term="Junit" scheme="http://yoursite.com/tags/Junit/"/>
+      <category term="软件测试" scheme="http://yoursite.com/tags/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95/"/>
     
       <category term="TDD" scheme="http://yoursite.com/tags/TDD/"/>
     
-      <category term="软件测试" scheme="http://yoursite.com/tags/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95/"/>
+      <category term="Junit" scheme="http://yoursite.com/tags/Junit/"/>
     
   </entry>
   
@@ -639,11 +680,11 @@
     
       <category term="学习笔记" scheme="http://yoursite.com/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
-      <category term="Junit" scheme="http://yoursite.com/tags/Junit/"/>
+      <category term="软件测试" scheme="http://yoursite.com/tags/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95/"/>
     
       <category term="TDD" scheme="http://yoursite.com/tags/TDD/"/>
     
-      <category term="软件测试" scheme="http://yoursite.com/tags/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95/"/>
+      <category term="Junit" scheme="http://yoursite.com/tags/Junit/"/>
     
   </entry>
   
@@ -1205,286 +1246,6 @@
     
       &lt;p&gt;  如上篇文章所说，这篇文章我介绍一下类文件结构里比较复杂的&lt;strong&gt;属性表&lt;/strong&gt;，属性列表这项数据可能存在于字段表，方法表，和类文件本身结构以及Code属性表中，我们可以 参照面的类C结构，来确认这一点。&lt;/p&gt;
 &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;15&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;16&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;17&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;18&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;19&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;20&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;21&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;22&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;23&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;24&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;25&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;26&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;27&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;28&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;29&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;30&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;31&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;32&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;/*&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;类文件结构&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;*/&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;ClassFile &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    u4             magic;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    u2             minor_version;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    u2             major_version;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    u2             constant_pool_count;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    cp_info        constant_pool[constant_pool_count-1];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    u2             access_flags;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    u2             this_class;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    u2             super_class;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    u2             interfaces_count;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    u2             interfaces[interfaces_count];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    u2             fields_count;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    field_info     fields[fields_count];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    u2             methods_count;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    method_info    methods[methods_count];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    /*属性表*/&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    u2             attributes_count;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    attribute_info attributes[attributes_count];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;/*方法表（和字段表结构相同）*/&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;field_info &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    u2             access_flags;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    u2             name_index;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    u2             descriptor_index;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    /*属性表*/&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    u2             attributes_count;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    attribute_info attributes[attributes_count];&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-    
-    </summary>
-    
-    
-      <category term="学习笔记" scheme="http://yoursite.com/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-      <category term="JVM" scheme="http://yoursite.com/tags/JVM/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>JVM (1):类文件结构（上）</title>
-    <link href="http://yoursite.com/2017/11/25/JVM-1-Structure-of-class-file/"/>
-    <id>http://yoursite.com/2017/11/25/JVM-1-Structure-of-class-file/</id>
-    <published>2017-11-25T06:02:15.000Z</published>
-    <updated>2017-11-28T07:26:54.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>  <strong>平台无关性</strong>是Java语言最重要的特性之一，这个特性由<strong>字节码</strong>这种中间码作为虚拟机执行的文件载体被大家所认识，<strong>一次编译到处运行</strong>的这种<strong>平台无关性</strong>在一个学习者在刚刚学习编程而且选择的是Java语言时就会了解，但是随着学习者技术视野不断扩张，就会意识到jvm不是提供了java运行的平台，而是提供了字节码运行的平台，像Scala，Groovy，Ruby，Python等等语言通过他们自己的编译器，也可以编译成字节码从而在jvm平台上运行，即<strong>语言无关性</strong>。</p>
-<p>  一个非凡的公司去设计一款非凡的程序平台，Java在诞生之初，JVM和Java语言的规范就是分开来的，JVM只关心Class文件里的字节码，并不关心它是怎么来的，你甚至可以用16进制编辑器自己写一份字节码，前提你对它的结构非常的清楚，你也可自己设计一门语言，然后让这门语言编译成字节码，运行在jvm平台上，以作为你的毕业设计或者开源项目。</p>
-<a id="more"></a>
-<h2 id="字节码"><a href="#字节码" class="headerlink" title="字节码"></a>字节码</h2><p>  上面一段中我提到过”一个非凡的公司去设计一款非凡的程序平台，Java在诞生之初，JVM和Java语言的规范就是分开来的”,你可能会怀疑句话，因为一个程序语言编译成一个中间载体，完成这个过程时就顺便实现了所谓的<strong>语言无关性</strong>。实际上高超的设计团队，并不会为了迎合某种语言的需求去设计一种中间载体，而是在这个中间载体的语义范围之内去设计一门能提高生产力的分工度的语言。</p>
-<p>  一言蔽之：“<strong>字节码不是但但为了java而设计的，字节码有着比java更强大的语义</strong>”。比如对于函数重载，但但是返回值不同在java语言中是不能判定为不同函数的，但是在class文件中则不然，class文件中只要一个类中方法的描述字段不相同，那么他们就是两个方法。虽然在具体语言上实现这一语义，这会带来新的运行时的麻烦。</p>
-<h2 id="Class文件"><a href="#Class文件" class="headerlink" title="Class文件"></a>Class文件</h2><p>  <strong>Class文件对应着唯一一个类或接口的定义信息</strong>，注意这里有几个重点，首先是<strong>唯一一个</strong>，第二是<strong>类或接口</strong>，第三点是<strong>定义信息</strong></p>
-<p>  Class文件，并不一定是指磁盘上的具体文件，它也许是动态生成的比如由CGlib生成，也可能是一个JSP文件生成，也有可能是一段网络流直接读取到内存里，但是不管它怎么样来，这段字节流都符合jvm规范里定义的类的结构，它的基础单位就是字节，各个项目数据严格按照规范排列在这段字节数据中，没有空隙存在，也没有分隔符存在，如果一个数据项不能以8位字节来表示，那么就用若干个字节，以高位在前方式来表示。</p>
-<p>  从高级语言编译成字节码的那一刻开始，<strong>在Class文件中每一个数据项都有它存在的意义</strong>，当并非都是运行时必须的，因为<strong>类的属性表（后面会介绍）</strong>要求更为宽泛一些，存在一些如LineNumberTable,LocalVariableTable这样的属性是用来帮助我们编程和调试期间能够确定错误行行号，以及避免局部变量显示的名称是arg0,arg1这样没有意义的符号。<strong>这些运行期不必要的数据项都可通过编译时使用特别的参数来拒绝生成</strong>，但是我建议不要这么做，因为会导致别人很难复用和审查你的代码。</p>
-<p>  Class文件格式并不是键值型的（属性表内属性除外），对数据的区分完全是看顺序和偏移。</p>
-<h3 id="Class文件的组成"><a href="#Class文件的组成" class="headerlink" title="Class文件的组成"></a>Class文件的组成</h3><p>  要搞清楚什么组成了Class文件，首先要清楚的明白宽泛的讲，Class文件里只有两种数据类型：</p>
-<ol>
-<li><p>基本数据类型：<strong>无符号数</strong>，包括了u1,u2,u4,u8几种分别代表了<strong>不同字节数的无符号数</strong>，这些无符号数用来描述<strong>数字</strong>和<strong>索引引用</strong>,并且可以按照<strong>缩略UTF-8</strong>来表示字符串。这里缩略和普通的UTF-8编码的具体区别大家可以看卡wiki上这段话：</p>
-<pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">The Unicode strings, despite the moniker &quot;UTF-8 string&quot;, are not actually encoded according to the Unicode standard, although it is similar. There are two differences (see UTF-8 for a complete discussion). The first is that the codepoint U+0000 is encoded as the two-byte sequence C0 80 (in hex) instead of the standard single-byte encoding 00. The second difference is that supplementary characters (those outside the BMP at U+10000 and above) are encoded using a surrogate-pair construction similar to UTF-16 rather than being directly encoded using UTF-8. In this case each of the two surrogates is encoded separately in UTF-8. For example, U+1D11E is encoded as the 6-byte sequence ED A0 B4 ED B4 9E, rather than the correct 4-byte UTF-8 encoding of F0 9D 84 9E.</div></pre></td></tr></table></figure>
-</code></pre></li>
-<li><p>复合数据类型：<strong>表</strong>，“表”可由<strong>其他表</strong>和<strong>无符号数</strong>组成，你可以把Class文件整个看成一张大表，里面有无符号数和许多小表，小表里又有小表，这些表设计者都以”_info”为结尾来命名，但是这些名称并不会体现在class文件里面，这里再次声明一遍，class文件格式没有键（属性表内属性除外）这种东西，完全是靠偏移来确定这个字段是什么，以及某个字段在哪里。</p>
-</li>
-</ol>
-<p>整个Class文件结构如下表顺序所示：</p>
-<table>
-<thead>
-<tr>
-<th>类型</th>
-<th>名称</th>
-<th>数量</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>u4</td>
-<td>magic</td>
-<td>1</td>
-</tr>
-<tr>
-<td>u2</td>
-<td>minor_version</td>
-<td>1</td>
-</tr>
-<tr>
-<td>u2</td>
-<td>major_version</td>
-<td>1</td>
-</tr>
-<tr>
-<td>u2</td>
-<td>constant_pool_count</td>
-<td>1</td>
-</tr>
-<tr>
-<td>cp_info</td>
-<td>constant_pool</td>
-<td>constant_pool_count-1</td>
-</tr>
-<tr>
-<td>u2</td>
-<td>assess_flags</td>
-<td>1</td>
-</tr>
-<tr>
-<td>u2</td>
-<td>this_class</td>
-<td>1</td>
-</tr>
-<tr>
-<td>u2</td>
-<td>super_class</td>
-<td>1</td>
-</tr>
-<tr>
-<td>u2</td>
-<td>interfaces_count</td>
-<td>1</td>
-</tr>
-<tr>
-<td>u2</td>
-<td>interfaces</td>
-<td>interface_count</td>
-</tr>
-<tr>
-<td>u2</td>
-<td>fields_count</td>
-<td>1</td>
-</tr>
-<tr>
-<td>field_info</td>
-<td>fields</td>
-<td>fields_count</td>
-</tr>
-<tr>
-<td>u2</td>
-<td>methods_count</td>
-<td>1</td>
-</tr>
-<tr>
-<td>method_info</td>
-<td>methods</td>
-<td>methods_count</td>
-</tr>
-<tr>
-<td>u2</td>
-<td>attributes_count</td>
-<td>1</td>
-</tr>
-<tr>
-<td>attribute_info</td>
-<td>attributes</td>
-<td>attributes_count</td>
-</tr>
-</tbody>
-</table>
-<p>下面我们来拆解这张表，但是我们把比较特别的attribute部分，也就是最后两行另外以一篇新的文章来讲。</p>
-<h4 id="magic-minor-major-version"><a href="#magic-minor-major-version" class="headerlink" title="magic,minor/major_version"></a>magic,minor/major_version</h4><p>class文件打头的6个字节就是<strong>魔术</strong>，<strong>次版本号</strong>以及<strong>主版本号</strong>。</p>
-<p><strong>魔术固定为：0xCAFEBABY</strong>，这个字段唯一的目的就是类加载时验证阶段确定这个类是不是一个class类</p>
-<p><strong>次版本号</strong>和<strong>主板本号</strong>确定这个class文件所支持最低的JDK版本,高版本的JDK能向下兼容，如果JVM检测到版本标识超过了自己支持的版本，就拒绝执行。</p>
-<p>比如，你把一个JDK7编译的class文件放到基于JDK6的项目中运行，就可能得到unsupporter major.minor 51.0异常。</p>
-<p>jdk7的版本号即51，jdk的版本号是从45开始（1.0和1.1都是45，小版本号不同），1.2开始每一个大版本号加1，jdk1.2是46,1.6是50，1.8是52。</p>
-<h4 id="常量池"><a href="#常量池" class="headerlink" title="常量池"></a>常量池</h4><p>接下来常量池，由于每个类中的常量不是固定的，所以这部分数据由2个部分组成</p>
-<ol>
-<li><p>constant_pool_count，它是一个数值量，用来指定常量词中包含了多少个常量，但<strong>这个数值量不是从0开始计数的，这点需要特别注意，它从1开始计数，1表示没有任何常量，2表示有1个常量</strong>，然后依次后推，至于为什么不从0开始，因为后面的一些表中的引用字段，可能会存在不指向任何常量的情况，这时候就用0做为引用对于常量池的偏移。</p>
-</li>
-<li><p>即  constant_pool_count-1个cp_info，cp_info是常量项的表结构，它有14种类型（截止jdk1.7），每种类型的常量项的表结构都不同，但是这种表结构的开头都是一个u1类型的tag字段，来指定不同的数值标识这个表结构是哪种类型。</p>
-<p>这14种类型你可以查看wiki：<a href="https://en.wikipedia.org/wiki/Java_class_file,里面的The" target="_blank" rel="external">https://en.wikipedia.org/wiki/Java_class_file,里面的The</a> constant pool项目就很清楚的说明了14种类型以及他们对应的tag的值。</p>
-<p>比如对于其中的一种CONSTANT_Class_info表结构：</p>
-</li>
-</ol>
-<table>
-<thead>
-<tr>
-<th>类型</th>
-<th>名称</th>
-<th>数量</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>u1</td>
-<td>tag</td>
-<td>1</td>
-</tr>
-<tr>
-<td>u2</td>
-<td>name_index</td>
-<td>1</td>
-</tr>
-</tbody>
-</table>
-<p>   这里的tag的值肯定是0x07,标识它的类型为CONSTANT_Class_info，接下来name_index标识了一个索引值，该值指向的是一个常量词中的CONSTANT_Utf8_info结构，这个结构中有该类的全限定名字符串。现在我们来看看这种结构：</p>
-<table>
-<thead>
-<tr>
-<th>类型</th>
-<th>名称</th>
-<th>数量</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>u1</td>
-<td>tag</td>
-<td>1</td>
-</tr>
-<tr>
-<td>u2</td>
-<td>length</td>
-<td>1</td>
-</tr>
-<tr>
-<td>u1</td>
-<td>bytes</td>
-<td>length</td>
-</tr>
-</tbody>
-</table>
-<p>   对应于CONSTANT_Utf8_info的tag值为0x01,然后有一个16位数指定这个utf-8字符串所占的字节数，所以你可以推测一下你在java里直接以赋值形式构造一个所需空间大于64k的数是不可能的，接下来就是一个<strong>缩略utf-8编码</strong>所代表的字符串的字节流了，它的长度是上面给定的length。</p>
-<h4 id="访问标志位"><a href="#访问标志位" class="headerlink" title="访问标志位"></a>访问标志位</h4><p>接下来一个u2类型的access_flags字段标识这个类的访问标志位，用来表示该类是不是被abstract等关键字修饰，是不是一个注解或者接口，是否是用户代码产生，是否是一个枚举类型等等，我们知道访问标志只有有和没有的区别，于是一个u2的每一位就代表了一种访问标志有还是没有，一个u2字段可以代表16种标志位，但是实际上只用了其中的8个。</p>
-<p>你可以从<a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.4" target="_blank" rel="external">官方文档</a>，里的4.1小结查看这些标志位的具体信息，这个文档是Java se8的。</p>
-<h4 id="this-class-super-class-interface索引集合"><a href="#this-class-super-class-interface索引集合" class="headerlink" title="this_class,super_class,interface索引集合"></a>this_class,super_class,interface索引集合</h4><table>
-<thead>
-<tr>
-<th>类型</th>
-<th>名称</th>
-<th>数量</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>u2</td>
-<td>this_class</td>
-<td>1</td>
-</tr>
-<tr>
-<td>u2</td>
-<td>super_class</td>
-<td>1</td>
-</tr>
-<tr>
-<td>u2</td>
-<td>interfaces_count</td>
-<td>1</td>
-</tr>
-<tr>
-<td>u2</td>
-<td>interfaces</td>
-<td>interface_count</td>
-</tr>
-</tbody>
-</table>
-<p>   ​    它们通通指向的一个常量词中类型为CONSTANT_Class_info的常量，我们上面介绍过这个常量的具体结构，它有一个name_index指向一个CONSTANT_Utf8_info常量，这个常量中包含了一段字符串，具体在这里这段字符串是完整的类名。诸如：java/lang/Object。</p>
-<p>   ​    在java中除了Object外，所有的类都有父类，字节码中表现也是一样的。</p>
-<h4 id="字段和方法表集合"><a href="#字段和方法表集合" class="headerlink" title="字段和方法表集合"></a>字段和方法表集合</h4><table>
-<thead>
-<tr>
-<th>类型</th>
-<th>名称</th>
-<th>数量</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>u2</td>
-<td>field_count</td>
-<td>1</td>
-</tr>
-<tr>
-<td>field_info</td>
-<td>fields</td>
-<td>fields_count</td>
-</tr>
-<tr>
-<td>u2</td>
-<td>methods_count</td>
-<td>1</td>
-</tr>
-<tr>
-<td>method_info</td>
-<td>methods</td>
-<td>methods_count</td>
-</tr>
-</tbody>
-</table>
-<p>   字段表和方法表的结构每个字段的功能上几乎一样，<strong>但是实际上在access_flags的取值上是不同的，另外在属性表中它们也可能有不同的属性</strong>。表结构如下：</p>
-   <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">/*</div><div class="line">这里只列出了方法表其实字段表和它一模一样，只是位置一前一后，从而vm可以判断出谁是方法表，谁是字段表</div><div class="line">*/</div><div class="line">method_info &#123;</div><div class="line">    u2             access_flags;</div><div class="line">    u2             name_index;</div><div class="line">    u2             descriptor_index;</div><div class="line">    u2             attributes_count;</div><div class="line">    attribute_info attributes[attributes_count];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>   1.访问位：不再赘述，和类的访问位功能和形式上差不多，具体有哪些访问位可以参考<a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.4" target="_blank" rel="external">官方文档</a></p>
-<p>   中4.5和4.6小结查看。</p>
-<p>   2.name_index指向一个常量CONSTANT_Utf8_info，标识了方法或者字段名的<strong>简单名称</strong>，这里的简单名称指的是没有类型和参数修饰的名称，比如”inc()”-&gt;”inc”</p>
-<p>   3.descriptor_index描述字段，这个字段有点复杂</p>
-<p><strong>字段的描述：</strong></p>
-<pre><code>首先对于除了long基本类型和void，都用首字符的大写来表示，比如void-&gt;V,int-&gt;I,double-&gt;D,long用J表示。
-</code></pre><p>   ​    为什么long用J表示的原因是因为所有引用类型都用L作为开头表示，引用类型表示的方式为L+类型权限定名，比如对于java.lang.Object-&gt;Ljava/lang/Object</p>
-<p>   ​    对于数组一个维度就在类型符号面前加一个[,比如对于int[]-&gt;[I,对于String[][]-&gt;[[Ljava/lang/String。</p>
-<p><strong>方法的描述</strong></p>
-<p>   ​    有了上面的基础，我们可以来介绍一下方法的descriptor_index字段，对于方法</p>
-   <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Object m(int i, double d, Thread t) &#123;...&#125;</div></pre></td></tr></table></figure>
-<p>   编译器把它转换为一个描述为：</p>
-   <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(IDLjava/lang/Thread;)Ljava/lang/Object;</div></pre></td></tr></table></figure>
-<p>   可以看到即使是在java中<strong>不能重载的同名同方法表不同返回值的方法</strong>实际上它们的描述符是不同的，实际上在class类中，这种<strong>不能重载的同名同方法表不同返回值的方法</strong>是可以存在的，但是运行期如何判断无接受值的方法调用到底调用的是什么方法呢?这是个巨大的问题。</p>
-<p>   方法表和属性表中都不会列出从父类继承来的方法和字段，除非是自己在代码里重写了，但是会有你用javap去解析一个class文件时可能会发现没有在你代码里出现过的方法出现在了方法和字段表里，比如\<init>和\<clinit>方法，它们是实例的构造器和类的构造器，再比如对于内部类，我们可以访问外部类的字段和方法，编译器会直接给我们在内部类属性表插一个指向外部类实例的字段。</clinit></init></p>
-<p>   <strong>就如我上面所说，对于类，方法和字段三种表中都存在的属性表，我在下篇文章介绍，这个表比较复杂，也能解开你包括，java里方法代码去哪儿了，被设为常量的类变量的赋值的值去哪儿了的疑问。</strong></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;  &lt;strong&gt;平台无关性&lt;/strong&gt;是Java语言最重要的特性之一，这个特性由&lt;strong&gt;字节码&lt;/strong&gt;这种中间码作为虚拟机执行的文件载体被大家所认识，&lt;strong&gt;一次编译到处运行&lt;/strong&gt;的这种&lt;strong&gt;平台无关性&lt;/strong&gt;在一个学习者在刚刚学习编程而且选择的是Java语言时就会了解，但是随着学习者技术视野不断扩张，就会意识到jvm不是提供了java运行的平台，而是提供了字节码运行的平台，像Scala，Groovy，Ruby，Python等等语言通过他们自己的编译器，也可以编译成字节码从而在jvm平台上运行，即&lt;strong&gt;语言无关性&lt;/strong&gt;。&lt;/p&gt;
-&lt;p&gt;  一个非凡的公司去设计一款非凡的程序平台，Java在诞生之初，JVM和Java语言的规范就是分开来的，JVM只关心Class文件里的字节码，并不关心它是怎么来的，你甚至可以用16进制编辑器自己写一份字节码，前提你对它的结构非常的清楚，你也可自己设计一门语言，然后让这门语言编译成字节码，运行在jvm平台上，以作为你的毕业设计或者开源项目。&lt;/p&gt;
     
     </summary>
     

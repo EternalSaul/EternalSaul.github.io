@@ -132,6 +132,74 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-JVM-1-Structure-of-class-file" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/11/25/JVM-1-Structure-of-class-file/">JVM (1):类文件结构（上）</a>
+    </h1>
+  
+
+        
+        <a href="/2017/11/25/JVM-1-Structure-of-class-file/" class="archive-article-date">
+  	<time datetime="2017-11-25T06:02:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>  <strong>平台无关性</strong>是Java语言最重要的特性之一，这个特性由<strong>字节码</strong>这种中间码作为虚拟机执行的文件载体被大家所认识，<strong>一次编译到处运行</strong>的这种<strong>平台无关性</strong>在一个学习者在刚刚学习编程而且选择的是Java语言时就会了解，但是随着学习者技术视野不断扩张，就会意识到jvm不是提供了java运行的平台，而是提供了字节码运行的平台，像Scala，Groovy，Ruby，Python等等语言通过他们自己的编译器，也可以编译成字节码从而在jvm平台上运行，即<strong>语言无关性</strong>。</p>
+<p>  一个非凡的公司去设计一款非凡的程序平台，Java在诞生之初，JVM和Java语言的规范就是分开来的，JVM只关心Class文件里的字节码，并不关心它是怎么来的，你甚至可以用16进制编辑器自己写一份字节码，前提你对它的结构非常的清楚，你也可自己设计一门语言，然后让这门语言编译成字节码，运行在jvm平台上，以作为你的毕业设计或者开源项目。</p>
+        
+          <a class="article-more-a" href="/2017/11/25/JVM-1-Structure-of-class-file/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习笔记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">JVM</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/11/25/JVM-1-Structure-of-class-file/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+        <!-- 目录内容 -->
+             
+        <!-- 目录内容结束 -->
+  
     <article id="post-Junit-2-Assert-by-Hamcrest" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -174,7 +242,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Junit</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">软件测试</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -182,7 +250,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">软件测试</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Junit</a>
         		</li>
       		
 		</ul>
@@ -246,7 +314,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Junit</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">软件测试</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -254,7 +322,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">软件测试</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Junit</a>
         		</li>
       		
 		</ul>
@@ -423,80 +491,6 @@
              
         <!-- 目录内容结束 -->
   
-    <article id="post-Functional-Programming-4-Monoid" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/10/Functional-Programming-4-Monoid/">Functional Programming(4):Monoid</a>
-    </h1>
-  
-
-        
-        <a href="/2017/09/10/Functional-Programming-4-Monoid/" class="archive-article-date">
-  	<time datetime="2017-09-10T14:17:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Monoid的数学定义"><a href="#Monoid的数学定义" class="headerlink" title="Monoid的数学定义"></a>Monoid的数学定义</h2><p>  在函数式编程中，我们喜欢用代数来描述一些数据类型，包括特定的法则和被它们限定的操作。比如说n阶可逆矩阵在其乘法运算下，满足结合律，且单位阵为幺元，每个n阶可逆矩阵都有逆阵，即逆元，那么它是一个群。<br>  实际上一些我们有一些通用的代数模式被用于函数式编程式数据类型的设计，对于函数式编程来说，他们就像在面向对象编程时我们要立刻想到各种设计模式一样重要，运用代数模式我们可以消除大量的重复代码！为什么可以呢？我们先来看看幺半群–Monoid。<br>  在左孝凌版本的离散数学Monoid不叫幺半群，而叫做独异点：</p>
-<blockquote>
-<p>  一个代数系统&lt;S,*&gt;,S为非空集合，而*为S上的一个二元运算<br>  如果运算是封闭的<br>  且运算是可结合的，即对于x,y,z ∈S满足(x*y)*z=x*(y*z)<br>  那么&lt;S,*&gt;是半群<br>  如果半群众含有幺元（对于任何x∈S，存在e,e*x=x=x*e,e即&lt;S,*&gt;的幺元），那么它就是一个幺半群（独异点）</p>
-</blockquote>
-        
-          <a class="article-more-a" href="/2017/09/10/Functional-Programming-4-Monoid/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">scala</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">FP</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/09/10/Functional-Programming-4-Monoid/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-        <!-- 目录内容 -->
-             
-        <!-- 目录内容结束 -->
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/4/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/6/">Next &raquo;</a>
@@ -597,6 +591,14 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">React</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">javascript</a>
               </li>
              
@@ -609,19 +611,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">scala</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">FP</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">JVM</a>
+                <a href="javascript:void(0)" class="js-tag color1">scala</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Junit</a>
+                <a href="javascript:void(0)" class="js-tag color5">软件测试</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -629,7 +627,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">软件测试</a>
+                <a href="javascript:void(0)" class="js-tag color1">Junit</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">JVM</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -645,11 +647,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Nexus</a>
+                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
+                <a href="javascript:void(0)" class="js-tag color1">Nexus</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -661,19 +663,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">React</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">温故</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">react</a>
               </li>
              
               <li class="article-tag-list-item">
