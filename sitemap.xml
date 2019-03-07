@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2018/11/18/ElasticSearch-1-Base-knowledge/</loc>
+    
+    <lastmod>2018-11-18T15:55:11.646Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2018/10/11/React-5-HOC/</loc>
     
     <lastmod>2018-10-11T07:55:38.356Z</lastmod>
@@ -82,13 +89,6 @@
     <loc>http://yoursite.com/2018/01/29/Junit-3-Build-a-stub/</loc>
     
     <lastmod>2018-01-30T15:40:10.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2018/01/22/Touch-ThoughtWorks-Be-a-ThoughtWorker/</loc>
-    
-    <lastmod>2018-01-24T14:55:44.000Z</lastmod>
     
   </url>
   

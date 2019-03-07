@@ -157,10 +157,10 @@
       
         <p>联系高阶函数概念，高阶组件是指接受一个组件返回一个组件的<strong>函数</strong>。它常用来分离组件的通用逻辑，可看作是装饰器模式的一种应用。</p>
 <p><strong>注意：高阶组件并不是组件，而是函数</strong></p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">myHOC</span>(<span class="params">WrappedComponent</span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="class"><span class="keyword">class</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span></span>&#123;</div><div class="line">        render()&#123;</div><div class="line">            <span class="keyword">return</span> &lt;WrappedComponent &#123;...this.props&#125;/&gt;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">myHOC</span>(<span class="params">WrappedComponent</span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="class"><span class="keyword">class</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span></span>&#123;</div><div class="line">        render()&#123;</div><div class="line">            <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">WrappedComponent</span> &#123;<span class="attr">...this.props</span>&#125;/&gt;</span></span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>既然高阶组件是函数，那么js函数中有的性质它都有，高阶组件并不一定是只能有一个参数的单个参数列表，我们可以给它传入多个参数，定义多个参数列表，柯里化等等都没有问题。</p>
 <a id="more"></a>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">myHOC</span> = (<span class="params">data</span>) =&gt; (<span class="params">WrappedComponent</span>) =&gt; </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="class"><span class="keyword">class</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span></span>&#123;</div><div class="line">    	construct(props)&#123;</div><div class="line">            <span class="keyword">super</span>(props)</div><div class="line">            <span class="keyword">this</span>.setState(&#123;data&#125;)</div><div class="line">    	&#125;</div><div class="line">        render()&#123;</div><div class="line">            <span class="keyword">return</span> &lt;WrappedComponent &#123;...this.props&#125;/&gt;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">function Mycomponent(props)&#123;</div><div class="line"> 	return &lt;div /&gt;   </div><div class="line">&#125;</div><div class="line"></div><div class="line">const hoc = myHOC(&#123;name:"Saul"&#125;)(Mycomponent)</div></pre></td></tr></table></figure>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">myHOC</span> = (<span class="params">data</span>) =&gt; (<span class="params">WrappedComponent</span>) =&gt; </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="class"><span class="keyword">class</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span></span>&#123;</div><div class="line">    	construct(props)&#123;</div><div class="line">            <span class="keyword">super</span>(props)</div><div class="line">            <span class="keyword">this</span>.setState(&#123;data&#125;)</div><div class="line">    	&#125;</div><div class="line">        render()&#123;</div><div class="line">            <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">WrappedComponent</span> &#123;<span class="attr">...this.props</span>&#125;/&gt;</span></span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">function Mycomponent(props)&#123;</div><div class="line"> 	return <span class="tag">&lt;<span class="name">div</span> /&gt;</span>   </div><div class="line">&#125;</div><div class="line"></div><div class="line">const hoc = myHOC(&#123;name:"Saul"&#125;)(Mycomponent)</div></pre></td></tr></table></figure>
 <p><strong>劫持渲染</strong></p>
 <p>有事我们可能要根据props或者状态来判断组件是不是能够被渲染，或者是不是要转换为其他的表现形式，比如下面，我们判断组件是不是应该被构造</p>
 <figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">judgePaintComponent</span>(<span class="params">WrappedComponent</span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="class"><span class="keyword">class</span> <span class="keyword">extends</span> <span class="title">WrappedComponent</span></span>&#123;</div><div class="line">        render()&#123;</div><div class="line">        	<span class="keyword">if</span>(<span class="keyword">this</span>.props.paint)</div><div class="line">        		<span class="keyword">return</span> <span class="keyword">super</span>.render();</div><div class="line">        	<span class="keyword">return</span> <span class="literal">null</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -169,7 +169,7 @@
 <figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">withStudentList</span>(<span class="params">students</span>)</span>&#123;</div><div class="line">    <span class="comment">//...</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>2.高阶组件每次都会返回一个新的组件，所以最好不要再render和组件的声明周期函数中使用，因为这些函数经常被调用，所以非常消耗空间，又消耗时间（前一次组件被卸载）。</p>
 <p>3.高阶组件生成的新组件不会包含被包装组件的静态方法，开发者需要手动复制</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">Wrapped.staticMethod = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">myHOC</span>(<span class="params">WrappedComponent</span>)</span>&#123;</div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">newComponent</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span></span>&#123;</div><div class="line">        render()&#123;</div><div class="line">            <span class="keyword">return</span> &lt;WrappedComponent &#123;...this.props&#125;/&gt;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    //手动复制</div><div class="line">    newComponent.staticMethod = WrappedComponent.staticMethod;</div><div class="line">    return newComponent;</div><div class="line">&#125;</div><div class="line"></div><div class="line"> const mycomponent = myHOC(Wrapped);</div></pre></td></tr></table></figure>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">Wrapped.staticMethod = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">myHOC</span>(<span class="params">WrappedComponent</span>)</span>&#123;</div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">newComponent</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span></span>&#123;</div><div class="line">        render()&#123;</div><div class="line">            <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">WrappedComponent</span> &#123;<span class="attr">...this.props</span>&#125;/&gt;</span></span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    //手动复制</div><div class="line">    newComponent.staticMethod = WrappedComponent.staticMethod;</div><div class="line">    return newComponent;</div><div class="line">&#125;</div><div class="line"></div><div class="line"> const mycomponent = myHOC(Wrapped);</div></pre></td></tr></table></figure>
 
       
 
@@ -278,6 +278,15 @@
   
 <nav id="article-nav">
   
+    <a href="/2018/11/18/ElasticSearch-1-Base-knowledge/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          ElasticSearch(1):Base knowledge
+        
+      </div>
+    </a>
+  
   
     <a href="/2018/10/10/Communication-way-of-Component/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">React(4):Communication way of Component</div>
@@ -332,7 +341,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2018 Saul
+    		&copy; 2019 Saul
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -446,7 +455,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">JVM</a>
+                <a href="javascript:void(0)" class="js-tag color5">-ElasticSearch</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -462,6 +471,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">JVM</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Maven</a>
               </li>
              
@@ -474,11 +487,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
+                <a href="javascript:void(0)" class="js-tag color1">Nexus</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Nexus</a>
+                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
               </li>
              
               <li class="article-tag-list-item">
