@@ -8,17 +8,17 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>ElasticSearch(1):Base knowledge | Blog of Saul</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="es是一个开源搜索引擎，其建立在,lucene上提供了一系列非常直观好用的restful api接口，以及分布式方案，用es的这些提供物，你不在需要写一个java程序去访问lucene，你也不再需要依赖其他的集群方案去建立并思考如何管理一个lucene集群，es是一套非常优秀的拿来即用的工具，一个天生的分布式的软件。 es集群的简单介绍一个运行中的es实例，即是一个节点，es集群由多个cluste">
+  <meta name="description" content="es是一个开源搜索引擎，其建立在,lucene上提供了一系列非常直观好用的restful api接口，以及分布式方案，用es的这些提供物，你不在需要写一个java程序去访问lucene，你也不再需要依赖其他的集群方案去建立并思考如何管理一个lucene集群，es是一套非常优秀的拿来即用的工具，一个天生的分布式的软件。">
 <meta name="keywords" content="-ElasticSearch">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ElasticSearch(1):Base knowledge">
 <meta property="og:url" content="http://yoursite.com/2018/11/18/ElasticSearch-1-Base-knowledge/index.html">
 <meta property="og:site_name" content="Blog of Saul">
-<meta property="og:description" content="es是一个开源搜索引擎，其建立在,lucene上提供了一系列非常直观好用的restful api接口，以及分布式方案，用es的这些提供物，你不在需要写一个java程序去访问lucene，你也不再需要依赖其他的集群方案去建立并思考如何管理一个lucene集群，es是一套非常优秀的拿来即用的工具，一个天生的分布式的软件。 es集群的简单介绍一个运行中的es实例，即是一个节点，es集群由多个cluste">
-<meta property="og:updated_time" content="2018-11-18T15:55:11.646Z">
+<meta property="og:description" content="es是一个开源搜索引擎，其建立在,lucene上提供了一系列非常直观好用的restful api接口，以及分布式方案，用es的这些提供物，你不在需要写一个java程序去访问lucene，你也不再需要依赖其他的集群方案去建立并思考如何管理一个lucene集群，es是一套非常优秀的拿来即用的工具，一个天生的分布式的软件。">
+<meta property="og:updated_time" content="2019-03-07T14:01:51.954Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ElasticSearch(1):Base knowledge">
-<meta name="twitter:description" content="es是一个开源搜索引擎，其建立在,lucene上提供了一系列非常直观好用的restful api接口，以及分布式方案，用es的这些提供物，你不在需要写一个java程序去访问lucene，你也不再需要依赖其他的集群方案去建立并思考如何管理一个lucene集群，es是一套非常优秀的拿来即用的工具，一个天生的分布式的软件。 es集群的简单介绍一个运行中的es实例，即是一个节点，es集群由多个cluste">
+<meta name="twitter:description" content="es是一个开源搜索引擎，其建立在,lucene上提供了一系列非常直观好用的restful api接口，以及分布式方案，用es的这些提供物，你不在需要写一个java程序去访问lucene，你也不再需要依赖其他的集群方案去建立并思考如何管理一个lucene集群，es是一套非常优秀的拿来即用的工具，一个天生的分布式的软件。">
   
   
     <link rel="icon" href="/favicon.png">
@@ -156,6 +156,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>es是一个开源搜索引擎，其建立在,lucene上提供了一系列非常直观好用的restful api接口，以及分布式方案，用es的这些提供物，你不在需要写一个java程序去访问lucene，你也不再需要依赖其他的集群方案去建立并思考如何管理一个lucene集群，es是一套非常优秀的拿来即用的工具，一个天生的分布式的软件。</p>
+<a id="more"></a>
 <h2 id="es集群的简单介绍"><a href="#es集群的简单介绍" class="headerlink" title="es集群的简单介绍"></a>es集群的简单介绍</h2><p>一个运行中的es实例，即是一个节点，es集群由多个cluster.name相同的节点组合而成，<strong>es集群一旦得知新节点的加入或者旧节点被移除，就会重新平均分配节点中的所有数据</strong>。</p>
 <p>一个es集群会选举产生<strong>主节点</strong>，<strong>主节点负责管理集群范围内所有的变更</strong>，如增删索引或者节点，但是主节点<strong>不负责文档级别的变更或者搜索</strong>，这个特性使得对文档的变更和搜索的性能不是由主节点的数量或者性能来决定的。</p>
 <p>es集群中<strong>任何节点都知道任意文档所处的位置</strong>，它们能够将我们的实际请求转发到存储我们的目标文档的节点上，所以我们不关心我们的请求发到的是哪个节点，因为任何节点都能给予我们正确的响应。</p>

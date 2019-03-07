@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-11-18T15:55:11.646Z</updated>
+  <updated>2019-03-07T14:01:51.954Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,9 +20,10 @@
     <link href="http://yoursite.com/2018/11/18/ElasticSearch-1-Base-knowledge/"/>
     <id>http://yoursite.com/2018/11/18/ElasticSearch-1-Base-knowledge/</id>
     <published>2018-11-18T12:34:06.000Z</published>
-    <updated>2018-11-18T15:55:11.646Z</updated>
+    <updated>2019-03-07T14:01:51.954Z</updated>
     
     <content type="html"><![CDATA[<p>es是一个开源搜索引擎，其建立在,lucene上提供了一系列非常直观好用的restful api接口，以及分布式方案，用es的这些提供物，你不在需要写一个java程序去访问lucene，你也不再需要依赖其他的集群方案去建立并思考如何管理一个lucene集群，es是一套非常优秀的拿来即用的工具，一个天生的分布式的软件。</p>
+<a id="more"></a>
 <h2 id="es集群的简单介绍"><a href="#es集群的简单介绍" class="headerlink" title="es集群的简单介绍"></a>es集群的简单介绍</h2><p>一个运行中的es实例，即是一个节点，es集群由多个cluster.name相同的节点组合而成，<strong>es集群一旦得知新节点的加入或者旧节点被移除，就会重新平均分配节点中的所有数据</strong>。</p>
 <p>一个es集群会选举产生<strong>主节点</strong>，<strong>主节点负责管理集群范围内所有的变更</strong>，如增删索引或者节点，但是主节点<strong>不负责文档级别的变更或者搜索</strong>，这个特性使得对文档的变更和搜索的性能不是由主节点的数量或者性能来决定的。</p>
 <p>es集群中<strong>任何节点都知道任意文档所处的位置</strong>，它们能够将我们的实际请求转发到存储我们的目标文档的节点上，所以我们不关心我们的请求发到的是哪个节点，因为任何节点都能给予我们正确的响应。</p>
@@ -53,7 +54,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;es是一个开源搜索引擎，其建立在,lucene上提供了一系列非常直观好用的restful api接口，以及分布式方案，用es的这些提供物，你不在需要写一个java程序去访问lucene，你也不再需要依赖其他的集群方案去建立并思考如何管理一个lucene集群，es是一套非常优
+      &lt;p&gt;es是一个开源搜索引擎，其建立在,lucene上提供了一系列非常直观好用的restful api接口，以及分布式方案，用es的这些提供物，你不在需要写一个java程序去访问lucene，你也不再需要依赖其他的集群方案去建立并思考如何管理一个lucene集群，es是一套非常优秀的拿来即用的工具，一个天生的分布式的软件。&lt;/p&gt;
     
     </summary>
     
