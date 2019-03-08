@@ -132,6 +132,77 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-MongoDB-3-Index" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/08/21/MongoDB-3-Index/">MongoDB (3):查询分析与索引基础</a>
+    </h1>
+  
+
+        
+        <a href="/2017/08/21/MongoDB-3-Index/" class="archive-article-date">
+  	<time datetime="2017-08-21T07:54:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-21</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>   这篇文章主要是写简单的写MongoDB的索引入门，索引是什么，有什么作用这种废话就不要介绍了，但是正如我在第一篇文章中所说，你需要注意MongoDB和传统许多的关系型数据库一样基于B-Tree索引。</p>
+<p>   MongoDB提供了多种索引类型让用户在不同的情况下选择，在介绍这些之前，我们必须先了解一个函数explain,它用于做查询分析，在3.0版本之后，explain函数受到了新的更新，它的输出大为不同，如果你尝试搜索关于MongoDB的explain博文就会发现很多都是基于3.0版本之前介绍的，由于我用的3.4.7版本的MongoDB,所以我在此就基于该版本来写</p>
+<blockquote>
+<p><a href="https://docs.mongodb.com/manual/reference/operator/meta/explain/#behavior" target="_blank" rel="external">官方文档</a>上说3.2开始可以使用$explain来得到2.6版本的那种返回结果，但是我尝试了好像没用…</p>
+</blockquote>
+        
+          <a class="article-more-a" href="/2017/08/21/MongoDB-3-Index/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">MongoDB</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">NoSQL</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/08/21/MongoDB-3-Index/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+        <!-- 目录内容 -->
+             
+        <!-- 目录内容结束 -->
+  
     <article id="post-MongoDB-2-MongoDB-shell" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -418,74 +489,6 @@
              
         <!-- 目录内容结束 -->
   
-    <article id="post-Maven-4-Aggregation-Inheritance" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/08/Maven-4-Aggregation-Inheritance/">Maven (4):聚合与继承</a>
-    </h1>
-  
-
-        
-        <a href="/2017/08/08/Maven-4-Aggregation-Inheritance/" class="archive-article-date">
-  	<time datetime="2017-08-08T05:52:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>  前面几篇文章，我们都是把项目拆分成三个模块来管理，每次编译时，我们可能要把每个模块编译一次，假设我们真实做项目有100多个模块，我想你肯定不太愿意去将他们一个个编译，那么Maven作为一个成熟的项目管理和构建工具，肯定提供了某种方式让我们避免做一些从复性的工作，这篇文章主要就是介绍我们如何完成多个模块的聚合。</p>
-<h2 id="隐式变量"><a href="#隐式变量" class="headerlink" title="隐式变量"></a>隐式变量</h2><p>  首先我想介绍，隐式变量，在工程中，我们都习惯于把很多配置项加到某个配置文件然后通过${}的方式来访问，比如数据库数据源的配置，还有一些文件保存位置等等，这样便于我们统一管理配置项，不用到时候一个个去改，Maven的隐式变量也有这个功能。</p>
-        
-          <a class="article-more-a" href="/2017/08/08/Maven-4-Aggregation-Inheritance/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Maven</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/08/08/Maven-4-Aggregation-Inheritance/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-        <!-- 目录内容 -->
-             
-        <!-- 目录内容结束 -->
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/6/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/8/">Next &raquo;</a>
@@ -606,6 +609,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">-ElasticSearch</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">scala</a>
               </li>
              
@@ -614,7 +621,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">-ElasticSearch</a>
+                <a href="javascript:void(0)" class="js-tag color4">JVM</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -627,10 +634,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Junit</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">JVM</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -659,6 +662,14 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">非阻塞I/O(NIO)</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">typescript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">study notes</a>
               </li>
              
               <li class="article-tag-list-item">

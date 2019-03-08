@@ -132,6 +132,79 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-TypeScript-0-Interface" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/08/TypeScript-0-Interface/">TypeScript(0):Interface</a>
+    </h1>
+  
+
+        
+        <a href="/2019/03/08/TypeScript-0-Interface/" class="archive-article-date">
+  	<time datetime="2019-03-08T06:09:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="接口如何工作？"><a href="#接口如何工作？" class="headerlink" title="接口如何工作？"></a>接口如何工作？</h2><p>下面我们声明了一个函数，它接受一个{color:string}类型的对象，那么在ts编译期间编译器如何来验证我们传入对象符合我们给定的类型呢？</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">draw</span>(<span class="params">shape:&#123;color:<span class="built_in">string</span>&#125;</span>)</span>&#123;</div><div class="line">   <span class="built_in">console</span>.log(<span class="string">`I am a <span class="subst">$&#123;shape.color&#125;</span> shape`</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>实际上ts的类型检查针对以下三点：</p>
+<p>1.必须属性是否存在</p>
+<p>2.类型是否匹配</p>
+<p>3.对于字面量对象还会有多余的属性检查</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//报错，类型检查失败，多了一个length属性, （对于字面量还会检查是否存在不必要的属性）</span></div><div class="line">draw(&#123;color: <span class="string">'red'</span>, length: <span class="number">1</span>&#125;);</div><div class="line"></div><div class="line"><span class="comment">//类型检查成功，使用变量来跳过对字面量多余属性的检查</span></div><div class="line"><span class="keyword">let</span> shape = &#123;color: <span class="string">'red'</span>, length: <span class="number">1</span>&#125;;</div><div class="line">draw(shape);</div><div class="line"></div><div class="line"><span class="comment">//报错， 没有必要的属性</span></div><div class="line"><span class="keyword">let</span> secondShape = &#123; length: <span class="number">1</span>&#125;;</div><div class="line">draw(secondShape);</div><div class="line"></div><div class="line"><span class="comment">// Ok!</span></div><div class="line">draw(&#123;color:<span class="string">'red'</span>&#125;);</div></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2019/03/08/TypeScript-0-Interface/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">typescript</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">study notes</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/03/08/TypeScript-0-Interface/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+        <!-- 目录内容 -->
+             
+        <!-- 目录内容结束 -->
+  
     <article id="post-ElasticSearch-1-Base-knowledge" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -402,79 +475,6 @@
              
         <!-- 目录内容结束 -->
   
-    <article id="post-react-2-Component" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/09/react-2-Component/">React(2):Component </a>
-    </h1>
-  
-
-        
-        <a href="/2018/10/09/react-2-Component/" class="archive-article-date">
-  	<time datetime="2018-10-09T03:13:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>  React的核心概念就是组件，组件是整个React应用的基石，组件是UI中被拆分成的独立，可复用的模块。</p>
-<h2 id="定义组件"><a href="#定义组件" class="headerlink" title="定义组件"></a>定义组件</h2><h3 id="类组件"><a href="#类组件" class="headerlink" title="类组件"></a>类组件</h3><p>  组件的声明方式有两种，使用ES 6 class声明的<strong>类组件</strong>和使用函数的声明<strong>函数组件</strong>，然而class语法只是es6的一个语法糖，不过在这里沟通过继承React已定义好的组件类能够简化开发。</p>
-<p>一个class组件如下：</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//Board.js</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Board</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</div><div class="line"></div><div class="line">    render() &#123;</div><div class="line">        <span class="keyword">return</span> (</div><div class="line">            <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></div><div class="line">                Board</div><div class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">        );</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">//这句话将Board作为默认模块导出，从而可以在其他JS文件中导入使用</span></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> Board;</div></pre></td></tr></table></figure>
-<p>以下两点需要注意：</p>
-<p><strong>class组件必须继承自React.Component</strong></p>
-<p><strong>class内部必须定义render方法，该方法返回代表该组件UI的react元素</strong></p>
-        
-          <a class="article-more-a" href="/2018/10/09/react-2-Component/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">前端</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">React</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/10/09/react-2-Component/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-        <!-- 目录内容 -->
-             
-        <!-- 目录内容结束 -->
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -595,6 +595,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">-ElasticSearch</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">scala</a>
               </li>
              
@@ -603,7 +607,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">-ElasticSearch</a>
+                <a href="javascript:void(0)" class="js-tag color4">JVM</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -616,10 +620,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Junit</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">JVM</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -648,6 +648,14 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">非阻塞I/O(NIO)</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">typescript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">study notes</a>
               </li>
              
               <li class="article-tag-list-item">
