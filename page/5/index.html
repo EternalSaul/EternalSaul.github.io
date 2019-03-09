@@ -132,6 +132,76 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-JVM-4-Class-Loader" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/05/JVM-4-Class-Loader/">JVM(4):类加载器机制</a>
+    </h1>
+  
+
+        
+        <a href="/2017/12/05/JVM-4-Class-Loader/" class="archive-article-date">
+  	<time datetime="2017-12-05T03:45:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>  类加载执行的前提是我们能以一个类的全限定名来获取字节流，至于字节流在哪里生成，我们从哪里获取这并不是虚拟机所关心的，作为一个出色的设计团队，Java的设计者最初为了满足Java Applet，设计了大名鼎鼎的类加载器机制，<strong>即让通过全限定名获取字节流的这个动作，放到JVM的外部，用户可以选择自行实现一些特殊的加载方案</strong>，现在你知道的随着flash的流行，Java Applet这种技术已经淘汰了，现在随着html5的新起，flash也基本上接近夕阳了，可见技术的变化是普遍而剧烈的。虽然Applet死了很多年，但是类加载器却被作为一种精髓留在了java体系中，原因是它在OSGi,代码加密，热部署等等应用中有了新生的土壤。</p>
+<p>  类加载器还有一个作用就是和类的标识一起来确定这个类的唯一性，若N1是类C的全限定名称标识，而L1是加载类C类加载器，那么如果存在一个类D的全限定名称为N2,而L2是类D的加载器，那么：</p>
+<p> 当且仅当，N1=N2且L1=L2时C和D才被认为是同一个类，即C&lt;N1,L1&gt;=D&lt;N2,L2&gt;</p>
+<p> 这种相等，关系到类的Class对象的equals方法，isAssignableFrom()方法以及isInstance()方法和instanceof关键字的判断结果。</p>
+        
+          <a class="article-more-a" href="/2017/12/05/JVM-4-Class-Loader/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习笔记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">JVM</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/12/05/JVM-4-Class-Loader/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+        <!-- 目录内容 -->
+             
+        <!-- 目录内容结束 -->
+  
     <article id="post-JVM-3-Class-Loading" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -418,81 +488,9 @@
              
         <!-- 目录内容结束 -->
   
-    <article id="post-Junit-1-Start-our-testing-travel" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/27/Junit-1-Start-our-testing-travel/">Junit(1):开始我们的单元测试之旅!</a>
-    </h1>
-  
-
-        
-        <a href="/2017/10/27/Junit-1-Start-our-testing-travel/" class="archive-article-date">
-  	<time datetime="2017-10-27T09:52:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>  作为一名程序员，虽然你可能不是测试岗，但是懂得测试是必须的，这一个系列的文章用来记录一些Junit的测试方法，首先从实现自动化测试开始，然后衍生到stub和mock测试，再来进行我们的web应用的测试和数据库的测试。当然测试并不只包含这些内容，这里只是其中的一小块，有兴趣的同学可以继续开展。</p>
-<p>  写这个系列的文章的目的在于，由于我未来工作的公司，是结对编程，有时候我需要去在伙伴写业务代码的时候写测试代码，不过我认为，既然软件测试在软件工程课程中是基础课，那么每一个程序员都应该懂得一定的测试手段，再者写下这套文章，有利于我从新复习java的单元测试手段，当然这些手段在未来，即使是换一种语言，也会是通用的知识。这篇文章中所用的junit版本都是junit4,用注解来标识一些测试声明，而且测试类不再需要继承TestCase,也不需要遵循它的测试方法命名规则，我们可以把测试方法命名的的更加直观。</p>
-        
-          <a class="article-more-a" href="/2017/10/27/Junit-1-Start-our-testing-travel/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">软件测试</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">TDD</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Junit</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/10/27/Junit-1-Start-our-testing-travel/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-        <!-- 目录内容 -->
-             
-        <!-- 目录内容结束 -->
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/4/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/6/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/4/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/6/">Next &raquo;</a>
     </nav>
   
 
@@ -610,15 +608,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">-ElasticSearch</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">scala</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">FP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">-ElasticSearch</a>
               </li>
              
               <li class="article-tag-list-item">

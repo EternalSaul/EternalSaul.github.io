@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2019/03/09/Typescript-1-Class/</loc>
+    
+    <lastmod>2019-03-09T12:59:37.494Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2019/03/08/TypeScript-0-Interface/</loc>
     
     <lastmod>2019-03-08T15:59:16.863Z</lastmod>
