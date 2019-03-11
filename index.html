@@ -132,6 +132,76 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Typescript-2-Function" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/11/Typescript-2-Function/">Typescript(2):Function</a>
+    </h1>
+  
+
+        
+        <a href="/2019/03/11/Typescript-2-Function/" class="archive-article-date">
+  	<time datetime="2019-03-11T10:15:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="函数类型"><a href="#函数类型" class="headerlink" title="函数类型"></a>函数类型</h2><p>一般情况下我们可以直接借助类型推到来声明一个函数变量，但是有些时候我们更倾向于写出完整的函数类型。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> func = <span class="function"><span class="keyword">function</span> (<span class="params">a:<span class="built_in">number</span>,b:<span class="built_in">number</span></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> a+b;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">//完整的函数类型</span></div><div class="line"><span class="keyword">let</span> func1:<span class="function">(<span class="params">m:<span class="built_in">number</span>,k:<span class="built_in">number</span></span>) =&gt;</span> <span class="built_in">number</span>= <span class="function"><span class="keyword">function</span> (<span class="params">a:<span class="built_in">number</span>,b:<span class="built_in">number</span></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> a+b;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>我们声明了一个func1变量，指明了它的类型，类型中的参数端的变量名其实是没有任何意义的，不过一般我们会为了可读性而把它设为一个表意点的名字。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> func1:<span class="function">(<span class="params">base:<span class="built_in">number</span>,adder:<span class="built_in">number</span></span>) =&gt;</span> <span class="built_in">number</span>= <span class="function"><span class="keyword">function</span> (<span class="params">a:<span class="built_in">number</span>,b:<span class="built_in">number</span></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> a+b;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2019/03/11/Typescript-2-Function/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">typescript</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">study notes</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/03/11/Typescript-2-Function/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+        <!-- 目录内容 -->
+             
+        <!-- 目录内容结束 -->
+  
     <article id="post-Typescript-1-Class" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -406,73 +476,6 @@
              
         <!-- 目录内容结束 -->
   
-    <article id="post-Communication-way-of-Component" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/10/Communication-way-of-Component/">React(4):Communication way of Component</a>
-    </h1>
-  
-
-        
-        <a href="/2018/10/10/Communication-way-of-Component/" class="archive-article-date">
-  	<time datetime="2018-10-10T09:59:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>  单独的组件几乎没什么意义，一个真实的UI界面是由多个组件打起来的，而这些组件部分又与服务器通信得到数据，更改自身的state进行渲染，组件之间也有通信方式，比如父组件就通过props把数据传给子组件进行渲染，以至于整个界面“活”了起来。</p>
-        
-          <a class="article-more-a" href="/2018/10/10/Communication-way-of-Component/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">前端</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">React</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/10/10/Communication-way-of-Component/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-        <!-- 目录内容 -->
-             
-        <!-- 目录内容结束 -->
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -593,7 +596,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">scala</a>
+                <a href="javascript:void(0)" class="js-tag color5">-ElasticSearch</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -601,7 +604,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">-ElasticSearch</a>
+                <a href="javascript:void(0)" class="js-tag color1">scala</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -649,15 +652,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">温故</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">typescript</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">study notes</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">温故</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -15,7 +15,7 @@
 <meta property="og:url" content="http://yoursite.com/2019/03/09/Typescript-1-Class/index.html">
 <meta property="og:site_name" content="Blog of Saul">
 <meta property="og:description" content="结构型类型系统ts中，一般情况下当我们比较两种类型时，我们实际比较的是类型的结构，即对比他们的成员类型是否都是兼容的。 12345678910111213141516171819class Food &amp;#123;    name:string;    constructor(foodName:string)&amp;#123;        this.name = foodName;    &amp;#125;&amp;">
-<meta property="og:updated_time" content="2019-03-09T12:59:37.494Z">
+<meta property="og:updated_time" content="2019-03-11T01:26:41.176Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Typescript(1):Class">
 <meta name="twitter:description" content="结构型类型系统ts中，一般情况下当我们比较两种类型时，我们实际比较的是类型的结构，即对比他们的成员类型是否都是兼容的。 12345678910111213141516171819class Food &amp;#123;    name:string;    constructor(foodName:string)&amp;#123;        this.name = foodName;    &amp;#125;&amp;">
@@ -175,7 +175,6 @@
 <figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Person &#123;</div><div class="line">    <span class="keyword">static</span> count:<span class="built_in">number</span> = <span class="number">0</span>;</div><div class="line">    <span class="keyword">constructor</span>(<span class="params"><span class="keyword">public</span> name: <span class="built_in">string</span>,<span class="keyword">public</span> age: <span class="built_in">number</span></span>) &#123;</div><div class="line">    &#125;</div><div class="line">    sayHello()&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;this.name&#125;</span> hello!`</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//最终编译后的效果</span></div><div class="line"><span class="keyword">var</span> Person = <span class="comment">/** @class */</span> (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name, age</span>) </span>&#123;</div><div class="line">        <span class="keyword">this</span>.name = name;</div><div class="line">        <span class="keyword">this</span>.age = age;</div><div class="line">    &#125;</div><div class="line">    Person.prototype.sayHello = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.name + <span class="string">"+hello"</span>);</div><div class="line">    &#125;;</div><div class="line">    Person.count = <span class="number">0</span>;</div><div class="line">    <span class="keyword">return</span> Person;</div><div class="line">&#125;());</div></pre></td></tr></table></figure>
 <p>可以看到Person被赋值成为了构造函数，我们也可以清晰的看到在闭包中声明的类的静态部分和实例部分。</p>
 <figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//output: function</span></div><div class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> Person);</div></pre></td></tr></table></figure>
-
       
 
       
@@ -282,6 +281,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2019/03/11/Typescript-2-Function/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Typescript(2):Function
+        
+      </div>
+    </a>
   
   
     <a href="/2019/03/08/TypeScript-0-Interface/" id="article-nav-older" class="article-nav-link-wrap">
@@ -419,7 +427,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">scala</a>
+                <a href="javascript:void(0)" class="js-tag color5">-ElasticSearch</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -427,7 +435,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">-ElasticSearch</a>
+                <a href="javascript:void(0)" class="js-tag color1">scala</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -475,15 +483,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">温故</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">typescript</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">study notes</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">温故</a>
               </li>
              
               <li class="article-tag-list-item">

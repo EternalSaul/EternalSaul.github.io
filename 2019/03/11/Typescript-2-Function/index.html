@@ -6,14 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2017 | Blog of Saul</title>
+  <title>Typescript(2):Function | Blog of Saul</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Blog of Saul">
-<meta property="og:url" content="http://yoursite.com/archives/2017/page/7/index.html">
+  <meta name="description" content="函数类型一般情况下我们可以直接借助类型推到来声明一个函数变量，但是有些时候我们更倾向于写出完整的函数类型。 12345678let func = function (a:number,b:number) &amp;#123;    return a+b;&amp;#125;;//完整的函数类型let func1:(m:number,k:number) =&amp;gt; number= function (a:numbe">
+<meta name="keywords" content="typescript,study notes">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Typescript(2):Function">
+<meta property="og:url" content="http://yoursite.com/2019/03/11/Typescript-2-Function/index.html">
 <meta property="og:site_name" content="Blog of Saul">
+<meta property="og:description" content="函数类型一般情况下我们可以直接借助类型推到来声明一个函数变量，但是有些时候我们更倾向于写出完整的函数类型。 12345678let func = function (a:number,b:number) &amp;#123;    return a+b;&amp;#125;;//完整的函数类型let func1:(m:number,k:number) =&amp;gt; number= function (a:numbe">
+<meta property="og:updated_time" content="2019-03-11T12:53:05.652Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Blog of Saul">
+<meta name="twitter:title" content="Typescript(2):Function">
+<meta name="twitter:description" content="函数类型一般情况下我们可以直接借助类型推到来声明一个函数变量，但是有些时候我们更倾向于写出完整的函数类型。 12345678let func = function (a:number,b:number) &amp;#123;    return a+b;&amp;#125;;//完整的函数类型let func1:(m:number,k:number) =&amp;gt; number= function (a:numbe">
   
   
     <link rel="icon" href="/favicon.png">
@@ -130,238 +135,173 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Typescript-2-Function" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Typescript(2):Function
+    </h1>
+  
+
+        
+        <a href="/2019/03/11/Typescript-2-Function/" class="archive-article-date">
+  	<time datetime="2019-03-11T10:15:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-11</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="函数类型"><a href="#函数类型" class="headerlink" title="函数类型"></a>函数类型</h2><p>一般情况下我们可以直接借助类型推到来声明一个函数变量，但是有些时候我们更倾向于写出完整的函数类型。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> func = <span class="function"><span class="keyword">function</span> (<span class="params">a:<span class="built_in">number</span>,b:<span class="built_in">number</span></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> a+b;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">//完整的函数类型</span></div><div class="line"><span class="keyword">let</span> func1:<span class="function">(<span class="params">m:<span class="built_in">number</span>,k:<span class="built_in">number</span></span>) =&gt;</span> <span class="built_in">number</span>= <span class="function"><span class="keyword">function</span> (<span class="params">a:<span class="built_in">number</span>,b:<span class="built_in">number</span></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> a+b;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>我们声明了一个func1变量，指明了它的类型，类型中的参数端的变量名其实是没有任何意义的，不过一般我们会为了可读性而把它设为一个表意点的名字。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> func1:<span class="function">(<span class="params">base:<span class="built_in">number</span>,adder:<span class="built_in">number</span></span>) =&gt;</span> <span class="built_in">number</span>= <span class="function"><span class="keyword">function</span> (<span class="params">a:<span class="built_in">number</span>,b:<span class="built_in">number</span></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> a+b;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<h2 id="可选参数"><a href="#可选参数" class="headerlink" title="可选参数"></a>可选参数</h2><h3 id="默认参数"><a href="#默认参数" class="headerlink" title="默认参数"></a>默认参数</h3><p>js里每个参数都是默认可选的，不传就是undefined，但是ts中如果不把参数显式声明为可选，那么参数就是必须的，一个很有意思的事情是默认值，在ts中我们的默认值传入undefined时也会启用。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">function jsFunction(color: string, shape:string = 'Circle') &#123;</div><div class="line">    return `$&#123;color&#125; $&#123;shape&#125;`;</div><div class="line">&#125;</div><div class="line"></div><div class="line">console.log(jsFunction('red'));</div><div class="line">console.log(jsFunction('red',undefined));</div><div class="line">console.log(jsFunction(undefined,undefined));</div><div class="line"></div><div class="line">//red Circle</div><div class="line">//red Circle</div><div class="line">//undefined Circle</div></pre></td></tr></table></figure>
+<h3 id="可选参数-1"><a href="#可选参数-1" class="headerlink" title="可选参数"></a>可选参数</h3><p>可选参数必须跟在必选参数后面，除非一个函数只有可选参数</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">//error 可选参数不能在不可选参数后面</div><div class="line">function jsFunction2(shape?:string, color: string) &#123;</div><div class="line">    return `$&#123;color&#125; $&#123;shape&#125;`;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//默认参数没有这个限制</div><div class="line">function jsFunction3(shape:string = 'Circle', color: string) &#123;</div><div class="line">    return `$&#123;color&#125; $&#123;shape&#125;`;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//默认参数在前，未传入参数情况下则必须传入undefined来激活默认值</div><div class="line">//所以推荐的写法是默认参数也写在后面</div><div class="line">jsFunction3(undefined, 'green');</div><div class="line"></div><div class="line">//It is ok!</div><div class="line">function jsFunction2(shape?:string, color？: string) &#123;</div><div class="line">    return `$&#123;color&#125; $&#123;shape&#125;`;</div><div class="line">&#125;</div><div class="line"></div><div class="line">function jsFunction(color: string, shape?:string) &#123;</div><div class="line">    return `$&#123;color&#125; $&#123;shape&#125;`;</div><div class="line">&#125;</div><div class="line"></div><div class="line">console.log(jsFunction('red'));</div><div class="line">console.log(jsFunction('red',undefined));</div><div class="line">console.log(jsFunction(undefined,undefined));</div><div class="line"></div><div class="line">// red undefined</div><div class="line">// red undefined</div><div class="line">// undefined undefined</div></pre></td></tr></table></figure>
+<h3 id="剩余参数"><a href="#剩余参数" class="headerlink" title="剩余参数"></a>剩余参数</h3><p>类似Java等语言，ts中也可以传入可变参数，但是叫法是剩余参数,同样的用熟悉的…来表示：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Circle &#123;</div><div class="line">    <span class="keyword">constructor</span>(<span class="params"><span class="keyword">public</span> radius: <span class="built_in">number</span>,<span class="keyword">public</span> color: <span class="built_in">string</span></span>) &#123;</div><div class="line">    &#125;</div><div class="line">    draw()&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;this.radius&#125;</span> <span class="subst">$&#123;this.color&#125;</span>`</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">draw</span>(<span class="params">...circles:Circle[]</span>) </span>&#123;</div><div class="line">    circles.forEach(<span class="function"><span class="params">circle</span> =&gt;</span> circle.draw());</div><div class="line">&#125;</div><div class="line"></div><div class="line">draw(<span class="keyword">new</span> Circle(<span class="number">1</span>, <span class="string">'red'</span>), <span class="keyword">new</span> Circle(<span class="number">2</span>, <span class="string">'green'</span>));</div><div class="line"><span class="comment">// 1 red</span></div><div class="line"><span class="comment">// 2 green</span></div><div class="line"></div><div class="line"><span class="keyword">let</span> myDraw:<span class="function">(<span class="params">...circles:Circle[]</span>) =&gt;</span> <span class="built_in">void</span> = draw;</div><div class="line">myDraw(<span class="keyword">new</span> Circle(<span class="number">1</span>, <span class="string">'red'</span>), <span class="keyword">new</span> Circle(<span class="number">2</span>, <span class="string">'green'</span>));</div></pre></td></tr></table></figure>
+<h2 id="this"><a href="#this" class="headerlink" title="this"></a>this</h2><h3 id="顶级层级下的非方法式调用的this绑定"><a href="#顶级层级下的非方法式调用的this绑定" class="headerlink" title="顶级层级下的非方法式调用的this绑定"></a>顶级层级下的非方法式调用的this绑定</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> deck = &#123;</div><div class="line">    suits: [<span class="string">"hearts"</span>, <span class="string">"spades"</span>, <span class="string">"clubs"</span>, <span class="string">"diamonds"</span>],</div><div class="line">    cards: <span class="built_in">Array</span>(<span class="number">52</span>),</div><div class="line">    createCardPicker: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">            <span class="keyword">let</span> pickedCard = <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random() * <span class="number">52</span>);</div><div class="line">            <span class="keyword">let</span> pickedSuit = <span class="built_in">Math</span>.floor(pickedCard / <span class="number">13</span>);</div><div class="line"></div><div class="line">            <span class="comment">//this的指向是什么？</span></div><div class="line">            <span class="keyword">return</span> &#123;suit: <span class="keyword">this</span>.suits[pickedSuit], card: pickedCard % <span class="number">13</span>&#125;;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">let</span> cardPicker = deck.createCardPicker();</div><div class="line"><span class="keyword">let</span> pickedCard = cardPicker();</div><div class="line"></div><div class="line">alert(<span class="string">"card: "</span> + pickedCard.card + <span class="string">" of "</span> + pickedCard.suit);</div></pre></td></tr></table></figure>
+<p>上面这段抄来的代码中，this的指向是什么呢？实际上这里的this将绑定到window（严格模式下是undefined）,所以该段方法抛出错误，因为windows汇总并没有suits，this.suits[pickedSuit]等于对undefined来调用index参数。</p>
+<h3 id="箭头函数进行this绑定"><a href="#箭头函数进行this绑定" class="headerlink" title="箭头函数进行this绑定"></a>箭头函数进行this绑定</h3><p>在箭头函数出现之前，每个新定义的函数都有它自己的 <code>this</code>值（在<strong>构造函数的情况下是一个新对象，在严格模式的函数调用中为 undefined，如果该函数被作为“对象方法”调用则为基础对象等</strong>）</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> deck = &#123;</div><div class="line">    suits: [<span class="string">"hearts"</span>, <span class="string">"spades"</span>, <span class="string">"clubs"</span>, <span class="string">"diamonds"</span>],</div><div class="line">    cards: <span class="built_in">Array</span>(<span class="number">52</span>),</div><div class="line">    createCardPicker: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="comment">// <span class="doctag">NOTE:</span> the line below is now an arrow function, allowing us to capture 'this' right here</span></div><div class="line">        <span class="keyword">return</span> <span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">            <span class="keyword">let</span> pickedCard = <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random() * <span class="number">52</span>);</div><div class="line">            <span class="keyword">let</span> pickedSuit = <span class="built_in">Math</span>.floor(pickedCard / <span class="number">13</span>);</div><div class="line"></div><div class="line">            <span class="keyword">return</span> &#123;suit: <span class="keyword">this</span>.suits[pickedSuit], card: pickedCard % <span class="number">13</span>&#125;;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">let</span> cardPicker = deck.createCardPicker();</div><div class="line"><span class="keyword">let</span> pickedCard = cardPicker();</div></pre></td></tr></table></figure>
+<p>这段代码不会报错，箭头函数将this绑定在了deck上。</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>嘀，学生卡<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/23/Practice-of-Basic-Java-Skills-NIO-4-Channel/" class="archive-article-date">
-  	<time datetime="2017-07-23T00:39:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-23</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/23/Practice-of-Basic-Java-Skills-NIO-4-Channel/">Practice of Basic Java Skills:非阻塞I/O (4):通道</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">typescript</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">非阻塞I/O(NIO)</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">study notes</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2019/03/11/Typescript-2-Function/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/22/Practice-of-Basic-Java-Skills-NIO-3-Buffer/" class="archive-article-date">
-  	<time datetime="2017-07-22T00:12:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-22</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/22/Practice-of-Basic-Java-Skills-NIO-3-Buffer/">Practice of Basic Java Skills:非阻塞I/O (3):缓冲区</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">非阻塞I/O(NIO)</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/21/Practice-of-Basic-Java-Skills-NIO-2-NIO-In-Server/" class="archive-article-date">
-  	<time datetime="2017-07-21T02:44:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/21/Practice-of-Basic-Java-Skills-NIO-2-NIO-In-Server/">Practice of Basic Java Skills:非阻塞I/O (2)——服务器非阻塞I/O</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">非阻塞I/O(NIO)</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/20/Practice-of-Basic-Java-Skills-NIO-1-NIO-In-Client/" class="archive-article-date">
-  	<time datetime="2017-07-20T07:54:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-20</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/20/Practice-of-Basic-Java-Skills-NIO-1-NIO-In-Client/">Practice of Basic Java Skills:非阻塞I/O (1)——客户端非阻塞I/O</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">非阻塞I/O(NIO)</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/18/Learning-Scala-10-Some-About-Type/" class="archive-article-date">
-  	<time datetime="2017-07-18T06:05:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-18</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/18/Learning-Scala-10-Some-About-Type/">Learning Scala(10):小谈类型</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">scala</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2019/03/09/Typescript-1-Class/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Typescript(1):Class</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
-
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/2017/page/6/">&laquo; Prev</a><a class="page-number" href="/archives/2017/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2017/page/5/">5</a><a class="page-number" href="/archives/2017/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/archives/2017/page/8/">8</a><a class="page-number" href="/archives/2017/page/9/">9</a><a class="page-number" href="/archives/2017/page/10/">10</a><a class="extend next" rel="next" href="/archives/2017/page/8/">Next &raquo;</a>
-    </nav>
-  
+</nav>
 
 
+
+
+
+  
+  
+  
+
+  
+
+  
+
+        <!-- 目录内容 -->
+             
+        <!-- 目录内容结束 -->
           </div>
         </div>
       </div>
@@ -382,8 +322,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
