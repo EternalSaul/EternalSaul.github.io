@@ -6,14 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: Junit | Blog of Saul</title>
+  <title>Typescript(3):Genericity and Type Inference | Blog of Saul</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Blog of Saul">
-<meta property="og:url" content="http://yoursite.com/tags/Junit/index.html">
+  <meta name="description" content="泛型泛型函数ts中，我们同样用尖括号来声明泛型： 123456789function genericFuction&amp;lt;T&amp;gt;(param:T): T &amp;#123;    return param;&amp;#125;// 显示泛型调用console.log(genericFuction&amp;lt;string&amp;gt;(&apos;HELLO&apos;));// 类型推导console.log(genericFuctio">
+<meta name="keywords" content="typescript,notes">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Typescript(3):Genericity and Type Inference">
+<meta property="og:url" content="http://yoursite.com/2019/03/12/Typescript-3-Genericity/index.html">
 <meta property="og:site_name" content="Blog of Saul">
+<meta property="og:description" content="泛型泛型函数ts中，我们同样用尖括号来声明泛型： 123456789function genericFuction&amp;lt;T&amp;gt;(param:T): T &amp;#123;    return param;&amp;#125;// 显示泛型调用console.log(genericFuction&amp;lt;string&amp;gt;(&apos;HELLO&apos;));// 类型推导console.log(genericFuctio">
+<meta property="og:updated_time" content="2019-03-12T11:53:14.612Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Blog of Saul">
+<meta name="twitter:title" content="Typescript(3):Genericity and Type Inference">
+<meta name="twitter:description" content="泛型泛型函数ts中，我们同样用尖括号来声明泛型： 123456789function genericFuction&amp;lt;T&amp;gt;(param:T): T &amp;#123;    return param;&amp;#125;// 显示泛型调用console.log(genericFuction&amp;lt;string&amp;gt;(&apos;HELLO&apos;));// 类型推导console.log(genericFuctio">
   
   
     <link rel="icon" href="/favicon.png">
@@ -130,230 +135,198 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Typescript-3-Genericity" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/02/01/Junit-4-Mock/" class="archive-article-date">
-  	<time datetime="2018-02-01T08:29:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-01</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/02/01/Junit-4-Mock/">Junit(4):Mock</a>
+    <h1 class="article-title" itemprop="name">
+      Typescript(3):Genericity and Type Inference
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2019/03/12/Typescript-3-Genericity/" class="archive-article-date">
+  	<time datetime="2019-03-12T08:34:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h2><h3 id="泛型函数"><a href="#泛型函数" class="headerlink" title="泛型函数"></a>泛型函数</h3><p>ts中，我们同样用尖括号来声明泛型：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">genericFuction</span>&lt;<span class="title">T</span>&gt;(<span class="params">param:T</span>): <span class="title">T</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> param;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 显示泛型调用</span></div><div class="line"><span class="built_in">console</span>.log(genericFuction&lt;<span class="built_in">string</span>&gt;(<span class="string">'HELLO'</span>));</div><div class="line"></div><div class="line"><span class="comment">// 类型推导</span></div><div class="line"><span class="built_in">console</span>.log(genericFuction(<span class="string">'HELLO'</span>));</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<h3 id="泛型类型"><a href="#泛型类型" class="headerlink" title="泛型类型"></a>泛型类型</h3><p>ts中函数也有类型：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> func:&lt;T&gt;<span class="function">(<span class="params">param:T</span>) =&gt;</span> T = <span class="function"><span class="keyword">function</span> <span class="title">genericFuction</span>&lt;<span class="title">T</span>&gt;(<span class="params">param:T</span>): <span class="title">T</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> param;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">let</span> func2:&lt;T,U&gt;<span class="function">(<span class="params">param:T, arg?:U</span>) =&gt;</span> T = <span class="function"><span class="keyword">function</span> <span class="title">genericFuction2</span>&lt;<span class="title">T</span>,<span class="title">U</span>&gt;(<span class="params">param:T, arg?:U</span>): <span class="title">T</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> param;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">arrayFunction</span>&lt;<span class="title">T</span>&gt;(<span class="params">arr:<span class="built_in">Array</span>&lt;T&gt;</span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> arr.length;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">arrayFunction2</span>&lt;<span class="title">T</span>&gt;(<span class="params">arr:T[]</span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> arr.length;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="泛型类"><a href="#泛型类" class="headerlink" title="泛型类"></a>泛型类</h4><figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> GenericClazz &lt;T,U&gt; &#123;</div><div class="line">     count:T;</div><div class="line">     toU:<span class="function">(<span class="params">something:T</span>) =&gt;</span> U; </div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">let</span> clazz = <span class="keyword">new</span> GenericClazz();</div><div class="line"></div><div class="line"><span class="comment">// error 类型不匹配</span></div><div class="line"><span class="comment">// let clazz = new GenericClazz&lt;number&gt;();</span></div><div class="line"></div><div class="line"><span class="keyword">let</span> clazz = <span class="keyword">new</span> GenericClazz&lt;<span class="built_in">number</span>,<span class="built_in">string</span>&gt;();</div></pre></td></tr></table></figure>
+<h3 id="泛型约束"><a href="#泛型约束" class="headerlink" title="泛型约束"></a>泛型约束</h3><h4 id="上界约束"><a href="#上界约束" class="headerlink" title="上界约束"></a>上界约束</h4><figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Circle &#123;</div><div class="line">    radius:<span class="built_in">number</span>;</div><div class="line">    getArea()&#123;</div><div class="line">        <span class="keyword">return</span> <span class="number">3.14</span> * <span class="built_in">Math</span>.pow(<span class="keyword">this</span>.radius, <span class="number">2</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">calculateArea</span>&lt;<span class="title">T</span>&gt;(<span class="params">shape:T</span>) </span>&#123;</div><div class="line">    <span class="comment">//报错，编译器并不知道T会存在一个叫做getArea的函数</span></div><div class="line">    <span class="keyword">return</span> shape.getArea();</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//泛型约束为Circle的上届</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">enhancedCalculateArea</span>&lt;<span class="title">T</span> <span class="title">extends</span> <span class="title">Circle</span>&gt;(<span class="params">shape:T</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> shape.getArea();</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//传递一个可以通过结构类型检测的对象</span></div><div class="line">enhancedCalculateArea(&#123;</div><div class="line">    radius: <span class="number">1</span>, getArea: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="number">3.14</span> * <span class="built_in">Math</span>.pow(<span class="keyword">this</span>.radius, <span class="number">2</span>);</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h4 id="属性名约束"><a href="#属性名约束" class="headerlink" title="属性名约束"></a>属性名约束</h4><p>非常有趣的，下面这段抄袭来的代码中，我们可以看到在函数定义时，我们显示的把key的类型以keyof方法，定义为了T的索引类型！</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getProperty</span>&lt;<span class="title">T</span>, <span class="title">K</span> <span class="title">extends</span> <span class="title">keyof</span> <span class="title">T</span>&gt;(<span class="params">obj: T, key: K</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> obj[key];</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">let</span> x = &#123; a: <span class="number">1</span>, b: <span class="number">2</span>, c: <span class="number">3</span>, d: <span class="number">4</span> &#125;;</div><div class="line"></div><div class="line">getProperty(x, <span class="string">"a"</span>); <span class="comment">// okay</span></div><div class="line">getProperty(x, <span class="string">"m"</span>); <span class="comment">// error: Argument of type 'm' isn't assignable to 'a' | 'b' | 'c' | 'd'.</span></div></pre></td></tr></table></figure>
+<h4 id="类类型约束"><a href="#类类型约束" class="headerlink" title="类类型约束"></a>类类型约束</h4><p>我们可以约束new方法的类型</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">function factoryBuild&lt;T&gt;(o: &#123; new(): T &#125;):T &#123;</div><div class="line">    return new o();</div><div class="line">&#125;</div><div class="line"></div><div class="line">class TestClazz &#123;</div><div class="line">    count:number = 1;</div><div class="line">&#125;</div><div class="line"></div><div class="line">let testClazz = factoryBuild(TestClazz);</div><div class="line"></div><div class="line">console.log(testClazz.count);</div></pre></td></tr></table></figure>
+<p>甚至我们可以混合的约束new方法返回值类型的上界</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> CarFactory &#123;</div><div class="line"></div><div class="line">    assembly&lt;T <span class="keyword">extends</span> Car&gt;<span class="function">(<span class="params">c: <span class="keyword">new</span>(<span class="params"></span>) =&gt; T </span>): <span class="params">T</span> &#123;</span></div><div class="line">        <span class="params">return</span> <span class="params">new</span> <span class="params">c</span><span class="params">()</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="params">construct</span>&lt;<span class="params">T</span> <span class="params">extends</span> <span class="params">Car</span>&gt;(<span class="params">c: &#123;<span class="keyword">new</span>(<span class="params"></span>):T&#125; </span>): <span class="params">T</span> &#123;</div><div class="line">        <span class="params">return</span> <span class="params">new</span> <span class="params">c</span><span class="params">()</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="类型推断"><a href="#类型推断" class="headerlink" title="类型推断"></a>类型推断</h2><p>最基础的类型推断也是我们经常使用的直接了当</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> n = <span class="number">1</span>;</div><div class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> n); <span class="comment">//number</span></div></pre></td></tr></table></figure>
+<h3 id="最佳通用类型"><a href="#最佳通用类型" class="headerlink" title="最佳通用类型"></a>最佳通用类型</h3><p>数组和元组中经常会出现多种类型的情况，一般</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Car &#123;</div><div class="line">    pay()&#123;&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">class</span> Audi <span class="keyword">extends</span> Car &#123;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">class</span> BMW <span class="keyword">extends</span> Car &#123;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">let</span> cars = [<span class="keyword">new</span> Audi(), <span class="keyword">new</span> BMW()];</div></pre></td></tr></table></figure>
+<h3 id="反向推断"><a href="#反向推断" class="headerlink" title="反向推断"></a>反向推断</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Car &#123;</div><div class="line">    pay()&#123;&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 函数定义中我们并没有定义car的类型，但是反向推断编译器能知道这个car的类型就是Car,因此我们能调用到pay方法</span></div><div class="line"><span class="keyword">let</span> carFunction:<span class="function">(<span class="params">some:Car</span>) =&gt;</span> <span class="built_in">void</span> = <span class="function"><span class="keyword">function</span> (<span class="params">car</span>) </span>&#123;</div><div class="line">    car.pay();</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//甚至反向类型推断会让我们所声明的类型无效</span></div><div class="line"><span class="keyword">let</span> carFunction:<span class="function">(<span class="params">car:Car</span>) =&gt;</span> <span class="built_in">void</span> = <span class="function"><span class="keyword">function</span> (<span class="params">car:<span class="built_in">any</span></span>) </span>&#123;</div><div class="line">    car.pay();</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">class</span> Audi <span class="keyword">extends</span> Car &#123;</div><div class="line">    audi()&#123;&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//当然需要我们的类型是兼容的,且更加'具体'，那么将保留我们自己声明的类型</span></div><div class="line"><span class="keyword">let</span> carFunction:<span class="function">(<span class="params">car:Car</span>) =&gt;</span> <span class="built_in">void</span> = <span class="function"><span class="keyword">function</span> (<span class="params">car:Audi</span>) </span>&#123;</div><div class="line">    car.pay();</div><div class="line">    car.audi();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>嘀，学生卡<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习笔记</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">typescript</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">软件测试</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">TDD</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Junit</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">notes</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/01/29/Junit-3-Build-a-stub/" class="archive-article-date">
-  	<time datetime="2018-01-29T14:45:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-29</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/01/29/Junit-3-Build-a-stub/">Junit(3):桩测试</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">软件测试</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">TDD</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Junit</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
       
-        </div></section>
+
       
+
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/29/Junit-2-Assert-by-Hamcrest/" class="archive-article-date">
-  	<time datetime="2017-10-29T07:32:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-29</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/29/Junit-2-Assert-by-Hamcrest/">Junit(2):使用Hamcrest断言</a>
-    </h1>
-  
+      </div>
+    </span>
+  </div>
+</div>
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">软件测试</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">TDD</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Junit</a>
-        		</li>
-      		
-		</ul>
-	</div>
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2019/03/12/Typescript-3-Genericity/" alt="微信分享二维码">
+    </div>
+</div>
 
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/27/Junit-1-Start-our-testing-travel/" class="archive-article-date">
-  	<time datetime="2017-10-27T09:52:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-27</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/27/Junit-1-Start-our-testing-travel/">Junit(1):开始我们的单元测试之旅!</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">软件测试</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">TDD</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Junit</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2019/03/11/Typescript-2-Function/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Typescript(2):Function</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+  
+  
   
 
-    
+  
 
+  
 
+        <!-- 目录内容 -->
+        
+            <p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
+            <span class="btn-bg"></span>
+            <span class="btn-text">文章导航</span>
+            </p>
+            <div id="toc-article" class="toc-article">
+                <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
+                <strong class="toc-title">文章目录</strong>
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#泛型"><span class="toc-number">1.</span> <span class="toc-text">泛型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#泛型函数"><span class="toc-number">1.1.</span> <span class="toc-text">泛型函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#泛型类型"><span class="toc-number">1.2.</span> <span class="toc-text">泛型类型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#泛型类"><span class="toc-number">1.2.1.</span> <span class="toc-text">泛型类</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#泛型约束"><span class="toc-number">1.3.</span> <span class="toc-text">泛型约束</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#上界约束"><span class="toc-number">1.3.1.</span> <span class="toc-text">上界约束</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#属性名约束"><span class="toc-number">1.3.2.</span> <span class="toc-text">属性名约束</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#类类型约束"><span class="toc-number">1.3.3.</span> <span class="toc-text">类类型约束</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#类型推断"><span class="toc-number">2.</span> <span class="toc-text">类型推断</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#最佳通用类型"><span class="toc-number">2.1.</span> <span class="toc-text">最佳通用类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#反向推断"><span class="toc-number">2.2.</span> <span class="toc-text">反向推断</span></a></li></ol></li></ol>
+           </div>
+           <script type="text/javascript">
+            function showToc(){
+                var toc_article = document.getElementById("toc-article");
+                var show_toc_btn = document.getElementById("show-toc-btn");
+                toc_article.setAttribute("style","display:block");
+                show_toc_btn.setAttribute("style","display:none");
+                };
+            function showBtn(){
+                var toc_article = document.getElementById("toc-article");
+                var show_toc_btn = document.getElementById("show-toc-btn");
+                toc_article.setAttribute("style","display:none");
+                show_toc_btn.setAttribute("style","display:block");
+                };
+           </script>
+             
+        <!-- 目录内容结束 -->
           </div>
         </div>
       </div>
@@ -374,9 +347,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		root: "/",

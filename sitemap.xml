@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2019/03/12/Typescript-3-Genericity/</loc>
+    
+    <lastmod>2019-03-12T11:53:14.612Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2019/03/11/Typescript-2-Function/</loc>
     
     <lastmod>2019-03-11T12:53:05.652Z</lastmod>
