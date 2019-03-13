@@ -132,6 +132,75 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Learning-Scala-7-Object-Oriented-Scala" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/16/Learning-Scala-7-Object-Oriented-Scala/">Learning Scala(7):从类开始</a>
+    </h1>
+  
+
+        
+        <a href="/2017/07/16/Learning-Scala-7-Object-Oriented-Scala/" class="archive-article-date">
+  	<time datetime="2017-07-16T00:19:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="定义类"><a href="#定义类" class="headerlink" title="定义类"></a>定义类</h3><p>你还记得Scala类的层次继承关系么？</p>
+<p><img src="\img\QQ图片20170716082739.png" alt="Scala类的继承关系"></p>
+<p>  在上图中，第二层里AnyVal是所有值类型的根，而AnyRef是所有引用类型的根，我们以前说到过Scala是一门多范式语言，现在我们来看看面向对象的Scala，既然是面向对象那么类就是核心构件，然后引出面向对象的三个基本的特性，即多态(Polymorphism)，继承(inheritance)，封装(encapsulation)。作为一门强大的语言，Scala很好的支持这些特性，然而在实现方法上和细节上，你将会看到Scala对比其他语言的不同之处，但是首先我们先快速的定义一个类来开始我们队Scala面向对象特性的探索。</p>
+        
+          <a class="article-more-a" href="/2017/07/16/Learning-Scala-7-Object-Oriented-Scala/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习笔记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">scala</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/07/16/Learning-Scala-7-Object-Oriented-Scala/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+        <!-- 目录内容 -->
+             
+        <!-- 目录内容结束 -->
+  
     <article id="post-Learning-Scala-6-Monadic" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -430,79 +499,6 @@
              
         <!-- 目录内容结束 -->
   
-    <article id="post-scala-Learning-placeholder-syntax" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/06/scala-Learning-placeholder-syntax/">Learning Scala (2):函数的部分应用与柯里化</a>
-    </h1>
-  
-
-        
-        <a href="/2017/07/06/scala-Learning-placeholder-syntax/" class="archive-article-date">
-  	<time datetime="2017-07-06T08:08:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="占位符语法"><a href="#占位符语法" class="headerlink" title="占位符语法"></a>占位符语法</h2><p>  占位符语法(Placeholder syntax) 是函数字面量的一种<strong>缩写形式</strong>，将命名参数替换为通配符(_)。以下情况可以使用：</p>
-<ol>
-<li>函数显示类型在字面量以外指定</li>
-<li>参数最多只使用一次</li>
-</ol>
-<p>比如：</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">scala&gt; <span class="keyword">val</span> half:<span class="type">Int</span>=&gt;<span class="type">Double</span>=_/<span class="number">2.0</span></div><div class="line">half: <span class="type">Int</span> =&gt; <span class="type">Double</span> = $$<span class="type">Lambda</span>$<span class="number">1121</span>/<span class="number">2012831257</span>@<span class="number">4607</span>cbe2</div><div class="line"></div><div class="line">scala&gt; half(<span class="number">3</span>)</div><div class="line">res13: <span class="type">Double</span> = <span class="number">1.5</span></div></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2017/07/06/scala-Learning-placeholder-syntax/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">scala</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/07/06/scala-Learning-placeholder-syntax/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-        <!-- 目录内容 -->
-             
-        <!-- 目录内容结束 -->
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/11/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/13/">Next &raquo;</a>
@@ -603,6 +599,18 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">React</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">-ElasticSearch</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">javascript</a>
               </li>
              
@@ -615,23 +623,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">FP</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">scala</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">React</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">-ElasticSearch</a>
+                <a href="javascript:void(0)" class="js-tag color3">FP</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -687,11 +683,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">notes</a>
+                <a href="javascript:void(0)" class="js-tag color2">study notes</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">study notes</a>
+                <a href="javascript:void(0)" class="js-tag color1">notes</a>
               </li>
              
               <li class="article-tag-list-item">

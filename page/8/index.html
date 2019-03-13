@@ -132,6 +132,76 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-MongoDB-2-MongoDB-shell" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/08/19/MongoDB-2-MongoDB-shell/">MongoDB (2):MongoDB shell</a>
+    </h1>
+  
+
+        
+        <a href="/2017/08/19/MongoDB-2-MongoDB-shell/" class="archive-article-date">
+  	<time datetime="2017-08-19T08:37:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="在windows上配置MongoDB"><a href="#在windows上配置MongoDB" class="headerlink" title="在windows上配置MongoDB"></a>在windows上配置MongoDB</h2><p>mongodb安装完成之后并不会自动给你建立data/db文件夹，你需要手动建立它，不然你会发现你无法执行mongod命令，来启动js shell操作mongodb</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="number">2017</span>-<span class="number">08</span>-<span class="number">19</span>T00:<span class="number">58</span>:<span class="number">21.465</span>-<span class="number">0700</span> I STORAGE  [initandlisten] exception <span class="keyword">in</span> initAndListen: <span class="number">29</span> <span class="keyword">Data</span> directory C:\data\db\ not found., terminating</div></pre></td></tr></table></figure>
+<p>但是一般情况下，你可不想为mongod进程单开一个控制台让他阻塞在那里来监听我们的客户端操作，windows情况下我们一般把它当做服务来操作</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">//执行以下命令</div><div class="line"></div><div class="line">mongod.exe </div><div class="line"></div><div class="line">--install</div><div class="line"></div><div class="line">--bind_ip <span class="number">127.0</span>.<span class="number">0.1</span> 		</div><div class="line"></div><div class="line">--logpath <span class="string">"C:\data\dbConf\mongodb.log"</span> //这里是日志文件路径,你必须创建这个文件否则报错</div><div class="line"></div><div class="line">--logappend 			//这里是以追加形式写日志</div><div class="line"></div><div class="line">--dbpath <span class="string">"C:/data/db"</span> 		//这里修改则默认文件夹就不是<span class="keyword">data</span>/db了，你必须先创建这个文件夹</div><div class="line"></div><div class="line">--port <span class="number">27017</span> 			//端口 默认就是<span class="number">27017</span></div><div class="line"></div><div class="line">--serviceName <span class="string">"mongodb"</span>		//服务名</div></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2017/08/19/MongoDB-2-MongoDB-shell/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">MongoDB</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">NoSQL</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/08/19/MongoDB-2-MongoDB-shell/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+        <!-- 目录内容 -->
+             
+        <!-- 目录内容结束 -->
+  
     <article id="post-MongoDB-1-Brief-Introduce-of-MongoDB" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -416,83 +486,6 @@
              
         <!-- 目录内容结束 -->
   
-    <article id="post-Maven-3-More-details-of-Maven" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/07/Maven-3-More-details-of-Maven/">Maven (3):依赖包的传递</a>
-    </h1>
-  
-
-        
-        <a href="/2017/08/07/Maven-3-More-details-of-Maven/" class="archive-article-date">
-  	<time datetime="2017-08-07T03:33:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>  现在你已经学会了在eclipse中构建一个maven项目，但实际上你构建的maven项目并不完备，比如在打包时，你可能已经完成了测试，所以你并不需要将dbunit或者junit等包加入到你最后的打包中，实际上这是可以实现的，如果你以前在maven repository中下载过依赖包，你会发现这个对应依赖包的GAV种还有一些其他的元素标签,如：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- https://mvnrepository.com/artifact/junit/junit --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.12<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
-<p> 这个scope标签对应的就是maven的依赖范围，里面的值有很多种，其中最常见的四种就是：</p>
-<p><strong>1.test</strong></p>
-<p>该范围指依赖只在测试时有效</p>
-<p><strong>2.compile</strong></p>
-<p>该范围是默认范围，你什么都不加就默认为compile，该范围在所有要编译的场景都有效，比如打包，测试等等</p>
-<p><strong>3.provide</strong></p>
-<p>该范围只在编译和测试时有效，打包时不会加入<em>**</em></p>
-<p><strong>4.runtime</strong></p>
-<p>只在运行时依赖，编译时不依赖</p>
-        
-          <a class="article-more-a" href="/2017/08/07/Maven-3-More-details-of-Maven/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Maven</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/08/07/Maven-3-More-details-of-Maven/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-        <!-- 目录内容 -->
-             
-        <!-- 目录内容结束 -->
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/7/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/9/">Next &raquo;</a>
@@ -593,6 +586,18 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">React</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">-ElasticSearch</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">javascript</a>
               </li>
              
@@ -605,23 +610,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">FP</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">scala</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">React</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">-ElasticSearch</a>
+                <a href="javascript:void(0)" class="js-tag color3">FP</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -677,11 +670,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">notes</a>
+                <a href="javascript:void(0)" class="js-tag color2">study notes</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">study notes</a>
+                <a href="javascript:void(0)" class="js-tag color1">notes</a>
               </li>
              
               <li class="article-tag-list-item">

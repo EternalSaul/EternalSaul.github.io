@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-03-12T11:53:14.612Z</updated>
+  <updated>2019-03-12T14:39:30.168Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,50 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Typescript(4):Enums</title>
+    <link href="http://yoursite.com/2019/03/12/Typescript-Enums/"/>
+    <id>http://yoursite.com/2019/03/12/Typescript-Enums/</id>
+    <published>2019-03-12T11:54:25.000Z</published>
+    <updated>2019-03-12T14:39:30.168Z</updated>
+    
+    <content type="html"><![CDATA[<p>枚举允许我们简单的定义一些但名字的常量，在TS语法中支持数字和基于字符串的两种枚举。</p>
+<h2 id="枚举类型"><a href="#枚举类型" class="headerlink" title="枚举类型"></a>枚举类型</h2><h3 id="数字枚举"><a href="#数字枚举" class="headerlink" title="数字枚举"></a>数字枚举</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//默认情况下X为0，Y为1，Z为2</span></div><div class="line"><span class="keyword">enum</span> Dimention &#123;</div><div class="line">    X,Y,Z</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//此时Y为2，Z为3</span></div><div class="line"><span class="keyword">enum</span> Dimention &#123;</div><div class="line">    X = <span class="number">1</span>,Y,Z</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//此时X=0，Z=3</span></div><div class="line"><span class="keyword">enum</span> Dimention &#123;</div><div class="line">    X ,Y = <span class="number">2</span> ,Z</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//此时X=0，Z=3.1</span></div><div class="line"><span class="keyword">enum</span> Dimention &#123;</div><div class="line">    X ,Y = <span class="number">2.1</span> ,Z</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(Dimention.Z)</div><div class="line"></div><div class="line"><span class="comment">//数字枚举的值可以是由计算表达式和常量两者来初始化，但是在用计算表达式初始化时需要放在不带初始化器或带常量初始化器的枚举值的后面</span></div><div class="line"><span class="keyword">enum</span> Dimention &#123;</div><div class="line">    <span class="comment">//Z报错，找不到初始化器</span></div><div class="line">    X ,Y = getNumber() ,Z</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// fine!</span></div><div class="line"><span class="keyword">enum</span> Dimention &#123;</div><div class="line">    X = <span class="number">0</span> ,Y = getNumber() ,Z = <span class="number">1</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//没问题</span></div><div class="line"><span class="keyword">enum</span> Dimention &#123;</div><div class="line">    X ,Z ,Y = getNumber()</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="数字枚举的反向映射"><a href="#数字枚举的反向映射" class="headerlink" title="数字枚举的反向映射"></a>数字枚举的反向映射</h4><figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">enum</span> Enum &#123;</div><div class="line">    A</div><div class="line">&#125;</div><div class="line"><span class="keyword">let</span> a = Enum.A;</div><div class="line"><span class="keyword">let</span> nameOfA = Enum[a]; <span class="comment">// "A"</span></div><div class="line"><span class="keyword">let</span> nameOfB = Enum[<span class="number">0</span>]; <span class="comment">// "A"</span></div></pre></td></tr></table></figure>
+<h3 id="字符串枚举"><a href="#字符串枚举" class="headerlink" title="字符串枚举"></a>字符串枚举</h3><p>字符串枚举每个成员都必须用字符串字面量初始化，或者用空一格字符串成员枚举进行初始化</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">enum</span> Direction &#123;</div><div class="line">    Up = <span class="string">"UP"</span>,</div><div class="line">    Down = <span class="string">"DOWN"</span>,</div><div class="line">    Left = <span class="string">"LEFT"</span>,</div><div class="line">    Right = <span class="string">"RIGHT"</span>,</div><div class="line">&#125;</div><div class="line">    </div><div class="line"><span class="keyword">enum</span> Direction &#123;</div><div class="line">    Up = <span class="string">"UP"</span>,</div><div class="line">    Down = <span class="string">"DOWN"</span>,</div><div class="line">    Left = <span class="string">"LEFT"</span>,</div><div class="line">    Right = Up,</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="异构枚举"><a href="#异构枚举" class="headerlink" title="异构枚举"></a>异构枚举</h3><p>异构枚举是一种不太好的实现</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">enum</span> Direction &#123;</div><div class="line">    Up = <span class="string">"UP"</span>,</div><div class="line">    Down = <span class="number">1</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="联合枚举值和枚举成员类型"><a href="#联合枚举值和枚举成员类型" class="headerlink" title="联合枚举值和枚举成员类型"></a>联合枚举值和枚举成员类型</h2><p>存在一种特殊的非计算的常量枚举成员的子集：<strong>字面量枚举成员</strong>。 字面量枚举成员是指不带有初始值的常量枚举成员，或者是值被初始化为</p>
+<ul>
+<li>任何字符串字面量（例如： <code>&quot;foo&quot;</code>， <code>&quot;bar&quot;</code>， <code>&quot;baz&quot;</code>）</li>
+<li>任何数字字面量（例如： <code>1</code>, <code>100</code>）</li>
+<li>应用了一元 <code>-</code>符号的数字字面量（例如： <code>-1</code>, <code>-100</code></li>
+</ul>
+<p><strong>当所有枚举成员都拥有字面量枚举值时，它就带有了一种特殊的语义。</strong></p>
+<p>首先，<strong>枚举成员成为了类型！</strong> 例如，我们可以说某些成员 <em>只能</em>是枚举成员的值：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">enum</span> ShapeKind &#123;</div><div class="line">    Circle,</div><div class="line">    Square,</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">interface</span> Circle &#123;</div><div class="line">    kind: ShapeKind.Circle;</div><div class="line">    radius: <span class="built_in">number</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">interface</span> Square &#123;</div><div class="line">    kind: ShapeKind.Square;</div><div class="line">    sideLength: <span class="built_in">number</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">let</span> c: Circle = &#123;</div><div class="line">    kind: ShapeKind.Square,</div><div class="line">    <span class="comment">//    ~~~~~~~~~~~~~~~~ Error!</span></div><div class="line">    radius: <span class="number">100</span>,</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>另一个变化是枚举类型本身变成了每个枚举成员的 <em>联合</em></strong>,通过联合枚举能够让类型系统知道枚举的值的集合</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">enum E &#123;</div><div class="line">    Foo,</div><div class="line">    Bar,</div><div class="line">&#125;</div><div class="line"></div><div class="line">function f(x: E) &#123;</div><div class="line">    //这里会报错，原因是编译器检测出E不是Foo就是Bar，所以或操作符后面的比较毫无意义</div><div class="line">    if (x !== E.Foo || x !== E.Bar) &#123;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="运行时枚举"><a href="#运行时枚举" class="headerlink" title="运行时枚举"></a>运行时枚举</h2><figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">enum</span> Dimention &#123;</div><div class="line">    X=<span class="number">1</span> ,Y = getNumber() ,Z=<span class="number">0</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params">d:&#123;X:<span class="built_in">number</span>&#125;</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> d.X;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// Dimention是真正存在的对象，满足类型&#123;X:number&#125;的结构定义</span></div><div class="line"><span class="built_in">console</span>.log(f1(Dimention));</div></pre></td></tr></table></figure>
+<h2 id="常量枚举"><a href="#常量枚举" class="headerlink" title="常量枚举"></a>常量枚举</h2><p>常量枚举只能用常量表达式，不允许包含计算成员。常量表达式会在常量枚举编译时删除，使用它的地方则会直接内联进来。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> <span class="keyword">enum</span> Directions &#123;</div><div class="line">    Up,</div><div class="line">    Down,</div><div class="line">    Left,</div><div class="line">    Right</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> directions = [<span class="number">0</span> <span class="comment">/* Up */</span>, <span class="number">1</span> <span class="comment">/* Down */</span>, <span class="number">2</span> <span class="comment">/* Left */</span>, <span class="number">3</span> <span class="comment">/* Right */</span>];</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;枚举允许我们简单的定义一些但名字的常量，在TS语法中支持数字和基于字符串的两种枚举。&lt;/p&gt;
+&lt;h2 id=&quot;枚举类型&quot;&gt;&lt;a href=&quot;#枚举类型&quot; class=&quot;headerlink&quot; title=&quot;枚举类型&quot;&gt;&lt;/a&gt;枚举类型&lt;/h2&gt;&lt;h3 id=&quot;数字枚举&quot;&gt;&lt;
+    
+    </summary>
+    
+    
+      <category term="typescript" scheme="http://yoursite.com/tags/typescript/"/>
+    
+      <category term="notes" scheme="http://yoursite.com/tags/notes/"/>
+    
+  </entry>
   
   <entry>
     <title>Typescript(3):Genericity and Type Inference</title>
@@ -1096,43 +1140,6 @@
       <category term="学习笔记" scheme="http://yoursite.com/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
       <category term="JVM" scheme="http://yoursite.com/tags/JVM/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>冯诺依曼：《数学家》（上）</title>
-    <link href="http://yoursite.com/2017/12/13/Von-Neumann-The-Mathematician-part-1/"/>
-    <id>http://yoursite.com/2017/12/13/Von-Neumann-The-Mathematician-part-1/</id>
-    <published>2017-12-13T10:56:43.000Z</published>
-    <updated>2017-12-13T15:11:16.000Z</updated>
-    
-    <content type="html"><![CDATA[<p><em>本文作者是冯诺依曼，英文名为《The Mathematician》，该文章在1947年发表在《Works of the Mind》上，后来也记录在《von Neumann’s Collected Works》中，这篇文章是我听讲座时偶然得知的，于是看了一下后翻译了出来，才疏学浅，只源于爱好，如有不对多多包涵——2017.12.13</em>  </p>
-<a id="more"></a>
-<p>  对于脑力工作的本质的论述在任何领域都是一项艰巨的任务，即使是在数学这样一个接近于人类智慧共同努力的中心地带的领域一样如此。无论如何，对于知识成果的本质的论述都是困难的，远远难于对特定领域的知识的运用。比如理解飞机的结构，以及它的升力和推力理论，比纯粹地去驾驶和乘坐，即便是比之控制航向，前者都要难的多。庆幸的是，一个人在通过直觉和经验深刻理解一个流程之前，就应当能够在没有事先很熟悉运转和使用的情况下，获得对这个流程的理解。</p>
-<p>  因此，除了本身设定就是简单或者日常的领域，对所有知识成果的论述都是困难的，在数学中，如果讨论停留在非数学层次上，这种限制就变得非常严重,然后讨论将必然表现出一些非常坏的特征；指出这是永远不能正确证明，然后某种完全肤浅的讨论变得不可避免。</p>
-<p>  我很清楚在我将要说的这些话中存在的缺陷，所以我提前道歉。此外，我要表达的观点可能并不是很多其他数学家完全同意的，你会得到一个人不太系统化的印象和解释，而我只能给你一点帮助，来裁决他们到底有多中肯。</p>
-<p>  尽管存在一些障碍，然而，我必须承认尝试向你解释数学研究的本质是一件有趣而又富有挑战性的任务。我只希望这件事情上我不会太失败。</p>
-<p>  在我看来，数学最本质的特点是，它与自然科学有着非常特殊的关系，更普遍地说，应该是任何阐释实践高于纯粹描述的科学。</p>
-<p>  很多人，包括数学家，会同意数学不是一门以观察或实验为依据的科学（经验科学），至少在实践上，它的决定性层面和很多经验科学不同。当然，它的发展和很多自然科学有着紧密联系。它的一个主要分支——几何学，实际上是起源于自然科学，或者说经验科学。现代数学中一些最精妙的灵感（我相信是最精妙的）源于自然科学。数学中的一些方法遍及和支配着自然科学的“理论性”分支。在现代经验科学中，这些方法已成为越来越重要的成功标准，无论它们变得接近数学方法还是近似数学的物理方法。 事实上，在整个自然科学中，一连串连续不断的学科交叉现象已经变得越来越明显，所有这些学科交叉现象都与数学沾点边，且几乎与科学进步的理念一致。生物学日益弥漫着化学和物理，化学串着实验和理论物理，物理学中又串着非常数学形式化的理论物理学。 </p>
-<p>  数学本质上有一种非常特别的两面性，一个人必须认识到这种两面性，然后接受它，并将它融入到他对这个问题的思考中去。数学本身就是两面的，我不相信能够在不牺牲本质的情况下做出简化的，统一的观点。</p>
-<p>  因此，我将不会呈现给你一个统一的版本。我将尽可能地用多种现象去描述数学。</p>
-<p>  不可否认的是，数学（我们能想到的纯粹数学中）中的一些最优秀的灵感源于自然科学。我们将提到两个最重要的事实。</p>
-<p>  第一个例子，显然应该是几何。几何是古代数学的重要部分。它的几个分支，至今仍是现代数学的几个主要分支之一。毫无疑问，它起源于古代，是经验性的，今天的它开始成为一门学科，就像理论物理学那样。除开所有其他的证据，单单是“几何”这个名字也指明的这一点。欧几里得的公设法（postulational treatment）是远离经验主义的一大步。但捍卫这一立场并不简单，这是具备决定性的，也是最后一步，这伴随着与经验主义完全分离。欧几里得的公理化在少数地方不符合现代公理的严谨性要求，但是在该方面显得不那么重要。更关键的是：其他的无疑是经验性的学科，如力学和热力学，通常表现为或多或少的公设，在一些作者的表现方法很难与欧几里得的那种过程区分开来。我们这个时代的理论物理学的经典——牛顿定理，在它的文学形式和一些最关键部分的核心上，很像欧几里得的手法。当然，在所有这些例子中，在所呈现的假设的背后，都能通过物理洞察力来证实假设，通过实验验证来证明定理，在几何学获得至今数千年的稳定性和现代的理论物理学体系明显缺失的那种权威性之前，有人可能会认为类似欧几里得这种说法是可以接受的，尤其那种古代的观点。</p>
-<p>  进一步来说，从欧几里得时代开始几何学的去经验主义逐步发展，但它没有变得更加完备，直到现代依然如此。关于非欧几里得几何学的讨论正好说明了这一点，它也说明了数学思想的矛盾性。讨论早已集中在一个高度抽象层面上，它处理的是一个纯粹的逻辑问题，即欧几里得的“第五公设”能不能由其他公设的引出。形式冲突被<strong>克莱因</strong>的纯数学范例所终结，这个范例展示了欧几里得平面可以利用重新定义的某些基本概念在非欧几里得理论中构建出来。然而经验主义阴霾从始至终都存在。在所有的欧几里得公设中，第五个受到了质疑的原因很明显只能来自于整个无限平面概念的这种非经验主义特点。最伟大数学家<strong>高斯</strong>的脑海里肯定存在着这个至少有重要意义的观点，尽管所有决定性的数学逻辑分析表明欧几里得几何学可能必须是经验主义的。在<strong>波尔约，罗巴切夫斯基，黎曼，克莱因</strong>取得更多的抽象结论之后，今天我们考虑原争论的结论，经验主义，更确切的说是物理学，依然有着最终的话语权。广义相对论的提出，迫使我们在新的设定下重新审视我们的几何学观点，它也带来了纯粹数学重点的全新的分配。最后我们来做一个完全的对比，最后这次发展发生在同一代人中，这一代人目睹了在现代公理逻辑数学家手中，欧几里得公理化方法的完全去经验化和去抽象化。，这两种矛盾的态度在一个数学家的脑中很好的相容了；可以看出，希尔伯特在公理化和广义相对论中都做出了巨大的共享。</p>
-<p>  第二例子是微积分，可以说所有的解析，都是由它产生。微积分是现代数学的第一个成就，它的重要性大到难以估计，我认为它比任何其他东西都更明确的定义现代数学的开端，它的逻辑推导铸就了数学分析系统，现仍然是精确思想中最伟大的技术进步。</p>
-<p>  微积分的显然起源于经验主义，开普勒首次正式尝试就是定义被称为“dolichometry”的方法，即对带有曲面的物体进行体积测量的方法。这是几何，但不是欧几里得几何，在那个时代，它是非公理化的经验主义几何。关于这点，开普勒非常清楚。牛顿和莱布尼茨的主要成果和发现，都明确的源自于物理。牛顿发明了“流数法”微积分，本质上是为了力学目的。实际上对于微积分和力学，这两个学科或多或少的一起发展，微积分的第一个公式在数学上是不严谨的。在牛顿之后的150年里这样一个不严谨的半物理公式是唯一的可选项。与这个不严谨，数学发展也不充分的时代背景相反，在这期间，解析学发生了很多重大的突破。这个时代的一些主要的数学思想肯定是不严谨的，比如<strong>欧拉</strong>；当然另外一些人，总体上是严谨的，比如<strong>高斯</strong>或者<strong>雅可比</strong>。虽然没有数学家会忽略那个时代（那个时代的数学获得了空前的发展），但是这一发展过程既混乱又模糊，它与经验主义的关系显然不是根据我们当前(或欧几里得的)抽象和严谨的思想而定的。甚至是在<strong>柯西</strong>重新从根本上确立统治地位之后，一个非常特殊的从新回归半物理方法的倒退却随着黎曼而生，黎曼的学术个性本身就是数学双重本质的一个最具说明性的例子，正如<strong>黎曼和魏尔斯特拉斯</strong>的论战，我们就此打住吧，如果我再深入研究下去的话就是技术细节了。从魏尔斯特拉斯开始，分析看起来变得完全抽象，严谨且不再经验性。即便不是绝对正确。关于数理和逻辑“基础”的论战，发生在过去的两代人里，消除了很多关于真相的错误观念。</p>
-<p>  这给我带来了第三个例子，这个例子和判断有关，它所涉及的是数学与哲学或者认知论的关系，而非数学与自然科学的关系。这个例子以一种非常新颖的方式说明了“完全”的数学严谨性的绝对观念并非是不可变的。严谨这一概念的多变性表明除了数学抽象以外的一些东西必定参与到了数学的构成中。在分析关于“基础”的论战中，我无法说服自己接受必须迎合其他因素的经验性质的结论。虽然至少在某些阶段的讨论中，赞成这些解释的理由是非常有力的。但我不认为它是完全让人信服的。然而，有两件事是清楚地。首先，一些非数学的东西，某种程度上与经验性科学或哲学联系在一起，或者两者兼而有之，确实从本质上进入了，他们的非经验特征能够维持下去，取决于一个人是否认为哲学（或者认识论）可以独立的存在（这种假设是必要的，但是不够充分）。第二，一些例子强力支持着数学的经验性起源，比如我们上面提到的两种例子（集合和微积分），这与“基础”论战的最佳解释是什么无关。</p>
-<p>  在分析数学严谨性概念的易变性时，我想强调上文所提到的“基础”论战，然而，我会先简要地细想一下这个问题的次要方面，这个方面加强了我的论点，但是我认为它的次要的，因为比之“基础”论战的分析，它可能不那么确切。我指的是数学“风格”的变化。众所周知，数学证明的写作风格已经经历了相当大的波动。这里讨论波动而不是某种趋势是因为在某些方面上十八、十九世纪的某些作者和现在之间的风格差异比现在和欧几里得时代更大。但是，在其他方面却具有非常显著的稳定性。在存在差异的领域中，主要差异是存在于表现上，这些差异可以再不引入任何新思想的情况下消除。然而，在很多情况下这些差异大到让人怀疑在不需要考虑他们是否真的对数学的严谨性有同样的想法，仅仅通过不同的风格，品味和教育水平，就可以把不同方式展现它们的作者给区分开来。结果，在极端情况下（例如，在上面提到的，18世纪晚期的分析工作），差异无法避免，即便可以补救，也要在全新而重要的理论的帮助下才行得通，而这些理论的发展需要数百年。一些在那种于今天而言是不严谨的方式（当时有一些同僚批评）下工作的数学家已经很清楚的意识到他们自身的工作方式缺乏严谨性。更客观的说，他们自身渴望数学处理方法应该和我们今天的观点一样，而不是只拘于他们手头上做的那种。不过那个时代的一些大师，比如欧拉，显得对于那种方法十分信任且对他们自己的标准很满意。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;em&gt;本文作者是冯诺依曼，英文名为《The Mathematician》，该文章在1947年发表在《Works of the Mind》上，后来也记录在《von Neumann’s Collected Works》中，这篇文章是我听讲座时偶然得知的，于是看了一下后翻译了出来，才疏学浅，只源于爱好，如有不对多多包涵——2017.12.13&lt;/em&gt;  &lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="译文" scheme="http://yoursite.com/tags/%E8%AF%91%E6%96%87/"/>
     
   </entry>
   
