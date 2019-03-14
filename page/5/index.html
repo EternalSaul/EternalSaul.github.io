@@ -132,6 +132,75 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-JVM-5-Execution-engine-of-bytecode" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/14/JVM-5-Execution-engine-of-bytecode/">JVM(5):字节码执行引擎</a>
+    </h1>
+  
+
+        
+        <a href="/2017/12/14/JVM-5-Execution-engine-of-bytecode/" class="archive-article-date">
+  	<time datetime="2017-12-14T05:41:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>  经历过类加载以后，类文件结构就以JVM定义的形式存储在JVM的方法区中。但是程序如何执行的描述存储在我们前面介绍的方法表的Code属性中的字节码指令，字节码执行引擎，即是执行那些直接码指令，以至于让程序“跑”起来。字节码执行引擎相当于JVM的“处理器”。</p>
+<p>  实际上JVM规范只定义了字节码执行引擎的概念模型，具体的实现可能是解释执行也可能是编译执行，或者混合起来。但是从外面看，所有的字节码执行引擎输入都是字节码文件，处理后输出的都是执行结果。</p>
+<h2 id="运行时栈帧结构"><a href="#运行时栈帧结构" class="headerlink" title="运行时栈帧结构"></a>运行时栈帧结构</h2><p>  JVM的直接码指令是基于栈操作的，我们也知道在JVM的内存结构里，线程私有的3种内存，即虚拟机栈，本地方法栈，和程序计数器。Hotspot中没有本地方法栈和虚拟机栈的区别，在JVM里，这两种栈中的元素都被称之为<strong>栈帧</strong>。栈帧是VM进行方法调用和方法执行的数据结构，它存储了方法的<strong>局部变量表，操作数栈，动态链接和方法返回地址和一些附加信息</strong>。</p>
+        
+          <a class="article-more-a" href="/2017/12/14/JVM-5-Execution-engine-of-bytecode/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习笔记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">JVM</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/12/14/JVM-5-Execution-engine-of-bytecode/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+        <!-- 目录内容 -->
+             
+        <!-- 目录内容结束 -->
+  
     <article id="post-Von-Neumann-The-Mathematician-part-1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -411,79 +480,6 @@
              
         <!-- 目录内容结束 -->
   
-    <article id="post-JVM-3-Class-Loading" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/04/JVM-3-Class-Loading/">JVM(3):类加载过程</a>
-    </h1>
-  
-
-        
-        <a href="/2017/12/04/JVM-3-Class-Loading/" class="archive-article-date">
-  	<time datetime="2017-12-04T04:41:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>  一般来说，我们以.class文件的形式将类保存到磁盘上，在介绍类结构的时候我已经说了，jvm并不关系你的类从哪儿来，只要它符合jvm类结构的规范就好了，无论是以传统方式从磁盘上加载.class文件，还是从网络来获取一段流，亦或者以Proxy动态生成一个类，都没有问题，它们最终会被自己所属的<strong>类加载器</strong>加载到虚拟机的方法区中，成为jvm可以直接使用的java类型。</p>
-<p>  类的生命周期有7个阶段，它们分别是：</p>
-<p><code>加载-&gt;验证-&gt;准备-&gt;解析-&gt;初始化-&gt;使用-&gt;卸载</code></p>
-<p>其中<code>验证-&gt;准备-&gt;解析</code>这三个阶段被称为链接（Linking）阶段</p>
-<p><code>加载-&gt;验证-&gt;准备-&gt;解析-&gt;初始化</code>这5个阶段称为<strong>类加载阶段</strong></p>
-<p>  在上面的声明周期七个阶段中，<strong>加载，验证，准备，初始化，卸载</strong>这5个阶段是<strong>按顺序开始</strong>的，注意这里是只是说开始，实际上它们的执行过程是<strong>交叉进行</strong>，相当于你按顺序执行了一个线程，线程里又执行了一个新的线程，如此往复的执行了5个，实际上它们是交叉执行的。</p>
-<p>  上面的<strong>箭头部分有误导倾向</strong>，因为<strong>解析</strong>这个过程，为了支持Java的运行时绑定机制，<strong>有些时候在初始化过程之后开始</strong>。</p>
-        
-          <a class="article-more-a" href="/2017/12/04/JVM-3-Class-Loading/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">JVM</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/12/04/JVM-3-Class-Loading/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-        <!-- 目录内容 -->
-             
-        <!-- 目录内容结束 -->
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/4/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/6/">Next &raquo;</a>
@@ -580,10 +576,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">闲谈</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">前端</a>
               </li>
              
@@ -592,7 +584,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">闲谈</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">-ElasticSearch</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">FP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">scala</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -605,18 +609,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">学习笔记</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">scala</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">FP</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">JVM</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -641,6 +633,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">NoSQL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">JVM</a>
               </li>
              
               <li class="article-tag-list-item">
