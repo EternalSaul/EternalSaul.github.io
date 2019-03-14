@@ -15,7 +15,7 @@
 <meta property="og:url" content="http://yoursite.com/2019/03/11/Typescript-2-Function/index.html">
 <meta property="og:site_name" content="Blog of Saul">
 <meta property="og:description" content="函数类型一般情况下我们可以直接借助类型推到来声明一个函数变量，但是有些时候我们更倾向于写出完整的函数类型。 12345678let func = function (a:number,b:number) &amp;#123;    return a+b;&amp;#125;;//完整的函数类型let func1:(m:number,k:number) =&amp;gt; number= function (a:numbe">
-<meta property="og:updated_time" content="2019-03-11T12:53:05.652Z">
+<meta property="og:updated_time" content="2019-03-14T12:52:34.035Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Typescript(2):Function">
 <meta name="twitter:description" content="函数类型一般情况下我们可以直接借助类型推到来声明一个函数变量，但是有些时候我们更倾向于写出完整的函数类型。 12345678let func = function (a:number,b:number) &amp;#123;    return a+b;&amp;#125;;//完整的函数类型let func1:(m:number,k:number) =&amp;gt; number= function (a:numbe">
@@ -309,6 +309,30 @@
   
 
         <!-- 目录内容 -->
+        
+            <p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
+            <span class="btn-bg"></span>
+            <span class="btn-text">文章导航</span>
+            </p>
+            <div id="toc-article" class="toc-article">
+                <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
+                <strong class="toc-title">文章目录</strong>
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#函数类型"><span class="toc-number">1.</span> <span class="toc-text">函数类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#可选参数"><span class="toc-number">2.</span> <span class="toc-text">可选参数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#默认参数"><span class="toc-number">2.1.</span> <span class="toc-text">默认参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#可选参数-1"><span class="toc-number">2.2.</span> <span class="toc-text">可选参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#剩余参数"><span class="toc-number">2.3.</span> <span class="toc-text">剩余参数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#this"><span class="toc-number">3.</span> <span class="toc-text">this</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#顶级层级下的非方法式调用的this绑定"><span class="toc-number">3.1.</span> <span class="toc-text">顶级层级下的非方法式调用的this绑定</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#箭头函数进行this绑定"><span class="toc-number">3.2.</span> <span class="toc-text">箭头函数进行this绑定</span></a></li></ol></li></ol>
+           </div>
+           <script type="text/javascript">
+            function showToc(){
+                var toc_article = document.getElementById("toc-article");
+                var show_toc_btn = document.getElementById("show-toc-btn");
+                toc_article.setAttribute("style","display:block");
+                show_toc_btn.setAttribute("style","display:none");
+                };
+            function showBtn(){
+                var toc_article = document.getElementById("toc-article");
+                var show_toc_btn = document.getElementById("show-toc-btn");
+                toc_article.setAttribute("style","display:none");
+                show_toc_btn.setAttribute("style","display:block");
+                };
+           </script>
              
         <!-- 目录内容结束 -->
           </div>

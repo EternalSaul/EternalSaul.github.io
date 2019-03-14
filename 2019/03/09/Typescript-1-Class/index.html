@@ -15,7 +15,7 @@
 <meta property="og:url" content="http://yoursite.com/2019/03/09/Typescript-1-Class/index.html">
 <meta property="og:site_name" content="Blog of Saul">
 <meta property="og:description" content="结构型类型系统ts中，一般情况下当我们比较两种类型时，我们实际比较的是类型的结构，即对比他们的成员类型是否都是兼容的。 12345678910111213141516171819class Food &amp;#123;    name:string;    constructor(foodName:string)&amp;#123;        this.name = foodName;    &amp;#125;&amp;">
-<meta property="og:updated_time" content="2019-03-11T01:26:41.176Z">
+<meta property="og:updated_time" content="2019-03-14T12:52:50.515Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Typescript(1):Class">
 <meta name="twitter:description" content="结构型类型系统ts中，一般情况下当我们比较两种类型时，我们实际比较的是类型的结构，即对比他们的成员类型是否都是兼容的。 12345678910111213141516171819class Food &amp;#123;    name:string;    constructor(foodName:string)&amp;#123;        this.name = foodName;    &amp;#125;&amp;">
@@ -312,6 +312,30 @@
   
 
         <!-- 目录内容 -->
+        
+            <p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
+            <span class="btn-bg"></span>
+            <span class="btn-text">文章导航</span>
+            </p>
+            <div id="toc-article" class="toc-article">
+                <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
+                <strong class="toc-title">文章目录</strong>
+                <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#结构型类型系统"><span class="toc-number">1.</span> <span class="toc-text">结构型类型系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#private和protected"><span class="toc-number">2.</span> <span class="toc-text">private和protected</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#语法特性"><span class="toc-number"></span> <span class="toc-text">语法特性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#属性参数"><span class="toc-number">1.</span> <span class="toc-text">属性参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#存取器"><span class="toc-number">2.</span> <span class="toc-text">存取器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编译后的类声明"><span class="toc-number"></span> <span class="toc-text">编译后的类声明</span></a>
+           </div>
+           <script type="text/javascript">
+            function showToc(){
+                var toc_article = document.getElementById("toc-article");
+                var show_toc_btn = document.getElementById("show-toc-btn");
+                toc_article.setAttribute("style","display:block");
+                show_toc_btn.setAttribute("style","display:none");
+                };
+            function showBtn(){
+                var toc_article = document.getElementById("toc-article");
+                var show_toc_btn = document.getElementById("show-toc-btn");
+                toc_article.setAttribute("style","display:none");
+                show_toc_btn.setAttribute("style","display:block");
+                };
+           </script>
              
         <!-- 目录内容结束 -->
           </div>
