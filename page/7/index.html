@@ -132,6 +132,78 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Junit-1-Start-our-testing-travel" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/27/Junit-1-Start-our-testing-travel/">Junit(1):开始我们的单元测试之旅!</a>
+    </h1>
+  
+
+        
+        <a href="/2017/10/27/Junit-1-Start-our-testing-travel/" class="archive-article-date">
+  	<time datetime="2017-10-27T09:52:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>  作为一名程序员，虽然你可能不是测试岗，但是懂得测试是必须的，这一个系列的文章用来记录一些Junit的测试方法，首先从实现自动化测试开始，然后衍生到stub和mock测试，再来进行我们的web应用的测试和数据库的测试。当然测试并不只包含这些内容，这里只是其中的一小块，有兴趣的同学可以继续开展。</p>
+<p>  写这个系列的文章的目的在于，由于我未来工作的公司，是结对编程，有时候我需要去在伙伴写业务代码的时候写测试代码，不过我认为，既然软件测试在软件工程课程中是基础课，那么每一个程序员都应该懂得一定的测试手段，再者写下这套文章，有利于我从新复习java的单元测试手段，当然这些手段在未来，即使是换一种语言，也会是通用的知识。这篇文章中所用的junit版本都是junit4,用注解来标识一些测试声明，而且测试类不再需要继承TestCase,也不需要遵循它的测试方法命名规则，我们可以把测试方法命名的的更加直观。</p>
+        
+          <a class="article-more-a" href="/2017/10/27/Junit-1-Start-our-testing-travel/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Junit</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">TDD</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">软件测试</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/10/27/Junit-1-Start-our-testing-travel/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+        <!-- 目录内容 -->
+             
+        <!-- 目录内容结束 -->
+  
     <article id="post-Recall-Quick-Sort-and-Merging-Sort" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -313,7 +385,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">FP</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习笔记</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -321,7 +393,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习笔记</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">FP</a>
         		</li>
       		
 		</ul>
@@ -413,77 +485,9 @@
              
         <!-- 目录内容结束 -->
   
-    <article id="post-MongoDB-4-Get-Informations-of-DB" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/23/MongoDB-4-Get-Informations-of-DB/">MongoDB (4):Get Information of DB</a>
-    </h1>
-  
-
-        
-        <a href="/2017/08/23/MongoDB-4-Get-Informations-of-DB/" class="archive-article-date">
-  	<time datetime="2017-08-23T03:08:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="简单的回顾"><a href="#简单的回顾" class="headerlink" title="简单的回顾"></a>简单的回顾</h2><p>   如果你过oracle数据库，我们知道可以用一些系统视图来查询到当前数据库的状态云云，数据库状态在实际运用中是调整数据库性能的重要依据。作为一款成熟的数据库产品，MongoDB当然也提供了这种功能，这篇文章就是介绍如何用MongoDB shell去查询我们的数据库状态，前面我们已经看到了一些简单的查询，这里我们先回顾一下这些命令：</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">//使用db命令显示当前使用的数据库</div><div class="line">&gt; db</div><div class="line">test</div><div class="line"></div><div class="line">//改变数据库</div><div class="line">&gt; use saul</div><div class="line">switched to db saul</div><div class="line"></div><div class="line">//先我们可以看到，当前数据库已经变成了db</div><div class="line">&gt; db</div><div class="line">saul</div><div class="line"></div><div class="line">//显示数据库名</div><div class="line">&gt; show dbs</div><div class="line">admin  <span class="number">0.000</span>GB</div><div class="line">local  <span class="number">0.000</span>GB</div><div class="line">saul   <span class="number">0.004</span>GB</div><div class="line">test   <span class="number">0.000</span>GB</div><div class="line"></div><div class="line">//显示当前数据库的集合名</div><div class="line">&gt; show collections</div><div class="line">articles</div><div class="line">num</div><div class="line">users</div></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2017/08/23/MongoDB-4-Get-Informations-of-DB/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">MongoDB</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">NoSQL</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/08/23/MongoDB-4-Get-Informations-of-DB/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-        <!-- 目录内容 -->
-             
-        <!-- 目录内容结束 -->
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/6/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/8/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/6/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/8/">Next &raquo;</a>
     </nav>
   
 
@@ -573,31 +577,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">-闲谈</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">React</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">闲谈</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">-ElasticSearch</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">FP</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">scala</a>
+                <a href="javascript:void(0)" class="js-tag color4">-闲谈</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -613,7 +597,31 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">软件测试</a>
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">React</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">-ElasticSearch</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">scala</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">FP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">JVM</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Junit</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -621,7 +629,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Junit</a>
+                <a href="javascript:void(0)" class="js-tag color5">软件测试</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -634,10 +642,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">NoSQL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">JVM</a>
               </li>
              
               <li class="article-tag-list-item">

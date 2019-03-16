@@ -132,6 +132,74 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Typescript-6-advenced-type-II" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/16/Typescript-6-advenced-type-II/">Typescript(6):advenced type II</a>
+    </h1>
+  
+
+        
+        <a href="/2019/03/16/Typescript-6-advenced-type-II/" class="archive-article-date">
+  	<time datetime="2019-03-16T03:17:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="多态this类型"><a href="#多态this类型" class="headerlink" title="多态this类型"></a>多态this类型</h2><p>  考虑到链式编程，很多连贯性操作中我们都会返回this，ts中允许把this作为返回值类型已到达继承之后依然能用基类的方法达到链式调用的目的。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> BasicCalculator &#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">constructor</span>(<span class="params"><span class="keyword">protected</span> value: <span class="built_in">number</span> = 0</span>) &#123; &#125;</div><div class="line">    <span class="keyword">public</span> currentValue(): <span class="built_in">number</span> &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.value;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">public</span> add(operand: <span class="built_in">number</span>): <span class="keyword">this</span> &#123;</div><div class="line">        <span class="keyword">this</span>.value += operand;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">public</span> multiply(operand: <span class="built_in">number</span>): <span class="keyword">this</span> &#123;</div><div class="line">        <span class="keyword">this</span>.value *= operand;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">// ... other operations go here ...</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">class</span> ScientificCalculator <span class="keyword">extends</span> BasicCalculator &#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">constructor</span>(<span class="params">value = 0</span>) &#123;</div><div class="line">        <span class="keyword">super</span>(value);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">public</span> sin() &#123;</div><div class="line">        <span class="keyword">this</span>.value = <span class="built_in">Math</span>.sin(<span class="keyword">this</span>.value);</div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">// ... other operations go here ...</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">let</span> v = <span class="keyword">new</span> ScientificCalculator(<span class="number">2</span>)</div><div class="line">        .multiply(<span class="number">5</span>)</div><div class="line">        .sin()</div><div class="line">        .add(<span class="number">1</span>)</div><div class="line">        .currentValue();</div></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2019/03/16/Typescript-6-advenced-type-II/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">typescript</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">notes</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/03/16/Typescript-6-advenced-type-II/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+        <!-- 目录内容 -->
+             
+        <!-- 目录内容结束 -->
+  
     <article id="post-Typescript-5-advenced-type" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -407,77 +475,9 @@
              
         <!-- 目录内容结束 -->
   
-    <article id="post-Typescript-1-Class" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/09/Typescript-1-Class/">Typescript(1):Class</a>
-    </h1>
-  
-
-        
-        <a href="/2019/03/09/Typescript-1-Class/" class="archive-article-date">
-  	<time datetime="2019-03-09T01:50:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="结构型类型系统"><a href="#结构型类型系统" class="headerlink" title="结构型类型系统"></a>结构型类型系统</h3><p>ts中，一般情况下当我们比较两种类型时，我们实际比较的是<strong>类型的结构</strong>，即对比他们的成员类型是否都是兼容的。</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Food &#123;</div><div class="line">    name:<span class="built_in">string</span>;</div><div class="line">    <span class="keyword">constructor</span>(<span class="params">foodName:<span class="built_in">string</span></span>)&#123;</div><div class="line">        <span class="keyword">this</span>.name = foodName;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">class</span> Cake <span class="keyword">extends</span> Food&#123;&#125;;</div><div class="line"></div><div class="line"><span class="keyword">class</span> FoodModel &#123;</div><div class="line">    name:<span class="built_in">string</span>;</div><div class="line">    <span class="keyword">constructor</span>(<span class="params">foodName:<span class="built_in">string</span></span>)&#123;</div><div class="line">        <span class="keyword">this</span>.name = foodName;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//Food可以赋值给FoodModel</span></div><div class="line"><span class="keyword">let</span> model:FoodModel = <span class="keyword">new</span> FoodModel(<span class="string">'cake'</span>);</div><div class="line">model = <span class="keyword">new</span> Food(<span class="string">'cake'</span>);</div></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2019/03/09/Typescript-1-Class/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">typescript</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">study notes</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/03/09/Typescript-1-Class/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-        <!-- 目录内容 -->
-             
-        <!-- 目录内容结束 -->
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 
@@ -567,31 +567,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">-闲谈</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">React</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">闲谈</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">-ElasticSearch</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">FP</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">scala</a>
+                <a href="javascript:void(0)" class="js-tag color4">-闲谈</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -607,7 +587,31 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">软件测试</a>
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">React</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">-ElasticSearch</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">scala</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">FP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">JVM</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Junit</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -615,7 +619,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Junit</a>
+                <a href="javascript:void(0)" class="js-tag color5">软件测试</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -628,10 +632,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">NoSQL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">JVM</a>
               </li>
              
               <li class="article-tag-list-item">

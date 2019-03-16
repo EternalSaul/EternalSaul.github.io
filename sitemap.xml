@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2019/03/16/Typescript-6-advenced-type-II/</loc>
+    
+    <lastmod>2019-03-16T07:11:05.475Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2019/03/14/Typescript-5-advenced-type/</loc>
+    
+    <lastmod>2019-03-14T12:53:42.655Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2019/03/09/Typescript-1-Class/</loc>
     
     <lastmod>2019-03-14T12:52:50.515Z</lastmod>
@@ -26,13 +40,6 @@
     <loc>http://yoursite.com/2019/03/12/Typescript-Enums/</loc>
     
     <lastmod>2019-03-14T12:52:18.215Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2019/03/14/Typescript-5-advenced-type/</loc>
-    
-    <lastmod>2019-03-14T12:51:22.120Z</lastmod>
     
   </url>
   
