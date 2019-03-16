@@ -15,7 +15,7 @@
 <meta property="og:url" content="http://yoursite.com/2019/03/16/Typescript-6-advenced-type-II/index.html">
 <meta property="og:site_name" content="Blog of Saul">
 <meta property="og:description" content="多态this类型  考虑到链式编程，很多连贯性操作中我们都会返回this，ts中允许把this作为返回值类型已到达继承之后依然能用基类的方法达到链式调用的目的。 1234567891011121314151617181920212223242526272829303132class BasicCalculator &amp;#123;    public constructor(protected val">
-<meta property="og:updated_time" content="2019-03-16T07:11:05.475Z">
+<meta property="og:updated_time" content="2019-03-16T07:11:25.978Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Typescript(6):advenced type II">
 <meta name="twitter:description" content="多态this类型  考虑到链式编程，很多连贯性操作中我们都会返回this，ts中允许把this作为返回值类型已到达继承之后依然能用基类的方法达到链式调用的目的。 1234567891011121314151617181920212223242526272829303132class BasicCalculator &amp;#123;    public constructor(protected val">
@@ -316,6 +316,30 @@
   
 
         <!-- 目录内容 -->
+        
+            <p class="show-toc-btn" id="show-toc-btn" onclick="showToc();" style="display:none">
+            <span class="btn-bg"></span>
+            <span class="btn-text">文章导航</span>
+            </p>
+            <div id="toc-article" class="toc-article">
+                <span id="toc-close" class="toc-close" title="隐藏导航" onclick="showBtn();">×</span>
+                <strong class="toc-title">文章目录</strong>
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#多态this类型"><span class="toc-number">1.</span> <span class="toc-text">多态this类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#索引类型"><span class="toc-number">2.</span> <span class="toc-text">索引类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#字符串索引签名的索引类型"><span class="toc-number">2.1.</span> <span class="toc-text">字符串索引签名的索引类型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#映射类型"><span class="toc-number">3.</span> <span class="toc-text">映射类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#简单类型映射"><span class="toc-number">3.1.</span> <span class="toc-text">简单类型映射</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#同态映射"><span class="toc-number">3.2.</span> <span class="toc-text">同态映射</span></a></li></ol></li></ol>
+           </div>
+           <script type="text/javascript">
+            function showToc(){
+                var toc_article = document.getElementById("toc-article");
+                var show_toc_btn = document.getElementById("show-toc-btn");
+                toc_article.setAttribute("style","display:block");
+                show_toc_btn.setAttribute("style","display:none");
+                };
+            function showBtn(){
+                var toc_article = document.getElementById("toc-article");
+                var show_toc_btn = document.getElementById("show-toc-btn");
+                toc_article.setAttribute("style","display:none");
+                show_toc_btn.setAttribute("style","display:block");
+                };
+           </script>
              
         <!-- 目录内容结束 -->
           </div>
