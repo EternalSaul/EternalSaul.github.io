@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2019/03/18/Typescript-7-Decorators/</loc>
+    
+    <lastmod>2019-03-20T10:47:26.539Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2019/03/16/Typescript-6-advenced-type-II/</loc>
     
-    <lastmod>2019-03-16T07:11:25.978Z</lastmod>
+    <lastmod>2019-03-18T01:52:37.701Z</lastmod>
     
   </url>
   

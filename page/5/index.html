@@ -132,6 +132,81 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Junit-3-Build-a-stub" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/29/Junit-3-Build-a-stub/">Junit(3):桩测试</a>
+    </h1>
+  
+
+        
+        <a href="/2018/01/29/Junit-3-Build-a-stub/" class="archive-article-date">
+  	<time datetime="2018-01-29T14:45:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>  如果我们只是单纯测试一个类里的公共方法，那么使用简单的断言，就能满足我们的需求，可是我们的<strong>测试很多时候要依赖其他的类，或者说环境</strong>，比如你测试的方法可能要访问一些服务器获取资源，或者访问数据库获取数据，此时我们必须需要一个真实的环境么？实际上很多情况下，你根本拿不到真实的环境，比如你测试的是一个还没有完成的服务模块。既然有这种需求，我们就得想办法在开发环境中模拟一个模块来测试，这有两种策略，一种就是stub，还一种就是mock，<strong>这两种方法都是为了代替依赖部分，不同的是mock是构建一个假的对象，而stub是真实地简单实现一个对象</strong>，这一节我先讲这个stub，我们将以stub的方式，模拟一个对一个服务器发送http请求测试。</p>
+        
+          <a class="article-more-a" href="/2018/01/29/Junit-3-Build-a-stub/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习笔记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">软件测试</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">TDD</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Junit</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/01/29/Junit-3-Build-a-stub/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+        <!-- 目录内容 -->
+             
+        <!-- 目录内容结束 -->
+  
     <article id="post-Von-Neumann-The-Mathematician-part-2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -399,81 +474,6 @@
              
         <!-- 目录内容结束 -->
   
-    <article id="post-Learning-ES6-1-Block-scope" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/06/Learning-ES6-1-Block-scope/">Learning ES6(1):块作用域</a>
-    </h1>
-  
-
-        
-        <a href="/2017/12/06/Learning-ES6-1-Block-scope/" class="archive-article-date">
-  	<time datetime="2017-12-06T06:46:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>  最近主要是在学习3个东西，一个就是单元测试，第二个就是jvm，还有一个就是es6了，目前的话jvm已经学完了，就差把笔记搬运从笔记本上到博客上，单元测试和es6的话都是正在进行，es6的是阮一峰的<a href="https://github.com/ruanyf/es6tutorial" target="_blank" rel="external">ECMAScript 6 入门</a>，大神已经把书开源道github上了，推荐大家去看那本书，博客这里主要用于我个人用于以后回忆某些知识用的。</p>
-<p>  至于es6是什么可以自行使用搜索引擎，或看上面那本书的第1章，这里我就不介绍了。</p>
-<hr>
-<p>  在ES6之前，js中是没有<strong>块级作用域</strong>这个东西的，只有<strong>函数</strong>和<strong>全局</strong>作用域<br>  ES6中的第一个特性，即以let来声明一个变量，这个变量只在当前代码块中有效，比如对于如下代码：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">!<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">let</span> k = <span class="number">3</span>;<span class="comment">//k作用域只在当前代码块中</span></div><div class="line">    &#125;</div><div class="line">    alert(k); <span class="comment">//报错，外层代码不能去引用内层代码块中的k，如果上面是var则输出3</span></div><div class="line">&#125;();</div><div class="line"></div><div class="line">!<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">let</span> k = <span class="number">3</span>;</div><div class="line">    &#123;</div><div class="line">        alert(k);<span class="comment">//正常输出3</span></div><div class="line">    &#125;</div><div class="line">&#125;();</div><div class="line"></div><div class="line">!<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">let</span> k = <span class="number">4</span>;</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">let</span> k = <span class="number">5</span>;</div><div class="line">        alert(k);<span class="comment">//输出k=5</span></div><div class="line">    &#125;</div><div class="line">    alert(k);<span class="comment">//输出k=4</span></div><div class="line">&#125;();</div></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2017/12/06/Learning-ES6-1-Block-scope/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ES6</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/12/06/Learning-ES6-1-Block-scope/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-        <!-- 目录内容 -->
-             
-        <!-- 目录内容结束 -->
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/4/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/6/">Next &raquo;</a>
@@ -566,11 +566,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">闲谈</a>
+                <a href="javascript:void(0)" class="js-tag color4">-闲谈</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">-闲谈</a>
+                <a href="javascript:void(0)" class="js-tag color3">闲谈</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -586,6 +586,14 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">scala</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">FP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">前端</a>
               </li>
              
@@ -598,19 +606,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">scala</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">FP</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">JVM</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Junit</a>
+                <a href="javascript:void(0)" class="js-tag color5">软件测试</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -618,7 +618,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">软件测试</a>
+                <a href="javascript:void(0)" class="js-tag color1">Junit</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -634,11 +634,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Nexus</a>
+                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
+                <a href="javascript:void(0)" class="js-tag color1">Nexus</a>
               </li>
              
               <li class="article-tag-list-item">
