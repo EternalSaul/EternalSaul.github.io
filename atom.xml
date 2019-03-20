@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-03-20T10:47:26.539Z</updated>
+  <updated>2019-03-20T10:51:29.127Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,11 +20,12 @@
     <link href="http://yoursite.com/2019/03/18/Typescript-7-Decorators/"/>
     <id>http://yoursite.com/2019/03/18/Typescript-7-Decorators/</id>
     <published>2019-03-18T09:22:56.000Z</published>
-    <updated>2019-03-20T10:47:26.539Z</updated>
+    <updated>2019-03-20T10:51:29.127Z</updated>
     
     <content type="html"><![CDATA[<p>装饰器是一种我们能够在类的声明和成员上通过元编程语法添加标注的方式，不过不管在ts（3.1）和还是在js中它都是处于试验阶段的。</p>
 <p>如果要启用实验性的装饰器特性，我们需要在命令行或者tsconfig.json里启用experimentalDecorators编译器选项。</p>
 <figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//命令行中加入编译选项参数</span></div><div class="line">tsc --target ES5 --experimentalDecorators</div><div class="line"></div><div class="line"><span class="comment">//tsconfig.json</span></div><div class="line">&#123;</div><div class="line">    <span class="string">"compilerOptions"</span>: &#123;</div><div class="line">        <span class="string">"target"</span>: <span class="string">"ES5"</span>,</div><div class="line">        <span class="string">"experimentalDecorators"</span>: <span class="literal">true</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<a id="more"></a>
 <h2 id="装饰器"><a href="#装饰器" class="headerlink" title="装饰器"></a>装饰器</h2><p>作为一种特殊的类型声明，装饰器能被附加到<strong>类声明，方法，访问符，属性或者参数</strong>上。装饰器不能用在声明文件中（.d.ts），或者任何外部上下文（比如 <code>declare</code>的类）里。</p>
 <p>装饰器通过<strong>@expression</strong>来使用，<strong>expression</strong>求值后必须是一个函数，注意这里的expression指的是表达式，不是一个placeholder或者是单纯的指一个变量名。</p>
 <p><code>function identity(args){ return args;}</code></p>
@@ -88,7 +89,8 @@
     <summary type="html">
     
       &lt;p&gt;装饰器是一种我们能够在类的声明和成员上通过元编程语法添加标注的方式，不过不管在ts（3.1）和还是在js中它都是处于试验阶段的。&lt;/p&gt;
-&lt;p&gt;如果要启用实验性的装饰器特性，我们需要在命令行或者tsconfig.json里启用experimentalDecorators编译
+&lt;p&gt;如果要启用实验性的装饰器特性，我们需要在命令行或者tsconfig.json里启用experimentalDecorators编译器选项。&lt;/p&gt;
+&lt;figure class=&quot;highlight typescript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//命令行中加入编译选项参数&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;tsc --target ES5 --experimentalDecorators&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//tsconfig.json&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;string&quot;&gt;&quot;compilerOptions&quot;&lt;/span&gt;: &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;string&quot;&gt;&quot;target&quot;&lt;/span&gt;: &lt;span class=&quot;string&quot;&gt;&quot;ES5&quot;&lt;/span&gt;,&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &lt;span class=&quot;string&quot;&gt;&quot;experimentalDecorators&quot;&lt;/span&gt;: &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
     
     </summary>
     
