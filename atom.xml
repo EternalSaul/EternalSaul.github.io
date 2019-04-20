@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-04-20T10:18:26.940Z</updated>
+  <updated>2019-04-20T10:19:02.694Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://yoursite.com/2019/04/20/RXjs-0-creator/"/>
     <id>http://yoursite.com/2019/04/20/RXjs-0-creator/</id>
     <published>2019-04-20T09:30:43.000Z</published>
-    <updated>2019-04-20T10:18:26.940Z</updated>
+    <updated>2019-04-20T10:19:02.694Z</updated>
     
     <content type="html"><![CDATA[<h1 id="创建数据流"><a href="#创建数据流" class="headerlink" title="创建数据流"></a>创建数据流</h1><h2 id="同步创建数据流"><a href="#同步创建数据流" class="headerlink" title="同步创建数据流"></a>同步创建数据流</h2><p>// 在一般情形下我们很少去主动创建同步的数据流，创建同步数据流一般是在写测试，写例子的时候<br>// rxjs之所以能够被称为前端编程中的’屠龙刀’，很大程度上是因为它处理异步数据流的简便性</p>
 <h3 id="of"><a href="#of" class="headerlink" title="of"></a>of</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 自定义一个流的内容</span></div><div class="line"><span class="keyword">let</span> of$ = of(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>);</div><div class="line">of$.subscribe(</div><div class="line">    <span class="function">(<span class="params">next</span>) =&gt;</span> <span class="built_in">console</span>.log(next)</div><div class="line">);</div></pre></td></tr></table></figure>
