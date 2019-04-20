@@ -132,6 +132,78 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-MongoDB-1-Brief-Introduce-of-MongoDB" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/08/18/MongoDB-1-Brief-Introduce-of-MongoDB/">MongoDB (1):Brief Introduce of MongoDB</a>
+    </h1>
+  
+
+        
+        <a href="/2017/08/18/MongoDB-1-Brief-Introduce-of-MongoDB/" class="archive-article-date">
+  	<time datetime="2017-08-18T07:02:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="MongoDB的基本概念"><a href="#MongoDB的基本概念" class="headerlink" title="MongoDB的基本概念"></a>MongoDB的基本概念</h2><p>MongoDB由C++编写，由<strong>10gen</strong>积极维护（主要），社区上也会受到一些贡献。这个项目是<strong>跨平台</strong>的和<strong>开源</strong>的，它能在所有主流操作系统上编译，包括Mac OS X,Windows以及Linux，目遵循的是<strong>GNU-AGPL许可</strong>。</p>
+<h3 id="一些特点"><a href="#一些特点" class="headerlink" title="一些特点"></a>一些特点</h3><p><strong>1.复制</strong></p>
+<p>MongoDB通过<strong>副本集</strong>（replica set）的拓扑结构提供了复制功能。副本集将数据分布在多台机器上实现冗余，在服务器和网络故障时能提供自动故障转移，此外复制功能还用于扩展数据库的读能力。它可<strong>以把读操作分散到副本集集群的各台机器上</strong>。有点类似于冗余磁盘整列的作用和概念。</p>
+<p><strong>副本集由一个主节点和多个重节点构成，只有主节点既能接受读操作也能接受写操作，而从节点是只读的。</strong></p>
+<p><img src="\img\QQ图片20170818150958.png" alt="QQ图片20170818150958"></p>
+<p><img src="\img\QQ图片20170818151106.png" alt="QQ图片20170818151106"></p>
+        
+          <a class="article-more-a" href="/2017/08/18/MongoDB-1-Brief-Introduce-of-MongoDB/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">MongoDB</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">NoSQL</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/08/18/MongoDB-1-Brief-Introduce-of-MongoDB/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+        <!-- 目录内容 -->
+             
+        <!-- 目录内容结束 -->
+  
     <article id="post-Nexus-2-Deploy-project-into-Nexus" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -421,75 +493,6 @@
              
         <!-- 目录内容结束 -->
   
-    <article id="post-Maven-2-Simple-Configuration-of-Maven" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/06/Maven-2-Simple-Configuration-of-Maven/">Maven (2):配置Maven与eclipse</a>
-    </h1>
-  
-
-        
-        <a href="/2017/08/06/Maven-2-Simple-Configuration-of-Maven/" class="archive-article-date">
-  	<time datetime="2017-08-06T03:10:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="更改本地仓库位置"><a href="#更改本地仓库位置" class="headerlink" title="更改本地仓库位置"></a>更改本地仓库位置</h2><p>  .m2文件夹在home目录下，这显然是不合适的，实际上我们可以更改Maven的配置文件setting.xml来更改本地仓库位置,setting.xml的位置在maven安装目录下的conf文件夹中。打开setting文档，然后Ctrl+f搜索到这一段，在后面添加本地仓库路径，我们就把本地的仓库指向了这个新路径，这里是D:\Java\repository。</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">settings</span> <span class="attr">xmlns</span>=<span class="string">"http://maven.apache.org/SETTINGS/1.0.0"</span></span></div><div class="line">          <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></div><div class="line">          <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd"</span>&gt;</div><div class="line">  <span class="comment">&lt;!-- localRepository</span></div><div class="line">   | The path to the local repository maven will use to store artifacts.</div><div class="line">   |</div><div class="line">   | Default: $&#123;user.home&#125;/.m2/repository</div><div class="line">  &lt;localRepository&gt;/path/to/local/repo&lt;/localRepository&gt;</div><div class="line">  --&gt;</div><div class="line">  <span class="tag">&lt;<span class="name">localRepository</span>&gt;</span>D:\Java\repository<span class="tag">&lt;/<span class="name">localRepository</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>  当然如果你肯定不想重新下载本身部署在原来仓库的依赖库，也不想把本地的项目从用mvn stall部署到新仓库，你可以把以前仓库的所有文件直接复制过来就可以了。</p>
-        
-          <a class="article-more-a" href="/2017/08/06/Maven-2-Simple-Configuration-of-Maven/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Maven</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/08/06/Maven-2-Simple-Configuration-of-Maven/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-        <!-- 目录内容 -->
-             
-        <!-- 目录内容结束 -->
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/8/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/10/">Next &raquo;</a>
@@ -582,11 +585,23 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">-闲谈</a>
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">React</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">闲谈</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">-ElasticSearch</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">-闲谈</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -610,23 +625,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">React</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">-ElasticSearch</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">JVM</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">软件测试</a>
+                <a href="javascript:void(0)" class="js-tag color1">Junit</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -634,7 +637,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Junit</a>
+                <a href="javascript:void(0)" class="js-tag color5">软件测试</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -658,15 +661,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">rxjs</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">notes</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Java</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">非阻塞I/O(NIO)</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">温故</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -678,7 +685,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">notes</a>
+                <a href="javascript:void(0)" class="js-tag color3">温故</a>
               </li>
              
               <li class="article-tag-list-item">

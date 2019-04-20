@@ -132,6 +132,76 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Learning-Scala-6-Monadic" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/15/Learning-Scala-6-Monadic/">Learning Scala(6):一元集合</a>
+    </h1>
+  
+
+        
+        <a href="/2017/07/15/Learning-Scala-6-Monadic/" class="archive-article-date">
+  	<time datetime="2017-07-15T03:06:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> <strong>一元(Monadic)集合支持Iterable中的变换操作，但是包含的元素不能多于1个。</strong></p>
+<h2 id="Option"><a href="#Option" class="headerlink" title="Option"></a>Option</h2><h3 id="Some和None"><a href="#Some和None" class="headerlink" title="Some和None"></a>Some和None</h3><p>  Option是一个一元集合类型，标识一个值的存在或者不存在。你可以看到很多编程语言近年来都增加了类似于Option的这样的一种特性，比如Java 8中的Optional和Swift中的Option,因为很多开发人员认为Option可以安全的代替null值，减少空指针异常发生的可能性，还有一些开发人员把它看作是构建操作链的安全方法，确保链中只含有有效的值。</p>
+<p>  Option类型本身没有实现，它依赖于两个子类型提供具体的实现：Some和None，其中Some是一个类型参数化的单元素集合，而None是一个空集合。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//创建一个值为kkk的字符串</span></div><div class="line">scala&gt; <span class="keyword">val</span> s=<span class="string">"kkk"</span></div><div class="line">s: <span class="type">String</span> = kkk</div><div class="line"></div><div class="line"><span class="comment">//调用Option，构造出Some类型</span></div><div class="line">scala&gt; <span class="keyword">val</span> a=<span class="type">Option</span>(s)</div><div class="line">a: <span class="type">Option</span>[<span class="type">String</span>] = <span class="type">Some</span>(kkk)</div><div class="line"></div><div class="line"><span class="comment">//创建一个空字符串</span></div><div class="line">scala&gt; <span class="keyword">val</span> n:<span class="type">String</span>=<span class="literal">null</span></div><div class="line">n: <span class="type">String</span> = <span class="literal">null</span></div><div class="line"></div><div class="line"><span class="comment">/*</span></div><div class="line">调用Option，构造出None类型</div><div class="line">以此你可以通过这样的新方式来判断一个值或者变量是不是null</div><div class="line">*/</div><div class="line">scala&gt; <span class="keyword">val</span> b=<span class="type">Option</span>(n)</div><div class="line">b: <span class="type">Option</span>[<span class="type">String</span>] = <span class="type">None</span></div><div class="line"></div><div class="line"><span class="comment">/*</span></div><div class="line">当然如果不是在REPL下而是在IDE下编写Scala程序，你并不会直接看到toString的输出，你也就无法判定具体的类型到底是None还是Some，这样的话我们需要借助两个操作来判断：isDefined和isEmpty</div><div class="line">*/</div><div class="line">scala&gt; a.isDefined</div><div class="line">res40: <span class="type">Boolean</span> = <span class="literal">true</span></div><div class="line"></div><div class="line">scala&gt; a.isEmpty</div><div class="line">res41: <span class="type">Boolean</span> = <span class="literal">false</span></div><div class="line"></div><div class="line">scala&gt; b.isEmpty</div><div class="line">res42: <span class="type">Boolean</span> = <span class="literal">true</span></div><div class="line"></div><div class="line">scala&gt; b.isDefined</div><div class="line">res43: <span class="type">Boolean</span> = <span class="literal">false</span></div></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2017/07/15/Learning-Scala-6-Monadic/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习笔记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">scala</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/07/15/Learning-Scala-6-Monadic/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+        <!-- 目录内容 -->
+             
+        <!-- 目录内容结束 -->
+  
     <article id="post-Learning-Scala-5-mutable-collection" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -433,100 +503,6 @@
              
         <!-- 目录内容结束 -->
   
-    <article id="post-Learning-Scala-1-Function" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/05/Learning-Scala-1-Function/">Learning Scala (1):一等公民——first-class function</a>
-    </h1>
-  
-
-        
-        <a href="/2017/07/05/Learning-Scala-1-Function/" class="archive-article-date">
-  	<time datetime="2017-07-05T02:50:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>  最近一周都在学习Scala这门语言,昨天刚刚看完O‘Reilly动物系列的<a href="https://book.douban.com/subject/26786632/" target="_blank" rel="external">《Scala学习手册》</a>，这是一本Scala语法入门书，总共就200来页，对于想学Scala的且有一定java基础的人来说可以入一本看看，Scala和C++一样是一门多范式语言，如果你能有一个安静的看书环境2-3就可以搞定，这本书里并没-有主要介绍Scala的函数式编程特点，只是用来语法入门，如果你想了解Scala函数式编程，在读完这本书之后可以看<a href="https://book.douban.com/subject/26772149/" target="_blank" rel="external">《Scala函数式编程》</a>这本书。</p>
-<h2 id="first-class-function介绍"><a href="#first-class-function介绍" class="headerlink" title="first-class function介绍"></a>first-class function介绍</h2><p>  什么是First-class function？</p>
-<p>  在<a href="https://book.douban.com/subject/26786632/" target="_blank" rel="external">《Scala学习手册》</a>中译者把它叫做首类函数，我觉得这个名字翻译的很奇怪，所以在这里我不用这个名字。    </p>
-<p>  first-class为名词作定语，它是用作来修饰类型的（在Scala中函数都有类型），可以把它看做是第一类，一等公民的意思，这样说你可能不太理解，但是如果我告诉你，还有second-class,和third-class你大概就知道了，一个函数可以加上First-class来修饰，是因为它满足了first-class的定义，那么这一、二、三类的区别是什么呢？</p>
-<table>
-<thead>
-<tr>
-<th>类型</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>First-class</td>
-<td>表示一种类型的值不仅能得到声明和调用，还可以作为一个数据类型作用在这种语言的任务地方</td>
-</tr>
-<tr>
-<td>Second-class</td>
-<td>表示一种类型的值可以作为函数的参数，但不能从函数返回，也不能赋给变量</td>
-</tr>
-<tr>
-<td>Third-class</td>
-<td>表示一种类型的值作为函数参数也不行，更不能从函数返回，也不能赋给变量</td>
-</tr>
-</tbody>
-</table>
-<p>  现在你知道什么是First-class了，如果你以前用过Javascript，你会更加理解一个函数是首类函数的便利性，在函数式编程语言中函数是First-class的，Scala是多范式语言，函数式编程是它的重要特性，所以Scala中的函数是First-class function，理解这一点，对应学习Scala是重要的。</p>
-<p>  First-class function与其他数据类型一样可以采用字面量的形式创建，而不必指定标识符，他可以存储在一个容器中，如值，变量或者数据结构，还可以作为另一个函数的参数或者返回值。</p>
-        
-          <a class="article-more-a" href="/2017/07/05/Learning-Scala-1-Function/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">scala</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/07/05/Learning-Scala-1-Function/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-        <!-- 目录内容 -->
-             
-        <!-- 目录内容结束 -->
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/12/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><span class="page-number current">13</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/14/">Next &raquo;</a>
@@ -619,11 +595,23 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">-闲谈</a>
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">React</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">闲谈</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">-ElasticSearch</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">-闲谈</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -647,23 +635,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">React</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">-ElasticSearch</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">JVM</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">软件测试</a>
+                <a href="javascript:void(0)" class="js-tag color1">Junit</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -671,7 +647,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Junit</a>
+                <a href="javascript:void(0)" class="js-tag color5">软件测试</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -695,15 +671,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">rxjs</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">notes</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Java</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">非阻塞I/O(NIO)</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">温故</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -715,7 +695,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">notes</a>
+                <a href="javascript:void(0)" class="js-tag color3">温故</a>
               </li>
              
               <li class="article-tag-list-item">

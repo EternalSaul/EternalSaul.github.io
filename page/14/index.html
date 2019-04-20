@@ -132,6 +132,100 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Learning-Scala-1-Function" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/05/Learning-Scala-1-Function/">Learning Scala (1):一等公民——first-class function</a>
+    </h1>
+  
+
+        
+        <a href="/2017/07/05/Learning-Scala-1-Function/" class="archive-article-date">
+  	<time datetime="2017-07-05T02:50:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>  最近一周都在学习Scala这门语言,昨天刚刚看完O‘Reilly动物系列的<a href="https://book.douban.com/subject/26786632/" target="_blank" rel="external">《Scala学习手册》</a>，这是一本Scala语法入门书，总共就200来页，对于想学Scala的且有一定java基础的人来说可以入一本看看，Scala和C++一样是一门多范式语言，如果你能有一个安静的看书环境2-3就可以搞定，这本书里并没-有主要介绍Scala的函数式编程特点，只是用来语法入门，如果你想了解Scala函数式编程，在读完这本书之后可以看<a href="https://book.douban.com/subject/26772149/" target="_blank" rel="external">《Scala函数式编程》</a>这本书。</p>
+<h2 id="first-class-function介绍"><a href="#first-class-function介绍" class="headerlink" title="first-class function介绍"></a>first-class function介绍</h2><p>  什么是First-class function？</p>
+<p>  在<a href="https://book.douban.com/subject/26786632/" target="_blank" rel="external">《Scala学习手册》</a>中译者把它叫做首类函数，我觉得这个名字翻译的很奇怪，所以在这里我不用这个名字。    </p>
+<p>  first-class为名词作定语，它是用作来修饰类型的（在Scala中函数都有类型），可以把它看做是第一类，一等公民的意思，这样说你可能不太理解，但是如果我告诉你，还有second-class,和third-class你大概就知道了，一个函数可以加上First-class来修饰，是因为它满足了first-class的定义，那么这一、二、三类的区别是什么呢？</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>First-class</td>
+<td>表示一种类型的值不仅能得到声明和调用，还可以作为一个数据类型作用在这种语言的任务地方</td>
+</tr>
+<tr>
+<td>Second-class</td>
+<td>表示一种类型的值可以作为函数的参数，但不能从函数返回，也不能赋给变量</td>
+</tr>
+<tr>
+<td>Third-class</td>
+<td>表示一种类型的值作为函数参数也不行，更不能从函数返回，也不能赋给变量</td>
+</tr>
+</tbody>
+</table>
+<p>  现在你知道什么是First-class了，如果你以前用过Javascript，你会更加理解一个函数是首类函数的便利性，在函数式编程语言中函数是First-class的，Scala是多范式语言，函数式编程是它的重要特性，所以Scala中的函数是First-class function，理解这一点，对应学习Scala是重要的。</p>
+<p>  First-class function与其他数据类型一样可以采用字面量的形式创建，而不必指定标识符，他可以存储在一个容器中，如值，变量或者数据结构，还可以作为另一个函数的参数或者返回值。</p>
+        
+          <a class="article-more-a" href="/2017/07/05/Learning-Scala-1-Function/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习笔记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">scala</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/07/05/Learning-Scala-1-Function/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+        <!-- 目录内容 -->
+             
+        <!-- 目录内容结束 -->
+  
     <article id="post-7‘¬" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -352,11 +446,23 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">-闲谈</a>
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">React</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">闲谈</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">-ElasticSearch</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">-闲谈</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -380,23 +486,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">React</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">-ElasticSearch</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">JVM</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">软件测试</a>
+                <a href="javascript:void(0)" class="js-tag color1">Junit</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -404,7 +498,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Junit</a>
+                <a href="javascript:void(0)" class="js-tag color5">软件测试</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -428,15 +522,19 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">rxjs</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">notes</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Java</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">非阻塞I/O(NIO)</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">温故</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -448,7 +546,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">notes</a>
+                <a href="javascript:void(0)" class="js-tag color3">温故</a>
               </li>
              
               <li class="article-tag-list-item">
