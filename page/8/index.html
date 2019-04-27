@@ -132,6 +132,81 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Docker-1-Run-a-Nginx-in-Docker" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/13/Docker-1-Run-a-Nginx-in-Docker/">Docker (1):Run a Nginx in Docker</a>
+    </h1>
+  
+
+        
+        <a href="/2017/09/13/Docker-1-Run-a-Nginx-in-Docker/" class="archive-article-date">
+  	<time datetime="2017-09-13T04:51:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-13</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>  Docker是在下非常常见的一个应用容器引擎，和MongoDb一样，它也诞生Paas市场混战时的,一家叫dotCloud的Paas提供商。</p>
+<p>   它的流行主要是能解决一些业界的痛点：</p>
+<p>​    1.解决了运行环境不一致带来的问题</p>
+<p>​    2.它的隔离性解决了资源分配过度的问题，它可以限定一个用户最多用多少资源</p>
+<p>​    3.因为上两点，我们可以实现新的服务器更快的部署</p>
+<p>centos上，直接使用以下命令，就可以自动安装docker</p>
+<p><code>yum install docker</code></p>
+<p>这个安装方式的缺点是，版本号可能不是最新的，你也可以采取curl方式来安装它的最新版本：</p>
+<p><code>curl -s https://get.docker.com|sh</code></p>
+        
+          <a class="article-more-a" href="/2017/09/13/Docker-1-Run-a-Nginx-in-Docker/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习笔记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Docker</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/09/13/Docker-1-Run-a-Nginx-in-Docker/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+        <!-- 目录内容 -->
+             
+        <!-- 目录内容结束 -->
+  
     <article id="post-Functional-Programming-4-Monoid" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -410,76 +485,6 @@
              
         <!-- 目录内容结束 -->
   
-    <article id="post-MongoDB-2-MongoDB-shell" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/19/MongoDB-2-MongoDB-shell/">MongoDB (2):MongoDB shell</a>
-    </h1>
-  
-
-        
-        <a href="/2017/08/19/MongoDB-2-MongoDB-shell/" class="archive-article-date">
-  	<time datetime="2017-08-19T08:37:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="在windows上配置MongoDB"><a href="#在windows上配置MongoDB" class="headerlink" title="在windows上配置MongoDB"></a>在windows上配置MongoDB</h2><p>mongodb安装完成之后并不会自动给你建立data/db文件夹，你需要手动建立它，不然你会发现你无法执行mongod命令，来启动js shell操作mongodb</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="number">2017</span>-<span class="number">08</span>-<span class="number">19</span>T00:<span class="number">58</span>:<span class="number">21.465</span>-<span class="number">0700</span> I STORAGE  [initandlisten] exception <span class="keyword">in</span> initAndListen: <span class="number">29</span> <span class="keyword">Data</span> directory C:\data\db\ not found., terminating</div></pre></td></tr></table></figure>
-<p>但是一般情况下，你可不想为mongod进程单开一个控制台让他阻塞在那里来监听我们的客户端操作，windows情况下我们一般把它当做服务来操作</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">//执行以下命令</div><div class="line"></div><div class="line">mongod.exe </div><div class="line"></div><div class="line">--install</div><div class="line"></div><div class="line">--bind_ip <span class="number">127.0</span>.<span class="number">0.1</span> 		</div><div class="line"></div><div class="line">--logpath <span class="string">"C:\data\dbConf\mongodb.log"</span> //这里是日志文件路径,你必须创建这个文件否则报错</div><div class="line"></div><div class="line">--logappend 			//这里是以追加形式写日志</div><div class="line"></div><div class="line">--dbpath <span class="string">"C:/data/db"</span> 		//这里修改则默认文件夹就不是<span class="keyword">data</span>/db了，你必须先创建这个文件夹</div><div class="line"></div><div class="line">--port <span class="number">27017</span> 			//端口 默认就是<span class="number">27017</span></div><div class="line"></div><div class="line">--serviceName <span class="string">"mongodb"</span>		//服务名</div></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2017/08/19/MongoDB-2-MongoDB-shell/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">MongoDB</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">NoSQL</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/08/19/MongoDB-2-MongoDB-shell/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-        <!-- 目录内容 -->
-             
-        <!-- 目录内容结束 -->
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/7/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/9/">Next &raquo;</a>
@@ -600,10 +605,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">-ElasticSearch</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">scala</a>
               </li>
              
@@ -612,11 +613,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">-ElasticSearch</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">JVM</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">软件测试</a>
+                <a href="javascript:void(0)" class="js-tag color1">Junit</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -624,7 +629,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Junit</a>
+                <a href="javascript:void(0)" class="js-tag color5">软件测试</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -664,6 +669,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Docker</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">温故</a>
               </li>
              
@@ -673,10 +682,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">study notes</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Docker</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -132,6 +132,77 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Notes-of-Deep-Learning-Neural-network-1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/02/28/Notes-of-Deep-Learning-Neural-network-1/">Notes of CS231n:Neural network 1</a>
+    </h1>
+  
+
+        
+        <a href="/2018/02/28/Notes-of-Deep-Learning-Neural-network-1/" class="archive-article-date">
+  	<time datetime="2018-02-28T07:17:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="人工神经元"><a href="#人工神经元" class="headerlink" title="人工神经元"></a>人工神经元</h2><p>  其实神经元这个翻译有点唬人，有些学者也不喜欢借用某些生物词语来蹭热度，他们直接就把所谓的人工神经元称之为单元（unit），结合人工神经网络来看的话，你可以很容易的推测出，它是由这个所谓的人工神经元组成的。在一个人工神经网络中，神经元间会有一种单向的影响，因为人工神经网络可以看做是一张有向无环图。下图是一个常见的粗糙模型：</p>
+<div align="center"><br><br><img width="600px" src="\img\QQ图片20180214181505.png"><br><br><img src="\img\QQ图片20180214180333.jpg"><br><br></div>
+
+<p>从这张图中你可以看到，一个人工神经元有几个主要的部分，如果你把它看做是有向无环图里的一个节点，那么你可以观察到它的每一个入度，分别对应一个不同的输入和一个自身权重的乘积（w和x都是向量或者矩阵，这里准确来说应该是<strong>点积</strong>），所有入度的点积的累加加上节点对应的偏差值（偏置）(Σwixi+b）代入所入节点的激活函数，图中就是f，对应为f(Σwixi+b),然后这个输出结果（<strong>激活率</strong>）顺着节点的出度流入下一层网络中的神经元。</p>
+<p>  现在你大概知道什么是所谓的人工神经元，如果硬要跟生物神经元扯上一毛钱关系的话，你学过高中生物，大概会知道突触，树突，突触小泡之类的，你也许能把这个和两个神经细胞里通过突触来传递兴奋的机制联系起来…然后对别人吹嘘一波，但是我是做不到的，可能是我不怎么了解生物吧。 </p>
+        
+          <a class="article-more-a" href="/2018/02/28/Notes-of-Deep-Learning-Neural-network-1/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习笔记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">深度学习</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/02/28/Notes-of-Deep-Learning-Neural-network-1/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+        <!-- 目录内容 -->
+             
+        <!-- 目录内容结束 -->
+  
     <article id="post-Junit-4-Mock" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -177,7 +248,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">软件测试</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Junit</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -185,7 +256,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Junit</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">软件测试</a>
         		</li>
       		
 		</ul>
@@ -252,7 +323,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">软件测试</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Junit</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -260,7 +331,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Junit</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">软件测试</a>
         		</li>
       		
 		</ul>
@@ -420,69 +491,6 @@
              
         <!-- 目录内容结束 -->
   
-    <article id="post-Von-Neumann-The-Mathematician-part-1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/13/Von-Neumann-The-Mathematician-part-1/">冯诺依曼：《数学家》（上）</a>
-    </h1>
-  
-
-        
-        <a href="/2017/12/13/Von-Neumann-The-Mathematician-part-1/" class="archive-article-date">
-  	<time datetime="2017-12-13T10:56:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><em>本文作者是冯诺依曼，英文名为《The Mathematician》，该文章在1947年发表在《Works of the Mind》上，后来也记录在《von Neumann’s Collected Works》中，这篇文章是我听讲座时偶然得知的，于是看了一下后翻译了出来，才疏学浅，只源于爱好，如有不对多多包涵——2017.12.13</em>  </p>
-        
-          <a class="article-more-a" href="/2017/12/13/Von-Neumann-The-Mathematician-part-1/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">译文</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/12/13/Von-Neumann-The-Mathematician-part-1/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-        <!-- 目录内容 -->
-             
-        <!-- 目录内容结束 -->
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/4/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/6/">Next &raquo;</a>
@@ -603,10 +611,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">-ElasticSearch</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">scala</a>
               </li>
              
@@ -615,11 +619,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">-ElasticSearch</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">JVM</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">软件测试</a>
+                <a href="javascript:void(0)" class="js-tag color1">Junit</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -627,7 +635,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Junit</a>
+                <a href="javascript:void(0)" class="js-tag color5">软件测试</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -667,6 +675,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Docker</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">温故</a>
               </li>
              
@@ -676,10 +688,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">study notes</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Docker</a>
               </li>
              
               <li class="article-tag-list-item">

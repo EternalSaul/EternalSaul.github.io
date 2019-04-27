@@ -132,6 +132,73 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-RXjs-1-combination" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/27/RXjs-1-combination/">RXjs(1): combination</a>
+    </h1>
+  
+
+        
+        <a href="/2019/04/27/RXjs-1-combination/" class="archive-article-date">
+  	<time datetime="2019-04-27T07:37:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="合并数据流"><a href="#合并数据流" class="headerlink" title="合并数据流"></a>合并数据流</h1><p>##　concat：首尾相连<br><figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123;concat, defer, interval, never, Observable, of&#125; <span class="keyword">from</span> <span class="string">"rxjs"</span>;</div><div class="line"></div><div class="line"><span class="comment">// concat会在前一个observable完结之后,去订阅后一个observable，如果前一个observable不完结，那么永远没有机会订阅后一个</span></div><div class="line"></div><div class="line"><span class="keyword">let</span> nextFunc = <span class="function"><span class="params">next</span> =&gt;</span> <span class="built_in">console</span>.log(next)</div><div class="line"></div><div class="line"><span class="keyword">let</span> observable = defer(<span class="function"><span class="params">()</span> =&gt;</span>  &#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">"observable has been subscribed"</span>);</div><div class="line">    <span class="keyword">return</span> of(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)</div><div class="line">&#125;);</div><div class="line"><span class="comment">//不输出任何日志，因为never永远不会完结，下游的数据永远也不会被subscribe，所以什么也不输出</span></div><div class="line">concat(never(), observable).subscribe(nextFunc);</div><div class="line"><span class="comment">//输出1,2,3</span></div><div class="line">concat(observable, never()).subscribe(nextFunc);</div><div class="line"></div><div class="line">concat(interval(<span class="number">1000</span>), observable).subscribe(nextFunc);</div></pre></td></tr></table></figure></p>
+        
+          <a class="article-more-a" href="/2019/04/27/RXjs-1-combination/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">rxjs</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">notes</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/04/27/RXjs-1-combination/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+        <!-- 目录内容 -->
+             
+        <!-- 目录内容结束 -->
+  
     <article id="post-RXjs-0-creator" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -152,7 +219,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="创建数据流"><a href="#创建数据流" class="headerlink" title="创建数据流"></a>创建数据流</h1><h2 id="同步创建数据流"><a href="#同步创建数据流" class="headerlink" title="同步创建数据流"></a>同步创建数据流</h2><p>// 在一般情形下我们很少去主动创建同步的数据流，创建同步数据流一般是在写测试，写例子的时候<br>// rxjs之所以能够被称为前端编程中的’屠龙刀’，很大程度上是因为它处理异步数据流的简便性</p>
+        <h1 id="创建数据流"><a href="#创建数据流" class="headerlink" title="创建数据流"></a>创建数据流</h1><h2 id="同步创建数据流"><a href="#同步创建数据流" class="headerlink" title="同步创建数据流"></a>同步创建数据流</h2><p>在一般情形下我们很少去主动创建同步的数据流，创建同步数据流一般是在写测试，写例子的时候<br>rxjs之所以能够被称为前端编程中的’屠龙刀’，很大程度上是因为它处理异步数据流的简便性</p>
 <h3 id="of"><a href="#of" class="headerlink" title="of"></a>of</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 自定义一个流的内容</span></div><div class="line"><span class="keyword">let</span> of$ = of(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>);</div><div class="line">of$.subscribe(</div><div class="line">    <span class="function">(<span class="params">next</span>) =&gt;</span> <span class="built_in">console</span>.log(next)</div><div class="line">);</div></pre></td></tr></table></figure>
 <h3 id="Range"><a href="#Range" class="headerlink" title="Range"></a>Range</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// range是给定一个初始值，往后加1</div><div class="line">let range$ = range(1,4);</div><div class="line">range$.subscribe(</div><div class="line">    (next) =&gt; console.log(next)</div><div class="line">);</div></pre></td></tr></table></figure>
         
@@ -408,73 +475,6 @@
              
         <!-- 目录内容结束 -->
   
-    <article id="post-Typescript-Enums" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/12/Typescript-Enums/">Typescript(4):Enums</a>
-    </h1>
-  
-
-        
-        <a href="/2019/03/12/Typescript-Enums/" class="archive-article-date">
-  	<time datetime="2019-03-12T11:54:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>枚举允许我们简单的定义一些但名字的常量，在TS语法中支持数字和基于字符串的两种枚举。</p>
-        
-          <a class="article-more-a" href="/2019/03/12/Typescript-Enums/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">notes</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">typescript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/03/12/Typescript-Enums/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-        <!-- 目录内容 -->
-             
-        <!-- 目录内容结束 -->
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -595,10 +595,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">-ElasticSearch</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">scala</a>
               </li>
              
@@ -607,11 +603,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">-ElasticSearch</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">JVM</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">软件测试</a>
+                <a href="javascript:void(0)" class="js-tag color1">Junit</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -619,7 +619,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Junit</a>
+                <a href="javascript:void(0)" class="js-tag color5">软件测试</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -659,6 +659,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Docker</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">温故</a>
               </li>
              
@@ -668,10 +672,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">study notes</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Docker</a>
               </li>
              
               <li class="article-tag-list-item">
