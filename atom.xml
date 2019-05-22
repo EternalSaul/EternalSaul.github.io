@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-04-27T11:25:22.408Z</updated>
+  <updated>2019-04-27T11:29:34.275Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://yoursite.com/2019/04/27/RXjs-1-combination/"/>
     <id>http://yoursite.com/2019/04/27/RXjs-1-combination/</id>
     <published>2019-04-27T07:37:40.000Z</published>
-    <updated>2019-04-27T11:25:22.408Z</updated>
+    <updated>2019-04-27T11:29:34.275Z</updated>
     
     <content type="html"><![CDATA[<h1 id="合并数据流"><a href="#合并数据流" class="headerlink" title="合并数据流"></a>合并数据流</h1><p>##　concat：首尾相连<br><figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123;concat, defer, interval, never, Observable, of&#125; <span class="keyword">from</span> <span class="string">"rxjs"</span>;</div><div class="line"></div><div class="line"><span class="comment">// concat会在前一个observable完结之后,去订阅后一个observable，如果前一个observable不完结，那么永远没有机会订阅后一个</span></div><div class="line"></div><div class="line"><span class="keyword">let</span> nextFunc = <span class="function"><span class="params">next</span> =&gt;</span> <span class="built_in">console</span>.log(next)</div><div class="line"></div><div class="line"><span class="keyword">let</span> observable = defer(<span class="function"><span class="params">()</span> =&gt;</span>  &#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">"observable has been subscribed"</span>);</div><div class="line">    <span class="keyword">return</span> of(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)</div><div class="line">&#125;);</div><div class="line"><span class="comment">//不输出任何日志，因为never永远不会完结，下游的数据永远也不会被subscribe，所以什么也不输出</span></div><div class="line">concat(never(), observable).subscribe(nextFunc);</div><div class="line"><span class="comment">//输出1,2,3</span></div><div class="line">concat(observable, never()).subscribe(nextFunc);</div><div class="line"></div><div class="line">concat(interval(<span class="number">1000</span>), observable).subscribe(nextFunc);</div></pre></td></tr></table></figure></p>
 <a id="more"></a>
@@ -631,6 +631,72 @@
   </entry>
   
   <entry>
+    <title>Lombok如何工作</title>
+    <link href="http://yoursite.com/2018/10/11/lombok%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C/"/>
+    <id>http://yoursite.com/2018/10/11/lombok如何工作/</id>
+    <published>2018-10-11T06:35:28.000Z</published>
+    <updated>2019-05-22T09:00:10.150Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="lombok如何工作"><a href="#lombok如何工作" class="headerlink" title="lombok如何工作"></a>lombok如何工作</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">@Getter</div><div class="line">public class FootBoot &#123;</div><div class="line">    int price;</div><div class="line">    int size;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如何转变为了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">public class FootBoot &#123;</div><div class="line">    int price;</div><div class="line">    int size;</div><div class="line"></div><div class="line">    public int getSize() &#123;</div><div class="line">        return this.size;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public int getPrice() &#123;</div><div class="line">        return this.price;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public FootBoot() &#123;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如果要发生这种转变，也许有三个阶段可以发生</p>
+<p>1、编译之前：直接改动.java文件</p>
+<p>如果在这个阶段进行操作，可能要解决的问题太多了</p>
+<p>这时候连扫描程序都没有工作，对于机器来说.java文件就是普通的文本，要一个一个字符去扫描</p>
+<p> 2、编译之后，直接改字节码：没办进行</p>
+<p>因为在编译阶段的语义分析时时就会报错，编译器找不到对应的方法</p>
+<p> 3、编译阶段</p>
+<p>在编译阶段我们本身就对.java源文件进行了阶段性分析，相当于做掉了很大一部分工作，因为涉及到语义分析，所以这个处理过程还要发生在语义分析之前。</p>
+<a id="more"></a>
+<p>在语义分析之前，只有词法分析和语法分析两个阶段，lombok进行的代码增改阶段是在语法分析后发生。并且这个阶段应该是能较好的处理这个需求的，因为在语法分析之后会生抽类文件的抽象语法树。</p>
+<p><img src="/Users/kxin/Desktop/Screen Shot 2019-01-21 at 12.33.42 AM.png" alt="Screen Shot 2019-01-21 at 12.33.42 AM"></p>
+<p>抽象语法树很清晰的描述了类文件的结构，我们可以修改它的子树，在下面增一些我们自己定义的子树，或者替换它本身存在的子树，最后把修改后的子树送给语义分析程序，只要保证我们增加的语句语法是正确的，接下来的阶段我们就不需要去管了，和正常的编译流程一样，语义分析后把结果给字节码生成器就好了。</p>
+<p>那么我们如何去操控javac让它知道我们要在语法生成树上增改一些东西呢？其实javac作为java这样一个广泛采用的语言的编译器，插件机制肯定是少不了的，用于做这一步的机制叫做Annotation Process机制，我们可以在编译时指定一个注解处理器，这个注解处理器会在抽象语法树初步生成之后执行，它的存在让我们有了通过注解标记来执行对抽象语法树修改的可能。</p>
+<p>定义一个注解处理器的基本架构如下, init用来获取一些上下文对象，比如我们要获取到所有类文件的语法树，打日志的对象，还要得到可以生成一个语法树的对象，创建或者获取一些标识符等等。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">//要处理哪个注解</div><div class="line">@SupportedAnnotationTypes(&quot;xin.saul.annotation.Getter&quot;)</div><div class="line">//支持的版本</div><div class="line">@SupportedSourceVersion(SourceVersion.RELEASE_8)</div><div class="line">public class GetterProcessor extends AbstractProcessor &#123;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public synchronized void init(ProcessingEnvironment processingEnv) &#123;</div><div class="line">        super.init(processingEnv);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public boolean process(Set&lt;? extends TypeElement&gt; annotations, RoundEnvironment roundEnv) &#123;</div><div class="line">        return true;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>下面是我实现的一个注解处理器：</p>
+<p>com.sun.tools.javac老源码:<a href="https://github.com/fiji/javac/blob/master/src/main/java/com/sun/tools/javac/tree/JCTree.java" target="_blank" rel="external">https://github.com/fiji/javac/blob/master/src/main/java/com/sun/tools/javac/tree/JCTree.java</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div></pre></td><td class="code"><pre><div class="line">package xin.saul.processor;</div><div class="line"></div><div class="line">import com.sun.source.tree.Tree;</div><div class="line">import com.sun.tools.javac.api.JavacTrees;</div><div class="line">import com.sun.tools.javac.code.Flags;</div><div class="line">import com.sun.tools.javac.processing.JavacProcessingEnvironment;</div><div class="line">import com.sun.tools.javac.tree.JCTree;</div><div class="line">import com.sun.tools.javac.tree.TreeMaker;</div><div class="line">import com.sun.tools.javac.tree.TreeTranslator;</div><div class="line">import com.sun.tools.javac.util.*;</div><div class="line">import lombok.Data;</div><div class="line">import xin.saul.annotation.Getter;</div><div class="line"></div><div class="line">import javax.annotation.processing.*;</div><div class="line">import javax.lang.model.SourceVersion;</div><div class="line">import javax.lang.model.element.Element;</div><div class="line">import javax.lang.model.element.TypeElement;</div><div class="line">import javax.tools.Diagnostic;</div><div class="line">import java.util.Set;</div><div class="line"></div><div class="line">@SupportedAnnotationTypes(&quot;xin.saul.annotation.Getter&quot;)</div><div class="line">@SupportedSourceVersion(SourceVersion.RELEASE_8)</div><div class="line">@Data</div><div class="line">public class GetterProcessor extends AbstractProcessor &#123;</div><div class="line"></div><div class="line">    private Messager messager;</div><div class="line">    private JavacTrees trees;</div><div class="line">    private TreeMaker treeMaker;</div><div class="line">    private Names names;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public synchronized void init(ProcessingEnvironment processingEnv) &#123;</div><div class="line">        super.init(processingEnv);</div><div class="line">        //Messager主要是用来在编译期打log用的</div><div class="line">        this.messager = processingEnv.getMessager();</div><div class="line">        //JavacTrees提供了待处理的抽象语法树</div><div class="line">        this.trees = JavacTrees.instance(processingEnv);</div><div class="line">        Context context = ((JavacProcessingEnvironment) processingEnv).getContext();</div><div class="line">        //TreeMaker封装了创建AST节点的一些方法</div><div class="line">        this.treeMaker = TreeMaker.instance(context);</div><div class="line">        //Names提供了创建标识符的方法</div><div class="line">        this.names = Names.instance(context);</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public boolean process(Set&lt;? extends TypeElement&gt; annotations, RoundEnvironment roundEnv) &#123;</div><div class="line">        //从编译环境上下文中，获取被注解标记的类</div><div class="line">        Set&lt;? extends Element&gt; set = roundEnv.getElementsAnnotatedWith(Getter.class);</div><div class="line">        set.forEach(element -&gt; &#123;</div><div class="line">            //获取被注解标记类的抽象语法树</div><div class="line">            JCTree jcTree = trees.getTree(element);</div><div class="line">            //抽象语法树都是通过 visit来访问的，设计模式中的，访问者模式，对不同的类型做不同的处理</div><div class="line">            jcTree.accept(new TreeTranslator() &#123;</div><div class="line"></div><div class="line">                //对类的抽象语法树做处理</div><div class="line">                @Override</div><div class="line">                public void visitClassDef(JCTree.JCClassDecl jcClassDecl) &#123;</div><div class="line">                    List&lt;JCTree.JCVariableDecl&gt; jcVariableDeclList = List.nil();</div><div class="line"></div><div class="line">                    //遍历类中所有的子树</div><div class="line">                    for (JCTree tree : jcClassDecl.defs) &#123;</div><div class="line">                        //记录子树中所有的变量子树</div><div class="line">                        if (tree.getKind().equals(Tree.Kind.VARIABLE)) &#123;</div><div class="line">                            JCTree.JCVariableDecl jcVariableDecl = (JCTree.JCVariableDecl) tree;</div><div class="line">                            jcVariableDeclList = jcVariableDeclList.append(jcVariableDecl);</div><div class="line">                        &#125;</div><div class="line">                    &#125;</div><div class="line"></div><div class="line">                    //对每一个变量子树，生成其对于的Getter方法对应的子树，加入到@Getter标识的类的抽象语法树中</div><div class="line">                    jcVariableDeclList.forEach(jcVariableDecl -&gt; &#123;</div><div class="line">                        messager.printMessage(Diagnostic.Kind.NOTE, jcVariableDecl.getName() + &quot; has been processed&quot;);</div><div class="line">                        jcClassDecl.defs = jcClassDecl.defs.prepend(makeGetterMethodDecl(jcVariableDecl));</div><div class="line">                    &#125;);</div><div class="line"></div><div class="line">                    //调用父类的观察者方法</div><div class="line">                    super.visitClassDef(jcClassDecl);</div><div class="line">                &#125;</div><div class="line"></div><div class="line">            &#125;);</div><div class="line">        &#125;);</div><div class="line">        return true;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private JCTree.JCMethodDecl makeGetterMethodDecl(JCTree.JCVariableDecl jcVariableDecl) &#123;</div><div class="line"></div><div class="line">        //创建一个语句子树列表，用来存放get方法对应的语句</div><div class="line">        ListBuffer&lt;JCTree.JCStatement&gt; statements = new ListBuffer&lt;&gt;();</div><div class="line"></div><div class="line">        //使用init中准备好的treeMaker去生成一条语句</div><div class="line">        //一个return 语句块 嵌套一个select表达式，即是xxx.xxx这样的表达式，用于类或者包</div><div class="line">        //Ident是Identifier的缩写，即是关键字和保留字，这里获取this这个保留字</div><div class="line">        statements.append(treeMaker.Return(treeMaker.Select(treeMaker.Ident(names.fromString(&quot;this&quot;)), jcVariableDecl.getName())));</div><div class="line"></div><div class="line">        //构建语句块抽象语法树,flags是用位形式来表示修饰符，比如是不是static语句块等等</div><div class="line">        JCTree.JCBlock body = treeMaker.Block(0, statements.toList());</div><div class="line"></div><div class="line">        //构建方法的抽象语法树</div><div class="line">        return treeMaker.MethodDef(treeMaker.Modifiers(Flags.PUBLIC), getNewMethodName(jcVariableDecl.getName()), jcVariableDecl.vartype, List.nil(), List.nil(), List.nil(), body, null);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    //生成方法标识符</div><div class="line">    private Name getNewMethodName(Name name) &#123;</div><div class="line">        String s = name.toString();</div><div class="line">        return names.fromString(&quot;get&quot; + s.substring(0, 1).toUpperCase() + s.substring(1, name.length()));</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>测试</p>
+<p>目录：</p>
+<p>├── FootBall.java</p>
+<p>├── Getter.java</p>
+<p>├── GetterProcessor.java</p>
+<p>└── classes</p>
+<p>rm -rf classes</p>
+<p>Mkdir classes</p>
+<p>javac -cp $JAVA_HOME/lib/tools.jar -d classes Getter*  </p>
+<p>javac -cp classes -d classes -processor xin.saul.processor.GetterProcessor FootBall.java</p>
+<p>cd classes/xin/saul</p>
+<p>javap FootBall</p>
+<p>cd ….</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;lombok如何工作&quot;&gt;&lt;a href=&quot;#lombok如何工作&quot; class=&quot;headerlink&quot; title=&quot;lombok如何工作&quot;&gt;&lt;/a&gt;lombok如何工作&lt;/h2&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;@Getter&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;public class FootBoot &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    int price;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    int size;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;如何转变为了&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;15&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;public class FootBoot &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    int price;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    int size;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    public int getSize() &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        return this.size;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    public int getPrice() &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        return this.price;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    public FootBoot() &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;如果要发生这种转变，也许有三个阶段可以发生&lt;/p&gt;
+&lt;p&gt;1、编译之前：直接改动.java文件&lt;/p&gt;
+&lt;p&gt;如果在这个阶段进行操作，可能要解决的问题太多了&lt;/p&gt;
+&lt;p&gt;这时候连扫描程序都没有工作，对于机器来说.java文件就是普通的文本，要一个一个字符去扫描&lt;/p&gt;
+&lt;p&gt; 2、编译之后，直接改字节码：没办进行&lt;/p&gt;
+&lt;p&gt;因为在编译阶段的语义分析时时就会报错，编译器找不到对应的方法&lt;/p&gt;
+&lt;p&gt; 3、编译阶段&lt;/p&gt;
+&lt;p&gt;在编译阶段我们本身就对.java源文件进行了阶段性分析，相当于做掉了很大一部分工作，因为涉及到语义分析，所以这个处理过程还要发生在语义分析之前。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Notes" scheme="http://yoursite.com/tags/Notes/"/>
+    
+      <category term="Lombok" scheme="http://yoursite.com/tags/Lombok/"/>
+    
+  </entry>
+  
+  <entry>
     <title>React(4):Communication way of Component</title>
     <link href="http://yoursite.com/2018/10/10/Communication-way-of-Component/"/>
     <id>http://yoursite.com/2018/10/10/Communication-way-of-Component/</id>
@@ -1079,71 +1145,6 @@
     <summary type="html">
     
       &lt;p&gt;  在上一篇文章中，记录了如何构造一个神经网络，比如如何初始化参数，如何选择激活函数和损失函数，应该用哪种方法来防止过拟合等等，在这篇记录中，记录的是如何训练一个神经网络，包括如何学习参数以及如何将超参数最优化。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="学习笔记" scheme="http://yoursite.com/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-      <category term="深度学习" scheme="http://yoursite.com/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Notes of CS231n:Neural network 2</title>
-    <link href="http://yoursite.com/2018/03/01/Notes-of-Deep-Learning-Neural-network-2/"/>
-    <id>http://yoursite.com/2018/03/01/Notes-of-Deep-Learning-Neural-network-2/</id>
-    <published>2018-03-01T02:26:43.000Z</published>
-    <updated>2018-03-12T08:36:58.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>  从上一篇博文，我们知道，神经网络其实就是一个一系列线性映射和非线性激活函数交织起来的评分函数，我们在输入层输入我们的数据，经过隐层的一系列点积和激活函数计算在输出层得到一个类型评分，然而要比较好地训练一个神经网络，我们需要更多的考虑，比如数据预处理，我们还需要考虑权重的初始值以及如何选择激活函数。</p>
-<h2 id="数据预处理"><a href="#数据预处理" class="headerlink" title="数据预处理"></a>数据预处理</h2><p>  我们通常会对<strong>训练集</strong>数据进行预处理，当然这可能有很多种形式，比如我们如果要去除一些噪声可能要进行数据清洗，这一部分这里先不介绍了，我们这里主要介绍归一化，归一化可以有利于避免模型训练时出现数值问题，还有利于网络快速收敛，更具体的优点你可以查看<a href="http://nnetinfo.com/nninfo/showText.jsp?id=37" target="_blank" rel="external">这里</a>。</p>
-<p>  归一化（Normalization）即把数据的所有维度都归一化，使其数值范围都近似相等，这个种预处理操作只在确信不同输入特征有不同的输入范围时才有意义，对于图像处理中，像素的范围都是0-255，所以这样做对于图片数据意义不大，但是数据如果是表示一个人，（体重（kg），身高（m），年龄）,这样的数据显然60Kg的体重和1.7m的身高不太对等，这会产生一些数值问题，我们有必要进行归一化。这里有两种方式进行<strong>归一化</strong>：</p>
-<p>先假设数据矩阵M，尺寸是N*D,N为样本数目，D是数据维度</p>
-<p>第一种：对数据先做零中心化(zero-centered)，如果用numpy表示：M-=np.mean(X,axis=0)，然后我们对每个维度都除以它的标准差就可以了，M/=np.std(X,axis=0)。</p>
-<p>第二种：对每个维度归一化使得每个维度的最大和最小值是1和-1。</p>
-<a id="more"></a>
-<p>  实际上零中心化单独也可以看成是一种预处理操作，被称作是<strong>均值减法</strong>在实际中用的也比较多，另外由于近来BN层的引入，归一化在有BN层的情况下也就没有必要了，因为每次卷积后BN层会把数据拉到0均值1方差的分布（标准高斯分布）上，并且这个均值和方差还是更加精确的动态统计出来的，而非原始输入上统计，因此在BN引入后归一化没什么必要。</p>
-<p>  我在前面就说过，数据预处理，归一化只是一种情况，还可能进行数据清洗，数据增强，白化和PCA等等操作，图片处理中有时候我们还会转换图片的格式，这也是一种预处理。预处理在模型训练中非常重要，有时候甚至决定着学习算法本身的好坏。</p>
-<h2 id="权重初始化"><a href="#权重初始化" class="headerlink" title="权重初始化"></a>权重初始化</h2><p>  要训练我们的网络，我们确定好我们需要一个怎么样的模型，然后构建一个最开始的网络，这样的话，网络中各种参数的初始值就显得非常重要，权重就是其中之一。</p>
-<p>  一些人可能会认为把权重都设置为0比较好，然而仔细思考一下，如果一开始整个网络中每一个神经元的输出都是一样的（权重相同），那么反向传播中他们会输出同样的梯度，从而进行同样的更新，这显然就是不对的，你相当于复制了神经元。</p>
-<p>  因为数据进行了适当的归一化，又要避免相同的参数更新，我们可以让权重的初始值接近于0，但是却又不等于0，为了得到不同的权重，我们可以以随机数产生器器来初始化我们的权重，这里我们产生的随机数可以服从正态分布或者均匀分布。需要注意的时，最好不要让随机值太小，因为太小的权重值会导致计算出的额梯度非常小，以至于一致我们在反向传播中的梯度信号。</p>
-<p>  为了保证神经元起始时有近似相同的输出分布，我们必须想办法校准方差，一般的方法是采用1/sqrt(N)，来做校准，其中N是输入数据的数量，这样我们可以把输出数据的分布的方差校准到1，如果用numpy表示，即：w=np.random.randn(N)/sqrt(n)。</p>
-<p>  有一种被称作<strong>稀疏初始化</strong> 的方法，将索引权重设置为0，但是为了避免相同的参数更新，每个神经元都同下一层固定数目的神经元随机连接，连接权重的数值由一个小的高斯分布生成。</p>
-<p>  当前比较推荐的方法是在激活函数是ReLU的情况下使用，w=np.random.randn(N)/sqrt(2/n)来进行权重初始化，另外我们一般把偏置设置为0。</p>
-<p>  上面介绍数据预处理的时候我们提到过一个被称为BN层(Batch Normalization)的东西，中文翻译是：<strong>批量归一化</strong>，它不仅可以避免<strong>归一化</strong>操作，也可以帮助我们解决初始化神经网络这个问题，我们通常会在全连接或者卷积层与激活函数之间添加一个BN层，让数据服从标准高斯分布，详细操作可以看这篇<a href="https://arxiv.org/abs/1502.03167" target="_blank" rel="external">文章</a>。</p>
-<h2 id="正则化"><a href="#正则化" class="headerlink" title="正则化"></a>正则化</h2><p>  我们在上一篇文章中知道了，正则化是避免过拟合的好方法，正则化也有很多种,比如最常见的L2正则化，以及你听的非常多的随机失活(dropout)方法。</p>
-<h3 id="L1，L2正则化"><a href="#L1，L2正则化" class="headerlink" title="L1，L2正则化"></a>L1，L2正则化</h3><p>1.L2正则化</p>
-<p>  <strong>L2正则化的思想是对大数值的权重向量进行严厉的惩罚，从而倾向于权重向量更加分散，即使网络更倾向于使用所有的特征。</strong>实际操作是对网络中的每个权重w，向目标函数中增加一个<strong>1/2（λ*w^2)</strong>,λ是正则化强度，而乘上常数1/2是数学上的小技巧，即让求导后梯度变成λw，而非2λw。在梯度下降和参数更新的时候，使用L2正则化意味着所有的权重都以<strong>w += -lambda * W</strong>向着0线性下降。</p>
-<p>2.L1正则化</p>
-<p>  <strong>L1正则化则倾向于让神经元最后使用它们最重要输入数据的稀疏子集，可看做特征选择</strong>，它的实际操作是对每个w都像目标函数增加一个λ*|w|，这样的话，你可以知道求导的时候，附加项的导数就与w的符号有关，如果w为正，最优化更新后的w变小（相比与没有添加L1正则项时），如果为负则更新后的w变大，即尽可能使权重值为0。在w为0时，我们把取符号的sgn(w）看作是0，即sgn(0)=0,sgn(w&gt;0)=1,sgn(w&lt;0)=-1。</p>
-<p>一般来说，实践更倾向于使用L2正则化，除非我们需要特征选择。</p>
-<h3 id="随机失活"><a href="#随机失活" class="headerlink" title="随机失活"></a>随机失活</h3><p>  目前我们经常看到随机失活(dropout)的字眼，<strong>其与L1，L2正则化，以及最大范式约束的方法互为补充</strong>，实际操作过程中，随机失活即是让神经元以超参数p为概率被设置为0或者被激活,<strong>p一般设置为0.5</strong>，这样我们可以看做对完整的神经网络抽样出一些子集，每次基于输入数据只更新子网络的参数。</p>
-<p><img src="\img\dropout.jpg" alt="dropout"></p>
-<p>  但实际上我们更倾向于使用Inverted dropout，这是因为如果我们在训练网络时使用前向随机失活，比如：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">train_step</span><span class="params">(X)</span>:</span></div><div class="line">  <span class="comment"># 3层neural network的前向传播</span></div><div class="line">  H1 = np.maximum(<span class="number">0</span>, np.dot(W1, X) + b1)</div><div class="line">  U1 = np.random.rand(*H1.shape) &lt; p <span class="comment"># 第一个随机失活遮罩</span></div><div class="line">  H1 *= U1 <span class="comment"># drop!</span></div><div class="line">  H2 = np.maximum(<span class="number">0</span>, np.dot(W2, H1) + b2)</div><div class="line">  U2 = np.random.rand(*H2.shape) &lt; p <span class="comment"># 第二个随机失活遮罩</span></div><div class="line">  H2 *= U2 <span class="comment"># drop!</span></div><div class="line">  out = np.dot(W3, H2) + b3</div></pre></td></tr></table></figure>
-<p>  上面这段代码中有p的概率，神经元会被激活，而又1-p的概率神经元会被设置为0，然后流向下一层，那么我们可以知道在随机失活进行后，输出为px，而在我们的测试过程中并不存在随机失活层，所以神经元对输入都是可见的，那么为了保持同样的预期输出，我们必须在测试时把输出结果乘以p,来缩放激活函数输出结果，以防止测试输出数值范围大于训练输出，如：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">predict</span><span class="params">(X)</span>:</span></div><div class="line">  <span class="comment"># 前向传播时模型集成</span></div><div class="line">  H1 = np.maximum(<span class="number">0</span>, np.dot(W1, X) + b1) * p <span class="comment"># 注意：激活数据要乘以p</span></div><div class="line">  H2 = np.maximum(<span class="number">0</span>, np.dot(W2, H1) + b2) * p <span class="comment"># 注意：激活数据要乘以p</span></div><div class="line">  out = np.dot(W3, H2) + b3</div></pre></td></tr></table></figure>
-<p>  这样的话测试时要多乘一次p显得非常麻烦，为了让我们的测试效率更高，各种深度学习框架中实践的其实是inverted dropout,有翻译为<strong>反向随机失活</strong>，个人觉得这个翻译不太好，<strong>其实它就是在训练阶段对激活函数输出值进行放大，即是放大1/p倍，而测试阶段则保持不变。</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">train_step</span><span class="params">(X)</span>:</span></div><div class="line">  <span class="comment"># 3层neural network的前向传播</span></div><div class="line">  H1 = np.maximum(<span class="number">0</span>, np.dot(W1, X) + b1)</div><div class="line">  U1 = (np.random.rand(*H1.shape) &lt; p) / p <span class="comment"># 第一个随机失活遮罩. 注意/p!</span></div><div class="line">  H1 *= U1 <span class="comment"># drop!</span></div><div class="line">  H2 = np.maximum(<span class="number">0</span>, np.dot(W2, H1) + b2)</div><div class="line">  U2 = (np.random.rand(*H2.shape) &lt; p) / p <span class="comment"># 第二个随机失活遮罩. 注意/p!</span></div><div class="line">  H2 *= U2 <span class="comment"># drop!</span></div><div class="line">  out = np.dot(W3, H2) + b3</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">predict</span><span class="params">(X)</span>:</span></div><div class="line">  <span class="comment"># 前向传播时模型集成</span></div><div class="line">  H1 = np.maximum(<span class="number">0</span>, np.dot(W1, X) + b1) <span class="comment"># 不用数值范围调整了</span></div><div class="line">  H2 = np.maximum(<span class="number">0</span>, np.dot(W2, H1) + b2)</div><div class="line">  out = np.dot(W3, H2) + b3</div></pre></td></tr></table></figure>
-<h2 id="损失函数的选择"><a href="#损失函数的选择" class="headerlink" title="损失函数的选择"></a>损失函数的选择</h2><p>  我们知道在<strong>分类问题中</strong>两个最常见的分类器对应的损失计算：</p>
-<p>  SVM-&gt;折页损失/平方折页损失（下图没列出）</p>
-<p>  Softmax-&gt;交叉熵损失</p>
-<p><img src="\img\loss.jpg" alt="loss"></p>
-<p>  如果我们面对的不是一个一般的分类问题，怎么办呢？上面的几种损失公式都只正确作用在每个样本只有一个正确的标签yi的假设成立的情况之下。但是你可以看到，在hexo博客中的一篇文章是可以打几个标签的，亦或者是新浪微博上的一张图片，比如你的女神正在日本旅游，发了一张在清水寺前不知道谁给它拍了一张照，可以打上美女，日本旅游，快乐等等几个标签。我们可以采取下面的一种损失评分策略：</p>
-<p><img src="\img\loss2.png" alt="loss2"></p>
-<p>其中yij的值为1或者-1，它表示第i个样本是否被贴上第j个标签，如果是就是1，如果不是就是-1，这样的话，可以发现，当一个正样本的得分小于+1，或者一个负样本得分大于-1的时候，算法就会累计损失值。</p>
-<p>  再比如回归问题，比如你要预测北京的空气质量pm2.5的值，一般我们考虑计算预测值和真实值之间的损失，再用L2或者L1范式度量差异。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;  从上一篇博文，我们知道，神经网络其实就是一个一系列线性映射和非线性激活函数交织起来的评分函数，我们在输入层输入我们的数据，经过隐层的一系列点积和激活函数计算在输出层得到一个类型评分，然而要比较好地训练一个神经网络，我们需要更多的考虑，比如数据预处理，我们还需要考虑权重的初始值以及如何选择激活函数。&lt;/p&gt;
-&lt;h2 id=&quot;数据预处理&quot;&gt;&lt;a href=&quot;#数据预处理&quot; class=&quot;headerlink&quot; title=&quot;数据预处理&quot;&gt;&lt;/a&gt;数据预处理&lt;/h2&gt;&lt;p&gt;  我们通常会对&lt;strong&gt;训练集&lt;/strong&gt;数据进行预处理，当然这可能有很多种形式，比如我们如果要去除一些噪声可能要进行数据清洗，这一部分这里先不介绍了，我们这里主要介绍归一化，归一化可以有利于避免模型训练时出现数值问题，还有利于网络快速收敛，更具体的优点你可以查看&lt;a href=&quot;http://nnetinfo.com/nninfo/showText.jsp?id=37&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;这里&lt;/a&gt;。&lt;/p&gt;
-&lt;p&gt;  归一化（Normalization）即把数据的所有维度都归一化，使其数值范围都近似相等，这个种预处理操作只在确信不同输入特征有不同的输入范围时才有意义，对于图像处理中，像素的范围都是0-255，所以这样做对于图片数据意义不大，但是数据如果是表示一个人，（体重（kg），身高（m），年龄）,这样的数据显然60Kg的体重和1.7m的身高不太对等，这会产生一些数值问题，我们有必要进行归一化。这里有两种方式进行&lt;strong&gt;归一化&lt;/strong&gt;：&lt;/p&gt;
-&lt;p&gt;先假设数据矩阵M，尺寸是N*D,N为样本数目，D是数据维度&lt;/p&gt;
-&lt;p&gt;第一种：对数据先做零中心化(zero-centered)，如果用numpy表示：M-=np.mean(X,axis=0)，然后我们对每个维度都除以它的标准差就可以了，M/=np.std(X,axis=0)。&lt;/p&gt;
-&lt;p&gt;第二种：对每个维度归一化使得每个维度的最大和最小值是1和-1。&lt;/p&gt;
     
     </summary>
     

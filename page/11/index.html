@@ -132,6 +132,75 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Functional-Programming-3-Pure-Functional-Status" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/29/Functional-Programming-3-Pure-Functional-Status/">Functional Programming (3):纯函数式状态</a>
+    </h1>
+  
+
+        
+        <a href="/2017/07/29/Functional-Programming-3-Pure-Functional-Status/" class="archive-article-date">
+  	<time datetime="2017-07-29T07:32:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>  如何以纯函数来实现有状态的API？你曾经写程序的时候可能会发现，函数的输出并不一定和输入有关，有可能和一个状态值有关，比如某平台在工作日的8:00-20:00才允许登入，你可能会写一个if判断来判断当前时间是不是属于允许登录时段来作为登录方法，但是现在情况有所不同，让我们再次来看函数式代码的定义：                                           </p>
+<p>​     <strong>在函数式代码中，函数的输出仅依赖于传入的参数，同样的输入意味着同样的输出，和局部或全局状态无关 </strong></p>
+<p>  既然我们不能允许一个全局状态量来决定我们的输出，肯定不意味着我们没办法写这样的程序，只不过现在我们要抛弃传统的命令式编程，转换到函数式上来。</p>
+        
+          <a class="article-more-a" href="/2017/07/29/Functional-Programming-3-Pure-Functional-Status/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">scala</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">FP</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/07/29/Functional-Programming-3-Pure-Functional-Status/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+        <!-- 目录内容 -->
+             
+        <!-- 目录内容结束 -->
+  
     <article id="post-Functional-Programming-2-Exception-handing" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -426,77 +495,6 @@
              
         <!-- 目录内容结束 -->
   
-    <article id="post-Practice-of-Basic-Java-Skills-NIO-3-Buffer" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/22/Practice-of-Basic-Java-Skills-NIO-3-Buffer/">Practice of Basic Java Skills:非阻塞I/O (3):缓冲区</a>
-    </h1>
-  
-
-        
-        <a href="/2017/07/22/Practice-of-Basic-Java-Skills-NIO-3-Buffer/" class="archive-article-date">
-  	<time datetime="2017-07-22T00:12:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>  前面的两个例子的文章中我们都看到了缓冲区的身影，正如我在第二篇文章的开头第二段所说，缓冲区是实现NIO的重要手段，缓冲区也是JAVA-NIO API的基础部分，实际上随便想想也可发现，NIO中已经不再用会阻塞流（Blocking I/O）来写byte或基本类型进行输入输出，而取代它们用来输入输出的是利用通道读写缓冲区，在缓冲区里写字节或基本类型。</p>
-<p>  与流基于字节不同：</p>
-<p>   <strong>1.通道是基于块的，它一次读写一个缓冲区的数据。</strong></p>
-<p>   <strong>2.通道和缓冲区可以支持同一对象的读写，而流则分为输入输出流。</strong></p>
-<p>  你可以把缓冲区认为是一种特定元素的列表，有时候他以数组来实现，有时不是，除了boolean以外，每个Java的基本类型都对应了一个特定的Buffer子类，比如DoubleBuffer,IntBuffer，但是我们用的最多的还是ByteBuffer，光是看名字的话原因你应该很清楚了。</p>
-        
-          <a class="article-more-a" href="/2017/07/22/Practice-of-Basic-Java-Skills-NIO-3-Buffer/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">非阻塞I/O(NIO)</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/07/22/Practice-of-Basic-Java-Skills-NIO-3-Buffer/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-        <!-- 目录内容 -->
-             
-        <!-- 目录内容结束 -->
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/10/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/12/">Next &raquo;</a>
@@ -605,6 +603,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">-ElasticSearch</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">javascript</a>
               </li>
              
@@ -622,10 +624,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">FP</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">-ElasticSearch</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -681,10 +679,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Docker</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">温故</a>
               </li>
              
@@ -694,6 +688,18 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">study notes</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Docker</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Notes</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Lombok</a>
               </li>
              
               <li class="article-tag-list-item">
