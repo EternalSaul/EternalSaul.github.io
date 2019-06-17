@@ -132,6 +132,74 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Practice-of-Basic-Java-Skills-NIO-4-Channel" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/23/Practice-of-Basic-Java-Skills-NIO-4-Channel/">Practice of Basic Java Skills:非阻塞I/O (4):通道</a>
+    </h1>
+  
+
+        
+        <a href="/2017/07/23/Practice-of-Basic-Java-Skills-NIO-4-Channel/" class="archive-article-date">
+  	<time datetime="2017-07-23T00:39:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>  上次我们了解了非阻塞I/O中用于数据读写的缓冲区对象，现在我们来看看通道，通道有很多类，层次结构复杂，幸好网络编程中我们不会使用那么多类，和缓冲区一样有一些类是我们经常使用的，它们分别是SoketChannel、ServerSocketChannel以及DatagramChannel,从名字你就可知道最后一个属于UDP协议。通道将缓冲区的数据块移入或移出到各种各样的I/O源。</p>
+<h2 id="SoketChannel"><a href="#SoketChannel" class="headerlink" title="SoketChannel"></a>SoketChannel</h2><h3 id="建立链接"><a href="#建立链接" class="headerlink" title="建立链接"></a>建立链接</h3><p>  我们在前面的客户端和服务器例子中好像不止一次的使用到了这个类，你知道我们可以用它来实现对TCP Socet的读写，使用方法跟一般的Sokect很类似，但是SoketChannel是一个抽象类，你不能直接new一个对象，我们需要调用它的静态工厂方法open来创建一个SoketChannel对象。</p>
+        
+          <a class="article-more-a" href="/2017/07/23/Practice-of-Basic-Java-Skills-NIO-4-Channel/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">非阻塞I/O(NIO)</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/07/23/Practice-of-Basic-Java-Skills-NIO-4-Channel/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+        <!-- 目录内容 -->
+             
+        <!-- 目录内容结束 -->
+  
     <article id="post-Practice-of-Basic-Java-Skills-NIO-3-Buffer" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -411,78 +479,9 @@
              
         <!-- 目录内容结束 -->
   
-    <article id="post-Learning-Scala-9-More-Characters" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/18/Learning-Scala-9-More-Characters/">Learning Scala (9):更多Scala特性</a>
-    </h1>
-  
-
-        
-        <a href="/2017/07/18/Learning-Scala-9-More-Characters/" class="archive-article-date">
-  	<time datetime="2017-07-18T00:06:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>  Scala利用常规类构建高层元组和函数字面量，这一篇文章主要是简单的介绍一下以常规类作为基础的元组和函数。</p>
-<h2 id="TupleX和FunctionX"><a href="#TupleX和FunctionX" class="headerlink" title="TupleX和FunctionX"></a>TupleX和FunctionX</h2><p>  创建一个元组和函数字面量的语法非常快捷，而且直观，它不需要new关键字，好像就是与生俱来的语法优势一样，实际上元组和函数字面量的具体实现只是普通的类。</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line">Scala的语法简洁而直观</div><div class="line">*/</div><div class="line"></div><div class="line">scala&gt; <span class="keyword">val</span> abc=(<span class="string">"a"</span>,<span class="string">"b"</span>,<span class="string">"c"</span>)</div><div class="line">abc: (<span class="type">String</span>, <span class="type">String</span>, <span class="type">String</span>) = (a,b,c)</div><div class="line"></div><div class="line">scala&gt; <span class="keyword">val</span> f=(x:<span class="type">Int</span>)=&gt;x*<span class="number">2</span></div><div class="line">f: <span class="type">Int</span> =&gt; <span class="type">Int</span> = $$<span class="type">Lambda</span>$<span class="number">1022</span>/<span class="number">627707285</span>@<span class="number">2</span>f3928ac</div></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2017/07/18/Learning-Scala-9-More-Characters/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">scala</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/07/18/Learning-Scala-9-More-Characters/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-        <!-- 目录内容 -->
-             
-        <!-- 目录内容结束 -->
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/11/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/13/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/11/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/13/">Next &raquo;</a>
     </nav>
   
 
@@ -572,11 +571,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">-闲谈</a>
+                <a href="javascript:void(0)" class="js-tag color3">闲谈</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">闲谈</a>
+                <a href="javascript:void(0)" class="js-tag color4">-闲谈</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -585,10 +584,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">React</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">-ElasticSearch</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -612,11 +607,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">-ElasticSearch</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">JVM</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Junit</a>
+                <a href="javascript:void(0)" class="js-tag color5">软件测试</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -624,7 +623,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">软件测试</a>
+                <a href="javascript:void(0)" class="js-tag color1">Junit</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -640,11 +639,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Nexus</a>
+                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
+                <a href="javascript:void(0)" class="js-tag color1">Nexus</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -680,15 +679,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">译文</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Notes</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Lombok</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">译文</a>
               </li>
             
             <div class="clearfix"></div>

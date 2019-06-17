@@ -132,6 +132,79 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-TypeScript-0-Interface" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/08/TypeScript-0-Interface/">TypeScript(0):Interface</a>
+    </h1>
+  
+
+        
+        <a href="/2019/03/08/TypeScript-0-Interface/" class="archive-article-date">
+  	<time datetime="2019-03-08T06:09:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="接口如何工作？"><a href="#接口如何工作？" class="headerlink" title="接口如何工作？"></a>接口如何工作？</h2><p>下面我们声明了一个函数，它接受一个{color:string}类型的对象，那么在ts编译期间编译器如何来验证我们传入对象符合我们给定的类型呢？</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">draw</span>(<span class="params">shape:&#123;color:<span class="built_in">string</span>&#125;</span>)</span>&#123;</div><div class="line">   <span class="built_in">console</span>.log(<span class="string">`I am a <span class="subst">$&#123;shape.color&#125;</span> shape`</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>实际上ts的类型检查针对以下三点：</p>
+<p>1.必须属性是否存在</p>
+<p>2.类型是否匹配</p>
+<p>3.对于字面量对象还会有多余的属性检查</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//报错，类型检查失败，多了一个length属性, （对于字面量还会检查是否存在不必要的属性）</span></div><div class="line">draw(&#123;color: <span class="string">'red'</span>, length: <span class="number">1</span>&#125;);</div><div class="line"></div><div class="line"><span class="comment">//类型检查成功，使用变量来跳过对字面量多余属性的检查</span></div><div class="line"><span class="keyword">let</span> shape = &#123;color: <span class="string">'red'</span>, length: <span class="number">1</span>&#125;;</div><div class="line">draw(shape);</div><div class="line"></div><div class="line"><span class="comment">//报错， 没有必要的属性</span></div><div class="line"><span class="keyword">let</span> secondShape = &#123; length: <span class="number">1</span>&#125;;</div><div class="line">draw(secondShape);</div><div class="line"></div><div class="line"><span class="comment">// Ok!</span></div><div class="line">draw(&#123;color:<span class="string">'red'</span>&#125;);</div></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2019/03/08/TypeScript-0-Interface/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">typescript</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">study notes</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/03/08/TypeScript-0-Interface/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+        <!-- 目录内容 -->
+             
+        <!-- 目录内容结束 -->
+  
     <article id="post-ElasticSearch-1-Base-knowledge" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -409,79 +482,9 @@
              
         <!-- 目录内容结束 -->
   
-    <article id="post-React-3-More-details-of-component" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/10/React-3-More-details-of-component/">React(3):More details of component</a>
-    </h1>
-  
-
-        
-        <a href="/2018/10/10/React-3-More-details-of-component/" class="archive-article-date">
-  	<time datetime="2018-10-10T00:36:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Key属性"><a href="#Key属性" class="headerlink" title="Key属性"></a>Key属性</h2><p>React用Key来标记列表中的每一个元素，通过查看key是否改变来知道哪些元素需要重新渲染，这样就节省了渲染时间，毕竟一个列表中有时包含太多元素。<strong>因此要避免使用索引值作为key</strong>,因为索引可能很容易会被改变，比如增加或者删除列表元素时。</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;ul&gt;</div><div class="line">	&lt;li key = "one"&gt;one&lt;/li&gt;</div><div class="line">	&lt;li key = "two"&gt;two&lt;/li&gt;</div><div class="line">&lt;/ul&gt;</div><div class="line"></div><div class="line">//changed</div><div class="line">&lt;ul&gt;</div><div class="line">    &lt;li key = "three"&gt;three&lt;/li&gt;</div><div class="line">	&lt;li key = "one"&gt;one&lt;/li&gt;</div><div class="line">	&lt;li key = "two"&gt;two&lt;/li&gt;</div><div class="line">&lt;/ul&gt;</div></pre></td></tr></table></figure>
-<p>上面这种情况发生时，因为key的存在，react会知道one和two两个项根本没变，所以会直接在one的前面插入一个three。</p>
-<p><strong>另外，key是一个在同列表下不能重复的属性。</strong></p>
-        
-          <a class="article-more-a" href="/2018/10/10/React-3-More-details-of-component/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">前端</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">React</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/10/10/React-3-More-details-of-component/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-        <!-- 目录内容 -->
-             
-        <!-- 目录内容结束 -->
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
     </nav>
   
 
@@ -571,11 +574,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">-闲谈</a>
+                <a href="javascript:void(0)" class="js-tag color3">闲谈</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">闲谈</a>
+                <a href="javascript:void(0)" class="js-tag color4">-闲谈</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -584,10 +587,6 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">React</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">-ElasticSearch</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -611,11 +610,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">-ElasticSearch</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">JVM</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Junit</a>
+                <a href="javascript:void(0)" class="js-tag color5">软件测试</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -623,7 +626,7 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">软件测试</a>
+                <a href="javascript:void(0)" class="js-tag color1">Junit</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -639,11 +642,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Nexus</a>
+                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
+                <a href="javascript:void(0)" class="js-tag color1">Nexus</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -679,15 +682,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">译文</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Notes</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Lombok</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">译文</a>
               </li>
             
             <div class="clearfix"></div>
