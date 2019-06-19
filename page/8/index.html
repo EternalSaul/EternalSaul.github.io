@@ -132,6 +132,83 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Junit-2-Assert-by-Hamcrest" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/29/Junit-2-Assert-by-Hamcrest/">Junit(2):使用Hamcrest断言</a>
+    </h1>
+  
+
+        
+        <a href="/2017/10/29/Junit-2-Assert-by-Hamcrest/" class="archive-article-date">
+  	<time datetime="2017-10-29T07:32:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>  上一篇文章中，我们以几个简单的用例测试来开篇，以assertTure,assertEquals这样的简单形式来作断言，这些方法都是org.junit.Assert来提供，如果你用的是maven或者其他的项目构建工具来引入junit包，我们会发现，它居然依赖于一个org.hamcrest的项目包，实际上，如果涉及到比较复杂的断言，我们以junit需要写一大串代码，这让我们的测试代码非常不美观，这个叫做hamcrest提供了一套断言工具，而且该项目还有ruby等等语言的版本，他们返回一个org.hamcrest.Matcher的子类，另外在org.hamcrest.MatcherAssert中提供了一套assertThat方法，它接受一个org.hamcrest.Matcher和一个计算值，从而做出该值是否符合该Matcher的判断。</p>
+<p>  在org.junit.Assert类中也有assertThat方法，不过它其实就是包装了一下MatcherAssert中的assertThat。如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function"><span class="keyword">void</span> <span class="title">assertThat</span><span class="params">(String reason, T actual,</span></span></div><div class="line">        Matcher&lt;? <span class="keyword">super</span> T&gt; matcher) &#123;</div><div class="line">    MatcherAssert.assertThat(reason, actual, matcher);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2017/10/29/Junit-2-Assert-by-Hamcrest/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习笔记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">软件测试</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">TDD</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Junit</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/10/29/Junit-2-Assert-by-Hamcrest/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+        <!-- 目录内容 -->
+             
+        <!-- 目录内容结束 -->
+  
     <article id="post-Junit-1-Start-our-testing-travel" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -420,71 +497,6 @@
              
         <!-- 目录内容结束 -->
   
-    <article id="post-A-failed-windows-Installation" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/03/A-failed-windows-Installation/">九月</a>
-    </h1>
-  
-
-        
-        <a href="/2017/09/03/A-failed-windows-Installation/" class="archive-article-date">
-  	<time datetime="2017-09-03T14:48:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-03</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="溜走的暑期"><a href="#溜走的暑期" class="headerlink" title="溜走的暑期"></a>溜走的暑期</h2><p>  又是新的一个月，2017年就要结束了，秋天也马上要到来，遥想暑假刚刚开始的时候，我曾经想在7月和8月之间写50篇文章，可是最后只写了30篇吧，还有一些零零碎碎的知识，8月在家里比较懒就放弃了。<br>  7月学习了Scala语言，很多人说它比较难，后来我学起来觉得挺容易的，不过鉴于说这话的人不多，所以我想这应该不是以讹传讹吧（以我的经验来看，一般来说如果一个东西很多人讨论并且有很多人说很难其实如果你肯多接触的话，它就不太难，比如说vim，但是你只看到寥寥几个人说很难其他人不说话，那么这个东西肯定很难），后来我接触《FP in scala》，发现scala其实不难，但是如果不仅仅把它当做Better Java 来工作的话就很难了，正因为如此国内聊这个语言的不是太多吧。</p>
-<p>  函数式编程也给我的毕业设计指明了某个方向，在写这篇文章的前几天，我在想可能会做一个用函数式写的解释器之类的的吧！</p>
-<p>  <img src="/img/Sept.jpg"></p>
-        
-          <a class="article-more-a" href="/2017/09/03/A-failed-windows-Installation/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">闲谈</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/09/03/A-failed-windows-Installation/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-        <!-- 目录内容 -->
-             
-        <!-- 目录内容结束 -->
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/7/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/9/">Next &raquo;</a>
@@ -577,19 +589,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">闲谈</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">-闲谈</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">React</a>
+                <a href="javascript:void(0)" class="js-tag color3">闲谈</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -602,6 +606,14 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">学习笔记</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">React</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -645,11 +657,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
+                <a href="javascript:void(0)" class="js-tag color1">Nexus</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Nexus</a>
+                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -661,15 +673,15 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">温故</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">rxjs</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">notes</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">温故</a>
               </li>
              
               <li class="article-tag-list-item">
